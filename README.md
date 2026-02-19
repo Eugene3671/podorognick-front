@@ -43,21 +43,13 @@ feature/назва-фічі (наприклад, feature/about-section).
 2. Порядок роботи з головною сторінкою (app/page.js)
    Для запобігання конфліктам при злитті (Merge Conflicts), ми використовуємо таку схему:
 
-# Початкова розмітка головної сторінки:
+# Початкова розмітка головної сторінки має:
 
-\`\`\`jsx
-export default function HomePage() {
-return (
-<main>
-<h2>Hero</h2>
-<h2>About</h2>
-<h2>PopularStoriesSection</h2>
-<h2>OurTravellers</h2>
-<h3>Join</h3>
-</main>
-);
-}
-\`\`\`
+Hero
+About
+PopularStoriesSection
+OurTravellers
+Join
 
 Алгоритм для розробників:
 
