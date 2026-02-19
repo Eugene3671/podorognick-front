@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌍 Podorognick-front
 
-## Getting Started
+Це фронтенд-репозиторій для проєкту Podorognick, розроблений на Next.js (App Router) та React.
 
-First, run the development server:
+# 🛠 Технологічний стек
 
-```bash
+Framework: Next.js 15+
+
+Library: React
+
+Styling: CSS Modules
+
+Icons: React Icons / Lucide React
+
+# 📂 Структура компонентів (Важливо!)
+
+Ми використовуємо модульний підхід. Для кожного нового компонента створюємо окрему папку в src/components.
+
+Правила створення:
+
+Назва папки та файлу має бути в PascalCase (наприклад, PopularStories).
+
+Кожен компонент повинен мати свій файл стилів.
+
+Приклад структури:
+
+src/components/Hero/
+├── Hero.jsx (Логіка та розмітка)
+└── Hero.module.css (Стилі компонента)
+Стилізація:
+
+Використовуйте змістовні назви класів (наприклад, .container, .title, .button).
+
+Оскільки ми використовуємо CSS Modules, класи не будуть конфліктувати між різними файлами.
+
+# 🌿 Правила роботи з Git
+
+1. Гілки (Branches)
+   Ніколи не працюйте в гілці main. Створюйте свою гілку від актуального мейну:
+
+feature/назва-фічі (наприклад, feature/about-section).
+
+2. Порядок роботи з головною сторінкою (app/page.js)
+   Для запобігання конфліктам при злитті (Merge Conflicts), ми використовуємо таку схему:
+
+# Початкова розмітка головної сторінки:
+
+export default function HomePage() {
+return (
+
+<main>
+<h2>Hero</h2>
+<h2>About</h2>
+<h2>PopularStoriesSection</h2>
+<h2>OurTravellers</h2>
+<h3>Join</h3>
+</main>
+);
+}
+
+Алгоритм для розробників:
+
+Локально ви можете замінити відповідний заголовок <h2> своїм компонентом для тестування.
+
+⚠️ ВАЖЛИВО ⚠️ ВАЖЛИВО ⚠️ ВАЖЛИВО ⚠️ ВАЖЛИВО ⚠️ ВАЖЛИВО
+Перед комітом та пушем: Обов'язково поверніть файл app/page.js до початкового стану (з заголовками <h2>).
+
+Я (Team Lead) сам підключу всі готові компоненти в головний файл після перевірки ваших Pull Requests.
+
+# ⚙️ Початок роботи
+
+Клонування:
+
+git clone https://github.com/Eugene3671/podorognick-front.git
+Встановлення залежностей:
+
+npm install
+Налаштування середовища: Скопіюйте .env.example у файл .env.
+
+Запуск:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# 🎨 Стандарти коду
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Використовуйте аліаси для імпортів: @/components/....
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Коміти пишіть англійською мовою (напр. feat: create Join component UI).
