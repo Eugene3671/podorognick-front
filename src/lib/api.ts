@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Story } from "../types/story";
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL + "/api";
 
@@ -14,14 +15,8 @@ interface GetStoriesParams {
 }
 
 interface StoriesResponse {
-  id: string;
-  img: string;
-  title: string;
-  article: string;
-  category: string;
-  ownerId: string;
-  date: string;
-  favoriteCount: number;
+  stories: Story[];
+  totalPages: number;
 }
 
 export async function getStories({
