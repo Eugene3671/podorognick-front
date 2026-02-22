@@ -1,0 +1,142 @@
+.header {
+    margin: 0 auto;
+    padding: 16px 20px;
+    width: 100%;
+    z-index: 2;
+    background-color: #f7f9ff;
+}
+@media (min-width: 768px) {
+    .header {
+        padding: 18px 32px;
+    }
+}
+@media (min-width: 1440px) {
+    .header {
+        padding: 18px 64px;
+    }
+}
+.homeHeader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+    color: #FFFFFF;
+}
+.container {
+    margin: 0 auto;
+    min-width: 320px;
+    max-width: 375px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+@media (min-width: 768px) {
+    .container {
+        min-width: 768px;
+        justify-content: flex-end;
+    }
+}
+@media (min-width: 1440px) {
+    .container {
+            min-width: 1440px;
+        }
+}
+.logo {
+    width: 156px;
+    height: 36px;
+    margin-right: auto;
+}
+
+.homeHeader .logo {
+    --color8: #ffffff;
+}
+
+.navList {
+    display: none;
+}
+@media (min-width: 1440px) {
+    .navList 
+    {
+        display: flex;
+        gap: 32px;
+        font-size: 18px;
+        line-height: 1.5;
+    }
+}
+
+.navItem {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #1d1d1d;
+}
+.action {
+    display: none;
+}
+.action a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    padding: 4px 10px;
+    background-color: #4169E1;
+    border: 1px solid #4169E1;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.4;
+
+}
+@media (min-width: 768px) {
+    .action {
+        display: block;
+    }
+    .homeHeader .action a{
+        background-color: #FFFFFF;
+        border: 1px solid #FFFFFF;
+        color: #000000;
+    }
+}
+@media (min-width: 1440px) {
+    .action {
+        display: none;
+    }
+}
+.auth {
+    display: none;
+}
+@media (min-width: 1440px) {
+    .auth {
+        display: flex;
+        margin-left: 32px;
+    }
+}
+.burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 12px;
+    background-color: #00000005;
+    border: 1px solid #00000015;
+    border-radius: 8px;
+    padding: 4px;
+    width: 32px;
+    height: 32px;
+}
+@media (min-width: 768px) {
+    .burger {
+        margin-left: 16px;
+    }
+}
+@media (min-width: 1440px) {
+    .burger {
+        display: none;
+    }
+}
+
+.homeHeader .burger {
+    background-color: #FFFFFF10;
+    border: 1px solid transparent;
+    color: #FFFFFF;
+}
