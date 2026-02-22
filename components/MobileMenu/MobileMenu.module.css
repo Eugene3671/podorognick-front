@@ -14,6 +14,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: auto;
+}
+@media (min-width: 768px) {
+    .wrapper {
+        min-width: 768px;
+    }
+
 }
 .header {
     width: 100%;
@@ -47,9 +54,6 @@
     display: flex;
     flex-direction: column;
     margin: 32px auto;
-}
-.navList> :last-child {
-    margin-top: 16px;
 }
 .navList li {
     margin-top: 32px;

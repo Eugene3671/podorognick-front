@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Nunito_Sans, Inter } from "next/font/google";
 import "./globals.css";
-// import Header from "../components/Header/Header";
+// import Header from "@/components/Header/Header";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",

@@ -3,10 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 import css from "./Header.module.css";
-import AuthNavigation from "../AuthNavigation/AuthNavigation";
-import MobileMenu from "../MobileMenu/MobileMenu";
+import AuthNavigation from "@/components/AuthNavigation/AuthNavigation";
+import MobileMenu from "@/components/MobileMenu/MobileMenu";
 
 export default function Header() {
   const pathname = usePathname();
@@ -16,15 +17,12 @@ export default function Header() {
 
   return (
     <>
-      <header
-        className={`
-        ${css.header}
-        ${isHome ? css.homeHeader : ""}
-      `}
-      >
+      <header className={clsx(css.header, isHome && css.homeHeader)}>
         <div className={css.container}>
           <Link href="/" className={css.logo}>
-            Logo
+            <svg width="156" height="36">
+              <use href="/sprite.svg#icon-Logo" />
+            </svg>
           </Link>
 
           <nav className={css.nav}>
@@ -44,9 +42,16 @@ export default function Header() {
                   Мандрівники
                 </Link>
               </li>
-              <AuthNavigation />
             </ul>
           </nav>
+
+          <div className={css.action}>
+            <Link href="/stories/create">Опублікувати історію</Link>
+          </div>
+
+          <div className={css.auth}>
+            <AuthNavigation />
+          </div>
 
           <button
             className={css.burger}

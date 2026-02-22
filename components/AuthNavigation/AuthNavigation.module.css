@@ -4,8 +4,6 @@
     justify-content: center;
     border-radius: 8px;
     padding: 4px;
-    height: 32px;
-    width: 335px;
 }
 .navigationItem a {
     font-weight: 500;
@@ -24,4 +22,15 @@
 
 .register a {
     color: #FFFFFF;
+}
+
+.mobile {
+    height: 32px;
+    width: 335px;
+    margin-bottom: 16px;
+}
+.desktop {
+    height: 35px;
+    padding: 4px 10px;
+    margin-left: 16px;
 }
