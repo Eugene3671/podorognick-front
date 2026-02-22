@@ -21,6 +21,7 @@ export default function TravellersStoriesItem({
 }: TravellersStoriesItemProps) {
   const router = useRouter();
   const { user, isAuthenticated } = useAuth();
+
   const [favoriteCount, setFavoriteCount] = useState<number>(
     story.favoriteCount,
   );
@@ -63,7 +64,9 @@ export default function TravellersStoriesItem({
   const handleUnsave = () => {
     unsaveMutation.mutate();
   };
-
+  if (typeof story.ownerId === "string" || typeof story.category === "string") {
+    return null;
+  }
   return (
     <li className={css.travellerStoryItem}>
       <div className={css.storyThumbnailWrapper}>

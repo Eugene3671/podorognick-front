@@ -12,17 +12,19 @@ export interface StoriesResponse {
   page: number;
 }
 
-export async function getAllStories({
-  page,
-  perPage,
-}: GetStoriesParams): Promise<StoriesResponse> {
-  const response = await nextServer.get("/stories", {
-    params: { page, perPage },
+export async function getAllStories(
+  params: GetStoriesParams,
+): Promise<StoriesResponse> {
+  const response = await nextServer.get<StoriesResponse>("/stories", {
+    params,
   });
 
   return response.data;
 }
-
+export async function getSavedStories(): Promise<Story[]> {
+  const response = await nextServer.get<Story[]>("/stories/saved");
+  return response.data;
+}
 export async function addToSavedStories(storyId: string) {
   const response = await nextServer.post(`/stories/${storyId}/save`);
 
@@ -30,6 +32,6 @@ export async function addToSavedStories(storyId: string) {
 }
 
 export async function removeFromSavedStories(storyId: string) {
-  const res = await nextServer.delete(`/stories/${storyId}/save`);
-  return res.data;
+  const response = await nextServer.delete(`/stories/${storyId}/save`);
+  return response.data;
 }
