@@ -1,3 +1,4 @@
+import Join from "@/src/components/Join/Join";
 export default function HomePage() {
   return (
     <main>
@@ -5,7 +6,7 @@ export default function HomePage() {
       <h2>About</h2>
       <h2>PopularStoriesSection</h2>
       <h2>OurTravellers</h2>
-      <h3>Join</h3>
+      <Join />
     </main>
   );
 }
