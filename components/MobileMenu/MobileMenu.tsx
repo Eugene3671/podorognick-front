@@ -7,7 +7,12 @@ import { usePathname } from "next/navigation";
 import css from "./MobileMenu.module.css";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
 
-export default function MobileMenu({ isOpen, onClose }) {
+interface MobileMenuProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const pathname = usePathname();
 
   useEffect(() => {
@@ -23,16 +28,18 @@ export default function MobileMenu({ isOpen, onClose }) {
   }, [isOpen]);
 
   useEffect(() => {
-    const handleEsc = (e) => {
+    const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
 
     document.addEventListener("keydown", handleEsc);
+    document.body.style.overflow = "hidden";
 
     return () => {
       document.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = "";
     };
-  }, []);
+  }, [onClose]);
 
   if (!isOpen) return null;
 
@@ -40,35 +47,38 @@ export default function MobileMenu({ isOpen, onClose }) {
     <div
       className={css.background}
       onClick={(e) => {
+        if (!(e.target instanceof Element)) return;
+
         if (!e.target.closest(`.${css.wrapper}`)) {
           onClose();
         }
       }}
     >
       <div className={css.wrapper}>
-        <button className={css.closeBtn} onClick={onClose} aria-label="Close">
-          ✕
-        </button>
-
-        <Link href="/" onClick={onClose} className={css.logo}>
-          Logo
-        </Link>
+        <div className={css.header}>
+          <Link href="/" onClick={onClose} className={css.logo}>
+            Logo
+          </Link>
+          <button className={css.closeBtn} onClick={onClose} aria-label="Close">
+            ✕
+          </button>
+        </div>
 
         <nav>
           <ul className={css.navList}>
-            <li>
+            <li className={css.navItem}>
               <Link href="/" onClick={onClose}>
                 Головна
               </Link>
             </li>
 
-            <li>
+            <li className={css.navItem}>
               <Link href="/stories" onClick={onClose}>
                 Історії
               </Link>
             </li>
 
-            <li>
+            <li className={css.navItem}>
               <Link href="/travellers" onClick={onClose}>
                 Мандрівники
               </Link>

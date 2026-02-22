@@ -1,0 +1,55 @@
+.header {
+    margin: 0 auto;
+    padding: 16px 20px;
+    width: 100%;
+    z-index: 2;
+    background-color: #f7f9ff;
+}
+.homeHeader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+    border-bottom: none;
+    color: #FFFFFF;
+}
+.container {
+    min-width: 320px;
+    max-width: 375px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo {
+    width: 156px;
+    height: 40px;
+    text-align: center;
+}
+.navList {
+    display: none;
+}
+.navItem {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #1d1d1d;
+}
+.burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 12px;
+    background-color: #00000005;
+    border: 1px solid #00000015;
+    border-radius: 8px;
+    padding: 4px;
+    width: 32px;
+    height: 32px;
+}
+
+.homeHeader .burger {
+    background-color: #FFFFFF10;
+    border: 1px solid transparent;
+    color: #FFFFFF;
+}

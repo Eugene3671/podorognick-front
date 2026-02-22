@@ -2,18 +2,27 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import css from "./Header.module.css";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
 import MobileMenu from "../MobileMenu/MobileMenu";
 
 export default function Header() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <header className={css.header}>
-        <div className={css.headerContainer}>
+      <header
+        className={`
+        ${css.header}
+        ${isHome ? css.homeHeader : ""}
+      `}
+      >
+        <div className={css.container}>
           <Link href="/" className={css.logo}>
             Logo
           </Link>
