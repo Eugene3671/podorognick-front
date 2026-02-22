@@ -9,6 +9,7 @@ export default function HomePage() {
       <h2>PopularStoriesSection</h2>
       <h2>OurTravellers</h2>
       <h3>Join</h3>
+      
     </main>
   );
 }
