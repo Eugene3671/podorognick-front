@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const instance = axios.create({
+const nextServer = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL + "/api",
   withCredentials: true,
   headers: {
@@ -8,7 +8,7 @@ const instance = axios.create({
   },
 });
 
-instance.interceptors.request.use(
+nextServer.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("accessToken");
     if (token && config.headers) {
@@ -20,4 +20,4 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   },
 );
-export default instance;
+export default nextServer;
