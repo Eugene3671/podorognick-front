@@ -6,30 +6,25 @@ import css from "./TravellersStoriesItem.module.css";
 import { Story } from "@/src/types/story";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Category } from "@/src/types/category";
-import {
-  addToSavedStories,
-  FullStory,
-  removeFromSavedStories,
-} from "@/src/lib/api";
+import { addToSavedStories, removeFromSavedStories } from "@/src/lib/api";
 import { useMutation } from "@tanstack/react-query";
-
+import { useAuth } from "@/src/hooks/useAuth";
+import icons from "@/src/images/icons.svg";
 interface TravellersStoriesItemProps {
-  story: FullStory;
-  currentUser: User | null;
+  story: Story;
 }
 export default function TravellersStoriesItem({
   story,
-  currentUser,
 }: TravellersStoriesItemProps) {
   const router = useRouter();
+  const { user, isAuthenticated } = useAuth();
   const [favoriteCount, setFavoriteCount] = useState<number>(
     story.favoriteCount,
   );
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
   const saveMutation = useMutation({
-    mutationFn: () => addToSavedStories(story.id),
+    mutationFn: () => addToSavedStories(story._id),
 
     onMutate: () => {
       setIsSaved(true);
@@ -46,16 +41,16 @@ export default function TravellersStoriesItem({
     mutationFn: () => removeFromSavedStories(story.id),
     onMutate: () => {
       setIsSaved(false);
-      setFavoriteCount((c) => c - 1);
+      setFavoriteCount((favCount) => favCount - 1);
     },
     onError: () => {
       setIsSaved(true);
-      setFavoriteCount((c) => c + 1);
+      setFavoriteCount((favCount) => favCount + 1);
     },
   });
 
   const handleSave = () => {
-    if (!currentUser) {
+    if (!isAuthenticated) {
       router.push("/auth/login");
       return;
     }
@@ -77,20 +72,20 @@ export default function TravellersStoriesItem({
       />
       <div className={css.storyWrapper}>
         <div className={css.storyContents}>
-          <p className={css.regionTag}>{category.name}</p>
+          <p className={css.regionTag}>{story.category.name}</p>
           <h4 className={css.storyTitle}>{story.title}</h4>
           <p className={css.storyText}>{story.article}</p>
         </div>
         <div className={css.storyAuthor}>
           <Image
-            src={author.avatarUrl}
+            src={story.ownerId.avatarUrl}
             alt="avatar"
             width={54}
             height={54}
             className={css.authorAvatar}
           />
           <div className={css.authorInfo}>
-            <p className={css.authorName}>{author.name}</p>
+            <p className={css.authorName}>{story.ownerId.name}</p>
             <div className={css.storyInfo}>
               <p className={css.storyDate}>{story.date}</p>
               <span className={css.separator}>•</span>
@@ -98,7 +93,7 @@ export default function TravellersStoriesItem({
             </div>
           </div>
         </div>
-        <Link href="/stories/[storyId]" className={css.storyDetailsLink}>
+        <Link href={`/stories/${story._id}`} className={css.storyDetailsLink}>
           Переглянути статтю
         </Link>
         <button
@@ -108,8 +103,8 @@ export default function TravellersStoriesItem({
           {saveMutation.isPending || unsaveMutation.isPending ? (
             <span className={css.loader}></span>
           ) : (
-            <svg>
-              <use />
+            <svg width="24" height="24" className={css.saveIcon}>
+              <use href="/sprite.svg#icon-bookmark"></use>
             </svg>
           )}
         </button>

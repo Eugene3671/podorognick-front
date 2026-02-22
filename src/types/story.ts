@@ -1,12 +1,12 @@
-import { Category } from "./category";
+import { Category, User } from "./category";
 
 export interface Story {
-  id: string;
+  _id: string;
   img: string;
   title: string;
   article: string;
   category: Category;
-  ownerId: string;
+  ownerId: User;
   date: string;
   favoriteCount: number;
 }
