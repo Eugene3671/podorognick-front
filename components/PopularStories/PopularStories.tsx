@@ -1,24 +1,30 @@
-import { getAllStories } from "@/src/lib/api";
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
 import TravellersStories from "../TravellersStories/TravellersStories";
+import css from "./PopularStories.module.css";
+import Link from "next/link";
+import { getAllStories } from "@/lib/api/clientApi";
 
 export default async function PopularStories() {
   const queryClient = new QueryClient();
   await queryClient.prefetchInfiniteQuery({
     queryKey: ["popular-stories"],
-    queryFn: () => getAllStories(),
+    queryFn: () => getAllStories({ page: 0, perPage: 3 }),
     initialPageParam: 0,
   });
 
   return (
     <section>
-      <h2>Популярні історії</h2>
+      <h2 className={css.sectionTitle}>Популярні історії</h2>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <TravellersStories />
+        <TravellersStories>
+          <Link href="/stories" className={css.paginationButton}>
+            Переглянути всі
+          </Link>
+        </TravellersStories>
       </HydrationBoundary>
     </section>
   );

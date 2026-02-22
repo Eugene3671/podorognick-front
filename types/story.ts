@@ -1,4 +1,5 @@
-import { Category, User } from "./category";
+import { User } from "@/types/user";
+import { Category } from "./category";
 
 export interface Story {
   _id: string;

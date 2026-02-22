@@ -3,13 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import css from "./TravellersStoriesItem.module.css";
-import { Story } from "@/src/types/story";
+import { Story } from "@/types/story";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { addToSavedStories, removeFromSavedStories } from "@/src/lib/api";
+import { addToSavedStories, removeFromSavedStories } from "@/lib/api/clientApi";
 import { useMutation } from "@tanstack/react-query";
-import { useAuth } from "@/src/hooks/useAuth";
-import icons from "@/src/images/icons.svg";
+import { useAuth } from "@/hooks/useAuth";
 interface TravellersStoriesItemProps {
   story: Story;
 }
@@ -28,17 +27,17 @@ export default function TravellersStoriesItem({
 
     onMutate: () => {
       setIsSaved(true);
-      setFavoriteCount((c) => c + 1);
+      setFavoriteCount((favCount) => favCount + 1);
     },
 
     onError: () => {
       setIsSaved(false);
-      setFavoriteCount((c) => c - 1);
+      setFavoriteCount((favCount) => favCount - 1);
     },
   });
 
   const unsaveMutation = useMutation({
-    mutationFn: () => removeFromSavedStories(story.id),
+    mutationFn: () => removeFromSavedStories(story._id),
     onMutate: () => {
       setIsSaved(false);
       setFavoriteCount((favCount) => favCount - 1);
@@ -63,13 +62,18 @@ export default function TravellersStoriesItem({
 
   return (
     <li className={css.travellerStoryItem}>
-      <Image
-        src={story.img}
-        alt="placeholder"
-        width={421}
-        height={280}
-        className={css.storyThumbnail}
-      />
+      <div className={css.storyThumbnailWrapper}>
+        <Image
+          src={story.img}
+          alt="placeholder"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1440px) 340px, 421px"
+          style={{ objectFit: "cover" }}
+          loading="eager"
+          className={css.storyThumbnail}
+        />
+      </div>
+
       <div className={css.storyWrapper}>
         <div className={css.storyContents}>
           <p className={css.regionTag}>{story.category.name}</p>
@@ -89,25 +93,32 @@ export default function TravellersStoriesItem({
             <div className={css.storyInfo}>
               <p className={css.storyDate}>{story.date}</p>
               <span className={css.separator}>•</span>
-              <p className={css.numberOfSaves}>{favoriteCount}</p>
+              <p className={css.numberOfSaves}>
+                {favoriteCount}
+                <svg width="16" height="16" className={css.saveIcon}>
+                  <use href="/sprite.svg#icon-bookmark"></use>
+                </svg>
+              </p>
             </div>
           </div>
         </div>
-        <Link href={`/stories/${story._id}`} className={css.storyDetailsLink}>
-          Переглянути статтю
-        </Link>
-        <button
-          className={isSaved ? css.saveButtonActive : css.saveButton}
-          onClick={isSaved ? handleUnsave : handleSave}
-        >
-          {saveMutation.isPending || unsaveMutation.isPending ? (
-            <span className={css.loader}></span>
-          ) : (
-            <svg width="24" height="24" className={css.saveIcon}>
-              <use href="/sprite.svg#icon-bookmark"></use>
-            </svg>
-          )}
-        </button>
+        <div className={css.buttonsWrapper}>
+          <Link href={`/stories/${story._id}`} className={css.storyDetailsLink}>
+            Переглянути статтю
+          </Link>
+          <button
+            className={isSaved ? css.saveButtonActive : css.saveButton}
+            onClick={isSaved ? handleUnsave : handleSave}
+          >
+            {saveMutation.isPending || unsaveMutation.isPending ? (
+              <span className={css.loader}></span>
+            ) : (
+              <svg width="24" height="24" className={css.saveIcon}>
+                <use href="/sprite.svg#icon-bookmark"></use>
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
     </li>
   );

@@ -1,0 +1,22 @@
+.sectionTitle {
+  font-family: "Sora", sans-serif;
+  font-weight: 700;
+  font-size: 52px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  color: #000;
+}
+
+.paginationButton {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 150%;
+  color: #fff;
+  border: 1px solid #4169e1;
+  border-radius: 8px;
+  padding: 6px 12px;
+  width: 163px;
+  height: 48px;
+  background: #4169e1;
+}
