@@ -1,5 +1,5 @@
 import { Story } from "../../types/story";
-import { nextServer } from "./api";
+import nextServer from "../axios";
 
 interface GetStoriesParams {
   page: number;
@@ -31,12 +31,5 @@ export async function addToSavedStories(storyId: string) {
 
 export async function removeFromSavedStories(storyId: string) {
   const res = await nextServer.delete(`/stories/${storyId}/save`);
-  return res.data;
-}
-
-export async function getMe() {
-  const res = await nextServer.get("/users/profile", {
-    withCredentials: true,
-  });
   return res.data;
 }

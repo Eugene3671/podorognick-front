@@ -3,15 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import css from "./TravellersStoriesItem.module.css";
-import { Story } from "@/types/story";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+
+import { useMutation } from "@tanstack/react-query";
+import { useAuth } from "@/src/hooks/useAuth";
+import { Story } from "@/src/types/story";
 import {
   addToSavedStories,
   removeFromSavedStories,
-} from "@/src/lib/api/clientApi";
-import { useMutation } from "@tanstack/react-query";
-import { useAuth } from "@/src/hooks/useAuth";
+} from "@/src/lib/services/stories.service";
 interface TravellersStoriesItemProps {
   story: Story;
 }
