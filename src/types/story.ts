@@ -6,8 +6,8 @@ export interface Story {
   img: string;
   title: string;
   article: string;
-  category: Category;
-  ownerId: User;
+  category: Category | string;
+  ownerId: User | string;
   date: string;
   favoriteCount: number;
 }
