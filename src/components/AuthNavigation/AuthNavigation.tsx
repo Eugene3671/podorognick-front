@@ -3,8 +3,8 @@
 import css from "./AuthNavigation.module.css";
 import Link from "next/link";
 import clsx from "clsx";
-import { useAuthStore } from "@/lib/store/authStore";
 import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/src/lib/store/authStore";
 
 interface AuthNavigationProps {
   variant?: "mobile" | "desktop";
