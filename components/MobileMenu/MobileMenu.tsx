@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import css from "./MobileMenu.module.css";
-import AuthNavigation from "../AuthNavigation/AuthNavigation";
+import AuthNavigation from "@/components/AuthNavigation/AuthNavigation";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -27,20 +27,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     };
   }, [isOpen]);
 
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-
-    document.addEventListener("keydown", handleEsc);
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.removeEventListener("keydown", handleEsc);
-      document.body.style.overflow = "";
-    };
-  }, [onClose]);
-
   if (!isOpen) return null;
 
   return (
@@ -56,8 +42,10 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     >
       <div className={css.wrapper}>
         <div className={css.header}>
-          <Link href="/" onClick={onClose} className={css.logo}>
-            Logo
+          <Link href="/" className={css.logo}>
+            <svg width="156" height="36">
+              <use href="/sprite.svg#icon-Logo" />
+            </svg>
           </Link>
           <button className={css.closeBtn} onClick={onClose} aria-label="Close">
             ✕
@@ -83,10 +71,11 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 Мандрівники
               </Link>
             </li>
-
-            <AuthNavigation />
           </ul>
         </nav>
+        <div className={css.auth}>
+          <AuthNavigation variant="mobile" />
+        </div>
       </div>
     </div>
   );
