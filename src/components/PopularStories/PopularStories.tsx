@@ -6,7 +6,7 @@ import {
 import TravellersStories from "../TravellersStories/TravellersStories";
 import css from "./PopularStories.module.css";
 import Link from "next/link";
-import { getAllStories } from "@/lib/api/clientApi";
+import { getAllStories } from "@/src/lib/api/clientApi";
 
 export default async function PopularStories() {
   const queryClient = new QueryClient();

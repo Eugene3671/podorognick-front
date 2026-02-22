@@ -6,9 +6,12 @@ import css from "./TravellersStoriesItem.module.css";
 import { Story } from "@/types/story";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { addToSavedStories, removeFromSavedStories } from "@/lib/api/clientApi";
+import {
+  addToSavedStories,
+  removeFromSavedStories,
+} from "@/src/lib/api/clientApi";
 import { useMutation } from "@tanstack/react-query";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/src/hooks/useAuth";
 interface TravellersStoriesItemProps {
   story: Story;
 }

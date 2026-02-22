@@ -4,7 +4,7 @@ import TravellersStoriesItem from "../TravellersStoriesItem/TravellersStoriesIte
 import { useInfiniteQuery } from "@tanstack/react-query";
 import css from "./TravellersStories.module.css";
 import { ReactNode } from "react";
-import { getAllStories } from "@/lib/api/clientApi";
+import { getAllStories } from "@/src/lib/api/clientApi";
 
 interface TravellersStoriesProps {
   children?: ReactNode;
