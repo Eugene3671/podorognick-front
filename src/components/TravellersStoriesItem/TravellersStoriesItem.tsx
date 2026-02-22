@@ -6,43 +6,66 @@ import css from "./TravellersStoriesItem.module.css";
 import { Story } from "@/src/types/story";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Category } from "@/src/types/category";
+import {
+  addToSavedStories,
+  FullStory,
+  removeFromSavedStories,
+} from "@/src/lib/api";
+import { useMutation } from "@tanstack/react-query";
 
 interface TravellersStoriesItemProps {
-  category: Category;
-  story: Story;
-  author: User;
+  story: FullStory;
   currentUser: User | null;
 }
 export default function TravellersStoriesItem({
-  category,
   story,
-  author,
   currentUser,
 }: TravellersStoriesItemProps) {
   const router = useRouter();
-  const [favoriteCount, setFavoriteCount] = useState(story.favoriteCount);
+  const [favoriteCount, setFavoriteCount] = useState<number>(
+    story.favoriteCount,
+  );
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
-  const handleSave = async () => {
+  const saveMutation = useMutation({
+    mutationFn: () => addToSavedStories(story.id),
+
+    onMutate: () => {
+      setIsSaved(true);
+      setFavoriteCount((c) => c + 1);
+    },
+
+    onError: () => {
+      setIsSaved(false);
+      setFavoriteCount((c) => c - 1);
+    },
+  });
+
+  const unsaveMutation = useMutation({
+    mutationFn: () => removeFromSavedStories(story.id),
+    onMutate: () => {
+      setIsSaved(false);
+      setFavoriteCount((c) => c - 1);
+    },
+    onError: () => {
+      setIsSaved(true);
+      setFavoriteCount((c) => c + 1);
+    },
+  });
+
+  const handleSave = () => {
     if (!currentUser) {
       router.push("/auth/login");
       return;
     }
-
-    setIsSaved(true);
-    setFavoriteCount((count) => count + 1);
-
-    try {
-      const res = await fetch(`/api/stories/${story.id}/favorite`, {
-        method: "POST",
-      });
-
-      if (!res.ok) throw new Error();
-    } catch {
-      setIsSaved(false);
-      setFavoriteCount((c) => c - 1);
-    }
+    saveMutation.mutate();
   };
+
+  const handleUnsave = () => {
+    unsaveMutation.mutate();
+  };
+
   return (
     <li className={css.travellerStoryItem}>
       <Image
@@ -80,9 +103,15 @@ export default function TravellersStoriesItem({
         </Link>
         <button
           className={isSaved ? css.saveButtonActive : css.saveButton}
-          onClick={handleSave}
+          onClick={isSaved ? handleUnsave : handleSave}
         >
-          Save
+          {saveMutation.isPending || unsaveMutation.isPending ? (
+            <span className={css.loader}></span>
+          ) : (
+            <svg>
+              <use />
+            </svg>
+          )}
         </button>
       </div>
     </li>
