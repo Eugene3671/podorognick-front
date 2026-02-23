@@ -2,7 +2,8 @@
 import Link from 'next/link'
 import css from './AuthForms.module.css'
 import { useState } from 'react'
- 
+import { registerSchema } from '@/src/validation/registerValidation'
+import { Formik, Form, Field } from 'formik';
 
 export default function Register() {
 
@@ -17,7 +18,7 @@ export default function Register() {
       
        <div className={css.authTabs}>
        <div className={css.tabWrapper}>
-    <Link href="./login.tsx " className={`${css.tab} ${css.active}`}>
+    <Link href=" " className={`${css.tab} ${css.active}`}>
       Реєстрація
     </Link>
   </div>
@@ -35,67 +36,100 @@ export default function Register() {
         </p>
       </div>
 
-      <form className={css.authForm}  >
-        
-        <div className={css.formGroup}>
-          <label htmlFor="fullname"  className={css.label_text}>Імʼя та Прізвище*</label>
-          <input
-            type="text"
-            id="fullname"
-            name="fullname"
-            placeholder="Ваше імʼя та прізвище"
-            required
-            className={css.input}
-          />
-        </div>
+     <Formik
+  initialValues={{
+    fullname: '',
+    email: '',
+    password: '',
+  }}
+  validationSchema={registerSchema}
+  onSubmit={(values) => {
+    console.log(values);
+  }}
+>
+  {({ errors, touched }) => (
+    <Form className={css.authForm}>
 
-        <div className={css.formGroup}>
-          <label htmlFor="email"  className={css.label_text}>Пошта*</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="hello@podorozhnyky.ua"
-            required
-            className={css.input}
-          />
-        </div>
-
-        <div className={css.formGroup}>
-          <label htmlFor="password" className={css.label_text}>Пароль*</label>
-           <div className={css.passwordWrapper}>
-    <input
-      type={showPassword ? 'text' : 'password'}
-      id="password"
-      name="password"
-      placeholder="*********"
-      required
-      className={css.input}
-    />
-
-    <button
-      type="button"
-      className={css.passwordToggle}
-      onClick={() => setShowPassword(!showPassword)}
-    >
-      <svg className={css.icon}>
-        <use
-          href={
-            showPassword
-              ? '/sprite.svg#icon-eye'
-              : '/sprite.svg#icon-eye-blocked'
-          }
+      <div className={css.formGroup}>
+        <label htmlFor="fullname" className={css.label_text}>
+          Імʼя та Прізвище*
+        </label>
+        <Field
+          type="text"
+          id="fullname"
+          name="fullname"
+          placeholder="Ваше імʼя та прізвище"
+          className={`${css.input} ${
+            errors.fullname && touched.fullname ? css.inputError : ''
+          }`}
         />
-      </svg>
-    </button>
-  </div>
+        {errors.fullname && touched.fullname && (
+          <div className={css.error}>{errors.fullname}</div>
+        )}
+      </div>
+
+      <div className={css.formGroup}>
+        <label htmlFor="email" className={css.label_text}>
+          Пошта*
+        </label>
+        <Field
+          type="email"
+          id="email"
+          name="email"
+          placeholder="hello@podorozhnyky.ua"
+          className={`${css.input} ${
+            errors.email && touched.email ? css.inputError : ''
+          }`}
+        />
+        {errors.email && touched.email && (
+          <div className={css.error}>{errors.email}</div>
+        )}
+      </div>
+
+      <div className={css.formGroup}>
+        <label htmlFor="password" className={css.label_text}>
+          Пароль*
+        </label>
+
+        <div className={css.passwordWrapper}>
+          <Field
+            type={showPassword ? 'text' : 'password'}
+            id="password"
+            name="password"
+            placeholder="*********"
+            className={`${css.input} ${
+              errors.password && touched.password ? css.inputError : ''
+            }`}
+          />
+
+          <button
+            type="button"
+            className={css.passwordToggle}
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            <svg className={css.icon}>
+              <use
+                href={
+                  showPassword
+                    ? '/sprite.svg#icon-eye'
+                    : '/sprite.svg#icon-eye-blocked'
+                }
+              />
+            </svg>
+          </button>
         </div>
 
-        <button type="submit" className={css.authButton}>
-          Зареєструватись
-        </button>
-      </form>
+        {errors.password && touched.password && (
+          <div className={css.error}>{errors.password}</div>
+        )}
+      </div>
 
+      <button type="submit" className={css.authButton}>
+        Зареєструватись
+      </button>
+    </Form>
+  )}
+</Formik>
     </div>
 
 
