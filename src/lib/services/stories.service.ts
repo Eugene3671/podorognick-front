@@ -27,7 +27,6 @@ export async function getSavedStories(): Promise<Story[]> {
 }
 export async function addToSavedStories(storyId: string) {
   const response = await nextServer.post(`/stories/${storyId}/save`);
-
   return response.data;
 }
 
