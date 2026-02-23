@@ -34,6 +34,10 @@
   --opacity-neutral-darkest-50: rgba(0, 0, 0, 0.5);
   --opacity-neutral-darkest-60: rgba(0, 0, 0, 0.6);
   --color-red: #b00101;
+
+  --color-royal-blue: #4169e1;
+  --color-white: #fff;
+  --color-scheme-2-text: #000;
 }
 
 /* transition: property 0.3s ease-in-out */
