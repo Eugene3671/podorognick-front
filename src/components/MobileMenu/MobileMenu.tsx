@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import css from "./MobileMenu.module.css";
-import AuthNavigation from "@/components/AuthNavigation/AuthNavigation";
+import AuthNavigation from "../AuthNavigation/AuthNavigation";
 
 interface MobileMenuProps {
   isOpen: boolean;

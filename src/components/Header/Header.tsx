@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
 import css from "./Header.module.css";
-import AuthNavigation from "@/components/AuthNavigation/AuthNavigation";
-import MobileMenu from "@/components/MobileMenu/MobileMenu";
+import AuthNavigation from "../AuthNavigation/AuthNavigation";
+import MobileMenu from "../MobileMenu/MobileMenu";
 
 export default function Header() {
   const pathname = usePathname();

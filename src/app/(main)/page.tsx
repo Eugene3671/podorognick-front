@@ -1,3 +1,5 @@
+import PopularStories from "../../components/PopularStories/PopularStories";
+import TravellersStoriesItem from "../../components/TravellersStoriesItem/TravellersStoriesItem";
 
 export default function HomePage() {
   return (
