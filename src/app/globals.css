@@ -36,7 +36,8 @@
   --color-red: #b00101;
 
   --color-royal-blue: #4169e1;
-  --color-white: #ffffff;
+  --color-white: #fff;
+  --color-scheme-2-text: #000;
 }
 
 /* transition: property 0.3s ease-in-out */
