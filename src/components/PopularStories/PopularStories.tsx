@@ -21,9 +21,11 @@ export default async function PopularStories() {
       <h2 className={css.sectionTitle}>Популярні історії</h2>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <TravellersStories>
-          <Link href="/stories" className={css.paginationButton}>
-            Переглянути всі
-          </Link>
+          <div className={css.buttonWrapper}>
+            <Link href="/stories" className={css.paginationButton}>
+              Переглянути всі
+            </Link>
+          </div>
         </TravellersStories>
       </HydrationBoundary>
     </section>
