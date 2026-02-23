@@ -2,15 +2,46 @@
 import Link from 'next/link'
 import css from './AuthForms.module.css'
 import { useState } from 'react'
+import { useRouter } from "next/navigation";
 import { registerSchema } from '@/src/validation/registerValidation'
 import { Formik, Form, Field } from 'formik';
+import { register } from '@/src/lib/services/auth.service';
+import {RegisterFormValues } from '@/src/types/auth'
+import toast  from 'react-hot-toast';
+ 
 
 export default function Register() {
 
-      const [showPassword, setShowPassword] = useState(false)
 
-  
-  
+  const initialValues: RegisterFormValues = {
+     fullname: '',
+    email: '',
+    password: '',
+    
+  }
+
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (values:RegisterFormValues) => {
+    setIsSubmitting(true);
+    try {
+      const response = await register({
+        name: values.fullname,
+        email: values.email,
+        password: values.password,
+      });
+      toast.success(`Привіт, ${response.user.name}! Реєстрація успішна.`);
+      router.push('/');
+    } catch (error: any) {
+      toast.error(error.response?.data?.error || "Помилка реєстрації");
+      
+    } finally {
+      setIsSubmitting(false);
+    }
+
+  }
 
     return (
 
@@ -36,16 +67,10 @@ export default function Register() {
         </p>
       </div>
 
-     <Formik
-  initialValues={{
-    fullname: '',
-    email: '',
-    password: '',
-  }}
+     <Formik<RegisterFormValues>
+  initialValues={initialValues}
   validationSchema={registerSchema}
-  onSubmit={(values) => {
-    console.log(values);
-  }}
+  onSubmit={handleSubmit}
 >
   {({ errors, touched }) => (
     <Form className={css.authForm}>
