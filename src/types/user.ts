@@ -1,6 +1,11 @@
 export interface User {
-    name: string,
-    email: string;
-    description: string;
-    avatarUrl: string;
+  _id: string;
+  name: string;
+  email: string;
+  description: string;
+  avatarUrl: string;
+  articlesAmount: number;
+  savedStories: string[];
+  createdAt?: string;
+  updatedAt?: string;
 }

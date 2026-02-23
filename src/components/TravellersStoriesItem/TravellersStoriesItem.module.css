@@ -1,0 +1,321 @@
+.travellerStoryItem {
+  border: 0px solid var(--opacity-neutral-darkest-15);
+  border-radius: 16px;
+  width: 335px;
+  height: 575px;
+  background-color: var(--color-accent-lighter);
+  overflow: hidden;
+}
+
+.travellerStoryItem:last-child {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .travellerStoryItem {
+    width: 340px;
+    height: 578px;
+  }
+
+  .travellerStoryItem:last-child {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .travellerStoryItem {
+    width: 421px;
+    height: 677px;
+  }
+
+  .travellerStoryItem:last-child {
+    display: none;
+  }
+}
+.storyThumbnailWrapper {
+  position: relative;
+  width: 335px;
+  height: 223px;
+}
+
+.storyThumbnail {
+  display: block;
+  object-fit: cover;
+}
+
+@media only screen and (min-width: 768px) {
+  .storyThumbnailWrapper {
+    width: 340px;
+    height: 226px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .storyThumbnailWrapper {
+    width: 100%;
+    height: 280px;
+  }
+}
+
+.storyWrapper {
+  padding: 24px;
+}
+
+.storyContents {
+  margin-bottom: 24px;
+}
+
+.regionTag {
+  font-family: var(--font-nunito-sans);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--light-scheme-text);
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+@media only screen and (min-width: 1440px) {
+  .regionTag {
+    font-size: 16px;
+  }
+}
+
+.storyTitle {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: no-wrap;
+  height: 54px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 18px !important;
+  line-height: 150%;
+  color: var(--light-scheme-text);
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+@media only screen and (min-width: 1440px) {
+  .storyTitle {
+    height: 78px;
+    font-size: 26px !important;
+  }
+}
+
+.storyText {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--font-nunito-sans);
+  font-weight: 400;
+  font-size: 16px !important;
+  line-height: 150%;
+  color: var(--light-scheme-text);
+  margin: 0;
+}
+@media only screen and (min-width: 1440px) {
+  .storyText {
+    font-size: 18px !important;
+  }
+}
+
+.storyAuthor {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.authorAvatar {
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+@media only screen and (min-width: 1440px) {
+  .authorAvatar {
+    width: 54px;
+    height: 54px;
+  }
+}
+
+.authorName {
+  font-family: var(--font-nunito-sans);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--light-scheme-text);
+  margin: 0;
+}
+
+.storyInfo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.storyDate {
+  font-family: var(--font-nunito-sans);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--light-scheme-text);
+  margin: 0;
+}
+
+.numberOfSaves {
+  font-family: var(--font-nunito-sans);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--light-scheme-text);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+@media only screen and (min-width: 1440px) {
+  .authorName,
+  .storyDate,
+  .numberOfSaves {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .saveIcon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.storyDetailsLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-nunito-sans);
+  font-weight: 500;
+  font-size: 16px !important;
+  line-height: 150%;
+  color: var(--light-scheme-text);
+  border: 1px solid var(--opacity-neutral-darkest-15);
+  border-radius: 8px;
+  width: 229px;
+  height: 48px;
+  background-color: var(--opacity-neutral-darkest-5);
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+@media only screen and (min-width: 768px) {
+  .storyDetailsLink {
+    width: 234px !important;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .storyDetailsLink {
+    width: 315px !important;
+    font-size: 18px;
+  }
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.saveButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--opacity-neutral-darkest-15);
+  border-radius: 8px;
+  width: 48px;
+  height: 48px;
+  background-color: var(--opacity-neutral-darkest-5);
+  text-decoration: none;
+  transition:
+    all 0.3s ease-in-out,
+    fill 0.3s ease-in-out;
+}
+
+.loader {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 3px solid var(--light-scheme-background);
+  border-right: 3px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ------------------- BUTTON STATES ----------------- */
+
+.storyDetailsLink:hover,
+.saveButton:hover,
+.storyDetailsLink:focus,
+.saveButton:focus {
+  background-color: var(--color-accent);
+  color: var(--light-scheme-background);
+  border: 1px solid var(--color-accent);
+  cursor: pointer;
+}
+
+.saveButton:hover .saveIconButton,
+.saveButton:focus .saveIconButton,
+.saveButton:active .saveIconButton {
+  fill: var(--light-scheme-background);
+}
+
+.storyDetailsLink:active,
+.saveButton:active {
+  background-color: var(--color-accent-darker);
+  color: var(--light-scheme-background);
+  border: 1px solid var(--opacity-transparent);
+}
+
+.saveButtonActive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  width: 48px;
+  height: 48px;
+  text-decoration: none;
+  transition:
+    all 0.3s ease-in-out,
+    fill 0.3s ease-in-out;
+  background-color: var(--color-accent-darker);
+  color: var(--light-scheme-background);
+  border: 1px solid var(--opacity-transparent);
+}
+
+.saveButtonActive .saveIconButton {
+  fill: var(--light-scheme-background);
+}
+
+.storyDetailsLink:disabled,
+.saveButton:disabled {
+  border: 1px solid var(--opacity-transparent);
+  color: var(--light-scheme-text);
+  background-color: var(--opacity-neutral-darkest-5);
+  opacity: 0.3;
+}
