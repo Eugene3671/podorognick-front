@@ -71,7 +71,7 @@
 @media screen and (min-width: 1440px) {
   .container {
     width: 1440px;
-    padding: 172px 64px 347px;
+    padding: 172px 617px 347px 64px;
 
     background-image: url("/img/hero-baner/bg-pc-compressed.jpg");
     .title {
