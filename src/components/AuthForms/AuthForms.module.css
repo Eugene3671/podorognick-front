@@ -197,3 +197,14 @@
     height: 20px;
     fill: rgba(0, 0, 0, 0.753);
 }
+
+.inputError {
+    border: 1px solid #e74a3b;
+    background-color: #fff5f5;
+}
+
+.error {
+    color: #e74a3b;
+    font-size: 14px;
+    margin-top: 4px;
+}
