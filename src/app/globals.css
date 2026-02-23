@@ -69,7 +69,8 @@ body {
 
 @media screen and (min-width: 1440px) {
   .container {
-    max-width: var(--container-width);
+    /* max-width: var(--container-width); */
+    max-width: 1440px;
     --container-padding: 64px;
   }
 }

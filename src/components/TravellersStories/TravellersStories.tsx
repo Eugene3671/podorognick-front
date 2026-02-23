@@ -16,7 +16,7 @@ export default function TravellersStories({
     useInfiniteQuery({
       queryKey: ["popular-stories"],
       queryFn: ({ pageParam = 1 }) =>
-        getAllStories({ page: pageParam, perPage: 3 }),
+        getAllStories({ page: pageParam, perPage: 4 }),
       initialPageParam: 1,
       getNextPageParam: (lastPage) => {
         return lastPage.page < lastPage.totalPages
@@ -27,7 +27,6 @@ export default function TravellersStories({
 
   const stories = data?.pages.flatMap((page) => page.stories) ?? [];
 
-  console.log(stories);
   return (
     <>
       <ul className={css.travellerStoriesList}>

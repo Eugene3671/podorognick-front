@@ -5,14 +5,13 @@ import Link from "next/link";
 import css from "./TravellersStoriesItem.module.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
 import { useMutation } from "@tanstack/react-query";
-import { useAuth } from "@/src/hooks/useAuth";
 import { Story } from "@/src/types/story";
 import {
   addToSavedStories,
   removeFromSavedStories,
 } from "@/src/lib/services/stories.service";
+import { useAuthStore } from "@/src/lib/store/authStore";
 interface TravellersStoriesItemProps {
   story: Story;
 }
@@ -20,7 +19,7 @@ export default function TravellersStoriesItem({
   story,
 }: TravellersStoriesItemProps) {
   const router = useRouter();
-  const { user, isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuthStore();
 
   const [favoriteCount, setFavoriteCount] = useState<number>(
     story.favoriteCount,
@@ -91,8 +90,8 @@ export default function TravellersStoriesItem({
           <Image
             src={story.ownerId.avatarUrl}
             alt="avatar"
-            width={54}
-            height={54}
+            width={48}
+            height={48}
             className={css.authorAvatar}
           />
           <div className={css.authorInfo}>
@@ -102,7 +101,7 @@ export default function TravellersStoriesItem({
               <span className={css.separator}>•</span>
               <p className={css.numberOfSaves}>
                 {favoriteCount}
-                <svg width="16" height="16" className={css.saveIcon}>
+                <svg width="12" height="12" className={css.saveIcon}>
                   <use href="/sprite.svg#icon-bookmark"></use>
                 </svg>
               </p>
@@ -120,7 +119,7 @@ export default function TravellersStoriesItem({
             {saveMutation.isPending || unsaveMutation.isPending ? (
               <span className={css.loader}></span>
             ) : (
-              <svg width="24" height="24" className={css.saveIcon}>
+              <svg width="24" height="24" className={css.saveIconButton}>
                 <use href="/sprite.svg#icon-bookmark"></use>
               </svg>
             )}
