@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Nunito_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import TanStackProvider from "../components/TanStackProvider/TanStackProvider";
-// import Header from "@/components/Header/Header";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -28,7 +27,9 @@ export default function RootLayout({
   return (
     <html lang="uk" className={`${nunitoSans.variable} ${inter.variable}`}>
       <body>
-        <TanStackProvider>{children}</TanStackProvider>
+        <TanStackProvider>
+          <main>{children}</main>
+        </TanStackProvider>
       </body>
     </html>
   );

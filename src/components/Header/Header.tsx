@@ -4,21 +4,23 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import "@/src/app/globals.css";
 
 import css from "./Header.module.css";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
 import MobileMenu from "../MobileMenu/MobileMenu";
+import { useAuthStore } from "@/src/lib/store/authStore";
 
 export default function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
-
+  const { isAuthenticated } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <header className={clsx(css.header, isHome && css.homeHeader)}>
-        <div className={css.container}>
+        <div className={`container  ${css.headerContainer}`}>
           <Link href="/" className={css.logo}>
             <svg width="156" height="36">
               <use href="/sprite.svg#icon-Logo" />
@@ -45,7 +47,9 @@ export default function Header() {
             </ul>
           </nav>
 
-          <div className={css.action}>
+          <div
+            className={clsx(css.action, isAuthenticated && css.authActionBtn)}
+          >
             <Link href="/stories/create">Опублікувати історію</Link>
           </div>
 
