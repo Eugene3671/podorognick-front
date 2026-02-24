@@ -1,3 +1,7 @@
+import "@/src/app/globals.css";
+import Header from "@/src/components/Header/Header";
+import Footer from "@/src/components/Footer/Footer";
+
 export default function MainLayout({
   children,
 }: {
@@ -5,7 +9,9 @@ export default function MainLayout({
 }) {
   return (
     <>
+      <Header />
       <main>{children}</main>
+      <Footer />
     </>
   );
 }

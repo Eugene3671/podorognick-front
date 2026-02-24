@@ -5,16 +5,19 @@
     border-radius: 8px;
     padding: 4px;
 }
+
 .navigationItem a {
     font-weight: 500;
     font-size: 16px;
     line-height: 1.5;
     color: #000000;
 }
+
 .login {
     background-color: #00000005;
     border: 1px solid #00000015;
 }
+
 .register {
     background-color: #4169E1;
     border: 1px solid #4169E1;
@@ -29,8 +32,27 @@
     width: 335px;
     margin-bottom: 16px;
 }
+
 .desktop {
     height: 35px;
     padding: 4px 10px;
     margin-left: 16px;
+}
+
+.homeLoginBtn.desktop {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.homeLoginBtn.desktop a {
+    color: #fff;
+}
+
+.homeRegisterBtn.desktop {
+    background: #fff;
+    border: 1px solid #fff;
+}
+
+.homeRegisterBtn.desktop a {
+    color: #000;
 }
