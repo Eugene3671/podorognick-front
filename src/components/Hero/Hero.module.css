@@ -1,5 +1,5 @@
 .container {
-  padding: 124px 20px 331px;
+  padding: 196px 20px 331px;
 
   position: relative;
   overflow: hidden;
@@ -69,7 +69,7 @@
 @media screen and (min-width: 768px) {
   .container {
     width: 768px;
-    padding: 172px 32px 117px;
+    padding: 244px 32px 117px;
 
     /* background-image: url("/img/hero-baner/bg-tab-compressed.jpg"); */
   }
@@ -87,7 +87,7 @@
 @media screen and (min-width: 1440px) {
   .container {
     width: 1440px;
-    padding: 172px 617px 347px 64px;
+    padding: 244px 553px 347px 64px;
 
     /* background-image: url("/img/hero-baner/bg-pc-compressed.jpg"); */
     .title {
