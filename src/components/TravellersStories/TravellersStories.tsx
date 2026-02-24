@@ -3,20 +3,47 @@
 import TravellersStoriesItem from "../TravellersStoriesItem/TravellersStoriesItem";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import css from "./TravellersStories.module.css";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { getAllStories } from "@/src/lib/services/stories.service";
+import Link from "next/link";
 
 interface TravellersStoriesProps {
-  children?: ReactNode;
+  perPage: number;
+  loadStep?: number;
+  sort: string;
+  buttonType: string;
 }
+
 export default function TravellersStories({
-  children,
+  perPage,
+  sort,
+  buttonType,
 }: TravellersStoriesProps) {
+  const [initialPerPage, setInitialPerPage] = useState(perPage);
+  useEffect(() => {
+    const mediaQueryList = window.matchMedia(
+      "(min-width: 768px) and (max-width: 1439px)",
+    );
+
+    const handleChange = () => {
+      if (mediaQueryList.matches) {
+        setInitialPerPage(perPage + 1);
+      } else {
+        setInitialPerPage(perPage);
+      }
+    };
+
+    handleChange();
+    mediaQueryList.addEventListener("change", handleChange);
+
+    return () => mediaQueryList.removeEventListener("change", handleChange);
+  }, []);
+
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: ["popular-stories"],
+      queryKey: ["popular-stories", initialPerPage],
       queryFn: ({ pageParam = 1 }) =>
-        getAllStories({ page: pageParam, perPage: 4 }),
+        getAllStories({ page: pageParam, perPage: initialPerPage, sort: sort }),
       initialPageParam: 1,
       getNextPageParam: (lastPage) => {
         return lastPage.page < lastPage.totalPages
@@ -34,17 +61,23 @@ export default function TravellersStories({
           <TravellersStoriesItem key={story._id} story={story} />
         ))}
       </ul>
-      {children ?? <div className={css.buttonWrapper}>{children}</div>}
-
-      {/* Це для сторінки stories */}
-      {/* {hasNextPage && (
-        <button
-          className={css.paginationButton}
-          onClick={() => fetchNextPage()}
-        >
-          Переглянути всі
-        </button>
-      )} */}
+      <div className={css.buttonWrapper}>
+        {buttonType === "loadMore" && hasNextPage ? (
+          <button
+            className={css.paginationButton}
+            onClick={() => fetchNextPage()}
+          >
+            Показати ще
+          </button>
+        ) : (
+          isFetchingNextPage && <div>Loader</div>
+        )}
+        {buttonType === "link" && (
+          <Link href="/stories" className={css.paginationButton}>
+            Переглянути всі
+          </Link>
+        )}
+      </div>
     </>
   );
 }
