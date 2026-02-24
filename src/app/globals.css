@@ -67,15 +67,15 @@ main {
 @media screen and (min-width: 768px) {
   .container {
     max-width: 768px;
-    /* --container-padding: 32px; */
+    --container-padding: 32px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .container {
-    /* max-width: var(--container-width); */
+    max-width: var(--container-width);
     max-width: 1440px;
-    /* --container-padding: 64px; */
+    --container-padding: 64px;
   }
 }
 

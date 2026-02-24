@@ -77,7 +77,7 @@
 
   .title {
     font-size: 48px;
-    padding-right: 92px;
+    /* padding-right: 92px; */
   }
   .button {
     width: 115px;
@@ -87,7 +87,7 @@
 
 @media screen and (min-width: 1440px) {
   .heroContainer {
-    padding: 244px 553px 347px 64px;
+    padding: 244px 617px 347px 64px;
   }
 
   .title {
