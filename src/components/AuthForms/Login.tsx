@@ -1,15 +1,47 @@
 'use client'
 import { useState } from 'react';
+import { useRouter } from "next/navigation";
 import Link from 'next/link';
 import css from './AuthForms.module.css'
 import { Formik, Form, Field } from 'formik';
- import { loginSchema } from '@/src/validation/registerValidation';
- 
+import { loginSchema } from '@/src/validation/registerValidation';
+import { LoginFormValues } from '@/src/types/auth';
+import { login } from '@/src/lib/services/auth.service';
+import toast from 'react-hot-toast';
 
 
 export default function Login() {
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const [showPassword, setShowPassword] = useState(false)
+  const initialValues: LoginFormValues = {
+      email: '',
+      password: '',
+      
+    }
+  
+
+  const handleSubmit = async (values: LoginFormValues) => {
+    setIsSubmitting(true);
+    try {
+      const response = await login({
+        email: values.email,
+        password: values.password,
+      })
+      router.push("/");
+
+      console.log('Користувач залогінився:', response)
+
+    } catch (error: any) {
+      toast.error(error.response?.data?.error || 'Помилка входу')
+    } finally {
+      setIsSubmitting(false);
+    }
+
+
+  }
+
 
 
 
@@ -36,36 +68,12 @@ export default function Login() {
       </div>
 
      <Formik
-  initialValues={{
-    name: '',
-    email: '',
-    password: '',
-  }}
+  initialValues={initialValues}
   validationSchema={loginSchema}
-  onSubmit={(values) => {
-    console.log(values);
-  }}
+  onSubmit={handleSubmit}
 >
   {({ errors, touched }) => (
     <Form className={css.authForm}>
-      
-      <div className={css.formGroup}>
-        <label htmlFor="name" className={css.label_text}>
-          Ім'я*
-        </label>
-        <Field
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Ваше ім'я"
-          className={`${css.input} ${
-            errors.name && touched.name ? css.inputError : ''
-          }`}
-        />
-        {errors.name && touched.name && (
-          <div className={css.error}>{errors.name}</div>
-        )}
-      </div>
 
       <div className={css.formGroup}>
         <label htmlFor="email" className={css.label_text}>

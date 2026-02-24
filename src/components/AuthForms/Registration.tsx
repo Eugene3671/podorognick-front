@@ -14,7 +14,7 @@ export default function Register() {
 
 
   const initialValues: RegisterFormValues = {
-     fullname: '',
+    name: '',
     email: '',
     password: '',
     
@@ -28,10 +28,13 @@ export default function Register() {
     setIsSubmitting(true);
     try {
       const response = await register({
-        name: values.fullname,
+        name: values.name,
         email: values.email,
         password: values.password,
       });
+
+          console.log("Користувач зареєстрований:", response);
+
       toast.success(`Привіт, ${response.user.name}! Реєстрація успішна.`);
       router.push('/');
     } catch (error: any) {
@@ -70,26 +73,29 @@ export default function Register() {
      <Formik<RegisterFormValues>
   initialValues={initialValues}
   validationSchema={registerSchema}
-  onSubmit={handleSubmit}
+  onSubmit={(values) => {
+    console.log("Formik onSubmit викликався", values);
+    handleSubmit(values);
+  }}
 >
   {({ errors, touched }) => (
     <Form className={css.authForm}>
 
       <div className={css.formGroup}>
-        <label htmlFor="fullname" className={css.label_text}>
+        <label htmlFor="name" className={css.label_text}>
           Імʼя та Прізвище*
         </label>
         <Field
           type="text"
-          id="fullname"
-          name="fullname"
+          id="name"
+          name="name"
           placeholder="Ваше імʼя та прізвище"
           className={`${css.input} ${
-            errors.fullname && touched.fullname ? css.inputError : ''
+            errors.name && touched.name ? css.inputError : ''
           }`}
         />
-        {errors.fullname && touched.fullname && (
-          <div className={css.error}>{errors.fullname}</div>
+        {errors.name && touched.name && (
+          <div className={css.error}>{errors.name}</div>
         )}
       </div>
 
