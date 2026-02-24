@@ -7,7 +7,9 @@ import { registerSchema } from '@/src/validation/registerValidation'
 import { Formik, Form, Field } from 'formik';
 import { register } from '@/src/lib/services/auth.service';
 import {RegisterFormValues } from '@/src/types/auth'
-import toast  from 'react-hot-toast';
+import toast from 'react-hot-toast';
+ import { useAuthStore } from '@/src/lib/store/authStore';
+
  
 
 export default function Register() {
@@ -21,19 +23,18 @@ export default function Register() {
   }
 
   const router = useRouter();
+  const setUser = useAuthStore((state) => state.setUser);
+
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (values:RegisterFormValues) => {
     setIsSubmitting(true);
     try {
-      const response = await register({
-        name: values.name,
-        email: values.email,
-        password: values.password,
-      });
+      const response = await register(values);
+      setUser(response.user, response.accessToken);
 
-          console.log("Користувач зареєстрований:", response);
+      console.log("Користувач зареєстрований:", response);
 
       toast.success(`Привіт, ${response.user.name}! Реєстрація успішна.`);
       router.push('/');
@@ -52,12 +53,12 @@ export default function Register() {
       
        <div className={css.authTabs}>
        <div className={css.tabWrapper}>
-    <Link href=" " className={`${css.tab} ${css.active}`}>
+    <Link href="./auth/register" className={`${css.tab} ${css.active}`}>
       Реєстрація
     </Link>
   </div>
   <div className={css.tabWrapper}>
-    <Link href="" className={css.tab}>
+    <Link href="/auth/login" className={css.tab}>
       Вхід
     </Link>
   </div>

@@ -8,10 +8,13 @@ import { loginSchema } from '@/src/validation/registerValidation';
 import { LoginFormValues } from '@/src/types/auth';
 import { login } from '@/src/lib/services/auth.service';
 import toast from 'react-hot-toast';
+import { useAuthStore } from '@/src/lib/store/authStore';
 
 
 export default function Login() {
   const router = useRouter();
+  const setUser = useAuthStore((state) => state.setUser);
+
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -25,12 +28,9 @@ export default function Login() {
   const handleSubmit = async (values: LoginFormValues) => {
     setIsSubmitting(true);
     try {
-      const response = await login({
-        email: values.email,
-        password: values.password,
-      })
+      const response = await login(values)
       router.push("/");
-
+      setUser(response.user, response.accessToken);
       console.log('Користувач залогінився:', response)
 
     } catch (error: any) {
@@ -50,12 +50,12 @@ export default function Login() {
       
       <div className={css.authTabs}>
        <div className={css.tabWrapper}>
-     <Link href=" " className={css.tab}>
+     <Link href="/auth/register" className={css.tab}>
       Реєстрація
      </Link>
      </div>
      <div className={css.tabWrapper}>
-     <Link href=" " className={`${css.tab} ${css.active}`}>
+     <Link href="/auth/login" className={`${css.tab} ${css.active}`}>
       Вхід
      </Link>
      </div>
