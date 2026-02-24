@@ -1,20 +1,10 @@
 .header {
-    margin: 0 auto;
-    padding: 16px 20px;
     width: 100%;
     z-index: 2;
     background-color: #f7f9ff;
+    padding: 16px 0;
 }
-@media (min-width: 768px) {
-    .header {
-        padding: 18px 32px;
-    }
-}
-@media (min-width: 1440px) {
-    .header {
-        padding: 18px 64px;
-    }
-}
+
 .homeHeader {
     position: absolute;
     top: 0;
@@ -22,24 +12,26 @@
     background: transparent;
     color: #FFFFFF;
 }
-.container {
-    margin: 0 auto;
-    min-width: 320px;
-    max-width: 375px;
+
+.headerContainer {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 20px;
+    
 }
+
 @media (min-width: 768px) {
-    .container {
-        min-width: 768px;
+    .headerContainer {
         justify-content: flex-end;
+        padding: 0 32px;
     }
 }
 @media (min-width: 1440px) {
-    .container {
-            min-width: 1440px;
-        }
+    .headerContainer {
+        justify-content: flex-end;
+        padding: 0 64px;
+    }
 }
 .logo {
     width: 156px;
@@ -54,9 +46,9 @@
 .navList {
     display: none;
 }
+
 @media (min-width: 1440px) {
-    .navList 
-    {
+    .navList {
         display: flex;
         gap: 32px;
         font-size: 18px;
@@ -70,9 +62,15 @@
     line-height: 1.4;
     color: #1d1d1d;
 }
+
+.homeHeader .navItem {
+    color: #fff;
+}
+
 .action {
     display: none;
 }
+
 .action a {
     display: flex;
     align-items: center;
@@ -87,30 +85,40 @@
     line-height: 1.4;
 
 }
+
 @media (min-width: 768px) {
     .action {
         display: block;
     }
-    .homeHeader .action a{
+
+    .homeHeader .action a {
         background-color: #FFFFFF;
         border: 1px solid #FFFFFF;
         color: #000000;
     }
 }
+
 @media (min-width: 1440px) {
     .action {
         display: none;
     }
+
+    .authActionBtn {
+        display: block;
+    }
 }
+
 .auth {
     display: none;
 }
+
 @media (min-width: 1440px) {
     .auth {
         display: flex;
         margin-left: 32px;
     }
 }
+
 .burger {
     display: flex;
     align-items: center;
@@ -124,11 +132,13 @@
     width: 32px;
     height: 32px;
 }
+
 @media (min-width: 768px) {
     .burger {
         margin-left: 16px;
     }
 }
+
 @media (min-width: 1440px) {
     .burger {
         display: none;
