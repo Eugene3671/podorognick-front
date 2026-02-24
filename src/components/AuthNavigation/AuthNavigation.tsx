@@ -3,8 +3,9 @@
 import css from "./AuthNavigation.module.css";
 import Link from "next/link";
 import clsx from "clsx";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useAuthStore } from "@/src/lib/store/authStore";
+import { logout } from "@/src/lib/services/auth.service";
 
 interface AuthNavigationProps {
   variant?: "mobile" | "desktop";
@@ -13,6 +14,9 @@ interface AuthNavigationProps {
 export default function AuthNavigation({
   variant = "desktop",
 }: AuthNavigationProps) {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   const { isAuthenticated, user } = useAuthStore();
   const clearIsAuthenticated = useAuthStore(
     (state) => state.clearIsAuthenticated,
@@ -20,9 +24,9 @@ export default function AuthNavigation({
   const router = useRouter();
 
   const handleLogout = async () => {
-    // await logout();
+    await logout();
     clearIsAuthenticated();
-    router.push("/sign-in");
+    router.refresh();
   };
 
   return isAuthenticated ? (
@@ -41,13 +45,27 @@ export default function AuthNavigation({
     </>
   ) : (
     <>
-      <li className={clsx(css.navigationItem, css.login, css[variant])}>
+      <li
+        className={clsx(
+          css.navigationItem,
+          css.login,
+          css[variant],
+          isHome && css.homeLoginBtn,
+        )}
+      >
         <Link href="/auth/login" prefetch={false}>
           Вхід
         </Link>
       </li>
 
-      <li className={clsx(css.navigationItem, css.register, css[variant])}>
+      <li
+        className={clsx(
+          css.navigationItem,
+          css.register,
+          css[variant],
+          isHome && css.homeRegisterBtn,
+        )}
+      >
         <Link href="/auth/register" prefetch={false}>
           Реєстрація
         </Link>

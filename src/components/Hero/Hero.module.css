@@ -1,0 +1,103 @@
+.container {
+  padding: 124px 20px 331px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.picture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.title,
+.description,
+.button {
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 110%;
+  letter-spacing: -0.01em;
+  color: var(--color-white);
+
+  margin-bottom: 24px;
+}
+
+.description {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-white);
+
+  margin-bottom: 32px;
+}
+
+.button {
+  border: 1px solid var(--color-royal-blue);
+  border-radius: 8px;
+  padding: 6px 12px;
+  width: 335px;
+  height: 39px;
+
+  background: var(--color-royal-blue);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-white);
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 768px;
+    padding: 172px 32px 117px;
+
+    /* background-image: url("/img/hero-baner/bg-tab-compressed.jpg"); */
+  }
+
+  .title {
+    font-size: 48px;
+    padding-right: 92px;
+  }
+  .button {
+    width: 115px;
+    height: 39px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    width: 1440px;
+    padding: 172px 617px 347px 64px;
+
+    /* background-image: url("/img/hero-baner/bg-pc-compressed.jpg"); */
+    .title {
+      font-size: 56px;
+    }
+    .description {
+      font-size: 20px;
+    }
+    .button {
+      width: 126px;
+    }
+  }
+}

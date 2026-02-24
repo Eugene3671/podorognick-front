@@ -4,6 +4,8 @@ import nextServer from "../axios";
 interface GetStoriesParams {
   page: number;
   perPage: number;
+  sort: string;
+  category?: string;
 }
 
 export interface StoriesResponse {
@@ -27,7 +29,6 @@ export async function getSavedStories(): Promise<Story[]> {
 }
 export async function addToSavedStories(storyId: string) {
   const response = await nextServer.post(`/stories/${storyId}/save`);
-
   return response.data;
 }
 
