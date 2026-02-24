@@ -1,8 +1,8 @@
-.container {
-  padding: 124px 20px 331px;
-
+.hero {
   position: relative;
   overflow: hidden;
+
+  width: 100%;
 }
 
 .picture {
@@ -23,6 +23,10 @@
 .button {
   position: relative;
   z-index: 2;
+}
+
+.heroContainer {
+  padding: 196px 20px 331px;
 }
 
 .title {
@@ -67,16 +71,14 @@
 }
 
 @media screen and (min-width: 768px) {
-  .container {
-    width: 768px;
-    padding: 172px 32px 117px;
-
-    /* background-image: url("/img/hero-baner/bg-tab-compressed.jpg"); */
+  .heroContainer {
+    padding: 244px 32px 117px;
   }
 
   .title {
     font-size: 48px;
-    padding-right: 92px;
+    width: 612px;
+    /* padding-right: 92px; */
   }
   .button {
     width: 115px;
@@ -85,19 +87,18 @@
 }
 
 @media screen and (min-width: 1440px) {
-  .container {
-    width: 1440px;
-    padding: 172px 617px 347px 64px;
+  .heroContainer {
+    padding: 244px 617px 347px 64px;
+  }
 
-    /* background-image: url("/img/hero-baner/bg-pc-compressed.jpg"); */
-    .title {
-      font-size: 56px;
-    }
-    .description {
-      font-size: 20px;
-    }
-    .button {
-      width: 126px;
-    }
+  .title {
+    font-size: 56px;
+    width: 759px;
+  }
+  .description {
+    font-size: 20px;
+  }
+  .button {
+    width: 126px;
   }
 }
