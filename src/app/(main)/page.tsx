@@ -3,16 +3,15 @@ import About from "@/src/components/About/About";
 import PopularStories from "../../components/PopularStories/PopularStories";
 
 import "@/src/app/globals.css";
+import Join from "@/src/components/Join/Join";
 export default function HomePage() {
   return (
-    <main>
+    <main className="container">
       <Hero />
       <About />
-      <h2>PopularStoriesSection</h2>
-      <h2>PopularStoriesSection</h2>
       <PopularStories />
       <h2>OurTravellers</h2>
-      <h3>Join</h3>
+      <Join />
     </main>
   );
 }
