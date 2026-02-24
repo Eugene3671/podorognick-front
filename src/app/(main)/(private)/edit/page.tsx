@@ -1,4 +1,4 @@
-import EditProfileForm from "../../../components/EditProfileForm/EditProfileForm";
+import EditProfileForm from "@/src/components/EditProfileForm/EditProfileForm";
 
 export default function PersonalPage() {
   return <EditProfileForm />;
