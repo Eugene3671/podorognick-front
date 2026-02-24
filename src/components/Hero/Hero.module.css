@@ -77,6 +77,7 @@
 
   .title {
     font-size: 48px;
+    width: 612px;
     /* padding-right: 92px; */
   }
   .button {
@@ -92,6 +93,7 @@
 
   .title {
     font-size: 56px;
+    width: 759px;
   }
   .description {
     font-size: 20px;
