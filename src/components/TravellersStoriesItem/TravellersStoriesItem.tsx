@@ -63,9 +63,9 @@ export default function TravellersStoriesItem({
   const handleUnsave = () => {
     unsaveMutation.mutate();
   };
-  if (typeof story.ownerId === "string" || typeof story.category === "string") {
-    return null;
-  }
+ if (!story.ownerId || !story.category) {
+  return null;
+}
   return (
     <li className={css.travellerStoryItem}>
       <div className={css.storyThumbnailWrapper}>

@@ -6,7 +6,7 @@ import "@/src/app/globals.css";
 export default function HomePage() {
   return (
     <main>
-      <div className="container">
+      {/* <div className="container"> */}
         <Hero />
         <About />
         <h2>PopularStoriesSection</h2>
@@ -14,7 +14,7 @@ export default function HomePage() {
         <PopularStories />
         <h2>OurTravellers</h2>
         <h3>Join</h3>
-      </div>
+      {/* </div> */}
     </main>
   );
 }
