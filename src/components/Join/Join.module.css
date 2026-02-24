@@ -21,14 +21,16 @@
 }
 
 .join_title {
+  margin-top: 0;
   color: #fff;
   margin-bottom: 16px;
   font-size: 26px;
+  line-height: 120%;
 }
 
 .join_description {
   color: #fff;
-  line-height: 1.5;
+  line-height: 150%;
   font-size: 16px;
   margin-bottom: 24px;
 }
@@ -81,13 +83,13 @@
   }
 
   .join_content {
-    padding: 32px;
+    padding: 32px 32px;
     width: 558px;
   }
 
   .join_title {
     font-size: 32px;
-    line-height: 1.2;
+    line-height: 120%;
     letter-spacing: -0.01em;
     margin-bottom: 8px;
   }
@@ -117,16 +119,18 @@
   }
 
   .join_content {
-    padding: 64px;
+    padding: 78px 64px;
     padding-right: 0;
   }
 
   .join_title {
+    font-weight: 700;
     font-size: 48px;
     margin-bottom: 24px;
   }
 
   .join_description {
+    font-weight: 400;
     margin-bottom: 32px;
     font-size: 20px;
   }
