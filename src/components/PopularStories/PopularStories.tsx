@@ -5,7 +5,7 @@ import {
 } from "@tanstack/react-query";
 import TravellersStories from "../TravellersStories/TravellersStories";
 import css from "./PopularStories.module.css";
-import Link from "next/link";
+import "@/src/app/globals.css";
 import { getAllStories } from "@/src/lib/services/stories.service";
 
 export default async function PopularStories() {
@@ -18,10 +18,12 @@ export default async function PopularStories() {
 
   return (
     <section>
-      <h2 className={css.sectionTitle}>Популярні історії</h2>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <TravellersStories perPage={4} sort={"popular"} buttonType="link" />
-      </HydrationBoundary>
+      <div className={css.container}>
+        <h2 className={css.sectionTitle}>Популярні історії</h2>
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <TravellersStories perPage={3} sort={"popular"} buttonType="link" />
+        </HydrationBoundary>
+      </div>
     </section>
   );
 }
