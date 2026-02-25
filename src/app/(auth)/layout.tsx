@@ -1,11 +1,19 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode } from "react";
+import HeaderAuth from "@/src/components/Header/HeaderAuth";
+import FooterAuth from "@/src/components/Footer/FooterAuth";
 
 type Props = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 const AuthLayout = ({ children }: Props) => {
-  return <div>{children}</div>
-}
+  return (
+    <>
+      <HeaderAuth />
+      <main>{children}</main>
+      <FooterAuth />
+    </>
+  );
+};
 
-export default AuthLayout
+export default AuthLayout;
