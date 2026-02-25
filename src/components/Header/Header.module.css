@@ -20,17 +20,25 @@
     padding: 0 20px;
     
 }
-
+.headerAuthContainer {
+    padding: 16px 20px;
+}
 @media (min-width: 768px) {
     .headerContainer {
         justify-content: flex-end;
-        padding: 0 32px;
+        padding: 16px 32px;
+    }
+    .headerAuthContainer {
+        padding: 16px 20px;
     }
 }
 @media (min-width: 1440px) {
     .headerContainer {
         justify-content: flex-end;
         padding: 0 64px;
+    }
+    .headerAuthContainer {
+        padding: 18px 64px;
     }
 }
 .logo {

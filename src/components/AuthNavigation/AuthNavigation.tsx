@@ -48,10 +48,15 @@ export default function AuthNavigation({
       </li>
 
       <li className={css.navigationItem}>
-        <p className={css.userName}>{user?.name} Lena</p>
+        <p className={clsx(css.userName, isHome && css.homeHeader)}>
+          {user?.name}
+        </p>
       </li>
 
-      <button className={css.logoutButton} onClick={handleLogout}>
+      <button
+        className={clsx(css.logoutButton, isHome && css.homeHeader)}
+        onClick={handleLogout}
+      >
         <svg width="24" height="24">
           <use href="/sprite.svg#icon-logout" />
         </svg>

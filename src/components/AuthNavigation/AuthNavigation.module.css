@@ -59,6 +59,7 @@
 .avatarWrapper {
     width: 32;
     height: 32;
+    margin-right: 8px;
 }
 .avatar {
     border-radius: 50%;
@@ -68,9 +69,12 @@
     margin: 0;
     color: #000;
     padding-right: 8px;
-    border-right: 1px solid rgba(0, 0, 0, 0.15);;
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
 }
-
+.homeHeader.userName {
+    color: #f7f9ff;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
 .logoutButton {
     width: 24px;
     height: 24px;
@@ -79,4 +83,7 @@
     cursor: pointer;
     padding: 0;
     margin: 0 8px;
+}
+.homeHeader.logoutButton {
+    fill: #f7f9ff;
 }
