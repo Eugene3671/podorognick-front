@@ -7,6 +7,7 @@ import TravellersStories from "../TravellersStories/TravellersStories";
 import css from "./PopularStories.module.css";
 import "@/src/app/globals.css";
 import { getAllStories } from "@/src/lib/services/stories.service";
+import { Toaster } from "react-hot-toast";
 
 export default async function PopularStories() {
   const queryClient = new QueryClient();
@@ -18,6 +19,7 @@ export default async function PopularStories() {
 
   return (
     <section>
+      <div><Toaster/></div>
       <div className={css.container}>
         <h2 className={css.sectionTitle}>Популярні історії</h2>
         <HydrationBoundary state={dehydrate(queryClient)}>

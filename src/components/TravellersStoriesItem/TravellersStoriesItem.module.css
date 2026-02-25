@@ -102,6 +102,7 @@
   font-family: var(--font-nunito-sans);
   font-weight: 400;
   font-size: 16px !important;
+  height: 72px;
   line-height: 150%;
   color: var(--light-scheme-text);
   margin: 0;
@@ -109,6 +110,7 @@
 @media only screen and (min-width: 1440px) {
   .storyText {
     font-size: 18px !important;
+    height: 81px;
   }
 }
 

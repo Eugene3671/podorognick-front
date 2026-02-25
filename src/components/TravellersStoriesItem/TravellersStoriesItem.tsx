@@ -12,6 +12,7 @@ import {
   removeFromSavedStories,
 } from "@/src/lib/services/stories.service";
 import { useAuthStore } from "@/src/lib/store/authStore";
+import toast from "react-hot-toast";
 interface TravellersStoriesItemProps {
   story: Story;
 }
@@ -20,7 +21,6 @@ export default function TravellersStoriesItem({
 }: TravellersStoriesItemProps) {
   const router = useRouter();
   const { isAuthenticated, user } = useAuthStore();
-
   const [favoriteCount, setFavoriteCount] = useState<number>(
     story.favoriteCount,
   );
@@ -32,11 +32,13 @@ export default function TravellersStoriesItem({
     onMutate: () => {
       setIsSaved(true);
       setFavoriteCount((favCount) => favCount + 1);
+      toast.success("Історію було збережено!");
     },
 
     onError: () => {
       setIsSaved(false);
       setFavoriteCount((favCount) => favCount - 1);
+      toast.error("Сталася помилка, спробуйте ще.");
     },
   });
 
@@ -45,10 +47,12 @@ export default function TravellersStoriesItem({
     onMutate: () => {
       setIsSaved(false);
       setFavoriteCount((favCount) => favCount - 1);
+      toast.success("Історію було видалено зі збережених.");
     },
     onError: () => {
       setIsSaved(true);
       setFavoriteCount((favCount) => favCount + 1);
+      toast.error("Сталася помилка, спробуйте ще.");
     },
   });
 

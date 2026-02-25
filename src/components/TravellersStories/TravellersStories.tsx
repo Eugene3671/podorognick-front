@@ -57,27 +57,39 @@ export default function TravellersStories({
 
   return (
     <>
-      <ul className={css.travellerStoriesList}>
-
-        {isLoading? <LoaderEl/> : stories.map((story) => (
-          <TravellersStoriesItem key={story._id} story={story} />
-        ))}
-      </ul>
-      <div className={css.buttonWrapper}>
-        {isFetchingNextPage ? <LoaderEl/> : buttonType === "loadMore" && hasNextPage && (
-          <button
-            className={css.paginationButton}
-            onClick={() => fetchNextPage()}
-          >
-            Показати ще
-          </button>
-        )}
-        {buttonType === "link" && (
-          <Link href="/stories" className={css.paginationButton}>
-            Переглянути всі
-          </Link>
-        )}
-      </div>
+      {isLoading ? (
+        <div className={css.loaderWrapper}>
+          <LoaderEl />
+        </div>
+      ) : (
+        <>
+          <ul className={css.travellerStoriesList}>
+            {stories.map((story) => (
+              <TravellersStoriesItem key={story._id} story={story} />
+            ))}
+          </ul>
+          <div className={css.buttonWrapper}>
+            {isFetchingNextPage ? (
+              <LoaderEl />
+            ) : (
+              buttonType === "loadMore" &&
+              hasNextPage && (
+                <button
+                  className={css.paginationButton}
+                  onClick={() => fetchNextPage()}
+                >
+                  Показати ще
+                </button>
+              )
+            )}
+            {buttonType === "link" && (
+              <Link href="/stories" className={css.paginationButton}>
+                Переглянути всі
+              </Link>
+            )}
+          </div>
+        </>
+      )}
     </>
   );
 }
