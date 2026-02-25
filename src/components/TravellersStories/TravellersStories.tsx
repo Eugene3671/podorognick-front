@@ -20,35 +20,40 @@ export default function TravellersStories({
   sort,
   buttonType,
 }: TravellersStoriesProps) {
-  const [initialPerPage, setInitialPerPage] = useState(perPage);
+  const [pageSize, setPageSize] = useState(perPage);
   useEffect(() => {
     const mediaQueryList = window.matchMedia(
       "(min-width: 768px) and (max-width: 1439px)",
     );
     const handleChange = () => {
-      if (mediaQueryList.matches) {
-        setInitialPerPage(perPage + 1);
-      } else {
-        setInitialPerPage(perPage);
-      }
+      setPageSize(mediaQueryList.matches ? perPage + 1 : perPage);
     };
     handleChange();
     mediaQueryList.addEventListener("change", handleChange);
     return () => mediaQueryList.removeEventListener("change", handleChange);
-  }, []);
+  }, [perPage]);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useInfiniteQuery({
-      queryKey: ["popular-stories", initialPerPage],
+      queryKey: ["popular-stories", pageSize, sort],
       queryFn: ({ pageParam = 1 }) =>
-        getAllStories({ page: pageParam, perPage: initialPerPage, sort: sort }),
+        getAllStories({ page: pageParam, perPage: pageSize, sort: sort }),
       initialPageParam: 1,
       getNextPageParam: (lastPage) => {
+        if (!lastPage) {
+          return undefined;
+        }
         return lastPage.page < lastPage.totalPages
           ? lastPage.page + 1
           : undefined;
       },
     });
+
+  const handleLoadMore = () => {
+    if (!hasNextPage || isFetchingNextPage) return;
+    fetchNextPage();
+  };
+
   const stories = data?.pages.flatMap((page) => page.stories) ?? [];
   return (
     <>
@@ -71,7 +76,8 @@ export default function TravellersStories({
               hasNextPage && (
                 <button
                   className={css.paginationButton}
-                  onClick={() => fetchNextPage()}
+                  onClick={handleLoadMore}
+                  disabled={isFetchingNextPage}
                 >
                   Показати ще
                 </button>

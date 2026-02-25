@@ -86,20 +86,24 @@ export default function TravellersStoriesItem({
 
       <div className={css.storyWrapper}>
         <div className={css.storyContents}>
-          <p className={css.regionTag}>{story.category.name}</p>
+          <p className={css.regionTag}>
+            {story.category?.name ?? "Без категорії"}
+          </p>
           <h4 className={css.storyTitle}>{story.title}</h4>
           <p className={css.storyText}>{story.article}</p>
         </div>
         <div className={css.storyAuthor}>
           <Image
-            src={story.ownerId.avatarUrl}
+            src={story.ownerId?.avatarUrl ?? "/default-avatar.png"}
             alt="avatar"
             width={48}
             height={48}
             className={css.authorAvatar}
           />
           <div className={css.authorInfo}>
-            <p className={css.authorName}>{story.ownerId.name}</p>
+            <p className={css.authorName}>
+              {story.ownerId?.name ?? "Невідомий автор"}
+            </p>
             <div className={css.storyInfo}>
               <p className={css.storyDate}>{story.date}</p>
               <span className={css.separator}>•</span>

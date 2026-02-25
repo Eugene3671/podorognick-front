@@ -10,7 +10,7 @@ const StoriesPageClient = () => {
     <section className={css.storiesSection}>
       <div className={`container ${css.containerStories}`}>
         <h1 className={css.pageTitle}>Історії Мандрівників</h1>
-        <TravellersStories perPage={9} sort={"new"} buttonType="loadMore" />
+        <TravellersStories perPage={9} sort={"popular"} buttonType="loadMore" />
       </div>
     </section>
   );
