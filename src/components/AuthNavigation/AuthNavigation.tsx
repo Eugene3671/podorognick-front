@@ -30,7 +30,7 @@ export default function AuthNavigation({
     router.refresh();
   };
 
-  return isAuthenticated ? (
+  return true ? (
     <>
       <li className={css.navigationItem}>
         <div className={css.avatarWrapper}>
@@ -49,7 +49,7 @@ export default function AuthNavigation({
 
       <li className={css.navigationItem}>
         <p className={clsx(css.userName, isHome && css.homeHeader)}>
-          {user?.name}
+          {user?.name}Lena
         </p>
       </li>
 

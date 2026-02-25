@@ -64,3 +64,25 @@
     font-size: 16px;
     line-height: 1.5;
 }
+
+.action {
+    display: none;
+}
+.action a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    padding: 4px 10px;
+    background-color: #4169E1;
+    border: 1px solid #4169E1;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.4;
+    width: 335px;
+    margin-bottom: 16px;
+}
+.authActionBtn {
+    display: block;
+}

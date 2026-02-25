@@ -28,7 +28,7 @@ export default function Header() {
           </Link>
 
           <nav className={css.nav}>
-            <ul className={css.navList}>
+            <ul className={clsx(css.navList, false && css.noAuthNavList)}>
               <li>
                 <Link href="/" className={css.navItem}>
                   Головна
@@ -44,12 +44,22 @@ export default function Header() {
                   Мандрівники
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/profile"
+                  className={clsx(
+                    css.navItem,
+                    css.noAuthNavItem,
+                    true && css.authNavItem,
+                  )}
+                >
+                  Мій Профіль
+                </Link>
+              </li>
             </ul>
           </nav>
 
-          <div
-            className={clsx(css.action, isAuthenticated && css.authActionBtn)}
-          >
+          <div className={clsx(css.action, true && css.authActionBtn)}>
             <Link href="/stories/create">Опублікувати історію</Link>
           </div>
 
