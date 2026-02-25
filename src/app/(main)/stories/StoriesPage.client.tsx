@@ -8,7 +8,7 @@ import TravellersStories from "@/src/components/TravellersStories/TravellersStor
 const StoriesPageClient = () => {
   return (
     <section className={css.storiesSection}>
-      <div className="container">
+      <div className={`container ${css.containerStories}`}>
         <h1 className={css.pageTitle}>Історії Мандрівників</h1>
         <TravellersStories perPage={9} sort={"new"} buttonType="loadMore" />
       </div>
