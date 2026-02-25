@@ -1,7 +1,5 @@
-import React from "react"
+import { redirect } from "next/navigation";
 
-const ProfilePage = () => {
-  return <div>Profile main page placeholder</div>
+export default function ProfilePage() {
+  redirect("/profile/saved");
 }
-
-export default ProfilePage
