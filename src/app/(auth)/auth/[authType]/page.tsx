@@ -1,41 +1,37 @@
-'use client'
+"use client";
 
-import  { useEffect } from "react";
+import { useEffect } from "react";
 import Login from "@/src/components/AuthForms/Login";
 import Register from "@/src/components/AuthForms/Registration";
-import { useParams, useRouter, notFound   } from "next/navigation";
+import { useParams, useRouter, notFound } from "next/navigation";
 import { useAuthStore } from "@/src/lib/store/authStore";
- 
+import { Toaster } from "react-hot-toast";
 
 const AuthPage = () => {
-
   const params = useParams();
   const router = useRouter();
   const authType = params?.authType;
 
-
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const isLoading = useAuthStore((state) => state.isLoading);
 
-
-   
-   useEffect(() => {
+  useEffect(() => {
     if (!isLoading && isAuthenticated) {
       router.push("/");
     }
   }, [isAuthenticated, isLoading, router]);
 
-
   if (!authType || (authType !== "login" && authType !== "register")) {
     notFound();
   }
 
-
-  return <div>
-     {authType === "login" && <Login />}
+  return (
+    <div>
+      {authType === "login" && <Login />}
       {authType === "register" && <Register />}
-  </div>
-}
+      <Toaster position="top-center" />
+    </div>
+  );
+};
 
-export default AuthPage
-
+export default AuthPage;

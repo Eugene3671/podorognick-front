@@ -1,5 +1,29 @@
+.containerPopular {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 375px;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+@media only screen and (min-width: 768px) {
+  .containerPopular {
+    max-width: 768px;
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .containerPopular {
+    max-width: 1440px;
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+}
+
 .sectionTitle {
-  font-family: "Sora", sans-serif;
+  font-family: var(--second-family);
   font-weight: 700;
   font-size: 28px;
   line-height: 120%;

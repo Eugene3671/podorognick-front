@@ -7,8 +7,19 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { getAllStories } from "@/src/lib/services/stories.service";
+import { getAllStories } from "@/src/lib/api/storiesApi";
 import StoriesPageClient from "./StoriesPage.client";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Всі Історії",
+  description: "Переглянути всі історії на сайті Подорожники",
+  openGraph: {
+    title: "Всі Історії",
+    description: "Переглянути всі історії на сайті Подорожники",
+    url: `https://podorognick-front.vercel.app/stories/`,
+  },
+};
 
 const StoriesPage = async () => {
   const queryClient = new QueryClient();
