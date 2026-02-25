@@ -3,7 +3,7 @@
 import TravellersStoriesItem from "../TravellersStoriesItem/TravellersStoriesItem";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import css from "./TravellersStories.module.css";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getAllStories } from "@/src/lib/services/stories.service";
 import Link from "next/link";
 import LoaderEl from "../LoaderEl/LoaderEl";
@@ -40,7 +40,7 @@ export default function TravellersStories({
     return () => mediaQueryList.removeEventListener("change", handleChange);
   }, []);
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isFetching, isPending } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useInfiniteQuery({
       queryKey: ["popular-stories", initialPerPage],
       queryFn: ({ pageParam = 1 }) =>
