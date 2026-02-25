@@ -5,7 +5,7 @@ import Login from "@/src/components/AuthForms/Login";
 import Register from "@/src/components/AuthForms/Registration";
 import { useParams, useRouter, notFound   } from "next/navigation";
 import { useAuthStore } from "@/src/lib/store/authStore";
- 
+import { Toaster } from "react-hot-toast";
 
 const AuthPage = () => {
 
@@ -33,7 +33,8 @@ const AuthPage = () => {
 
   return <div>
      {authType === "login" && <Login />}
-      {authType === "register" && <Register />}
+    {authType === "register" && <Register />}
+    <Toaster position="top-center"/>
   </div>
 }
 

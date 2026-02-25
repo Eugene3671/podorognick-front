@@ -29,21 +29,27 @@ export default function Login() {
     setIsSubmitting(true);
     try {
       const response = await login(values)
-      router.push("/");
       setUser(response.user, response.accessToken);
+
+      router.push("/");
       console.log('Користувач залогінився:', response)
 
     } catch (error: any) {
-      toast.error(error.response?.data?.error || 'Помилка входу')
+    console.error("Login error:", error);
+
+    const message =
+      error?.response?.data?.error ||
+      error?.message ||
+      "Помилка входу";
+    toast.error(message);
+  
+
     } finally {
       setIsSubmitting(false);
     }
 
 
   }
-
-
-
 
     return (
         <div className={css.authContainer}>
