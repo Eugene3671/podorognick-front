@@ -1,86 +1,58 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
 import { getUsers } from "../../lib/services/users.service";
-import React, { useState, useEffect, useCallback } from "react";
+import { User } from "@/src/types/user";
 import TravelerCard from "./TravelerCard";
 import styles from "./OurTravelers.module.css";
-
-// Описуємо тип тут, щоб не чіпати сервіс
-interface BackendUser {
-  id: number;
-  name: string;
-  about?: string;
-  description?: string;
-  avatarUrl?: string;
-  img?: string;
-}
-
-interface Traveler {
-  id: number;
-  name: string;
-  description: string;
-  img: string;
-}
+import Link from "next/link";
 
 const OurTravelers = () => {
-  const [travelers, setTravelers] = useState<Traveler[]>([]);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const fetchTravelers = useCallback(async (currentPage: number) => {
-    setIsLoading(true);
-    try {
-      const response = (await getUsers()) as BackendUser[];
-      const limit = 4;
-      const start = (currentPage - 1) * limit;
-      const data = response.slice(start, start + limit);
-
-      if (start + data.length >= response.length) {
-        setHasMore(false);
-      }
-      
-      if (data.length > 0) {
-        const formattedData: Traveler[] = data.map((user: BackendUser) => ({
-          id: user.id,
-          name: user.name,
-          description: user.about || user.description || "Мандрівник",
-          img: user.avatarUrl || user.img || "/default-avatar.png",
-        }));
-
-        setTravelers((prev) => [...prev, ...formattedData]);
-      }
-    } catch (error) {
-      console.error("Помилка завантаження мандрівників:", error);
-      setHasMore(false);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  const [travelers, setTravelers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchTravelers(page);
-  }, [page, fetchTravelers]);
+    const fetchFirstTravelers = async () => {
+      try {
+        const response = await getUsers();
+        const usersArray = response.users || [];
+        
+        setTravelers(usersArray.slice(0, 4));
+      } catch (error) {
+        console.error("Помилка завантаження мандрівників:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchFirstTravelers();
+  }, []);
 
   return (
-    <section className={styles.section}>
+    <section className={`${styles.section} container`}>
       <h2 className={styles.title}>Наші Мандрівники</h2>
-      <ul className={styles.list}>
-        {travelers.map((t) => (
-          <li key={t.id} className={styles.card}>
-            <TravelerCard {...t} />
-          </li>
-        ))}
-      </ul>
-      {hasMore && (
-        <button 
-          className={styles.viewAllButton} 
-          onClick={() => setPage((p) => p + 1)} 
-          disabled={isLoading}
-        >
-          {isLoading ? "Завантаження..." : "Переглянути всі"}
-        </button>
+      
+      {isLoading ? (
+        <p>Завантаження...</p>
+      ) : (
+        <ul className={styles.list}>
+          {travelers.map((user) => (
+            <li key={user._id} className={styles.item}>
+              <TravelerCard 
+                id={user._id}
+                name={user.name || "Мандрівник"}
+                description={user.description || "Досвідчений мандрівник"}
+                img={user.avatarUrl || "/default-avatar.png"}
+              />
+            </li>
+          ))}
+        </ul>
       )}
+
+      <div className={styles.buttonContainer}>
+        <Link href="/travellers" className={styles.viewAllButton}>
+          Переглянути всіх
+        </Link>
+      </div>
     </section>
   );
 };

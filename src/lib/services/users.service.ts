@@ -7,7 +7,7 @@ interface UserPaginationResponse {
   perPage: number;
   totalItems: number;
   totalPages: number;
-  user: User[];
+  users: User[];
 }
 
 // Отримати профіль поточного користувача

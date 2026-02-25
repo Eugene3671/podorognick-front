@@ -2,9 +2,7 @@
 
 
 export const loginSchema = Yup.object({
-  name: Yup.string()
-    .max(32, 'Максимум 32 символи')
-    .required("Ім'я є обов'язковим"),
+  
   email: Yup.string()
     .email('Некоректна пошта')
     .max(64, 'Максимум 64 символи')
@@ -16,7 +14,7 @@ export const loginSchema = Yup.object({
 });
 
  export const registerSchema = Yup.object({
-  fullname: Yup.string()
+  name: Yup.string()
     .max(32, 'Максимум 32 символи')
     .required("Імʼя та прізвище обовʼязкові"),
 

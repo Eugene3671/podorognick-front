@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "./OurTravelers.module.css";
 
 interface TravelerProps {
-  id: number;
+  id: string;
   name: string;
   description: string;
   img: string;
@@ -12,12 +12,21 @@ interface TravelerProps {
 
 const TravelerCard: React.FC<TravelerProps> = ({ id, name, description, img }) => {
   return (
-    <>
-        <Image src={img} alt={name} width={112} height={112} className={styles.avatar} />
+    <div className={styles.card}> 
+      <Image 
+        src={img || "/default-avatar.png"} 
+        alt={`Аватар мандрівника ${name}`}
+        width={112} 
+        height={112} 
+        className={styles.avatar} 
+      />
       <h3 className={styles.name}>{name}</h3>
       <p className={styles.description}>{description}</p>
-      <Link href={`/profile/${id}`} className={styles.button}>Переглянути профіль</Link>
-      </>
+      
+      <Link href={`/travellers/${id}`} className={styles.button}>
+        Переглянути профіль
+      </Link>
+    </div>
   );
 };
 
