@@ -5,7 +5,8 @@ import Link from "next/link";
 import clsx from "clsx";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuthStore } from "@/src/lib/store/authStore";
-import { logout } from "@/src/lib/services/auth.service";
+import { logout } from "@/src/lib/api/authApi";
+import Image from "next/image";
 
 interface AuthNavigationProps {
   variant?: "mobile" | "desktop";
@@ -32,15 +33,28 @@ export default function AuthNavigation({
   return isAuthenticated ? (
     <>
       <li className={css.navigationItem}>
-        <p>Avatar</p>
+        <div className={css.avatarWrapper}>
+          <Image
+            src={
+              user?.avatarUrl ||
+              "https://ac.goit.global/fullstack/react/default-avatar.jpg"
+            }
+            alt="User avatar"
+            width={32}
+            height={32}
+            className={css.avatar}
+          />
+        </div>
       </li>
 
       <li className={css.navigationItem}>
-        <p className={css.userName}>{user?.name}</p>
+        <p className={css.userName}>{user?.name} Lena</p>
       </li>
 
       <button className={css.logoutButton} onClick={handleLogout}>
-        Logout
+        <svg width="24" height="24">
+          <use href="/sprite.svg#icon-logout" />
+        </svg>
       </button>
     </>
   ) : (

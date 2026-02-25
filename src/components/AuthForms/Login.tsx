@@ -6,9 +6,10 @@ import css from "./AuthForms.module.css";
 import { Formik, Form, Field } from "formik";
 import { loginSchema } from "@/src/validation/registerValidation";
 import { LoginFormValues } from "@/src/types/auth";
-import { login } from "@/src/lib/services/auth.service";
+import { login } from "@/src/lib/api/authApi";
 import toast from "react-hot-toast";
 import { useAuthStore } from "@/src/lib/store/authStore";
+import { AxiosError } from "axios";
 
 export default function Login() {
   const router = useRouter();
@@ -26,16 +27,15 @@ export default function Login() {
     setIsSubmitting(true);
     try {
       const response = await login(values);
-      setUser(response.user, response.accessToken);
-
       router.push("/");
+      setUser(response.user, response.accessToken);
       console.log("Користувач залогінився:", response);
-    } catch (error: any) {
-      console.error("Login error:", error);
-
-      const message =
-        error?.response?.data?.error || error?.message || "Помилка входу";
-      toast.error(message);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data?.error || "Помилка входу");
+      } else {
+        toast.error("Невідома помилка");
+      }
     } finally {
       setIsSubmitting(false);
     }
