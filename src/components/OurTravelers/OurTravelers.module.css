@@ -47,32 +47,21 @@
   padding: 0;
   display: grid;
   grid-auto-rows: 1fr;
-  flex-wrap: wrap;
   align-items: stretch;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: stretch;
   gap: 24px;
-  max-width: 335px;
-  margin: 0;
+  margin: 0 auto;
   width: 100%;
 }
 @media (min-width: 768px) {
   .list {
-    flex-direction: row;
-    max-width: 704px;
-    justify-content: flex-start;
-    margin: 0 auto;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (min-width: 1200px) {
   .list {
-    flex-wrap: nowrap;
-    display: grid;
-    grid-template-columns: repeat(4, 310px);
+    grid-template-columns: repeat(4, 1fr);
     gap: 24px;
-    width: 100%;
-    max-width: 1312px;
-    margin: 0 auto;
   }
 }
 
@@ -85,21 +74,13 @@
   background-color: #e8eeff;
   border-radius: 16px;
   width: 100%;
-  max-width: 335px;
   height: 100%;
   text-align: left;
 }
 
 @media (min-width: 768px) {
   .card {
-    max-width: none;
-    width: calc(50% - 12px);
-  }
-
-  @media (min-width: 1200px) {
-    .card {
-      width: 100%;
-    }
+    width: 100%;
   }
 }
 
