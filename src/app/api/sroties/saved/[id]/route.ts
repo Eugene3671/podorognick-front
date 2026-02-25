@@ -1,16 +1,19 @@
-// app/api/users/me/route.ts
+// app/api/stories/saved/[id]/route.ts
 
 import { NextResponse } from "next/server";
-import { api } from "../../api";
+import { api } from "../../../api";
 import { cookies } from "next/headers";
-import { logErrorResponse } from "../../_utils/utils";
 import { isAxiosError } from "axios";
+import { logErrorResponse } from "../../../_utils/utils";
 
-export async function GET() {
+type Props = { params: Promise<{ id: string }> };
+
+export async function POST(req: Request, { params }: Props) {
   try {
     const cookieStore = await cookies();
+    const { id } = await params;
 
-    const res = await api.get("/users/me", {
+    const res = await api.post(`/stories/${id}/save`, null, {
       headers: { Cookie: cookieStore.toString() },
     });
 
@@ -31,12 +34,12 @@ export async function GET() {
   }
 }
 
-export async function PATCH(req: Request) {
+export async function DELETE(req: Request, { params }: Props) {
   try {
     const cookieStore = await cookies();
-    const body = await req.json();
+    const { id } = await params;
 
-    const res = await api.patch("/users/me", body, {
+    const res = await api.delete(`/stories/${id}/save`, {
       headers: { Cookie: cookieStore.toString() },
     });
 

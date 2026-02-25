@@ -1,16 +1,21 @@
-// app/api/users/me/route.ts
+// app/api/stories/route.ts
 
-import { NextResponse } from "next/server";
-import { api } from "../../api";
+import { NextRequest, NextResponse } from "next/server";
+import { api } from "../api";
 import { cookies } from "next/headers";
-import { logErrorResponse } from "../../_utils/utils";
 import { isAxiosError } from "axios";
+import { logErrorResponse } from "../_utils/utils";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
     const cookieStore = await cookies();
+    const category = req.nextUrl.searchParams.get("category") ?? "";
+    const page = Number(req.nextUrl.searchParams.get("page") ?? 1);
+    const perPage = Number(req.nextUrl.searchParams.get("perPage") ?? 9);
+    const sort = req.nextUrl.searchParams.get("sort");
 
-    const res = await api.get("/users/me", {
+    const res = await api.get("/stories", {
+      params: { category, page, perPage, sort },
       headers: { Cookie: cookieStore.toString() },
     });
 
@@ -31,13 +36,16 @@ export async function GET() {
   }
 }
 
-export async function PATCH(req: Request) {
+export async function POST(req: Request) {
   try {
     const cookieStore = await cookies();
-    const body = await req.json();
+    const body = await req.formData();
 
-    const res = await api.patch("/users/me", body, {
-      headers: { Cookie: cookieStore.toString() },
+    const res = await api.post("/stories", body, {
+      headers: {
+        Cookie: cookieStore.toString(),
+        "Content-Type": "multipart/form-data",
+      },
     });
 
     return NextResponse.json(res.data, { status: res.status });

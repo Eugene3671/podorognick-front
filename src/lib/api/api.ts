@@ -1,10 +1,10 @@
-// app/lib/api/api.ts
+// lib/api/api.ts
 
-import axios from 'axios';
+import axios from "axios";
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL + '/api';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL + "/api";
 
 export const nextServer = axios.create({
-  baseURL,
-  withCredentials: true, 
+  baseURL: BASE_URL,
+  withCredentials: true,
 });
