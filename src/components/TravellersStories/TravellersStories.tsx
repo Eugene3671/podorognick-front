@@ -3,13 +3,8 @@
 import TravellersStoriesItem from "../TravellersStoriesItem/TravellersStoriesItem";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import css from "./TravellersStories.module.css";
-<<<<<<< HEAD
 import { ReactNode, useEffect, useState } from "react";
 import { getAllStories } from "@/src/lib/api/storiesApi";
-=======
-import { useEffect, useState } from "react";
-import { getAllStories } from "@/src/lib/services/stories.service";
->>>>>>> main
 import Link from "next/link";
 import LoaderEl from "../LoaderEl/LoaderEl";
 
@@ -41,12 +36,8 @@ export default function TravellersStories({
     mediaQueryList.addEventListener("change", handleChange);
     return () => mediaQueryList.removeEventListener("change", handleChange);
   }, []);
-<<<<<<< HEAD
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-=======
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
->>>>>>> main
     useInfiniteQuery({
       queryKey: ["popular-stories", initialPerPage],
       queryFn: ({ pageParam = 1 }) =>
