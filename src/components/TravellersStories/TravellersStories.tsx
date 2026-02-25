@@ -3,8 +3,8 @@
 import TravellersStoriesItem from "../TravellersStoriesItem/TravellersStoriesItem";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import css from "./TravellersStories.module.css";
-import { useEffect, useState } from "react";
-import { getAllStories } from "@/src/lib/services/stories.service";
+import { ReactNode, useEffect, useState } from "react";
+import { getAllStories } from "@/src/lib/api/storiesApi";
 import Link from "next/link";
 import LoaderEl from "../LoaderEl/LoaderEl";
 
@@ -25,7 +25,6 @@ export default function TravellersStories({
     const mediaQueryList = window.matchMedia(
       "(min-width: 768px) and (max-width: 1439px)",
     );
-
     const handleChange = () => {
       if (mediaQueryList.matches) {
         setInitialPerPage(perPage + 1);
@@ -33,10 +32,8 @@ export default function TravellersStories({
         setInitialPerPage(perPage);
       }
     };
-
     handleChange();
     mediaQueryList.addEventListener("change", handleChange);
-
     return () => mediaQueryList.removeEventListener("change", handleChange);
   }, []);
 
@@ -52,9 +49,7 @@ export default function TravellersStories({
           : undefined;
       },
     });
-
   const stories = data?.pages.flatMap((page) => page.stories) ?? [];
-
   return (
     <>
       {isLoading ? (

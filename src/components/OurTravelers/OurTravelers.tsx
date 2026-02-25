@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { getUsers } from "../../lib/services/users.service";
+import { getUsers } from "@/src/lib/api/usersApi";
 import { User } from "@/src/types/user";
 import TravelerCard from "./TravelerCard";
 import styles from "./OurTravelers.module.css";
@@ -16,7 +16,7 @@ const OurTravelers = () => {
       try {
         const response = await getUsers();
         const usersArray = response.users || [];
-        
+
         setTravelers(usersArray.slice(0, 4));
       } catch (error) {
         console.error("Помилка завантаження мандрівників:", error);
@@ -30,14 +30,14 @@ const OurTravelers = () => {
   return (
     <section className={`${styles.section} container`}>
       <h2 className={styles.title}>Наші Мандрівники</h2>
-      
+
       {isLoading ? (
         <p>Завантаження...</p>
       ) : (
         <ul className={styles.list}>
           {travelers.map((user) => (
             <li key={user._id} className={styles.item}>
-              <TravelerCard 
+              <TravelerCard
                 id={user._id}
                 name={user.name || "Мандрівник"}
                 description={user.description || "Досвідчений мандрівник"}

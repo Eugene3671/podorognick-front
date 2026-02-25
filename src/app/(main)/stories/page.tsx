@@ -7,7 +7,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { getAllStories } from "@/src/lib/services/stories.service";
+import { getAllStories } from "@/src/lib/api/storiesApi";
 import StoriesPageClient from "./StoriesPage.client";
 import { Metadata } from "next";
 

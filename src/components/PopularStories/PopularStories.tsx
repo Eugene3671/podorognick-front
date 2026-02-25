@@ -6,7 +6,7 @@ import {
 import TravellersStories from "../TravellersStories/TravellersStories";
 import css from "./PopularStories.module.css";
 import "@/src/app/globals.css";
-import { getAllStories } from "@/src/lib/services/stories.service";
+import { getAllStories } from "@/src/lib/api/storiesApi";
 import { Toaster } from "react-hot-toast";
 
 export default async function PopularStories() {

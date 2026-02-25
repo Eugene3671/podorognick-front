@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { getUsers } from "@/src/lib/services/users.service"; 
+import { getUsers } from "@/src/lib/api/usersApi";
 import { User } from "@/src/types/user";
 import TravelerCard from "@/src/components/OurTravelers/TravelerCard";
-import styles from "./page.module.css"; 
+import styles from "./page.module.css";
 
 const TravellersPage = () => {
   const [travelers, setTravelers] = useState<User[]>([]);
@@ -27,13 +27,13 @@ const TravellersPage = () => {
   return (
     <main className={`${styles.container} container`}>
       <h1 className={styles.title}>Мандрівники</h1>
-      
+
       {isLoading ? (
         <div className={styles.loader}>Завантаження...</div>
       ) : (
         <div className={styles.grid}>
           {travelers.map((user) => (
-            <TravelerCard 
+            <TravelerCard
               key={user._id}
               id={user._id}
               name={user.name || "Мандрівник"}
