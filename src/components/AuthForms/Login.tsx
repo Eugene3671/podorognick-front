@@ -25,33 +25,24 @@ export default function Login() {
   const handleSubmit = async (values: LoginFormValues) => {
     setIsSubmitting(true);
     try {
-      const response = await login(values)
+      const response = await login(values);
       setUser(response.user, response.accessToken);
 
       router.push("/");
-      console.log('Користувач залогінився:', response)
-
+      console.log("Користувач залогінився:", response);
     } catch (error: any) {
-    console.error("Login error:", error);
+      console.error("Login error:", error);
 
-    const message =
-      error?.response?.data?.error ||
-      error?.message ||
-      "Помилка входу";
-    toast.error(message);
-  
-
+      const message =
+        error?.response?.data?.error || error?.message || "Помилка входу";
+      toast.error(message);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-
-  }
-
-    return (
-        <div className={css.authContainer}>
-      
+  return (
+    <div className={css.authContainer}>
       <div className={css.authTabs}>
         <div className={css.tabWrapper}>
           <Link href="/auth/register" className={css.tab}>

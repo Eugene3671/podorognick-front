@@ -25,14 +25,13 @@ const AuthPage = () => {
     notFound();
   }
 
-
-  return <div>
-     {authType === "login" && <Login />}
-    {authType === "register" && <Register />}
-    <Toaster position="top-center"/>
-  </div>
-}
-
-export default AuthPage
+  return (
+    <div>
+      {authType === "login" && <Login />}
+      {authType === "register" && <Register />}
+      <Toaster position="top-center" />
+    </div>
+  );
+};
 
 export default AuthPage;
