@@ -1,6 +1,5 @@
-.container {
+.aboutContainer {
   padding: 64px 20px;
-  /* margin-top: 0; */
 }
 
 .title {
@@ -31,9 +30,6 @@
   gap: 32px;
 }
 
-.item {
-}
-
 .icon {
   margin-bottom: 8px;
 }
@@ -61,7 +57,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .container {
+  .aboutContainer {
     padding: 64px 32px;
   }
 
@@ -90,9 +86,6 @@
     margin-bottom: 0;
   }
 
-  .description {
-  }
-
   .subTitle {
     margin-bottom: 24px;
   }
@@ -104,8 +97,7 @@
 }
 
 @media screen and (min-width: 1440px) {
-  .container {
-    width: 1440px;
+  .aboutContainer {
     padding: 72px 64px;
   }
   .title {

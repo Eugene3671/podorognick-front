@@ -2,15 +2,50 @@
 import Link from 'next/link'
 import css from './AuthForms.module.css'
 import { useState } from 'react'
+import { useRouter } from "next/navigation";
 import { registerSchema } from '@/src/validation/registerValidation'
 import { Formik, Form, Field } from 'formik';
+import { register } from '@/src/lib/services/auth.service';
+import {RegisterFormValues } from '@/src/types/auth'
+import toast from 'react-hot-toast';
+ import { useAuthStore } from '@/src/lib/store/authStore';
+
+ 
 
 export default function Register() {
 
-      const [showPassword, setShowPassword] = useState(false)
 
-  
-  
+  const initialValues: RegisterFormValues = {
+    name: '',
+    email: '',
+    password: '',
+    
+  }
+
+  const router = useRouter();
+  const setUser = useAuthStore((state) => state.setUser);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (values:RegisterFormValues) => {
+    setIsSubmitting(true);
+    try {
+      const response = await register(values);
+      setUser(response.user, response.accessToken);
+
+      console.log("Користувач зареєстрований:", response);
+
+      toast.success(`Привіт, ${response.user.name}! Реєстрація успішна.`);
+      router.push('/');
+    } catch (error: any) {
+      toast.error(error.response?.data?.error || "Помилка реєстрації");
+      
+    } finally {
+      setIsSubmitting(false);
+    }
+
+  }
 
     return (
 
@@ -18,12 +53,12 @@ export default function Register() {
       
        <div className={css.authTabs}>
        <div className={css.tabWrapper}>
-    <Link href=" " className={`${css.tab} ${css.active}`}>
+    <Link href="./auth/register" className={`${css.tab} ${css.active}`}>
       Реєстрація
     </Link>
   </div>
   <div className={css.tabWrapper}>
-    <Link href="" className={css.tab}>
+    <Link href="/auth/login" className={css.tab}>
       Вхід
     </Link>
   </div>
@@ -36,35 +71,32 @@ export default function Register() {
         </p>
       </div>
 
-     <Formik
-  initialValues={{
-    fullname: '',
-    email: '',
-    password: '',
-  }}
+     <Formik<RegisterFormValues>
+  initialValues={initialValues}
   validationSchema={registerSchema}
   onSubmit={(values) => {
-    console.log(values);
+    console.log("Formik onSubmit викликався", values);
+    handleSubmit(values);
   }}
 >
   {({ errors, touched }) => (
     <Form className={css.authForm}>
 
       <div className={css.formGroup}>
-        <label htmlFor="fullname" className={css.label_text}>
+        <label htmlFor="name" className={css.label_text}>
           Імʼя та Прізвище*
         </label>
         <Field
           type="text"
-          id="fullname"
-          name="fullname"
+          id="name"
+          name="name"
           placeholder="Ваше імʼя та прізвище"
           className={`${css.input} ${
-            errors.fullname && touched.fullname ? css.inputError : ''
+            errors.name && touched.name ? css.inputError : ''
           }`}
         />
-        {errors.fullname && touched.fullname && (
-          <div className={css.error}>{errors.fullname}</div>
+        {errors.name && touched.name && (
+          <div className={css.error}>{errors.name}</div>
         )}
       </div>
 
