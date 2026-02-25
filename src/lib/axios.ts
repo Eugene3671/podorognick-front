@@ -21,7 +21,7 @@ nextServer.interceptors.request.use(
 
     return config;
   },
-  (error) => Promise.reject(error),
+  (error) => Promise.reject(error)
 );
 
 // Response interceptor
@@ -30,19 +30,19 @@ nextServer.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (
-      error.response?.status === 401 &&
-      !originalRequest?._retry
-    ) {
+    if (error.response?.status === 401 && !originalRequest?._retry) {
       originalRequest._retry = true;
 
       try {
-        const { data } = await nextServer.get("/auth/refresh");
+        const { data } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/auth/refresh`,
+          { withCredentials: true }
+        );
 
         if (typeof window !== "undefined") {
           localStorage.setItem("accessToken", data.accessToken);
         }
-
+        
         originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
 
         return nextServer(originalRequest);
@@ -51,13 +51,12 @@ nextServer.interceptors.response.use(
           localStorage.removeItem("accessToken");
           window.location.href = "/auth/login";
         }
-
         return Promise.reject(refreshError);
       }
     }
 
     return Promise.reject(error);
-  },
+  }
 );
 
 export default nextServer;

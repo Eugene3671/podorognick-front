@@ -5,6 +5,7 @@ import Login from "@/src/components/AuthForms/Login";
 import Register from "@/src/components/AuthForms/Registration";
 import { useParams, useRouter, notFound } from "next/navigation";
 import { useAuthStore } from "@/src/lib/store/authStore";
+import { Toaster } from "react-hot-toast";
 
 const AuthPage = () => {
   const params = useParams();
@@ -24,12 +25,14 @@ const AuthPage = () => {
     notFound();
   }
 
-  return (
-    <div>
-      {authType === "login" && <Login />}
-      {authType === "register" && <Register />}
-    </div>
-  );
-};
+
+  return <div>
+     {authType === "login" && <Login />}
+    {authType === "register" && <Register />}
+    <Toaster position="top-center"/>
+  </div>
+}
+
+export default AuthPage
 
 export default AuthPage;
