@@ -1,7 +1,29 @@
-import React from "react"
+import React from "react";
+import "@/src/app/globals.css";
+import css from "./StoriesPage.module.css";
+import TravellersStories from "@/src/components/TravellersStories/TravellersStories";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import { getAllStories } from "@/src/lib/services/stories.service";
+import StoriesPageClient from "./StoriesPage.client";
 
-const StoriesPage = () => {
-  return <div>Stories main page placeholder</div>
-}
+const StoriesPage = async () => {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ["popular-stories"],
+    queryFn: () =>
+      getAllStories({ page: 0, perPage: 9, sort: "new", category: "" }),
+    initialPageParam: 0,
+  });
 
-export default StoriesPage
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <StoriesPageClient />
+    </HydrationBoundary>
+  );
+};
+
+export default StoriesPage;

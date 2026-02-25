@@ -12,21 +12,15 @@ export default async function PopularStories() {
   const queryClient = new QueryClient();
   await queryClient.prefetchInfiniteQuery({
     queryKey: ["popular-stories"],
-    queryFn: () => getAllStories({ page: 0, perPage: 3 }),
+    queryFn: () => getAllStories({ page: 0, perPage: 4, sort: "popular" }),
     initialPageParam: 0,
   });
 
   return (
-    <section>
+    <section className="container">
       <h2 className={css.sectionTitle}>Популярні історії</h2>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <TravellersStories>
-          <div className={css.buttonWrapper}>
-            <Link href="/stories" className={css.paginationButton}>
-              Переглянути всі
-            </Link>
-          </div>
-        </TravellersStories>
+        <TravellersStories perPage={4} sort={"popular"} buttonType="link" />
       </HydrationBoundary>
     </section>
   );
