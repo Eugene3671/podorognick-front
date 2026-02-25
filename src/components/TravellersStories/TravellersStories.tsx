@@ -4,7 +4,7 @@ import TravellersStoriesItem from "../TravellersStoriesItem/TravellersStoriesIte
 import { useInfiniteQuery } from "@tanstack/react-query";
 import css from "./TravellersStories.module.css";
 import { ReactNode, useEffect, useState } from "react";
-import { getAllStories } from "@/src/lib/services/stories.service";
+import { getAllStories } from "@/src/lib/api/storiesApi";
 import Link from "next/link";
 
 interface TravellersStoriesProps {
@@ -24,7 +24,6 @@ export default function TravellersStories({
     const mediaQueryList = window.matchMedia(
       "(min-width: 768px) and (max-width: 1439px)",
     );
-
     const handleChange = () => {
       if (mediaQueryList.matches) {
         setInitialPerPage(perPage + 1);
@@ -32,13 +31,10 @@ export default function TravellersStories({
         setInitialPerPage(perPage);
       }
     };
-
     handleChange();
     mediaQueryList.addEventListener("change", handleChange);
-
     return () => mediaQueryList.removeEventListener("change", handleChange);
   }, []);
-
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: ["popular-stories", initialPerPage],
@@ -51,9 +47,7 @@ export default function TravellersStories({
           : undefined;
       },
     });
-
   const stories = data?.pages.flatMap((page) => page.stories) ?? [];
-
   return (
     <>
       <ul className={css.travellerStoriesList}>

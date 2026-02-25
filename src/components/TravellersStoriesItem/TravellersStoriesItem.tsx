@@ -10,7 +10,7 @@ import { Story } from "@/src/types/story";
 import {
   addToSavedStories,
   removeFromSavedStories,
-} from "@/src/lib/services/stories.service";
+} from "@/src/lib/api/storiesApi";
 import { useAuthStore } from "@/src/lib/store/authStore";
 interface TravellersStoriesItemProps {
   story: Story;

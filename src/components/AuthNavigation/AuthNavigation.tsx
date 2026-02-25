@@ -5,7 +5,7 @@ import Link from "next/link";
 import clsx from "clsx";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuthStore } from "@/src/lib/store/authStore";
-import { logout } from "@/src/lib/services/auth.service";
+import { logout } from "@/src/lib/api/authApi";
 import Image from "next/image";
 
 interface AuthNavigationProps {

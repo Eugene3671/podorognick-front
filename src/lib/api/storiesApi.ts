@@ -1,5 +1,5 @@
 import { Story } from "../../types/story";
-import nextServer from "../axios";
+import { nextServer } from './api'
 
 interface GetStoriesParams {
   page: number;

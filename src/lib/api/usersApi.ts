@@ -1,6 +1,5 @@
-// users.service.ts
 import { User } from "@/src/types/user";
-import nextServer from "../axios"; // твій axios.ts
+import { nextServer } from './api'
 
 interface UserPaginationResponse {
   page: number;
