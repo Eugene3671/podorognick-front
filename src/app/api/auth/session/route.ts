@@ -1,3 +1,5 @@
+// app/api/auth/session/route.ts
+
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { api } from "../../api";
@@ -16,7 +18,7 @@ export async function GET() {
     }
 
     if (refreshToken) {
-      const apiRes = await api.get("auth/session", {
+      const apiRes = await api.get("/auth/session", {
         headers: {
           Cookie: cookieStore.toString(),
         },
@@ -26,9 +28,9 @@ export async function GET() {
 
       if (setCookie) {
         const cookieArray = Array.isArray(setCookie) ? setCookie : [setCookie];
+
         for (const cookieStr of cookieArray) {
           const parsed = parse(cookieStr);
-
           const options = {
             expires: parsed.Expires ? new Date(parsed.Expires) : undefined,
             path: parsed.Path,
@@ -40,15 +42,18 @@ export async function GET() {
           if (parsed.refreshToken)
             cookieStore.set("refreshToken", parsed.refreshToken, options);
         }
+
         return NextResponse.json({ success: true }, { status: 200 });
       }
     }
+
     return NextResponse.json({ success: false }, { status: 200 });
   } catch (error) {
     if (isAxiosError(error)) {
       logErrorResponse(error.response?.data);
       return NextResponse.json({ success: false }, { status: 200 });
     }
+
     logErrorResponse({ message: (error as Error).message });
     return NextResponse.json({ success: false }, { status: 200 });
   }
