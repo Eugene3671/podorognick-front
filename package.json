@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@tailwindcss/oxide-darwin-arm64": "^4.2.1",
     "@tanstack/react-query": "^5.90.21",
     "axios": "^1.13.5",
     "axois": "^0.0.1-security",
@@ -38,6 +37,6 @@
     "typescript": "^5"
   },
   "optionalDependencies": {
-  "@tailwindcss/oxide-darwin-arm64": "*"
-}
+    "@tailwindcss/oxide-darwin-arm64": "*"
+  }
 }

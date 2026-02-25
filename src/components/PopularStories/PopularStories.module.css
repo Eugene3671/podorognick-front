@@ -1,29 +1,29 @@
-.container {
+.containerPopular {
   margin: 0 auto;
   width: 100%;
   max-width: 375px;
-  padding: 64px 20px;
+  padding-top: 64px;
+  padding-bottom: 64px;
 }
 
-
 @media only screen and (min-width: 768px) {
-  .container {
-     max-width: 768px;
-    padding: 64px 32px;
+  .containerPopular {
+    max-width: 768px;
+    padding-top: 64px;
+    padding-bottom: 64px;
   }
-
 }
 
 @media only screen and (min-width: 1440px) {
-  .container {
-     max-width: 1440px;
-    padding: 72px 64px;
+  .containerPopular {
+    max-width: 1440px;
+    padding-top: 72px;
+    padding-bottom: 72px;
   }
 }
 
-
 .sectionTitle {
-font-family: var(--second-family);
+  font-family: var(--second-family);
   font-weight: 700;
   font-size: 28px;
   line-height: 120%;

@@ -1,41 +1,38 @@
-.container {
+.containerStories {
   margin: 0 auto;
-  width: 100%;
-  max-width: 375px;
-  padding: 64px 20px;
+  padding-top: 64px;
+  padding-bottom: 64px;
 }
 
-
-
 .pageTitle {
-font-family: var(--second-family);
-font-weight: 700;
-font-size: 32px;
-line-height: 110%;
-letter-spacing: -0.01em;
-text-align: center;
-color: #000;
-margin-bottom: 40px;
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 110%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #000;
+  margin-bottom: 40px;
 }
 
 @media only screen and (min-width: 768px) {
-  .container {
-     max-width: 768px;
-    padding: 64px 32px;
+  .containerStories {
+    padding-top: 64px;
+    padding-bottom: 64px;
   }
 
   .pageTitle {
-font-size: 48px;
+    font-size: 48px;
   }
 }
 
 @media only screen and (min-width: 1440px) {
-  .container {
-     max-width: 1440px;
-    padding: 72px 64px;
+  .containerStories {
+    padding-top: 72px;
+    padding-bottom: 72px;
   }
 
   .pageTitle {
-font-size: 56px;
+    font-size: 56px;
   }
 }
