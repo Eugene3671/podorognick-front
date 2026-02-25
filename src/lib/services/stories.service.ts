@@ -4,6 +4,8 @@ import nextServer from "../axios";
 interface GetStoriesParams {
   page: number;
   perPage: number;
+  sort: string;
+  category?: string;
 }
 
 export interface StoriesResponse {

@@ -1,0 +1,142 @@
+.join {
+  padding-bottom: 32px;
+  padding-top: 32px;
+}
+
+.join_background {
+  background-color: #e8eeff;
+  border-radius: 24px;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.2)), url(/images/Join/join_mob_1x.webp);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @media screen and (min-resolution: 2x) {
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.2)), url(/images/Join/join_mob_2x.webp);
+  }
+}
+.join_content {
+  padding: 20px;
+}
+
+.join_title {
+  margin-top: 0;
+  color: #fff;
+  margin-bottom: 16px;
+  font-size: 26px;
+  line-height: 120%;
+}
+
+.join_description {
+  color: #fff;
+  line-height: 150%;
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+.join_button {
+  font-family: var(--font-family);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  width: 100%;
+  border: 1px solid #4169e1;
+  border-radius: 8px;
+  padding-block: 10.5px;
+  padding-inline: 12px;
+  background: #4169e1;
+  color: #fff;
+  transition:
+    color 0.3s ease-in-out,
+    transform 0.1s ease,
+    box-shadow 0.2s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.join_button:hover,
+.join_button:focus {
+  color: #000;
+  background-color: #e8eeff;
+  cursor: pointer;
+}
+
+.join_button:active {
+  color: #000;
+  background-color: #7a96ea;
+}
+
+@media screen and (min-width: 768px) {
+  .join_background {
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.2)), url(/images/Join/join_tab_1x.webp);
+    @media screen and (min-resolution: 2x) {
+      background-image:
+        linear-gradient(rgba(0, 0, 0, 0.2)), url(/images/Join/join_tab_2x.webp);
+    }
+  }
+
+  .join_content {
+    padding: 32px 32px;
+    width: 558px;
+  }
+
+  .join_title {
+    font-size: 32px;
+    line-height: 120%;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+
+  .join_description {
+    margin-bottom: 16px;
+  }
+
+  .join_button {
+    max-width: 153px;
+  }
+}
+
+@media screen and (min-width: 1440) {
+  .join {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .join_background {
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.2)), url(/images/Join/join_desk_1x.webp);
+    @media screen and (min-resolution: 2x) {
+      background-image:
+        linear-gradient(rgba(0, 0, 0, 0.2)), url(/images/Join/join_desk_2x.webp);
+    }
+  }
+
+  .join_content {
+    padding: 78px 64px;
+    padding-right: 0;
+  }
+
+  .join_title {
+    font-weight: 700;
+    font-size: 48px;
+    margin-bottom: 24px;
+  }
+
+  .join_description {
+    font-weight: 400;
+    margin-bottom: 32px;
+    font-size: 20px;
+  }
+
+  .join_button {
+    font-size: 18px;
+    max-width: 169px;
+  }
+}

@@ -1,14 +1,35 @@
-.container {
-  padding: 124px 20px 331px;
+.hero {
+  position: relative;
+  overflow: hidden;
 
-  background-image: url("/img/hero-baner/bg-mob-compressed.jpg");
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
-
-  background-attachment: fixed;
-  margin-left: 0;
+  width: 100vw;
 }
+
+.picture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.title,
+.description,
+.button {
+  position: relative;
+  z-index: 2;
+}
+
+.heroContainer {
+  max-width: 100%;
+  display: block;
+padding-top: 196px;
+padding-bottom: 331px;}
 
 .title {
   font-family: var(--second-family);
@@ -51,16 +72,16 @@
   color: var(--color-white);
 }
 
-@media screen and (min-width: 768px) {
-  .container {
-    width: 768px;
-    padding: 172px 32px 117px;
-
-    background-image: url("/img/hero-baner/bg-tab-compressed.jpg");
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .heroContainer {
+  padding-top: 244px;
+    padding-bottom: 117px;
   }
 
   .title {
     font-size: 48px;
+    width: 612px;
+    /* padding-right: 92px; */
   }
   .button {
     width: 115px;
@@ -69,19 +90,18 @@
 }
 
 @media screen and (min-width: 1440px) {
-  .container {
-    width: 1440px;
-    padding: 172px 617px 347px 64px;
+  .heroContainer {
+    max-width: 759px;
+  padding-bottom: 347px;  }
 
-    background-image: url("/img/hero-baner/bg-pc-compressed.jpg");
-    .title {
-      font-size: 56px;
-    }
-    .description {
-      font-size: 20px;
-    }
-    .button {
-      width: 126px;
-    }
+  .title {
+    font-size: 56px;
+    width: 759px;
+  }
+  .description {
+    font-size: 20px;
+  }
+  .button {
+    width: 126px;
   }
 }
