@@ -17,7 +17,7 @@ export default async function PopularStories() {
   });
 
   return (
-    <section className="container">
+    <section className={`container ${css.popularStoriesContainer}`}>
       <h2 className={css.sectionTitle}>Популярні історії</h2>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <TravellersStories perPage={4} sort={"popular"} buttonType="link" />

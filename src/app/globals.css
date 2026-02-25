@@ -78,16 +78,42 @@ padding-inline: 32px;
   }
 }
 
-a {
-  text-decoration: none;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
 }
 
-ul {
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-
+img{
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
 *,
 *::before,
 *::after {
