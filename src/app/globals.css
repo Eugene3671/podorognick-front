@@ -125,6 +125,20 @@ button {
   border: 1px solid #4169e1;
   background: #4169e1;
   transition: all 0.3s ease-in-out;
+  margin: 0 auto;
+  display: inline-block;
+  font-family: var(--font-nunito-sans);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  border-radius: 8px;
+  padding: 10.5px 12px;
+}
+
+@media only screen and (min-width: 1440px) {
+  .buttonBlue {
+    font-size: 18px;
+  }
 }
 
 .buttonBlue:hover,

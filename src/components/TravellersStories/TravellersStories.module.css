@@ -47,25 +47,6 @@
   padding: 12px;
 }
 
-@media only screen and (min-width: 768px) {
-  .buttonWrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .paginationButton {
-    margin: 0 auto;
-    display: inline-block;
-    font-family: var(--font-nunito-sans);
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 150%;
-    border-radius: 8px;
-    padding: 12px;
-  }
-}
-
 @media only screen and (min-width: 1440px) {
   .paginationButton {
     font-size: 18px;
