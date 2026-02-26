@@ -1,50 +1,24 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
+import { QueryClient, dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getUsers } from "@/src/lib/api/usersApi";
-import { User } from "@/src/types/user";
-import TravelerCard from "@/src/components/OurTravelers/TravelerCard";
+import TravellersList from "./TravellersList";
 import styles from "./page.module.css";
 
-const TravellersPage = () => {
-  const [travelers, setTravelers] = useState<User[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+export default async function TravellersPage() {
+  const queryClient = new QueryClient();
 
-  useEffect(() => {
-    const fetchAll = async () => {
-      try {
-        const response = await getUsers();
-        setTravelers(response.users || []);
-      } catch (error) {
-        console.error("Помилка завантаження всіх мандрівників:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchAll();
-  }, []);
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ["travelers-infinite"],
+    queryFn: ({ pageParam = 1 }) => getUsers(pageParam),
+    initialPageParam: 1,
+  });
 
   return (
     <main className={`${styles.container} container`}>
       <h1 className={styles.title}>Мандрівники</h1>
-
-      {isLoading ? (
-        <div className={styles.loader}>Завантаження...</div>
-      ) : (
-        <div className={styles.grid}>
-          {travelers.map((user) => (
-            <TravelerCard
-              key={user._id}
-              id={user._id}
-              name={user.name || "Мандрівник"}
-              description={user.description || "Досвідчений мандрівник"}
-              img={user.avatarUrl || "/default-avatar.png"}
-            />
-          ))}
-        </div>
-      )}
+      
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <TravellersList />
+      </HydrationBoundary>
     </main>
   );
-};
-
-export default TravellersPage;
+}

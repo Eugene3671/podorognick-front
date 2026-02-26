@@ -1,7 +1,7 @@
 import { User } from "@/src/types/user";
 import { nextServer } from './api'
 
-interface UserPaginationResponse {
+export interface UserPaginationResponse {
   page: number;
   perPage: number;
   totalItems: number;
@@ -16,9 +16,29 @@ export const getMe = async (): Promise<User> => {
 };
 
 // Отримати список усіх користувачів
-export const getUsers = async (): Promise<UserPaginationResponse> => {
-  const res = await nextServer.get<UserPaginationResponse>("/users");
-  return res.data;
+
+export const getUsers = async (page = 1, perPage = 12) : Promise<UserPaginationResponse> =>{
+  const url = new URL("https://podorognick-back.onrender.com/api/users");
+  
+  url.searchParams.append("page", page.toString());
+  url.searchParams.append("perPage", perPage.toString());
+  url.searchParams.append("sortBy", "articlesAmount"); 
+  url.searchParams.append("sortOrder", "desc");
+
+  try {
+    const res = await fetch(url.toString());
+    
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({}));
+      console.error("Помилка сервера:", errorData);
+      throw new Error(errorData.message || "Validation failed");
+    }
+    
+    return await res.json();
+  } catch (error) {
+    console.error("Помилка при виконанні запиту:", error);
+    throw error;
+  }
 };
 
 // Отримати одного користувача за ID

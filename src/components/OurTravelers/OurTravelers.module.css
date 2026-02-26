@@ -46,6 +46,7 @@
   list-style: none;
   padding: 0;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   grid-auto-rows: 1fr;
   align-items: stretch;
   justify-content: stretch;
@@ -55,13 +56,12 @@
 }
 @media (min-width: 768px) {
   .list {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (min-width: 1200px) {
   .list {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -76,6 +76,9 @@
   width: 100%;
   height: 100%;
   text-align: left;
+  min-width: 0;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
@@ -96,11 +99,14 @@
 .name {
   font-size: 18px;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.5;
   margin: 0 0 16px;
-  color: #1a1a1a;
-  min-height: 2.6em;
-  display: flex;
+  color: #000;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  display: block;
+  width: 100%;
 }
 
 @media (min-width: 1200px) {
@@ -112,7 +118,7 @@
 .description {
   font-size: 16px;
   font-weight: 400;
-  color: #1a1a1a;
+  color: #000;
   line-height: 1.5;
   margin: 0 0 16px;
   display: block;
@@ -190,4 +196,12 @@
 .viewAllButton:active {
   background-color: #7a96ea;
   color: #000;
+}
+
+.loaderWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 300px;
 }

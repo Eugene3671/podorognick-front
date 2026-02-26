@@ -6,6 +6,7 @@ import { User } from "@/src/types/user";
 import TravelerCard from "./TravelerCard";
 import styles from "./OurTravelers.module.css";
 import Link from "next/link";
+import { Circles } from "react-loader-spinner";
 
 const OurTravelers = () => {
   const [travelers, setTravelers] = useState<User[]>([]);
@@ -32,7 +33,15 @@ const OurTravelers = () => {
       <h2 className={styles.title}>Наші Мандрівники</h2>
 
       {isLoading ? (
-        <p>Завантаження...</p>
+        <div className={styles.loaderWrapper}>
+          <Circles
+            height="80"
+            width="80"
+            color="#4F2EE8"
+            ariaLabel="circles-loading"
+            visible={true}
+          />
+        </div>
       ) : (
         <ul className={styles.list}>
           {travelers.map((user) => (
