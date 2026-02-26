@@ -1,5 +1,6 @@
 import { Story } from "../../types/story";
-import { nextServer } from './api'
+import { nextServer } from "./api";
+
 
 interface GetStoriesParams {
   page: number;
@@ -36,3 +37,4 @@ export async function removeFromSavedStories(storyId: string) {
   const response = await nextServer.delete(`/stories/${storyId}/save`);
   return response.data;
 }
+
