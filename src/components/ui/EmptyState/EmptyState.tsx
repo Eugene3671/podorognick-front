@@ -18,7 +18,7 @@ export default function EmptyState({
 }: EmptyStateProps) {
   return (
     <div className={css.emptyStateBox}>
-      <h3>{title}</h3>
+      <h3 className={css.emptyStateTitle}>{title}</h3>
 
       {description && <p>{description}</p>}
 
