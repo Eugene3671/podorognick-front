@@ -2,18 +2,24 @@
 
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { createStory } from "@/src/lib/api/storiesApi";
+import { getCategories } from "@/src/lib/api/сategoriesApi";
 import css from "./AddStoryForm.module.css";
 
 export default function AddStoryForm() {
   const router = useRouter();
-  const queryClient = useQueryClient();
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [article, setArticle] = useState("");
   const [image, setImage] = useState<File | null>(null);
+
+  // === отримуємо категорії ===
+  const { data: categories = [], isLoading } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getCategories,
+  });
 
   const isFormValid = useMemo(() => {
     return (
@@ -27,7 +33,6 @@ export default function AddStoryForm() {
   const { mutate, isPending, isError } = useMutation({
     mutationFn: createStory,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["stories"] });
       router.push("/stories");
     },
   });
@@ -54,6 +59,7 @@ export default function AddStoryForm() {
       <h1 className={css.title}>Створити історію</h1>
 
       <form className={css.form} onSubmit={handleSubmit}>
+        {/* Фото */}
         <div className={css.formGroup}>
           <label>Фото</label>
           <input
@@ -66,6 +72,7 @@ export default function AddStoryForm() {
           />
         </div>
 
+        {/* Заголовок */}
         <div className={css.formGroup}>
           <label>Заголовок</label>
           <input
@@ -77,24 +84,31 @@ export default function AddStoryForm() {
           />
         </div>
 
+        {/* Категорія */}
         <div className={css.formGroup}>
           <label>Категорія</label>
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            disabled={isPending}
-            required
-          >
-            <option value="">Оберіть категорію</option>
 
-            {/* TODO: замінити на реальні ID з API */}
-            <option value="ID_EUROPE">Європа</option>
-            <option value="ID_ASIA">Азія</option>
-            <option value="ID_DESERTS">Пустелі</option>
-            <option value="ID_AFRICA">Африка</option>
-          </select>
+          {isLoading ? (
+            <p>Завантаження...</p>
+          ) : (
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              disabled={isPending}
+              required
+            >
+              <option value="">Оберіть категорію</option>
+
+              {categories.map((cat) => (
+                <option key={cat._id} value={cat._id}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          )}
         </div>
 
+        {/* Текст */}
         <div className={css.formGroup}>
           <label>Текст історії</label>
           <textarea
