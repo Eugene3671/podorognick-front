@@ -6,7 +6,7 @@ interface GetStoriesParams {
   page: number;
   perPage: number;
   sort: string;
-  category?: Category;
+  category?: string;
 }
 
 export interface StoriesResponse {

@@ -14,7 +14,7 @@ interface TravellersStoriesProps {
   sort: "popular" | "new";
   pageType: "popular" | "stories";
   buttonType: "loadMore" | "link";
-  category?: Category;
+  category?: string;
 }
 
 export default function TravellersStories({
@@ -24,6 +24,7 @@ export default function TravellersStories({
   category,
 }: TravellersStoriesProps) {
   const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
   const hasBreakpoint = breakpoint !== null;
 
   const loadStep = breakpoint === "tablet" ? 4 : 3;
@@ -124,7 +125,7 @@ export default function TravellersStories({
               )
             )}
 
-            {buttonType === "link" && (
+            {buttonType === "link" && !isMobile && (
               <Link
                 href="/stories"
                 className={`buttonBlue ${css.paginationButton}`}

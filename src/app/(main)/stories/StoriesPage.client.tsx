@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import "@/src/app/globals.css";
 import css from "./StoriesPage.module.css";
 import TravellersStories from "@/src/components/TravellersStories/TravellersStories";
@@ -8,12 +8,10 @@ import { Toaster } from "react-hot-toast";
 import { Category } from "@/src/types/category";
 import { getCategories } from "@/src/lib/api/storiesApi";
 import { useQuery } from "@tanstack/react-query";
-import LoaderEl from "@/src/components/LoaderEl/LoaderEl";
 
 function StoriesPageClient() {
-  const [category, setCategory] = useState<Category>();
-  const [isSelected, setIsSelected] = useState<boolean>(false);
-  const { data, isLoading, isError } = useQuery({
+  const [category, setCategory] = useState<Category | null>();
+  const { data } = useQuery({
     queryKey: ["categories"],
     queryFn: () => getCategories(),
   });
@@ -25,20 +23,19 @@ function StoriesPageClient() {
         <h1 className={css.pageTitle}>Історії Мандрівників</h1>
         <fieldset className={css.categoryList}>
           <input
-            key={"all"}
             className={css.categoryButton}
             type="button"
             value={"Усі категорії"}
-            onClick={() => setCategory(category)}
+            onClick={() => setCategory(null)}
           />
           {data ? (
-            data?.map((category) => (
+            data?.map((cat) => (
               <input
-                key={category.id}
+                key={cat._id}
                 className={css.categoryButton}
                 type="button"
-                value={category.name}
-                onClick={() => setCategory(category)}
+                value={cat.name}
+                onClick={() => setCategory(cat)}
               />
             ))
           ) : (
@@ -50,7 +47,7 @@ function StoriesPageClient() {
           pageType="stories"
           sort={"popular"}
           buttonType="loadMore"
-          category={category}
+          category={category?._id}
         />
       </div>
     </section>
