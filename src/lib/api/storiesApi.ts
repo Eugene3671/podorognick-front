@@ -1,11 +1,12 @@
+import { Category } from "@/src/types/category";
 import { Story } from "../../types/story";
-import { nextServer } from './api'
+import { nextServer } from "./api";
 
 interface GetStoriesParams {
   page: number;
   perPage: number;
   sort: string;
-  category?: string;
+  category?: Category;
 }
 
 export interface StoriesResponse {
@@ -34,5 +35,10 @@ export async function addToSavedStories(storyId: string) {
 
 export async function removeFromSavedStories(storyId: string) {
   const response = await nextServer.delete(`/stories/${storyId}/save`);
+  return response.data;
+}
+
+export async function getCategories(): Promise<Category[]> {
+  const response = await nextServer.get<Category[]>("/categories");
   return response.data;
 }

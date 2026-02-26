@@ -26,7 +26,7 @@ const StoriesPage = async () => {
   await queryClient.prefetchInfiniteQuery({
     queryKey: ["popular-stories"],
     queryFn: () =>
-      getAllStories({ page: 0, perPage: 9, sort: "new", category: "" }),
+      getAllStories({ page: 0, perPage: 9, sort: "new" }),
     initialPageParam: 0,
   });
 

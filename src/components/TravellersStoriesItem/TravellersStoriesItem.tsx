@@ -35,10 +35,10 @@ export default function TravellersStoriesItem({
       toast.success("Історію було збережено!");
     },
 
-    onError: () => {
+    onError: (error) => {
       setIsSaved(false);
       setFavoriteCount((favCount) => favCount - 1);
-      toast.error("Сталася помилка, спробуйте ще.");
+      toast.error(`Сталася помилка: ${error.message}`);
     },
   });
 
@@ -49,10 +49,10 @@ export default function TravellersStoriesItem({
       setFavoriteCount((favCount) => favCount - 1);
       toast.success("Історію було видалено зі збережених.");
     },
-    onError: () => {
+    onError: (error) => {
       setIsSaved(true);
       setFavoriteCount((favCount) => favCount + 1);
-      toast.error("Сталася помилка, спробуйте ще.");
+      toast.error(`Сталася помилка: ${error.message}`);
     },
   });
 
