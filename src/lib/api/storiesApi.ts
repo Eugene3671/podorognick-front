@@ -1,6 +1,6 @@
 import { Story } from "../../types/story";
 import { nextServer } from "./api";
-import { Category } from "../../types/category";
+
 
 interface GetStoriesParams {
   page: number;
@@ -38,8 +38,3 @@ export async function removeFromSavedStories(storyId: string) {
   return response.data;
 }
 
-// ✅ НОВА функція отримання категорій
-export async function getCategories(): Promise<Category[]> {
-  const response = await nextServer.get<Category[]>("/categories");
-  return response.data;
-}
