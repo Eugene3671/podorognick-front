@@ -10,6 +10,7 @@ import { login } from "@/src/lib/api/authApi";
 import toast from "react-hot-toast";
 import { useAuthStore } from "@/src/lib/store/authStore";
 import { AxiosError } from "axios";
+import LoaderEl from '@/src/components/LoaderEl/LoaderEl';
 
 export default function Login() {
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function Login() {
     try {
       const response = await login(values);
       router.push("/");
-      setUser(response.user, response.accessToken);
+      setUser(response.user);
       console.log("Користувач залогінився:", response);
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
@@ -126,9 +127,15 @@ export default function Login() {
               )}
             </div>
 
-            <button type="submit" className={css.authButton}>
+            <button type="submit" className={css.authButton} disabled={isSubmitting}>
               Увійти
             </button>
+             {isSubmitting && (
+        <div className={css.loaderWrapper}>
+          <LoaderEl />
+        </div>
+      )}
+
           </Form>
         )}
       </Formik>
