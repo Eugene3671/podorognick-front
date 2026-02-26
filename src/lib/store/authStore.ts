@@ -5,7 +5,7 @@ type AuthStore = {
   isAuthenticated: boolean;
   isLoading: boolean;
   user: User | null;
-  setUser: (user: User, token?: string) => void;
+  setUser: (user: User) => void;
   clearIsAuthenticated: () => void;
 };
 
@@ -14,14 +14,10 @@ export const useAuthStore = create<AuthStore>()((set) => ({
   isLoading: false,
   user: null,
 
-  setUser: (user: User, token?: string) => {
-    if (token) {
-      localStorage.setItem("accessToken", token);
-    }
+  setUser: (user: User) => {
     set(() => ({ user, isAuthenticated: true }));
   },
   clearIsAuthenticated: () => {
-    localStorage.removeItem("accessToken");
     set(() => ({ user: null, isAuthenticated: false }));
   },
 }));
