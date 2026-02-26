@@ -1,6 +1,6 @@
 import css from "./Hero.module.css";
-import Link from "next/link";
 import "@/src/app/globals.css";
+import Button from "../Button/Button";
 
 export default function Hero() {
   return (
@@ -40,9 +40,7 @@ export default function Hero() {
             своїми історіями та отримувати натхнення для нових пригод. Відкрийте
             для себе нові місця та знайдіть однодумців!
           </p>
-          <Link href="/auth/register" className={css.button}>
-            Доєднатись
-          </Link>
+          <Button href="/auh/register">Доєднатись</Button>
         </div>
       </div>
     </section>
