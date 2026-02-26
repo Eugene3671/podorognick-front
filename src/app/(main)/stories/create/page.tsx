@@ -1,7 +1,23 @@
-import React from "react"
+// src/app/(main)/stories/create/page.tsx
 
-const CreateStoryPage = () => {
-  return <div>Create story page placeholder</div>
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/src/lib/store/authStore";
+import AddStoryForm from "@/src/components/AddStoryForm/AddStoryForm";
+
+export default function AddStoryPage() {
+  const { isAuthenticated } = useAuthStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.replace("/auth/login");
+    }
+  }, [isAuthenticated, router]);
+
+  if (!isAuthenticated) return null;
+
+  return <AddStoryForm />;
 }
-
-export default CreateStoryPage

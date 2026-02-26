@@ -1,7 +1,6 @@
 import { Story } from "../../types/story";
 import { nextServer } from "./api";
 
-
 interface GetStoriesParams {
   page: number;
   perPage: number;
@@ -38,3 +37,27 @@ export async function removeFromSavedStories(storyId: string) {
   return response.data;
 }
 
+// -------- STORIES --------
+
+export interface CreateStoryDto {
+  title: string;
+  article: string;
+  category: string; // <-- ID категорії
+  img?: File | null;
+  date: string;
+}
+
+export const createStory = async (story: CreateStoryDto) => {
+  const formData = new FormData();
+
+  formData.append("title", story.title);
+  formData.append("article", story.article);
+  formData.append("category", story.category); // ID
+  formData.append("date", story.date);
+
+  if (story.img) {
+    formData.append("img", story.img);
+  }
+
+  return nextServer.post("/stories", formData);
+};
