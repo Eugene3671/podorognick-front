@@ -3,7 +3,6 @@
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-    /* padding: 4px; */
 }
 
 .navigationItem a {
@@ -16,11 +15,13 @@
 .login {
     background-color: #00000005;
     border: 1px solid #00000015;
+    
 }
 
 .register {
     background-color: #4169E1;
     border: 1px solid #4169E1;
+
 }
 
 .register a {
@@ -28,32 +29,32 @@
 }
 
 .mobile {
-    height: 32px;
-    width: 335px;
     margin-bottom: 16px;
 }
 
 .desktop {
     height: 35px;
     padding: 4px 10px;
-    margin-left: 16px;
 }
-
-.homeLoginBtn.desktop {
+.mobile .login {
+    margin-bottom: 16px;
+}
+.desktop .homeLoginBtn {
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.1);
+    
 }
 
-.homeLoginBtn.desktop a {
+.desktop .homeLoginBtn a {
     color: #fff;
 }
 
-.homeRegisterBtn.desktop {
+.desktop .homeRegisterBtn  {
     background: #fff;
     border: 1px solid #fff;
 }
 
-.homeRegisterBtn.desktop a {
+.desktop .homeRegisterBtn a {
     color: #000;
 }
 .avatarWrapper {
@@ -71,7 +72,7 @@
     padding-right: 8px;
     border-right: 1px solid rgba(0, 0, 0, 0.15);
 }
-.homeHeader.userName {
+.homeUserName.userName {
     color: #f7f9ff;
     border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -84,6 +85,26 @@
     padding: 0;
     margin: 0 8px;
 }
-.homeHeader.logoutButton {
-    fill: #f7f9ff;
+.homeLogout.logoutButton {
+    color: #f7f9ff;
+}
+.mobile.homeLogout  {
+    color: #000;
+}
+.mobile.homeUserName {
+    color: #000;
+}
+.mobile .navigationItem{
+    height: 32px;
+    width: 335px;
+}
+.desktop.authWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+.desktop.authWrapper .navigationItem {
+    padding: 4px 10px;
 }
