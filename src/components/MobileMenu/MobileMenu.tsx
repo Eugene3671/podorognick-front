@@ -3,9 +3,10 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import { useAuthStore } from "@/src/lib/store/authStore";
 import css from "./MobileMenu.module.css";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
+import clsx from "clsx";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const pathname = usePathname();
+  const { isAuthenticated } = useAuthStore();
 
   useEffect(() => {
     if (isOpen) onClose();
@@ -73,6 +75,10 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </li>
           </ul>
         </nav>
+        <div className={clsx(css.action, isAuthenticated && css.authActionBtn)}>
+          <Link href="/stories/create">Опублікувати історію</Link>
+        </div>
+
         <div className={css.auth}>
           <AuthNavigation variant="mobile" />
         </div>
