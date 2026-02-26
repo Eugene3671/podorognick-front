@@ -18,17 +18,20 @@
   object-fit: cover;
 }
 
-.title,
+/* .title,
 .description {
   position: relative;
   z-index: 2;
-}
+} */
 
 .heroContainer {
   max-width: 100%;
   display: block;
   padding-top: 196px;
   padding-bottom: 331px;
+
+  position: relative;
+  z-index: 2;
 }
 
 .title {
