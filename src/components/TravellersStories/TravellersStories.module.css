@@ -48,16 +48,12 @@
   .paginationButton {
     margin: 0 auto;
     display: inline-block;
-    font-family: var(--font-family);
+    font-family: var(--font-nunito-sans);
     font-weight: 500;
     font-size: 16px;
     line-height: 150%;
-    color: #fff;
-    border: 1px solid #4169e1;
     border-radius: 8px;
     padding: 12px;
-    background: #4169e1;
-    transition: all 0.3s ease-in-out;
   }
 }
 
@@ -65,22 +61,4 @@
   .paginationButton {
     font-size: 18px;
   }
-}
-
-.paginationButton:hover,
-.paginationButton:focus {
-  background-color: var(--color-accent-lighter);
-  color: var(--light-scheme-text);
-  border: 1px solid var(--color-accent);
-}
-
-.paginationButton:active {
-  background-color: var(--color-accent-light);
-  color: var(--light-scheme-text);
-}
-
-.paginationButton:disabled {
-  background-color: var(--color-accent-light);
-  opacity: 0.3;
-  color: var(--light-scheme-background);
 }

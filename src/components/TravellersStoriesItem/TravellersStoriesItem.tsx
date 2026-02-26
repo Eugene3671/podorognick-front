@@ -117,11 +117,14 @@ export default function TravellersStoriesItem({
           </div>
         </div>
         <div className={css.buttonsWrapper}>
-          <Link href={`/stories/${story._id}`} className={css.storyDetailsLink}>
+          <Link
+            href={`/stories/${story._id}`}
+            className={`buttonGrey ${css.storyDetailsLink}`}
+          >
             Переглянути статтю
           </Link>
           <button
-            className={isSaved ? css.saveButtonActive : css.saveButton}
+            className={`buttonGrey ${isSaved ? css.saveButtonActive : css.saveButton}`}
             onClick={isSaved ? handleUnsave : handleSave}
           >
             {saveMutation.isPending || unsaveMutation.isPending ? (

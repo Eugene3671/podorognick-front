@@ -115,7 +115,7 @@ export default function TravellersStories({
               shoulShowLoadButton &&
               !isFetchingNextPage && (
                 <button
-                  className={css.paginationButton}
+                  className={`buttonBlue ${css.paginationButton}`}
                   onClick={handleLoadMore}
                   disabled={isFetchingNextPage}
                 >
@@ -125,7 +125,10 @@ export default function TravellersStories({
             )}
 
             {buttonType === "link" && (
-              <Link href="/stories" className={css.paginationButton}>
+              <Link
+                href="/stories"
+                className={`buttonBlue ${css.paginationButton}`}
+              >
                 Переглянути всі
               </Link>
             )}
