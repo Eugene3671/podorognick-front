@@ -18,12 +18,6 @@
   object-fit: cover;
 }
 
-/* .title,
-.description {
-  position: relative;
-  z-index: 2;
-} */
-
 .heroContainer {
   max-width: 100%;
   display: block;
@@ -64,7 +58,6 @@
   .title {
     font-size: 48px;
     width: 612px;
-    /* padding-right: 92px; */
   }
 }
 

@@ -34,22 +34,4 @@
   .button {
     font-size: 18px;
   }
-
-  .button:hover,
-  .button:focus {
-    background-color: var(--color-accent-lighter);
-    color: var(--light-scheme-text);
-    border: 1px solid var(--color-accent);
-  }
-
-  .button:active {
-    background-color: var(--color-accent-light);
-    color: var(--light-scheme-text);
-  }
-
-  .button:disabled {
-    background-color: var(--color-accent-light);
-    opacity: 0.3;
-    color: var(--light-scheme-background);
-  }
 }
