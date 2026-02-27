@@ -11,3 +11,10 @@ export interface Story {
   date: string;
   favoriteCount: number;
 }
+
+export interface CreateStoryFormValues {
+  title: string;
+  article: string;
+  category: string;
+  img: File | null;
+}
