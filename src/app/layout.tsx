@@ -35,6 +35,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const user = await getCurrentUser();
+  console.log("SERVER USER:", user);
   return (
     <html lang="uk" className={`${nunitoSans.variable} ${inter.variable}`}>
       <head>
