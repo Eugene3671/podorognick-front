@@ -64,12 +64,13 @@ export async function PATCH(
   req: NextRequest,
   { params }: { params: { id: string } },
 ) {
+  const { id } = await params;
   try {
     const body = await req.json();
     const cookieStore = await cookies();
     const token = cookieStore.get("accessToken")?.value;
 
-    const res = await api.patch(`/stories/${params.id}`, body, {
+    const res = await api.patch(`/stories/${id}`, body, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
