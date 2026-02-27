@@ -6,8 +6,8 @@ import css from "./StoriesPage.module.css";
 import TravellersStories from "@/src/components/TravellersStories/TravellersStories";
 import { Toaster } from "react-hot-toast";
 import { Category } from "@/src/types/category";
-import { getCategories } from "@/src/lib/api/storiesApi";
 import { useQuery } from "@tanstack/react-query";
+import { getCategories } from "@/src/lib/api/сategoriesApi";
 
 function StoriesPageClient() {
   const [category, setCategory] = useState<Category | null>();

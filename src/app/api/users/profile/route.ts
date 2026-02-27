@@ -1,30 +1,24 @@
-import { isAxiosError } from "axios";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { logErrorResponse } from "../../_utils/utils";
 import { api } from "../../api";
 
 export async function GET() {
   try {
     const cookieStore = await cookies();
+    const token = cookieStore.get("accessToken")?.value;
 
-    const res = await api.get("/users/rofile", {
-      headers: { Cookie: cookieStore.toString() },
-    });
-
-    return NextResponse.json(res.data, { status: res.status });
-  } catch (error) {
-    if (isAxiosError(error)) {
-      logErrorResponse(error.response?.data);
-      return NextResponse.json(
-        { error: error.message },
-        { status: error.status },
-      );
+    if (!token) {
+      return NextResponse.json(null, { status: 200 });
     }
 
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 },
-    );
+    const res = await api.get("/users/profile", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return NextResponse.json(res.data, { status: 200 });
+  } catch {
+    return NextResponse.json(null, { status: 200 });
   }
 }
