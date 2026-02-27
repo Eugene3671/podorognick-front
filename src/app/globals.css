@@ -120,3 +120,70 @@ button {
 *::after {
   box-sizing: border-box;
 }
+
+.buttonBlue {
+  color: #fff;
+  border: 1px solid #4169e1;
+  background: #4169e1;
+  transition: all 0.3s ease-in-out;
+  margin: 0 auto;
+  display: inline-block;
+  font-family: var(--font-nunito-sans);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  border-radius: 8px;
+  padding: 10.5px 12px;
+}
+
+@media only screen and (min-width: 1440px) {
+  .buttonBlue {
+    font-size: 18px;
+  }
+}
+
+.buttonBlue:hover,
+.buttonBlue:focus {
+  background-color: var(--color-accent-lighter);
+  color: var(--light-scheme-text);
+  border: 1px solid var(--color-accent);
+}
+
+.buttonBlue:active {
+  background-color: var(--color-accent-light);
+  color: var(--light-scheme-text);
+}
+
+.buttonBlue:disabled {
+  background-color: var(--color-accent-light);
+  opacity: 0.3;
+  color: var(--light-scheme-background);
+}
+
+.buttonGrey {
+  border: 1px solid var(--opacity-neutral-darkest-15);
+  background-color: var(--opacity-neutral-darkest-5);
+  transition: all 0.3s ease-in-out;
+  color: var(--light-scheme-text);
+}
+
+.buttonGrey:hover,
+.buttonGrey:focus {
+  background-color: var(--color-accent);
+  color: var(--light-scheme-background);
+  border: 1px solid var(--color-accent);
+  cursor: pointer;
+}
+
+.buttonGrey:active {
+  background-color: var(--color-accent-darker);
+  color: var(--light-scheme-background);
+  border: 1px solid var(--opacity-transparent);
+}
+
+.buttonGrey:disabled {
+  border: 1px solid var(--opacity-transparent);
+  color: var(--light-scheme-text);
+  background-color: var(--opacity-neutral-darkest-5);
+  opacity: 0.3;
+}

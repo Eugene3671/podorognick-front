@@ -1,3 +1,4 @@
+import { Category } from "@/src/types/category";
 import { Story } from "../../types/story";
 import { nextServer } from "./api";
 

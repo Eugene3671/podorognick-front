@@ -1,14 +1,18 @@
 import { Circles } from "react-loader-spinner";
+import styles from "./LoaderEl.module.css";
 
-export default function LoaderEl() {
+interface LoaderProps {
+  height?: number;
+  width?: number;
+}
+export default function LoaderEl({ height, width }: LoaderProps) {
   return (
     <Circles
-      height="54"
-      width="54"
+      height={height ? height : 54}
+      width={width ? width : 54}
       color="#3454b4"
       ariaLabel="circles-loading"
-      wrapperStyle={{}}
-      wrapperClass=""
+      wrapperClass={styles.loaderEl}
       visible={true}
     />
   );
