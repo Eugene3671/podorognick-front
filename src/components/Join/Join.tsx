@@ -15,7 +15,7 @@ const Join = () => {
               надихають на нові пригоди.
             </p>
             {authenticated ? (
-              <Link className={css.join_button} href="/auth/profile">
+              <Link className={css.join_button} href="/profile">
                 Збережені
               </Link>
             ) : (

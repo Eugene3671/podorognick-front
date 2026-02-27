@@ -1,5 +1,5 @@
 import { User } from "@/src/types/user";
-import { nextServer } from './api'
+import { nextServer } from "./api";
 
 interface UserPaginationResponse {
   page: number;

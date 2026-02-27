@@ -1,14 +1,29 @@
+"use client";
+
 import css from "./TravellerInfo.module.css";
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getMe } from "@/src/lib/api/usersApi";
 import { User } from "@/src/types/user";
 import Image from "next/image";
 
-//  { id: 1, name: "Анастасія Олійник", description: "Експертка з гірських походів. Знає кожен таємний куточок Карпат.", img: "/anastasia-oliinyk.png" },
+// interface TravellerInfoProps {
+//   user: User;
+// }
 
-interface TravellerInfoProps {
-  user: User;
-}
+export default function TravellerInfo() {
+  const {
+    data: user,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["user", "me"],
+    queryFn: getMe,
+    retry: false,
+  });
 
-export default function TravellerInfo({ user }: TravellerInfoProps) {
+  if (isLoading) return <div>Loading...</div>;
+  if (isError || !user) return <div>Не вдалося завантажити профіль</div>;
   return (
     <div className={css.info}>
       <Image

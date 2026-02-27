@@ -1,15 +1,35 @@
-import Link from "next/link";
-// import { usePathname } from "next/navigation";
+"use client";
+
+import React, { useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 const PageToggle = () => {
-  // const pathname = usePathname();
+  const router = useRouter();
+  const pathname = usePathname();
+  const [activeTab, setActiveTab] = useState(
+    pathname.includes("/saved") ? "saved" : "own",
+  );
+
+  const switchTab = (tab: "saved" | "own") => {
+    setActiveTab(tab);
+    router.push(`/profile/${tab}`);
+  };
 
   return (
-    <div>
-      <Link href="/profile/saved">Saved</Link>
-
-      <Link href="/profile/own">Own</Link>
-    </div>
+    <nav className="page-toggle">
+      <button
+        className={activeTab === "saved" ? "active" : ""}
+        onClick={() => switchTab("saved")}
+      >
+        Збережені історії
+      </button>
+      <button
+        className={activeTab === "own" ? "active" : ""}
+        onClick={() => switchTab("own")}
+      >
+        Мої історії
+      </button>
+    </nav>
   );
 };
 
