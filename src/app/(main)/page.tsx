@@ -4,6 +4,7 @@ import PopularStories from "../../components/PopularStories/PopularStories";
 import OurTravelers from "../../components/OurTravelers/OurTravelers";
 import Join from "@/src/components/Join/Join";
 import "@/src/app/globals.css";
+import TravellersStories from "@/src/components/TravellersStories/TravellersStories";
 
 export default function HomePage() {
   return (
@@ -11,6 +12,13 @@ export default function HomePage() {
       <Hero />
       <About />
       <PopularStories />
+      <TravellersStories
+        sort={"popular"}
+        pageType={"profile"}
+        buttonType={"loadMore"}
+        mode={"travellerStories"}
+        ownerId={"6881563901add19ee16fd009"}
+      />
       <OurTravelers />
       <Join />
     </main>
