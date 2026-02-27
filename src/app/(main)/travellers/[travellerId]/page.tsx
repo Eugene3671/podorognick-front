@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
 
 const TravellerPage = () => {
-  return <div>Traveller page placeholder</div>
-}
+  return <div>Traveller page placeholder</div>;
+};
 
-export default TravellerPage
+export default TravellerPage;
