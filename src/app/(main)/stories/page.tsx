@@ -22,19 +22,7 @@ export const metadata: Metadata = {
 };
 
 const StoriesPage = async () => {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchInfiniteQuery({
-    queryKey: ["popular-stories"],
-    queryFn: () =>
-      getAllStories({ page: 0, perPage: 9, sort: "new", category: "" }),
-    initialPageParam: 0,
-  });
-
-  return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <StoriesPageClient />
-    </HydrationBoundary>
-  );
+  return <StoriesPageClient />;
 };
 
 export default StoriesPage;

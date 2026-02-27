@@ -30,6 +30,7 @@ export default function Register() {
     setIsSubmitting(true);
     try {
       const response = await register(values);
+ 
       setUser(response.user);
 
       console.log("Користувач зареєстрований:", response);
