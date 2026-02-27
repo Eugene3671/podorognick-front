@@ -11,9 +11,9 @@ interface UserPaginationResponse {
 interface GetUsersParams {
   page: number;
   perPage: number;
-  search: string;
-  sortBy: string;
-  sortOrder: string;
+  search?: string;
+  sortBy?: string;
+  sortOrder?: string;
 }
 
 // Отримати профіль поточного користувача

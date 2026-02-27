@@ -13,7 +13,7 @@ const TravellersPage = () => {
   useEffect(() => {
     const fetchAll = async () => {
       try {
-        const response = await getUsers();
+        const response = await getUsers({ page: 1, perPage: 4 });
         setTravelers(response.users || []);
       } catch (error) {
         console.error("Помилка завантаження всіх мандрівників:", error);
