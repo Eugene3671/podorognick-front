@@ -27,6 +27,7 @@ export default function AuthNavigation({
   const handleLogout = async () => {
     await logout();
     clearIsAuthenticated();
+    localStorage.removeItem("auth");
     router.refresh();
   };
 
