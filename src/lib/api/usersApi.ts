@@ -23,15 +23,11 @@ export const getMe = async (): Promise<User> => {
 };
 
 // Отримати список усіх користувачів
-export const getUsers = async (page = 1, perPage = 4): Promise<UserPaginationResponse> => {
+export const getUsers = async (
+  params: GetUsersParams,
+): Promise<UserPaginationResponse> => {
   const res = await nextServer.get<UserPaginationResponse>("/users", {
-    params: {
-      page,
-      perPage,
-      sortBy: "articlesAmount",
-      sortOrder: "desc",
-      search: "",
-    },
+    params,
   });
   return res.data;
 };

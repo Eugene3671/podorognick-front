@@ -13,7 +13,7 @@
     padding: 64px 32px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   .section {
     padding: 72px 64px;
   }
@@ -37,7 +37,7 @@
     max-width: 768px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   .title {
     font-size: 52px;
   }
@@ -59,7 +59,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   .list {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
@@ -109,7 +109,7 @@
   width: 100%;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   .name {
     font-size: 26px;
   }
@@ -125,7 +125,7 @@
   flex-grow: 1;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   .description {
     font-size: 18px;
   }
@@ -149,7 +149,7 @@
   transition: background-color 0.2s ease;
   margin: auto 0 24px;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   .button {
     font-size: 18px;
   }
@@ -172,20 +172,13 @@
 @media (min-width: 768px) {
   .viewAllButton {
     display: flex;
-    align-items: center;
-    justify-content: center;
     margin: 48px auto 0;
-    padding: 6px 12px;
-    width: auto;
-    background-color: #4169e1;
-    color: #ffffff;
-    border: 1px solid #4169e1;
-    border-radius: 8px;
-    font-size: 16px;
-    line-height: 1.5;
-    font-weight: 500;
+    width: 173px;
+    white-space: nowrap;
+    min-width: fit-content;
     cursor: pointer;
     transition: background-color 0.2s;
+    height: 48px;
   }
 }
 .viewAllButton:hover,

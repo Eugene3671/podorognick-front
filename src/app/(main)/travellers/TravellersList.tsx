@@ -1,37 +1,65 @@
 "use client";
 
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { User } from "@/src/types/user";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getUsers, UserPaginationResponse } from "@/src/lib/api/usersApi";
 import TravelerCard from "@/src/components/OurTravelers/TravelerCard";
-import { Circles, ThreeDots} from "react-loader-spinner";
+import LoaderEl from "@/src/components/LoaderEl/LoaderEl";
+import Button from "@/src/components/Button/Button";
 import styles from "./page.module.css";
 
 const TravellersList = () => {
+  const [visibleCount, setVisibleCount] = useState(12);
+
   const {
     data,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
     isLoading,
-  } = useInfiniteQuery <UserPaginationResponse>({
+    isFetching,
+  } = useInfiniteQuery<UserPaginationResponse>({
     queryKey: ["travelers-infinite"],
-    queryFn: ({ pageParam = 1 }) => getUsers(pageParam as number, 12), 
+    queryFn: ({ pageParam = 1 }) => getUsers({ 
+  page: Number(pageParam), 
+  perPage: 20,
+  sortBy: "articlesAmount",
+  sortOrder: "desc"
+}),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      console.log("LastPage:", lastPage);
-      if (lastPage.page < lastPage.totalPages) {
-        return lastPage.page + 1;
-      }
+      if (lastPage.page < lastPage.totalPages) return lastPage.page + 1;
       return undefined;
     },
   });
 
-  if (isLoading) {
+  const allUsers = useMemo(() => {
+    if (!data) return [];
+    const flatUsers = data.pages.flatMap(page => page.users);
+    const uniqueMap = new Map();
+    flatUsers.forEach(user => uniqueMap.set(user._id, user));
+    return Array.from(uniqueMap.values()) as User[];
+  }, [data]);
+
+  const visibleUsers = useMemo(() => {
+    return allUsers.slice(0, visibleCount);
+  }, [allUsers, visibleCount]);
+
+  const handleLoadMore = () => {
+    if (visibleCount + 4 <= allUsers.length) {
+      setVisibleCount(prev => prev + 4);
+    } else if (hasNextPage) {
+      fetchNextPage().then(() => {
+        setVisibleCount(prev => prev + 4);
+      });
+    }
+  };
+
+  if (isLoading || (isFetching && allUsers.length === 0)) {
     return (
       <div className={styles.loaderWrapper}>
-        <Circles height="80" width="80" color="#4169e1" />
+        <LoaderEl />
       </div>
     );
   }
@@ -39,49 +67,38 @@ const TravellersList = () => {
   return (
     <>
       <div className={styles.grid}>
-        {data?.pages.map((page, pageIndex) =>
-          page.users.map((user: User, userIndex: number) => {
-            const isExtraForMobile = pageIndex === 0 && userIndex >= 8;
-
-            return (
-              <div 
-                key={user._id} 
-                className={isExtraForMobile ? styles.desktopOnlyCard : ""}
-              >
-                <TravelerCard
-                  id={user._id}
-                  name={user.name || "Мандрівник"}
-                  description={user.description || "Досвідчений мандрівник"}
-                  img={user.avatarUrl || "/default-avatar.png"}
-                />
-              </div>
-            );
-          })
-        )}
+        {visibleUsers.map((user: User, index: number) => (
+          <div 
+            key={user._id} 
+            className={index >= 8 && index < 12 ? styles.desktopOnlyCard : ""}
+          >
+            <TravelerCard
+              id={user._id}
+              name={user.name || "Мандрівник"}
+              description={user.description || "Досвідчений мандрівник"}
+              img={user.avatarUrl || "/default-avatar.png"}
+            />
+          </div>
+        ))}
       </div>
 
-      {hasNextPage && (
-  <div className={styles.buttonContainer}>
-    <button
-      onClick={() => fetchNextPage()}
-      disabled={isFetchingNextPage}
-      className={`${styles.loadMoreButton} ${isFetchingNextPage ? styles.loading : ""}`}
-    >
-      {isFetchingNextPage ? (
-        <ThreeDots 
-          height="20" 
-          width="40" 
-          radius="9" 
-          color="#1a1a1a"
-          ariaLabel="three-dots-loading"
-          visible={true}
-        />
-      ) : (
-        "Показати ще"
+      {(visibleCount < allUsers.length || hasNextPage) && (
+        <div className={styles.buttonContainer}>
+  {isFetchingNextPage ? (
+    <LoaderEl />
+  ) : (
+    (visibleCount < allUsers.length || hasNextPage) && (
+      <Button
+        type="button"
+        onClick={handleLoadMore}
+        className={styles.loadMoreButton}
+      >
+        Показати ще
+      </Button>
+    )
+  )}
+</div>
       )}
-    </button>
-  </div>
-)}
     </>
   );
 };
