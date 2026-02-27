@@ -5,7 +5,7 @@ import { nextServer } from "./api";
 interface GetStoriesParams {
   page: number;
   perPage: number;
-  sort: string;
+  sort?: string;
   category?: string;
 }
 

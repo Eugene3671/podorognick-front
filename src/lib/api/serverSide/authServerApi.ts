@@ -4,7 +4,6 @@ import { serverApi } from "./serverApi";
 export async function getCurrentUser() {
   const cookieStore = await cookies();
   const token = cookieStore.get("accessToken")?.value;
-
   if (!token) return null;
 
   try {
@@ -13,7 +12,6 @@ export async function getCurrentUser() {
         Authorization: `Bearer ${token}`,
       },
     });
-
     return res.data;
   } catch {
     return null;

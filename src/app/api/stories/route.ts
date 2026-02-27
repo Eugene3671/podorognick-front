@@ -14,8 +14,20 @@ export async function GET(req: NextRequest) {
     const perPage = Number(req.nextUrl.searchParams.get("perPage") ?? 9);
     const sort = req.nextUrl.searchParams.get("sort");
 
+    const params: {
+      category?: string;
+      sort?: string;
+      page?: number;
+      perPage?: number;
+    } = {};
+
+    if (category) params.category = category;
+    if (sort) params.sort = sort;
+    if (!isNaN(page)) params.page = page;
+    if (!isNaN(perPage)) params.perPage = perPage;
+
     const res = await api.get("/stories", {
-      params: { category, page, perPage, sort },
+      params,
       headers: { Cookie: cookieStore.toString() },
     });
 
