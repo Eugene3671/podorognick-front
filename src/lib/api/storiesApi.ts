@@ -39,6 +39,8 @@ export async function removeFromSavedStories(storyId: string) {
 
 // -------- STORIES --------
 
+// Data Transfer Object для створення історії
+
 export interface CreateStoryDto {
   title: string;
   article: string;
