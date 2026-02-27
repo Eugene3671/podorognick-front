@@ -10,6 +10,8 @@ import { RegisterFormValues } from "@/src/types/auth";
 import toast from "react-hot-toast";
 import { useAuthStore } from "@/src/lib/store/authStore";
 import { AxiosError } from "axios";
+import LoaderEl from '@/src/components/LoaderEl/LoaderEl';
+
 
 export default function Register() {
   const initialValues: RegisterFormValues = {
@@ -28,7 +30,8 @@ export default function Register() {
     setIsSubmitting(true);
     try {
       const response = await register(values);
-      setUser(response.user, response.accessToken);
+ 
+      setUser(response.user);
 
       console.log("Користувач зареєстрований:", response);
 
@@ -151,9 +154,15 @@ export default function Register() {
               )}
             </div>
 
-            <button type="submit" className={css.authButton}>
+            <button type="submit" className={css.authButton} disabled={isSubmitting}>
               Зареєструватись
             </button>
+             {isSubmitting && (
+        <div className={css.loaderWrapper}>
+          <LoaderEl />
+        </div>
+      )}
+
           </Form>
         )}
       </Formik>

@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
 
 const ProfileOwnTabPage = () => {
-  return <div>Profile own tab page placeholder</div>
-}
+  return <div>Profile own tab page placeholder</div>;
+};
 
-export default ProfileOwnTabPage
+export default ProfileOwnTabPage;

@@ -1,5 +1,5 @@
 import { User } from "@/src/types/user";
-import { nextServer } from './api'
+import { nextServer } from "./api";
 
 export interface UserPaginationResponse {
   page: number;
@@ -7,6 +7,13 @@ export interface UserPaginationResponse {
   totalItems: number;
   totalPages: number;
   users: User[];
+}
+interface GetUsersParams {
+  page: number;
+  perPage: number;
+  search: string;
+  sortBy: string;
+  sortOrder: string;
 }
 
 // Отримати профіль поточного користувача
@@ -16,29 +23,17 @@ export const getMe = async (): Promise<User> => {
 };
 
 // Отримати список усіх користувачів
-
-export const getUsers = async (page = 1, perPage = 12) : Promise<UserPaginationResponse> =>{
-  const url = new URL("https://podorognick-back.onrender.com/api/users");
-  
-  url.searchParams.append("page", page.toString());
-  url.searchParams.append("perPage", perPage.toString());
-  url.searchParams.append("sortBy", "articlesAmount"); 
-  url.searchParams.append("sortOrder", "desc");
-
-  try {
-    const res = await fetch(url.toString());
-    
-    if (!res.ok) {
-      const errorData = await res.json().catch(() => ({}));
-      console.error("Помилка сервера:", errorData);
-      throw new Error(errorData.message || "Validation failed");
-    }
-    
-    return await res.json();
-  } catch (error) {
-    console.error("Помилка при виконанні запиту:", error);
-    throw error;
-  }
+export const getUsers = async (page = 1, perPage = 4): Promise<UserPaginationResponse> => {
+  const res = await nextServer.get<UserPaginationResponse>("/users", {
+    params: {
+      page,
+      perPage,
+      sortBy: "articlesAmount",
+      sortOrder: "desc",
+      search: "",
+    },
+  });
+  return res.data;
 };
 
 // Отримати одного користувача за ID
@@ -53,17 +48,15 @@ export const createUser = async (data: Partial<User>): Promise<User> => {
   return res.data;
 };
 
+export const updateUserAvatar = async (formData: FormData) => {
+  const res = await nextServer.patch(`/users/me/avatar`, formData);
+  return res.data;
+};
 // Оновити існуючого користувача
 export const updateUser = async (
   id: string,
   data: Partial<User>,
 ): Promise<User> => {
   const res = await nextServer.put(`/users/${id}`, data);
-  return res.data;
-};
-
-// Видалити користувача
-export const deleteUser = async (id: string): Promise<void> => {
-  const res = await nextServer.delete(`/users/${id}`);
   return res.data;
 };

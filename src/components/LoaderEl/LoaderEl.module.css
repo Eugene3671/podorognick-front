@@ -1,0 +1,11 @@
+.loaderEl {
+  height: 48px;
+  width: 48px;
+}
+
+@media only screen and (min-width: 1440px) {
+  .loaderEl {
+    height: 54px;
+    width: 54px;
+  }
+}
