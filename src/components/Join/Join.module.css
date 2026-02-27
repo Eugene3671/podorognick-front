@@ -7,13 +7,13 @@
   background-color: #e8eeff;
   border-radius: 24px;
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.2)), url(/images/join/join_mob_2x.webp);
+    linear-gradient(rgba(0, 0, 0, 0.2)), url(/img/join/join_mob_1x.webp);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   @media screen and (min-resolution: 2x) {
     background-image:
-      linear-gradient(rgba(0, 0, 0, 0.2)), url(/images/join/join_mob_2x.webp);
+      linear-gradient(rgba(0, 0, 0, 0.2)), url(/img/join/join_mob_2x.webp);
   }
 }
 .join_content {
@@ -36,16 +36,16 @@
 }
 
 .join_button {
-  font-family: var(--font-family);
+  /* font-family: var(--font-family);
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-weight: 500;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.5; */
   width: 100%;
-  border: 1px solid #4169e1;
+  /* border: 1px solid #4169e1;
   border-radius: 8px;
   padding-block: 10.5px;
   padding-inline: 12px;
@@ -57,7 +57,7 @@
     box-shadow 0.2s ease,
     background-color 0.3s ease,
     border-color 0.3s ease,
-    border-color 0.3s ease;
+    border-color 0.3s ease; */
 }
 
 .join_button:hover,
@@ -75,10 +75,10 @@
 @media screen and (min-width: 768px) {
   .join_background {
     background-image:
-      linear-gradient(rgba(0, 0, 0, 0.2)), url(/images/join/join_tab_1x.webp);
+      linear-gradient(rgba(0, 0, 0, 0.2)), url(/img/join/join_tab_1x.webp);
     @media screen and (min-resolution: 2x) {
       background-image:
-        linear-gradient(rgba(0, 0, 0, 0.2)), url(/images/join/join_tab_2x.webp);
+        linear-gradient(rgba(0, 0, 0, 0.2)), url(/img/join/join_tab_2x.webp);
     }
   }
 
@@ -111,10 +111,10 @@
 
   .join_background {
     background-image:
-      linear-gradient(rgba(0, 0, 0, 0.2)), url(/images/join/join_desk_1x.webp);
+      linear-gradient(rgba(0, 0, 0, 0.2)), url(/img/join/join_desk_1x.webp);
     @media screen and (min-resolution: 2x) {
       background-image:
-        linear-gradient(rgba(0, 0, 0, 0.2)), url(/images/join/join_desk_2x.webp);
+        linear-gradient(rgba(0, 0, 0, 0.2)), url(/img/join/join_desk_2x.webp);
     }
   }
 
