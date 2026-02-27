@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createStory, CreateStoryDto } from "@/src/lib/api/storiesApi";
 import { CreateStoryFormValues } from "@/src/types/story";
-import AddStoryForm from "@/src/components/AddStoryForm/AddStoryForm";
+import StoryForm from "@/src/components/StoryForm/StoryForm";
 
 export default function CreateStoryPage() {
   const router = useRouter();
