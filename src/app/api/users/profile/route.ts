@@ -1,17 +1,14 @@
-// app/api/users/me/route.ts
-
-import { NextResponse } from "next/server";
-import { api } from "../../api";
-import { cookies } from "next/headers";
-import { logErrorResponse } from "../../_utils/utils";
 import { isAxiosError } from "axios";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+import { logErrorResponse } from "../../_utils/utils";
+import { api } from "../../api";
 
-export async function PATCH(req: Request) {
+export async function GET() {
   try {
     const cookieStore = await cookies();
-    const body = await req.json();
 
-    const res = await api.patch("/users/me", body, {
+    const res = await api.get("/users/rofile", {
       headers: { Cookie: cookieStore.toString() },
     });
 

@@ -48,13 +48,23 @@ export default function AuthNavigation({
       </li>
 
       <li className={css.navigationItem}>
-        <p className={clsx(css.userName, isHome && css.homeHeader)}>
+        <p
+          className={clsx(
+            css.userName,
+            isHome && css.homeUserName,
+            css[variant],
+          )}
+        >
           {user?.name}
         </p>
       </li>
 
       <button
-        className={clsx(css.logoutButton, isHome && css.homeHeader)}
+        className={clsx(
+          css.logoutButton,
+          isHome && css.homeLogout,
+          css[variant],
+        )}
         onClick={handleLogout}
       >
         <svg width="24" height="24">
@@ -63,12 +73,11 @@ export default function AuthNavigation({
       </button>
     </>
   ) : (
-    <>
+    <div className={clsx(css[variant], css.authWrapper)}>
       <li
         className={clsx(
           css.navigationItem,
           css.login,
-          css[variant],
           isHome && css.homeLoginBtn,
         )}
       >
@@ -81,7 +90,6 @@ export default function AuthNavigation({
         className={clsx(
           css.navigationItem,
           css.register,
-          css[variant],
           isHome && css.homeRegisterBtn,
         )}
       >
@@ -89,6 +97,6 @@ export default function AuthNavigation({
           Реєстрація
         </Link>
       </li>
-    </>
+    </div>
   );
 }
