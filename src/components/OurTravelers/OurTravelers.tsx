@@ -15,7 +15,7 @@ const OurTravelers = () => {
   useEffect(() => {
     const fetchFirstTravelers = async () => {
       try {
-        const response = await getUsers();
+        const response = await getUsers({ page: 1, perPage: 4 });
         const usersArray = response.users || [];
 
         setTravelers(usersArray.slice(0, 4));

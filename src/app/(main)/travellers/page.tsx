@@ -8,7 +8,7 @@ export default async function TravellersPage() {
 
   await queryClient.prefetchInfiniteQuery({
     queryKey: ["travelers-infinite"],
-    queryFn: ({ pageParam = 1 }) => getUsers(pageParam),
+    queryFn: ({ pageParam = 1 }) => getUsers(pageParam as number, 20),
     initialPageParam: 1,
   });
 
