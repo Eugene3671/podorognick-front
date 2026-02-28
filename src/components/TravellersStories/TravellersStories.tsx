@@ -14,6 +14,7 @@ import Link from "next/link";
 import LoaderEl from "../LoaderEl/LoaderEl";
 import { useBreakpoint } from "@/src/hooks/useBreakpoint";
 import { getUserById } from "@/src/lib/api/usersApi";
+import EmptyState from "../ui/EmptyState/EmptyState";
 
 type StoryMode =
   | "default"
@@ -60,8 +61,9 @@ export default function TravellersStories({
     isFetchingNextPage,
     isLoading,
     isError,
+    error,
   } = useInfiniteQuery({
-    queryKey: ["stories", pageType, sort, breakpoint, category],
+    queryKey: ["stories", pageType, sort, breakpoint, category, mode, ownerId],
     queryFn: async ({ pageParam = 1 }) => {
       switch (mode) {
         case "myOwnStories":
@@ -74,7 +76,7 @@ export default function TravellersStories({
             page: pageParam,
             perPage: initialVisibleStories,
           });
-        case "travellerStories":
+        case "travellerStories": {
           if (!ownerId) throw new Error("Owner ID is required");
           const data = await getUserById(ownerId, {
             page: pageParam,
@@ -86,6 +88,7 @@ export default function TravellersStories({
             totalPages: data.totalPages,
             totalStories: data.totalItems,
           } as StoriesResponse;
+        }
         default:
           return getAllStories({
             page: pageParam,
@@ -102,16 +105,21 @@ export default function TravellersStories({
         ? lastPage.page + 1
         : undefined;
     },
+    throwOnError: true,
   });
 
-  const allStories =
-    Array.from(
-      new Map(
-        data?.pages
-          .flatMap((page) => page.stories)
-          .map((story) => [story._id, story]),
-      ).values(),
-    ) ?? [];
+  const allStories = useMemo(
+    () =>
+      Array.from(
+        new Map(
+          (data?.pages.flatMap((page) => page.stories) ?? []).map((story) => [
+            story._id,
+            story,
+          ]),
+        ).values(),
+      ),
+    [data],
+  );
 
   const [visibleStories, setVisibleStories] = useState(initialVisibleStories);
 
@@ -144,12 +152,15 @@ export default function TravellersStories({
       </div>
     );
   }
+
   return (
     <>
       {isLoading ? (
         <div className={css.loaderWrapper}>
           <LoaderEl />
         </div>
+      ) : isError ? (
+        <EmptyState title={error.message} />
       ) : (
         <>
           <ul className={css.travellerStoriesList}>

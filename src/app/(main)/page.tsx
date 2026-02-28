@@ -12,13 +12,6 @@ export default function HomePage() {
       <Hero />
       <About />
       <PopularStories />
-      <TravellersStories
-        sort={"popular"}
-        pageType={"profile"}
-        buttonType={"loadMore"}
-        mode={"travellerStories"}
-        ownerId={"6881563901add19ee16fd009"}
-      />
       <OurTravelers />
       <Join />
     </main>
