@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getMe, getUserById } from "@/src/lib/api/usersApi";
 import Image from "next/image";
 import LoaderEl from "../LoaderEl/LoaderEl";
+import { User } from "@/src/types/user";
 
 interface TravellerInfoProps {
   travellerId?: string;
@@ -15,11 +16,19 @@ export default function TravellerInfo({ travellerId }: TravellerInfoProps) {
     data: user,
     isLoading,
     isError,
-  } = useQuery({
+  } = useQuery<User>({
     queryKey: ["user", travellerId || "me"],
-    queryFn: () => (travellerId ? getUserById(travellerId) : getMe()),
+    queryFn: async () => {
+      if (travellerId) {
+        const response = await getUserById(travellerId, {
+          page: 1,
+          perPage: 1,
+        });
+        return response.user;
+      }
+      return await getMe();
+    },
     retry: false,
-    staleTime: 5 * 60 * 1000,
   });
 
   if (isLoading)
