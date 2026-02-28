@@ -5,7 +5,7 @@ import TanStackProvider from "../components/TanStackProvider/TanStackProvider";
 import { cookies } from "next/headers";
 import AuthProvider from "../components/providers/AuthProvider";
 import { getCurrentUser } from "../lib/api/serverSide/authServerApi";
-
+import { ThemeProvider } from "@/src/components/providers/ThemeProvider";
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
   subsets: ["cyrillic"],
@@ -29,6 +29,8 @@ export const metadata: Metadata = {
   },
 };
 
+
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -42,11 +44,13 @@ export default async function RootLayout({
         <link rel="icon" href="/Favicon.svg" />
       </head>
       <body>
-        <AuthProvider user={user}>
-          <TanStackProvider>
-            <main>{children}</main>
-          </TanStackProvider>
-        </AuthProvider>
+        <ThemeProvider>
+          <AuthProvider user={user}>
+            <TanStackProvider>
+              <main>{children}</main>
+            </TanStackProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
