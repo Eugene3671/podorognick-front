@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Nunito_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import TanStackProvider from "@/src/components/TanStackProvider/TanStackProvider";
-import AuthProvider from "@/src/components/providers/AuthProvider";
+import AuthProvider from "@/src/components/AuthProvider/AuthProvider";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",

@@ -1,7 +1,3 @@
-import React from "react"
-
-const ProfilePage = () => {
-  return <div>Profile main page placeholder</div>
+export default function ProfilePage() {
+  return null;
 }
-
-export default ProfilePage

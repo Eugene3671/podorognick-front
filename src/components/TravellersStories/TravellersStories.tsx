@@ -4,24 +4,39 @@ import TravellersStoriesItem from "../TravellersStoriesItem/TravellersStoriesIte
 import { useInfiniteQuery } from "@tanstack/react-query";
 import css from "./TravellersStories.module.css";
 import { useEffect, useMemo, useState } from "react";
-import { getAllStories } from "@/src/lib/api/storiesApi";
+import {
+  getAllStories,
+  getMyStories,
+  getSavedStories,
+  StoriesResponse,
+} from "@/src/lib/api/storiesApi";
 import Link from "next/link";
 import LoaderEl from "../LoaderEl/LoaderEl";
 import { useBreakpoint } from "@/src/hooks/useBreakpoint";
-import { Category } from "@/src/types/category";
+import { getUserById } from "@/src/lib/api/usersApi";
+import EmptyState from "../ui/EmptyState/EmptyState";
 
+type StoryMode =
+  | "default"
+  | "travellerStories"
+  | "myOwnStories"
+  | "mySavedStories";
 interface TravellersStoriesProps {
   sort: "popular" | "new";
-  pageType: "popular" | "stories";
+  pageType: "popular" | "stories" | "profile";
   buttonType: "loadMore" | "link";
   category?: string;
+  ownerId?: string;
+  mode?: StoryMode;
 }
 
 export default function TravellersStories({
-  sort,
+  sort = "popular",
   pageType,
   buttonType,
   category,
+  ownerId,
+  mode = "default",
 }: TravellersStoriesProps) {
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
@@ -32,38 +47,79 @@ export default function TravellersStories({
   const initialVisibleStories = useMemo(() => {
     if (pageType === "stories") {
       return breakpoint === "tablet" ? 8 : 9;
+    } else if (pageType === "profile") {
+      return breakpoint === "tablet" ? 4 : 6;
     } else {
       return breakpoint === "tablet" ? 4 : 3;
     }
   }, [breakpoint, pageType]);
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    useInfiniteQuery({
-      queryKey: ["stories", pageType, sort, breakpoint, category],
-      queryFn: ({ pageParam = 1 }) =>
-        getAllStories({
-          page: pageParam,
-          perPage: initialVisibleStories,
-          sort,
-          category,
-        }),
-      initialPageParam: 1,
-      enabled: hasBreakpoint,
-      getNextPageParam: (lastPage) => {
-        return lastPage.page < lastPage.totalPages
-          ? lastPage.page + 1
-          : undefined;
-      },
-    });
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    isError,
+    error,
+  } = useInfiniteQuery({
+    queryKey: ["stories", pageType, sort, breakpoint, category, mode, ownerId],
+    queryFn: async ({ pageParam = 1 }) => {
+      switch (mode) {
+        case "myOwnStories":
+          return getMyStories({
+            page: pageParam,
+            perPage: initialVisibleStories,
+          });
+        case "mySavedStories":
+          return getSavedStories({
+            page: pageParam,
+            perPage: initialVisibleStories,
+          });
+        case "travellerStories": {
+          if (!ownerId) throw new Error("Owner ID is required");
+          const data = await getUserById(ownerId, {
+            page: pageParam,
+            perPage: initialVisibleStories,
+          });
+          return {
+            stories: data.stories,
+            page: data.page,
+            totalPages: data.totalPages,
+            totalStories: data.totalItems,
+          } as StoriesResponse;
+        }
+        default:
+          return getAllStories({
+            page: pageParam,
+            perPage: initialVisibleStories,
+            sort,
+            category,
+          });
+      }
+    },
+    initialPageParam: 1,
+    enabled: hasBreakpoint,
+    getNextPageParam: (lastPage) => {
+      return lastPage.page < lastPage.totalPages
+        ? lastPage.page + 1
+        : undefined;
+    },
+    throwOnError: true,
+  });
 
-  const allStories =
-    Array.from(
-      new Map(
-        data?.pages
-          .flatMap((page) => page.stories)
-          .map((story) => [story._id, story]),
-      ).values(),
-    ) ?? [];
+  const allStories = useMemo(
+    () =>
+      Array.from(
+        new Map(
+          (data?.pages.flatMap((page) => page.stories) ?? []).map((story) => [
+            story._id,
+            story,
+          ]),
+        ).values(),
+      ),
+    [data],
+  );
 
   const [visibleStories, setVisibleStories] = useState(initialVisibleStories);
 
@@ -89,19 +145,22 @@ export default function TravellersStories({
     buttonType === "loadMore" &&
     (hasNextPage || visibleStories < allStories.length);
 
-  if (!hasBreakpoint || isLoading) {
+  if (!hasBreakpoint) {
     return (
       <div className={css.loaderWrapper}>
         <LoaderEl />
       </div>
     );
   }
+
   return (
     <>
       {isLoading ? (
         <div className={css.loaderWrapper}>
           <LoaderEl />
         </div>
+      ) : isError ? (
+        <EmptyState title={error.message} />
       ) : (
         <>
           <ul className={css.travellerStoriesList}>
