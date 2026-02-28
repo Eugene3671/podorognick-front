@@ -1,12 +1,10 @@
+"use client";
+
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import styles from "./StoryForm.module.css";
-
-type Category = {
-  _id: string;
-  name: string;
-};
+import { useCategories } from "@/src/hooks/useCategories";
 
 export type StoryFormValues = {
   img: File | null;
@@ -20,15 +18,11 @@ type StoryFormProps = {
   initialValues: StoryFormValues;
   onSubmit: (values: StoryFormValues) => void;
   buttonText: string;
-  categories: Category[];
 };
 
-const StoryForm = ({
-  initialValues,
-  onSubmit,
-  buttonText,
-  categories,
-}: StoryFormProps) => {
+const StoryForm = ({ initialValues, onSubmit, buttonText }: StoryFormProps) => {
+  const { data: categories = [], isLoading } = useCategories();
+
   const [preview, setPreview] = useState<string | null>(
     initialValues.img ? URL.createObjectURL(initialValues.img) : null,
   );
@@ -89,12 +83,14 @@ const StoryForm = ({
 
             <label className={styles.label}>
               <span>Заголовок</span>
+
               <Field
                 type="text"
                 name="title"
                 placeholder="Введіть заголовок історії"
                 className={styles.input}
               />
+
               <ErrorMessage
                 name="title"
                 component="p"
@@ -111,7 +107,9 @@ const StoryForm = ({
                 value={values.category}
                 onChange={(e) => setFieldValue("category", e.target.value)}
               >
-                <option value="">Оберіть категорію</option>
+                <option value="">
+                  {isLoading ? "Завантаження..." : "Оберіть категорію"}
+                </option>
 
                 {categories.map((cat) => (
                   <option key={cat._id} value={cat._id}>
@@ -129,21 +127,26 @@ const StoryForm = ({
 
             <label className={styles.label}>
               <span>Текст історії</span>
+
               <Field
                 as="textarea"
                 name="article"
                 placeholder="Ваша історія тут"
                 className={styles.textarea}
               />
+
               <ErrorMessage
                 name="article"
                 component="p"
                 className={styles.error}
               />
             </label>
+
             <label className={styles.label}>
               <span>Дата</span>
+
               <Field type="date" name="date" className={styles.input} />
+
               <ErrorMessage
                 name="date"
                 component="p"
@@ -155,6 +158,7 @@ const StoryForm = ({
               <button type="submit" className={styles.saveBtn}>
                 {buttonText}
               </button>
+
               <button type="button" className={styles.cancelBtn}>
                 Відмінити
               </button>
