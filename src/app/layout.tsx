@@ -24,6 +24,15 @@ export const metadata: Metadata = {
     description:
       "Наша платформа створена, щоб об`єднати людей, закоханих у відкриття нового. Тут ви можете ділитися власним досвідом, знаходити друзів та надихатися на наступні пригоди разом з нами.",
     url: `https://podorognick-front.vercel.app/`,
+    siteName: "Подорожники",
+    images: [
+      {
+        url: "https://podorognick-front.vercel.app/cover.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Подорожники",
+      },
+    ],
   },
 };
 
