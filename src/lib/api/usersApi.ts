@@ -38,7 +38,7 @@ export const getMe = async (): Promise<User> => {
 
 // Отримати список усіх користувачів
 export const getUsers = async (
-  params: GetUsersParams,
+  params?: GetUsersParams,
 ): Promise<UserPaginationResponse> => {
   const res = await nextServer.get<UserPaginationResponse>("/users", {
     params,
