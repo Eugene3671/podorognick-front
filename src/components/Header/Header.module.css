@@ -71,13 +71,34 @@
     line-height: 1.4;
     color: #1d1d1d;
 }
+
 .nav li {
-    margin-right: 32px;
+    margin-right: 24px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+.nav li:hover,
+.nav li:focus {
+    border: 1px solid #000;
+}
+.nav li:active
+ {
+    border: 1px solid #000;
+    background: #d8d8d8;
 }
 .homeHeader .navItem {
     color: #fff;
 }
+.homeHeader .nav li:hover,
+.homeHeader .nav li:focus {
+    border: 1px solid #fff;
+}
 
+.homeHeader .nav li:active {
+    border: 1px solid #fff;
+    background: rgba(255, 255, 255, 0.1)
+}
 .action {
     display: none;
 }
@@ -106,6 +127,12 @@
         background-color: #FFFFFF;
         border: 1px solid #FFFFFF;
         color: #000000;
+    }
+    .homeHeader .action a:hover,
+    .homeHeader .action a:focus {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
     }
 }
 

@@ -34,7 +34,7 @@ export default function AuthNavigation({
   return isAuthenticated ? (
     <>
       <li className={css.navigationItem}>
-        <div className={css.avatarWrapper}>
+        <Link href="/edit" prefetch={false} className={css.avatarWrapper}>
           <Image
             src={
               user?.avatarUrl ||
@@ -45,7 +45,7 @@ export default function AuthNavigation({
             height={32}
             className={css.avatar}
           />
-        </div>
+        </Link>
       </li>
 
       <li className={css.navigationItem}>
@@ -74,30 +74,37 @@ export default function AuthNavigation({
       </button>
     </>
   ) : (
-    <div className={clsx(css[variant], css.authWrapper)}>
-      <li
-        className={clsx(
-          css.navigationItem,
-          css.login,
-          isHome && css.homeLoginBtn,
-        )}
-      >
-        <Link href="/auth/login" prefetch={false}>
+    <ul className={clsx(css[variant], css.authWrapper)}>
+      <li>
+        <Link
+          href="/auth/login"
+          prefetch={false}
+          className={clsx(
+            css.navigationItem,
+            css.login,
+            "buttonGrey",
+            "buttonBlue",
+            isHome && css.homeLoginBtn,
+          )}
+        >
           Вхід
         </Link>
       </li>
 
-      <li
-        className={clsx(
-          css.navigationItem,
-          css.register,
-          isHome && css.homeRegisterBtn,
-        )}
-      >
-        <Link href="/auth/register" prefetch={false}>
+      <li>
+        <Link
+          href="/auth/register"
+          prefetch={false}
+          className={clsx(
+            css.navigationItem,
+            css.register,
+            "buttonBlue",
+            isHome && css.homeRegisterBtn,
+          )}
+        >
           Реєстрація
         </Link>
       </li>
-    </div>
+    </ul>
   );
 }
