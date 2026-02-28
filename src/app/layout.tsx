@@ -16,6 +16,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://podorognick-front.vercel.app"),
+
   title: "Подорожники",
   description:
     "Наша платформа створена, щоб об`єднати людей, закоханих у відкриття нового. Тут ви можете ділитися власним досвідом, знаходити друзів та надихатися на наступні пригоди разом з нами.",
@@ -23,16 +25,17 @@ export const metadata: Metadata = {
     title: "Подорожники",
     description:
       "Наша платформа створена, щоб об`єднати людей, закоханих у відкриття нового. Тут ви можете ділитися власним досвідом, знаходити друзів та надихатися на наступні пригоди разом з нами.",
-    url: `https://podorognick-front.vercel.app/`,
+    url: `/`,
     siteName: "Подорожники",
     images: [
       {
-        url: "https://podorognick-front.vercel.app/cover.jpg",
+        url: "/Cover.jpg",
         width: 1200,
         height: 630,
         alt: "Подорожники",
       },
     ],
+    type: "website",
   },
 };
 
