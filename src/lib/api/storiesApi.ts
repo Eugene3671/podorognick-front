@@ -29,6 +29,11 @@ export async function getAllStories(
   return response.data;
 }
 
+export async function getStoryById(storyId: string): Promise<Story> {
+  const response = await nextServer.get<Story>(`/stories/${storyId}`);
+  return response.data;
+}
+
 export async function addToSavedStories(storyId: string) {
   const response = await nextServer.post(`/stories/${storyId}/save`);
   return response.data;
