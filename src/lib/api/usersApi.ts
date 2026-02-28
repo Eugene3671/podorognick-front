@@ -38,7 +38,7 @@ export const getMe = async (): Promise<User> => {
 
 // Отримати список усіх користувачів
 export const getUsers = async (
-  params: GetUsersParams,
+  params?: GetUsersParams,
 ): Promise<UserPaginationResponse> => {
   const res = await nextServer.get<UserPaginationResponse>("/users", {
     params,
@@ -49,7 +49,7 @@ export const getUsers = async (
 // Отримати одного користувача за ID
 export const getUserById = async (
   id: string,
-  params: GetTravellerStoriesParams,
+  params?: GetTravellerStoriesParams,
 ): Promise<GetTravellerStoriesResponse> => {
   const res = await nextServer.get<GetTravellerStoriesResponse>(
     `/users/${id}`,
