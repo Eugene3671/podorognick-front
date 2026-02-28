@@ -36,7 +36,7 @@ export const getMe = async (): Promise<User> => {
 };
 
 export const getUsers = async (
-  params: GetUsersParams,
+  params?: GetUsersParams,
 ): Promise<UserPaginationResponse> => {
   const res = await nextServer.get<UserPaginationResponse>("/users", {
     params,
@@ -46,7 +46,7 @@ export const getUsers = async (
 
 export const getUserById = async (
   id: string,
-  params: GetTravellerStoriesParams,
+  params?: GetTravellerStoriesParams,
 ): Promise<GetTravellerStoriesResponse> => {
   const res = await nextServer.get<GetTravellerStoriesResponse>(
     `/users/${id}`,

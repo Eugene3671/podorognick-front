@@ -1,0 +1,20 @@
+.title {
+  font-family: var(----second-family-family);
+  font-size: 28px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  margin-bottom: 40px;
+  color: var(--color-scheme-2-text);
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 44px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .title {
+    font-size: 52px;
+  }
+}
