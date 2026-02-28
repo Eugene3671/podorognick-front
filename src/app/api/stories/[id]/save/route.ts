@@ -1,11 +1,6 @@
-<<<<<<< HEAD:src/app/api/stories/saved/[id]/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { api } from "@/src/app/api/api";
-=======
->>>>>>> main:src/app/api/stories/[id]/save/route.ts
 import { cookies } from "next/headers";
-import { api } from "../../../api";
-import { NextResponse } from "next/server";
 import { isAxiosError } from "axios";
 import { logErrorResponse } from "@/src/app/api/_utils/utils";
 
