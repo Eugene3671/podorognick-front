@@ -32,13 +32,15 @@ export default function TravellersStoriesItem({
     onMutate: () => {
       setIsSaved(true);
       setFavoriteCount((favCount) => favCount + 1);
-      toast.success("Історію було збережено!");
     },
 
     onError: (error) => {
       setIsSaved(false);
       setFavoriteCount((favCount) => favCount - 1);
       toast.error(`Сталася помилка: ${error.message}`);
+    },
+    onSuccess: () => {
+      toast.success("Історію було збережено!");
     },
   });
 
@@ -47,12 +49,14 @@ export default function TravellersStoriesItem({
     onMutate: () => {
       setIsSaved(false);
       setFavoriteCount((favCount) => favCount - 1);
-      toast.success("Історію було видалено зі збережених.");
     },
     onError: (error) => {
       setIsSaved(true);
       setFavoriteCount((favCount) => favCount + 1);
       toast.error(`Сталася помилка: ${error.message}`);
+    },
+    onSuccess: () => {
+      toast.success("Історію було видалено зі збережених.");
     },
   });
 
