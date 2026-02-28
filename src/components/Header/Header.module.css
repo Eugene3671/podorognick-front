@@ -58,7 +58,7 @@
 @media (min-width: 1440px) {
     .navList {
         display: flex;
-        gap: 32px;
+        /* gap: 32px; */
         font-size: 18px;
         line-height: 1.5;
         margin-right: 32px;
@@ -71,7 +71,9 @@
     line-height: 1.4;
     color: #1d1d1d;
 }
-
+.nav li {
+    margin-right: 32px;
+}
 .homeHeader .navItem {
     color: #fff;
 }
@@ -127,7 +129,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        /* margin-left: 32px; */
     }
 }
 
@@ -161,4 +162,15 @@
     background-color: #FFFFFF10;
     border: 1px solid transparent;
     color: #FFFFFF;
+}
+
+.noAuthNavItem { display: none;}
+.authNavItem {
+    display: inline;
+}
+.nav li:last-child {
+    margin: 0;
+}
+.noAuthNavList {
+    margin-right: 0;
 }

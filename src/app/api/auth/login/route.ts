@@ -22,8 +22,11 @@ export async function POST(req: NextRequest) {
         const parsed = parse(cookieStr);
         const options = {
           expires: parsed.Expires ? new Date(parsed.Expires) : undefined,
-          path: parsed.Path,
           maxAge: Number(parsed["Max-Age"]),
+          path: "/",
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "lax" as const,
         };
 
         if (parsed.accessToken)

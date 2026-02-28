@@ -1,12 +1,19 @@
 import { User } from "@/src/types/user";
-import { nextServer } from './api'
+import { nextServer } from "./api";
 
-interface UserPaginationResponse {
+export interface UserPaginationResponse {
   page: number;
   perPage: number;
   totalItems: number;
   totalPages: number;
   users: User[];
+}
+interface GetUsersParams {
+  page: number;
+  perPage: number;
+  search?: string;
+  sortBy?: string;
+  sortOrder?: string;
 }
 
 // Отримати профіль поточного користувача
@@ -16,8 +23,12 @@ export const getMe = async (): Promise<User> => {
 };
 
 // Отримати список усіх користувачів
-export const getUsers = async (): Promise<UserPaginationResponse> => {
-  const res = await nextServer.get<UserPaginationResponse>("/users");
+export const getUsers = async (
+  params: GetUsersParams,
+): Promise<UserPaginationResponse> => {
+  const res = await nextServer.get<UserPaginationResponse>("/users", {
+    params,
+  });
   return res.data;
 };
 
@@ -33,17 +44,15 @@ export const createUser = async (data: Partial<User>): Promise<User> => {
   return res.data;
 };
 
+export const updateUserAvatar = async (formData: FormData) => {
+  const res = await nextServer.patch(`/users/me/avatar`, formData);
+  return res.data;
+};
 // Оновити існуючого користувача
 export const updateUser = async (
   id: string,
   data: Partial<User>,
 ): Promise<User> => {
   const res = await nextServer.put(`/users/${id}`, data);
-  return res.data;
-};
-
-// Видалити користувача
-export const deleteUser = async (id: string): Promise<void> => {
-  const res = await nextServer.delete(`/users/${id}`);
   return res.data;
 };

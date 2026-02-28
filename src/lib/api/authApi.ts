@@ -17,6 +17,13 @@ interface LoginAndRegisterResponse {
   user: User;
 }
 
+export interface AuthResponse {
+  status: number;
+  message: string;
+  data: LoginAndRegisterResponse;
+}
+
+
 interface CheckSessionRequest {
   success: boolean;
 };
@@ -25,20 +32,20 @@ interface CheckSessionRequest {
 export async function register(
   data: RegisterRequest,
 ): Promise<LoginAndRegisterResponse> {
-  const res = await nextServer.post<LoginAndRegisterResponse>(
+  const res = await nextServer.post<AuthResponse>(
     "/auth/register",
     data,
   );
-  return res.data;
+  return res.data.data;
 }
 export async function login(
   data: LoginRequest,
 ): Promise<LoginAndRegisterResponse> {
-  const res = await nextServer.post<LoginAndRegisterResponse>(
+  const res = await nextServer.post<AuthResponse>(
     "/auth/login",
     data,
   );
-  return res.data;
+  return res.data.data;
 }
 
 export async function logout(): Promise<void> {
