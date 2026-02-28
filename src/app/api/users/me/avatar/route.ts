@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { api } from "../../../api";
+import { api } from "@/src/app/api/api";
 
 export async function PATCH(req: NextRequest) {
   try {

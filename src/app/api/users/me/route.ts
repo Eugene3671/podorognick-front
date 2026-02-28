@@ -1,9 +1,7 @@
-// app/api/users/me/route.ts
-
 import { NextResponse } from "next/server";
-import { api } from "../../api";
+import { api } from "@/src/app/api/api";
 import { cookies } from "next/headers";
-import { logErrorResponse } from "../../_utils/utils";
+import { logErrorResponse } from "@/src/app/api/_utils/utils";
 import { isAxiosError } from "axios";
 
 export async function PATCH(req: Request) {
