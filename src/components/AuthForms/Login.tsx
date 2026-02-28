@@ -28,18 +28,26 @@ export default function Login() {
     setIsSubmitting(true);
     try {
       const response = await login(values);
-      router.push("/");
+       
       setUser(response.user);
+      router.push("/");
+      toast.success(`Привіт, ${response.user.name}!`);
+
       console.log("Користувач залогінився:", response);
-    } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        toast.error(error.response?.data?.error || "Помилка входу");
-      } else {
-        toast.error("Невідома помилка");
+    }  catch (error: any) {
+      console.error("Login error:", error);
+
+      let message = "Помилка входу, спробуйте ще раз";
+
+      if (error?.response?.status === 401) {
+        message = "Неправильний пароль або користувача не існує";
       }
+       toast.error(message);
+
     } finally {
       setIsSubmitting(false);
     }
+
   };
 
   return (

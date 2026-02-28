@@ -4,6 +4,7 @@ import "./globals.css";
 import TanStackProvider from "../components/TanStackProvider/TanStackProvider";
 import { cookies } from "next/headers";
 import AuthProvider from "../components/providers/AuthProvider";
+import { getCurrentUser } from "../lib/api/serverSide/authServerApi";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -28,28 +29,13 @@ export const metadata: Metadata = {
   },
 };
 
-async function getCurrentUser() {
-  try {
-    const cookieStore = await cookies();
-    const accessToken = cookieStore.get("accessToken")?.value;
-    if (!accessToken) return null;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/me`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-      next: { revalidate: 0 },
-    });
-    if (!res.ok) return null;
-    return res.json();
-  } catch {
-    return null;
-  }
-}
-
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const user = await getCurrentUser();
+  console.log("SERVER USER:", user);
   return (
     <html lang="uk" className={`${nunitoSans.variable} ${inter.variable}`}>
       <head>
