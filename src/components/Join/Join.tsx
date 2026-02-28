@@ -1,6 +1,5 @@
 "use client";
 import css from "./Join.module.css";
-import Link from "next/link";
 import Button from "@/src/components/Button/Button";
 import { useAuthStore } from "@/src/lib/store/authStore";
 const Join = () => {

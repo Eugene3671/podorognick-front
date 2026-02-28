@@ -5,7 +5,8 @@ import { getUsers } from "@/src/lib/api/usersApi";
 import { User } from "@/src/types/user";
 import TravelerCard from "./TravelerCard";
 import styles from "./OurTravelers.module.css";
-import Link from "next/link";
+import LoaderEl from "@/src/components/LoaderEl/LoaderEl";
+import Button from "@/src/components/Button/Button";
 
 const OurTravelers = () => {
   const [travelers, setTravelers] = useState<User[]>([]);
@@ -14,10 +15,15 @@ const OurTravelers = () => {
   useEffect(() => {
     const fetchFirstTravelers = async () => {
       try {
-        const response = await getUsers({ page: 1, perPage: 4 });
+       const response = await getUsers({ 
+  page: 1, 
+  perPage: 4, 
+  sortBy: "articlesAmount", 
+  sortOrder: "desc" 
+});
         const usersArray = response.users || [];
 
-        setTravelers(usersArray.slice(0, 4));
+        setTravelers(usersArray);
       } catch (error) {
         console.error("Помилка завантаження мандрівників:", error);
       } finally {
@@ -32,11 +38,13 @@ const OurTravelers = () => {
       <h2 className={styles.title}>Наші Мандрівники</h2>
 
       {isLoading ? (
-        <p>Завантаження...</p>
-      ) : (
+  <div className={styles.loaderWrapper}>
+    <LoaderEl />
+  </div>
+) : (
         <ul className={styles.list}>
           {travelers.map((user) => (
-            <li key={user._id} className={styles.item}>
+            <li key={user._id}>
               <TravelerCard
                 id={user._id}
                 name={user.name || "Мандрівник"}
@@ -49,10 +57,10 @@ const OurTravelers = () => {
       )}
 
       <div className={styles.buttonContainer}>
-        <Link href="/travellers" className={styles.viewAllButton}>
-          Переглянути всіх
-        </Link>
-      </div>
+  <Button href="/travellers" className={styles.viewAllButton}>
+    Переглянути всіх
+  </Button>
+</div>
     </section>
   );
 };

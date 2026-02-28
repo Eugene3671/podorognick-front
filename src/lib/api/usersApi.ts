@@ -1,7 +1,8 @@
 import { User } from "@/src/types/user";
 import { nextServer } from "./api";
+import { Story } from "@/src/types/story";
 
-interface UserPaginationResponse {
+export interface UserPaginationResponse {
   page: number;
   perPage: number;
   totalItems: number;
@@ -16,6 +17,19 @@ interface GetUsersParams {
   sortOrder?: string;
 }
 
+interface GetTravellerStoriesParams {
+  page: number;
+  perPage: number;
+}
+interface GetTravellerStoriesResponse {
+  page: number;
+  perPage: number;
+  totalItems: number;
+  totalPages: number;
+  user: User;
+  stories: Story[];
+}
+
 // Отримати профіль поточного користувача
 export const getMe = async (): Promise<User> => {
   const res = await nextServer.get("/users/profile");
@@ -24,7 +38,7 @@ export const getMe = async (): Promise<User> => {
 
 // Отримати список усіх користувачів
 export const getUsers = async (
-  params: GetUsersParams,
+  params?: GetUsersParams,
 ): Promise<UserPaginationResponse> => {
   const res = await nextServer.get<UserPaginationResponse>("/users", {
     params,
@@ -33,8 +47,16 @@ export const getUsers = async (
 };
 
 // Отримати одного користувача за ID
-export const getUserById = async (id: string): Promise<User> => {
-  const res = await nextServer.get<User>(`/users/${id}`);
+export const getUserById = async (
+  id: string,
+  params: GetTravellerStoriesParams,
+): Promise<GetTravellerStoriesResponse> => {
+  const res = await nextServer.get<GetTravellerStoriesResponse>(
+    `/users/${id}`,
+    {
+      params,
+    },
+  );
   return res.data;
 };
 
