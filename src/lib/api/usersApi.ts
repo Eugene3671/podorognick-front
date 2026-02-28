@@ -30,13 +30,11 @@ interface GetTravellerStoriesResponse {
   stories: Story[];
 }
 
-// Отримати профіль поточного користувача
 export const getMe = async (): Promise<User> => {
   const res = await nextServer.get("/users/profile");
   return res.data;
 };
 
-// Отримати список усіх користувачів
 export const getUsers = async (
   params?: GetUsersParams,
 ): Promise<UserPaginationResponse> => {
@@ -46,7 +44,6 @@ export const getUsers = async (
   return res.data;
 };
 
-// Отримати одного користувача за ID
 export const getUserById = async (
   id: string,
   params?: GetTravellerStoriesParams,
@@ -60,7 +57,6 @@ export const getUserById = async (
   return res.data;
 };
 
-// Створити нового користувача
 export const createUser = async (data: Partial<User>): Promise<User> => {
   const res = await nextServer.post("/users", data);
   return res.data;
@@ -70,7 +66,7 @@ export const updateUserAvatar = async (formData: FormData) => {
   const res = await nextServer.patch(`/users/me/avatar`, formData);
   return res.data;
 };
-// Оновити існуючого користувача
+
 export const updateUser = async (
   id: string,
   data: Partial<User>,

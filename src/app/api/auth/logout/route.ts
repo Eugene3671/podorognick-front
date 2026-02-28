@@ -1,10 +1,8 @@
-// app/api/auth/logout/route.ts
-
 import { NextResponse } from "next/server";
-import { api } from "../../api";
+import { api } from "@/src/app/api/api";
 import { cookies } from "next/headers";
 import { isAxiosError } from "axios";
-import { logErrorResponse } from "../../_utils/utils";
+import { logErrorResponse } from "@/src/app/api/_utils/utils";
 
 export async function POST() {
   try {

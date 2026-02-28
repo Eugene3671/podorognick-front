@@ -1,11 +1,9 @@
-// app/api/auth/register/route.ts
-
 import { NextRequest, NextResponse } from "next/server";
-import { api } from "../../api";
+import { api } from "@/src/app/api/api";
 import { cookies } from "next/headers";
 import { parse } from "cookie";
 import { isAxiosError } from "axios";
-import { logErrorResponse } from "../../_utils/utils";
+import { logErrorResponse } from "@/src/app/api/_utils/utils";
 
 export async function POST(req: NextRequest) {
   try {
