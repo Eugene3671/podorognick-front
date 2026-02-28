@@ -46,11 +46,8 @@ export async function getSavedStories(
   });
   return response.data;
 }
-export async function getStoryById(
-  storyId: string,
-  formData: FormData,
-): Promise<Story> {
-  const res = await nextServer.get(`/stories/${storyId}`, formData);
+export async function getStoryById(storyId: string): Promise<Story> {
+  const res = await nextServer.get(`/stories/${storyId}`);
   return res.data;
 }
 
