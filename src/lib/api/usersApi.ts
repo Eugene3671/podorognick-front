@@ -49,7 +49,7 @@ export const getUsers = async (
 // Отримати одного користувача за ID
 export const getUserById = async (
   id: string,
-  params: GetTravellerStoriesParams,
+  params?: GetTravellerStoriesParams,
 ): Promise<GetTravellerStoriesResponse> => {
   const res = await nextServer.get<GetTravellerStoriesResponse>(
     `/users/${id}`,
