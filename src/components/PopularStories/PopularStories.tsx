@@ -25,7 +25,11 @@ export default async function PopularStories() {
       <div className={`container ${css.containerPopular}`}>
         <h2 className={css.sectionTitle}>Популярні історії</h2>
         <HydrationBoundary state={dehydrate(queryClient)}>
-          <TravellersStories perPage={3} sort={"popular"} buttonType="link" />
+          <TravellersStories
+            pageType="popular"
+            sort={"popular"}
+            buttonType="link"
+          />
         </HydrationBoundary>
       </div>
     </section>

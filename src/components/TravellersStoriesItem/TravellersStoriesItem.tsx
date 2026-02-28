@@ -32,13 +32,15 @@ export default function TravellersStoriesItem({
     onMutate: () => {
       setIsSaved(true);
       setFavoriteCount((favCount) => favCount + 1);
-      toast.success("Історію було збережено!");
     },
 
-    onError: () => {
+    onError: (error) => {
       setIsSaved(false);
       setFavoriteCount((favCount) => favCount - 1);
-      toast.error("Сталася помилка, спробуйте ще.");
+      toast.error(`Сталася помилка: ${error.message}`);
+    },
+    onSuccess: () => {
+      toast.success("Історію було збережено!");
     },
   });
 
@@ -47,12 +49,14 @@ export default function TravellersStoriesItem({
     onMutate: () => {
       setIsSaved(false);
       setFavoriteCount((favCount) => favCount - 1);
-      toast.success("Історію було видалено зі збережених.");
     },
-    onError: () => {
+    onError: (error) => {
       setIsSaved(true);
       setFavoriteCount((favCount) => favCount + 1);
-      toast.error("Сталася помилка, спробуйте ще.");
+      toast.error(`Сталася помилка: ${error.message}`);
+    },
+    onSuccess: () => {
+      toast.success("Історію було видалено зі збережених.");
     },
   });
 
@@ -86,20 +90,24 @@ export default function TravellersStoriesItem({
 
       <div className={css.storyWrapper}>
         <div className={css.storyContents}>
-          <p className={css.regionTag}>{story.category.name}</p>
+          <p className={css.regionTag}>
+            {story.category?.name ?? "Без категорії"}
+          </p>
           <h4 className={css.storyTitle}>{story.title}</h4>
           <p className={css.storyText}>{story.article}</p>
         </div>
         <div className={css.storyAuthor}>
           <Image
-            src={story.ownerId.avatarUrl}
+            src={story.ownerId?.avatarUrl ?? "/default-avatar.png"}
             alt="avatar"
             width={48}
             height={48}
             className={css.authorAvatar}
           />
           <div className={css.authorInfo}>
-            <p className={css.authorName}>{story.ownerId.name}</p>
+            <p className={css.authorName}>
+              {story.ownerId?.name ?? "Невідомий автор"}
+            </p>
             <div className={css.storyInfo}>
               <p className={css.storyDate}>{story.date}</p>
               <span className={css.separator}>•</span>
@@ -113,11 +121,14 @@ export default function TravellersStoriesItem({
           </div>
         </div>
         <div className={css.buttonsWrapper}>
-          <Link href={`/stories/${story._id}`} className={css.storyDetailsLink}>
+          <Link
+            href={`/stories/${story._id}`}
+            className={`buttonGrey ${css.storyDetailsLink}`}
+          >
             Переглянути статтю
           </Link>
           <button
-            className={isSaved ? css.saveButtonActive : css.saveButton}
+            className={`buttonGrey ${isSaved ? css.saveButtonActive : css.saveButton}`}
             onClick={isSaved ? handleUnsave : handleSave}
           >
             {saveMutation.isPending || unsaveMutation.isPending ? (

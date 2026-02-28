@@ -1,7 +1,17 @@
-import React from "react"
+import TravellersStories from "@/src/components/TravellersStories/TravellersStories";
 
 const ProfileOwnTabPage = () => {
-  return <div>Profile own tab page placeholder</div>
-}
+  return (
+    <div>
+      <TravellersStories
+        key="own"
+        sort="new"
+        pageType="stories"
+        buttonType="loadMore"
+        mode="myOwnStories"
+      />
+    </div>
+  );
+};
 
-export default ProfileOwnTabPage
+export default ProfileOwnTabPage;

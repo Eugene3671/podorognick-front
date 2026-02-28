@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Nunito_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import TanStackProvider from "../components/TanStackProvider/TanStackProvider";
+import { cookies } from "next/headers";
+import AuthProvider from "../components/providers/AuthProvider";
+import { getCurrentUser } from "../lib/api/serverSide/authServerApi";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -26,20 +29,24 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await getCurrentUser();
+  console.log("SERVER USER:", user);
   return (
     <html lang="uk" className={`${nunitoSans.variable} ${inter.variable}`}>
       <head>
         <link rel="icon" href="/Favicon.svg" />
       </head>
       <body>
-        <TanStackProvider>
-          <main>{children}</main>
-        </TanStackProvider>
+        <AuthProvider user={user}>
+          <TanStackProvider>
+            <main>{children}</main>
+          </TanStackProvider>
+        </AuthProvider>
       </body>
     </html>
   );

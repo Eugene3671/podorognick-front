@@ -2,27 +2,33 @@
   padding-top: 40px;
   padding-bottom: 80px;
   min-height: 80vh;
+  font-family: var(--font-nunito-sans), sans-serif;
 }
 
 .title {
   font-family: "Inter", sans-serif;
   font-size: 32px;
   font-weight: 700;
-  line-height: 1.2;
-  color: #1a1a1a;
-  margin-bottom: 48px;
+  line-height: 110%;
+  letter-spacing: -0.01em;
+  color: #000;
+  margin-bottom: 24px;
   text-align: center;
 }
 
 .grid {
   display: grid;
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+  justify-content: stretch;
   gap: 24px;
-  grid-template-columns: 1fr;
+  margin: 0 auto;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
   .title {
-    font-size: 44px;
+    font-size: 48px;
   }
 
   .grid {
@@ -30,22 +36,69 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   .title {
-    font-size: 52px;
+    font-size: 56px;
   }
 
   .grid {
     grid-template-columns: repeat(4, 1fr);
-    gap: 32px 24px;
   }
 }
 
-.loader {
+.buttonContainer .loadMoreButton {
+  height: 48px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .buttonContainer .loadMoreButton {
+    width: 123px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .buttonContainer .loadMoreButton {
+    width: 135px;
+    font-size: 18px;
+  }
+}
+
+.buttonContainer .loadMoreButton:hover,
+.buttonContainer .loadMoreButton:focus {
+  color: #000;
+  background-color: #e8eeff;
+  border: 1px solid #4169e1;
+  transform: translateY(-2px);
+}
+
+.buttonContainer .loadMoreButton:disabled {
+  cursor: not-allowed;
+  background-color: rgba(0, 0, 0, 0.05);
+  opacity: 0.3;
+}
+
+.desktopOnlyCard {
+  display: none;
+}
+
+@media (min-width: 1440px) {
+  .desktopOnlyCard {
+    display: block;
+  }
+}
+
+.buttonContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
-  color: #4169e1;
-  height: 200px;
+  margin-top: 24px;
+}
+
+.loaderWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }

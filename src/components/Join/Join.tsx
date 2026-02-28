@@ -1,6 +1,6 @@
 "use client";
 import css from "./Join.module.css";
-import Link from "next/link";
+import Button from "@/src/components/Button/Button";
 import { useAuthStore } from "@/src/lib/store/authStore";
 const Join = () => {
   const authenticated = useAuthStore((state) => state.isAuthenticated);
@@ -15,13 +15,17 @@ const Join = () => {
               надихають на нові пригоди.
             </p>
             {authenticated ? (
-              <Link className={css.join_button} href="/auth/profile">
+              <Button href="/profile" type="button" className={css.join_button}>
                 Збережені
-              </Link>
+              </Button>
             ) : (
-              <Link className={css.join_button} href="/auth/register">
+              <Button
+                href="/auth/register"
+                type="button"
+                className={css.join_button}
+              >
                 Зареєструватися
-              </Link>
+              </Button>
             )}
           </div>
         </div>

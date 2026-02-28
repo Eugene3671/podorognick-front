@@ -1,7 +1,17 @@
-import React from "react"
+import TravellersStories from "@/src/components/TravellersStories/TravellersStories";
 
 const ProfileSavedTabPage = () => {
-  return <div>Profile saved tab page placeholder</div>
-}
+  return (
+    <div>
+      <TravellersStories
+        key="saved"
+        sort="new"
+        pageType="stories"
+        buttonType="loadMore"
+        mode="mySavedStories"
+      />
+    </div>
+  );
+};
 
-export default ProfileSavedTabPage
+export default ProfileSavedTabPage;
