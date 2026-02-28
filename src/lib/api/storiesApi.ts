@@ -1,4 +1,3 @@
-import { Category } from "@/src/types/category";
 import { Story } from "../../types/story";
 import { nextServer } from "./api";
 
@@ -46,6 +45,13 @@ export async function getSavedStories(
     params,
   });
   return response.data;
+}
+export async function getStoryById(
+  storyId: string,
+  formData: FormData,
+): Promise<Story> {
+  const res = await nextServer.get(`/stories/${storyId}`, formData);
+  return res.data;
 }
 
 export async function getMyStories(
