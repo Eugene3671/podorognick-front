@@ -49,17 +49,14 @@ export default function Header() {
                   Мандрівники
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/profile"
-                  className={clsx(
-                    css.navItem,
-                    css.noAuthNavItem,
-                    isAuthenticated && css.authNavItem,
-                  )}
-                >
-                  Мій Профіль
-                </Link>
+              <li
+                className={clsx(
+                  css.navItem,
+                  css.noAuthNavItem,
+                  isAuthenticated && css.authNavItem,
+                )}
+              >
+                <Link href="/profile">Мій Профіль</Link>
               </li>
             </ul>
           </nav>

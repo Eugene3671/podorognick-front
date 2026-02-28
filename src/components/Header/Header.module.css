@@ -58,10 +58,8 @@
 @media (min-width: 1440px) {
     .navList {
         display: flex;
-        /* gap: 32px; */
         font-size: 18px;
         line-height: 1.5;
-        margin-right: 32px;
     }
 }
 
@@ -190,14 +188,13 @@
     border: 1px solid transparent;
     color: #FFFFFF;
 }
-
-.noAuthNavItem { display: none;}
-.authNavItem {
-    display: inline;
-}
-.nav li:last-child {
+.noAuthNavItem {
     margin: 0;
+    display: none;
 }
-.noAuthNavList {
-    margin-right: 0;
+.authNavItem {
+    display: flex;
+    align-items: center;
 }
+
+
