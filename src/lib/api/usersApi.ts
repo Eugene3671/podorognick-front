@@ -1,7 +1,7 @@
 import { User } from "@/src/types/user";
 import { nextServer } from "./api";
 
-interface UserPaginationResponse {
+export interface UserPaginationResponse {
   page: number;
   perPage: number;
   totalItems: number;
