@@ -37,7 +37,7 @@ export default function CreateStoryPage() {
   });
 
   return (
-    <AddStoryForm
+    <StoryForm
       initialValues={initialValues}
       onSubmit={mutation.mutate}
       buttonText="Create Story"
