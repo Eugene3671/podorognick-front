@@ -1,8 +1,10 @@
 import TravellersStories from "@/src/components/TravellersStories/TravellersStories";
+import TitleUpdater from "@/src/components/ui/TitleUpdater/TitleUpdater";
 
 const ProfileSavedTabPage = () => {
   return (
-    <div>
+    <>
+      <TitleUpdater title="Збережені історії" />
       <TravellersStories
         key="saved"
         sort="new"
@@ -10,7 +12,7 @@ const ProfileSavedTabPage = () => {
         buttonType="loadMore"
         mode="mySavedStories"
       />
-    </div>
+    </>
   );
 };
 
