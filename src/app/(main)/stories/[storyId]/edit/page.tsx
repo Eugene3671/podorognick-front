@@ -1,33 +1,54 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import { getStoryById } from "@/src/lib/api/storiesApi";
-import StoryForm from "@/components/StoryForm/StoryForm";
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import StoryForm, { StoryFormValues } from "@/components/StoryForm/StoryForm";
+import { getStoryById, updateStory } from "@/src/lib/api/storiesApi";
+import { Story } from "@/src/types/story";
 
 export default function EditStoryPage() {
   const { storyId } = useParams<{ storyId: string }>();
+  const router = useRouter();
 
-  const [story, setStory] = useState(null);
+  const [story, setStory] = useState<Story | null>(null);
+  const [initialValues, setInitialValues] = useState<StoryFormValues | null>(
+    null,
+  );
 
   useEffect(() => {
     async function fetchStory() {
-      const data = await getStoryById(storyId);
-      setStory(data);
+      const story = await getStoryById(storyId);
+
+      setStory(story);
+
+      setInitialValues({
+        img: null, // файл не можемо заповнити автоматично
+        title: story.title || "",
+        category:
+          typeof story.category === "string"
+            ? story.category
+            : story.category?._id || "",
+        article: story.article || "",
+        date: story.date ? story.date.slice(0, 10) : "",
+      });
     }
 
-    if (storyId) {
-      fetchStory();
-    }
+    if (storyId) fetchStory();
   }, [storyId]);
 
-  if (!story) return <div>Loading...</div>;
+  const handleSubmit = async (values: StoryFormValues) => {
+    await updateStory(storyId, values);
+    router.push("/stories");
+  };
+
+  if (!initialValues || !story) return <div>Loading...</div>;
 
   return (
-    <div>
-      <h1>Редагувати історію</h1>
-
-      <StoryForm initialValues={story} isEditMode storyId={storyId} />
-    </div>
+    <StoryForm
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      buttonText="Оновити історію"
+      currentImage={story.img}
+    />
   );
 }
