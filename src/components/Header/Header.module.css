@@ -1,6 +1,6 @@
 .header {
     width: 100%;
-    z-index: 2;
+    z-index: 100;
     background-color: #f7f9ff;
     padding: 16px 0;
 }
