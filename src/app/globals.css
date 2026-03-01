@@ -148,7 +148,7 @@ button {
 }
 
 .buttonBlue:hover,
-.buttonBlue:focus {
+.buttonBlue:focus-visible {
   background-color: var(--color-accent-lighter);
   color: var(--light-scheme-text);
   border: 1px solid var(--color-accent);
@@ -173,7 +173,7 @@ button {
 }
 
 .buttonGrey:hover,
-.buttonGrey:focus {
+.buttonGrey:focus-visible {
   background-color: var(--color-accent);
   color: var(--light-scheme-background);
   border: 1px solid var(--color-accent);

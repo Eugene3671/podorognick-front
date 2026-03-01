@@ -1,5 +1,144 @@
-.storyDetails{
+.stroryDatailsContainer {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+.storyTitle {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 110%;
+  letter-spacing: -0.01em;
+  color: var(--color-scheme-2-text);
+  margin-bottom: 32px;
+  max-width: 335px;
+}
+.storyInfo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  gap: 16px;
+}
+.storyInfoTitle {
+  font-size: 16px;
+  line-height: 150%;
+  font-weight: 400;
+  color: var(--color-scheme-2-text);
+}
+
+.storyInfoCategory {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--opacity-neutral-darkest-5);
+  border: 1px solid var(--opacity-transparent);
+  border-radius: 6px;
+  padding: 4px 10px;
+  width: 76px;
+  height: 26px;
+  padding: 0 10px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--color-neutral-darkest);
+}
+.storyImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 345px;
+  margin-bottom: 64px;
+}
+.storyImage {
+  object-fit: cover;
+  border-radius: 12px;
+}
+.storyArticleWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.storyArticle {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-scheme-2-text);
+}
+.addToSaveWrapper {
+  display: block;
+  border: 0px solid var(--color-scheme-1-border);
+  background-color: #f2f2f2;
+  border-radius: 24px;
+  padding: 32px 20px;
+  max-width: 335px;
+  padding: 32px 20px;
+}
+.addToSaveTitle {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: -0.01em;
+  color: var(--color-scheme-1-text);
+  margin-bottom: 16px;
+}
+.addToSaveDescr {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-scheme-1-text);
+  margin-bottom: 16px;
+}
+.addToSaveBtn {
+  width: 100%;
+  padding: 12px 6px;
+}
+@media only screen and (min-width: 768px) {
+  .storyTitle {
+    max-width: 704px;
+  }
+
+  .storyInfo {
+    flex-direction: row;
+    gap: unset;
+  }
+  .storyInfoTitle {
+    font-size: 18px;
+  }
+  .storyInfoTitle:first-child {
+    margin-right: 48px;
+  }
+  .storyInfoCategory {
+    margin-left: auto;
+  }
+  .storyImageWrapper {
+    height: 469px;
+  }
+  .addToSaveWrapper {
+    padding: 32px;
+    max-width: 418px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .stroryDatailsContainer {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .storyTitle {
+    font-size: 56px;
+  }
+  .storyInfoCategory {
+    font-size: 16px;
+    height: 32px;
+  }
+  .storyImageWrapper {
+    height: 874px;
+    margin-bottom: 96px;
+  }
+  .storyArticleWrapper {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 16px;
+    flex-direction: row;
+  }
+  .storyArticle {
+    display: inline-block;
+    max-width: 865px;
+  }
 }

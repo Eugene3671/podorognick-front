@@ -2,7 +2,7 @@ import { getServerStoryById } from "@/src/lib/api/serverSide/storiesServerApi";
 import React from "react";
 import { StoryDetails } from "./StoryDetails";
 import PopularStories from "@/src/components/PopularStories/PopularStories";
-
+import css from "./StoryDetails.module.css";
 const StoryPage = async ({
   params,
 }: {
@@ -12,8 +12,10 @@ const StoryPage = async ({
   const story = await getServerStoryById(storyId);
   return (
     <>
-      <h1>{story.title}</h1>
-      <StoryDetails story={story} />
+      <section className={`${css.stroryDatailsContainer} container`}>
+        <h1 className={css.storyTitle}>{story.title}</h1>
+        <StoryDetails story={story} />
+      </section>
       <PopularStories />
     </>
   );
