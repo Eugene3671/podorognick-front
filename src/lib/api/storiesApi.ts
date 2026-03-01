@@ -51,10 +51,6 @@ export async function getSavedStories(
   });
   return response.data;
 }
-export async function getStoryById(storyId: string): Promise<Story> {
-  const res = await nextServer.get(`/stories/${storyId}`);
-  return res.data;
-}
 
 export async function getMyStories(
   params: PaginationParams,

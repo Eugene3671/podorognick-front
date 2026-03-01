@@ -1,18 +1,33 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import { getStoryById } from "@/src/lib/api/storiesApi";
+import StoryForm from "@/components/StoryForm/StoryForm";
 
-interface EditStoryPageProps {
-  params: Promise<{ storyId: string }>;
-}
+export default function EditStoryPage() {
+  const { storyId } = useParams<{ storyId: string }>();
 
-export default async function EditStoryPage({ params }: EditStoryPageProps) {
-  const { storyId } = await params;
-  const story = await getStoryById(storyId);
+  const [story, setStory] = useState(null);
+
+  useEffect(() => {
+    async function fetchStory() {
+      const data = await getStoryById(storyId);
+      setStory(data);
+    }
+
+    if (storyId) {
+      fetchStory();
+    }
+  }, [storyId]);
+
+  if (!story) return <div>Loading...</div>;
+
   return (
     <div>
       <h1>Редагувати історію</h1>
-      <p>ID історії: {storyId}</p>
-      <p>Title: {story.title}</p>
+
+      <StoryForm initialValues={story} isEditMode storyId={storyId} />
     </div>
   );
 }
