@@ -49,17 +49,14 @@ export default function Header() {
                   Мандрівники
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/profile"
-                  className={clsx(
-                    css.navItem,
-                    css.noAuthNavItem,
-                    isAuthenticated && css.authNavItem,
-                  )}
-                >
-                  Мій Профіль
-                </Link>
+              <li
+                className={clsx(
+                  css.navItem,
+                  css.noAuthNavItem,
+                  isAuthenticated && css.authNavItem,
+                )}
+              >
+                <Link href="/profile">Мій Профіль</Link>
               </li>
             </ul>
           </nav>
@@ -67,7 +64,9 @@ export default function Header() {
           <div
             className={clsx(css.action, isAuthenticated && css.authActionBtn)}
           >
-            <Link href="/stories/create">Опублікувати історію</Link>
+            <Link href="/stories/create" className="buttonBlue">
+              Опублікувати історію
+            </Link>
           </div>
 
           <div className={css.auth}>
