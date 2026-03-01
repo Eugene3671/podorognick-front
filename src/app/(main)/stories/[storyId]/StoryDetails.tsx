@@ -11,12 +11,13 @@ import {
   addToSavedStories,
   removeFromSavedStories,
 } from "@/src/lib/api/storiesApi";
+import ModalWrapper from "@/src/components/ui/ModalWrapper/ModalWrapper";
 interface StoryDetailsProps {
   story: Story;
 }
 export const StoryDetails = ({ story }: StoryDetailsProps) => {
   const router = useRouter();
-  const { isAuthenticated, user } = useAuthStore();
+  const { isAuthenticated } = useAuthStore();
   const [favoriteCount, setFavoriteCount] = useState<number>(
     story.favoriteCount,
   );
@@ -46,14 +47,11 @@ export const StoryDetails = ({ story }: StoryDetailsProps) => {
       setIsSaved(false);
       setFavoriteCount((favCount) => favCount - 1);
     },
-    onError: (error) => {
+    onError: () => {
       setIsSaved(true);
       setFavoriteCount((favCount) => favCount + 1);
-      toast.error(`Сталася помилка: ${error.message}`);
     },
-    onSuccess: () => {
-      toast.success("Історію було видалено зі збережених.");
-    },
+    onSuccess: () => {},
   });
 
   const handleSave = () => {
