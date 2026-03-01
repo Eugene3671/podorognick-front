@@ -1,10 +1,11 @@
 "use client";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import { useState } from "react";
 import styles from "./StoryForm.module.css";
 import { useCategories } from "@/src/hooks/useCategories";
+
+import { StorySchemaValidation } from "@/src/validation/storySchemaValid";
 
 export type StoryFormValues = {
   img: File | null;
@@ -18,36 +19,20 @@ type StoryFormProps = {
   initialValues: StoryFormValues;
   onSubmit: (values: StoryFormValues) => void;
   buttonText: string;
+  currentImage?: string;
 };
 
-const StoryForm = ({ initialValues, onSubmit, buttonText }: StoryFormProps) => {
+const StoryForm = ({
+  initialValues,
+  onSubmit,
+  buttonText,
+  currentImage,
+}: StoryFormProps) => {
   const { data: categories = [], isLoading } = useCategories();
 
-  const [preview, setPreview] = useState<string | null>(
-    initialValues.img ? URL.createObjectURL(initialValues.img) : null,
-  );
+  const [preview, setPreview] = useState<string | null>(null);
 
-  const StorySchemaValidation = Yup.object().shape({
-    img: Yup.mixed()
-      .required("Завантажте фото")
-      .test("fileSize", "Максимальний розмір 2MB", (value) => {
-        if (!value) return false;
-        const file = value as File;
-        return file.size <= 2 * 1024 * 1024;
-      }),
-
-    title: Yup.string()
-      .max(80, "Максимум 80 символів")
-      .required("Обов'язкове поле"),
-
-    article: Yup.string()
-      .max(2500, "Максимум 2500 символів")
-      .required("Обов'язкове поле"),
-
-    category: Yup.string().required("Оберіть категорію"),
-
-    date: Yup.string().required("Оберіть дату"),
-  });
+  const previewImage = preview ?? currentImage ?? null;
 
   return (
     <div className={styles.formWrap}>
@@ -55,11 +40,20 @@ const StoryForm = ({ initialValues, onSubmit, buttonText }: StoryFormProps) => {
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={StorySchemaValidation}
+        enableReinitialize
       >
         {({ setFieldValue, values }) => (
           <Form className={styles.form}>
             <label className={styles.label}>
               <span>Обкладинка статті</span>
+
+              {previewImage && (
+                <img
+                  src={previewImage}
+                  alt="preview"
+                  className={styles.preview}
+                />
+              )}
 
               <input
                 type="file"
@@ -73,10 +67,6 @@ const StoryForm = ({ initialValues, onSubmit, buttonText }: StoryFormProps) => {
                 }}
                 className={styles.input}
               />
-
-              {preview && (
-                <img src={preview} alt="preview" className={styles.preview} />
-              )}
 
               <ErrorMessage name="img" component="p" className={styles.error} />
             </label>
@@ -106,6 +96,7 @@ const StoryForm = ({ initialValues, onSubmit, buttonText }: StoryFormProps) => {
                 className={styles.input}
                 value={values.category}
                 onChange={(e) => setFieldValue("category", e.target.value)}
+                disabled={isLoading}
               >
                 <option value="">
                   {isLoading ? "Завантаження..." : "Оберіть категорію"}
