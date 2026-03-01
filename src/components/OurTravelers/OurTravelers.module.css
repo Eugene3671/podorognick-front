@@ -157,7 +157,6 @@
 @media (min-width: 768px) {
   .viewAllButton {
     display: flex;
-    margin: 48px auto 0;
     width: 173px;
     white-space: nowrap;
     min-width: fit-content;
@@ -182,4 +181,8 @@
   align-items: center;
   width: 100%;
   min-height: 300px;
+}
+
+.buttonContainer {
+  margin: 48px auto 0;
 }
