@@ -9,12 +9,12 @@ type Props = {
 
 const ProfileLayout = ({ children, tabs }: Props) => {
   return (
-    <main className="container">
+    <div className="container">
       <TravellerInfo />
       <PageToggle />
       {children}
       <div style={{ minHeight: "600px" }}>{tabs}</div>
-    </main>
+    </div>
   );
 };
 
