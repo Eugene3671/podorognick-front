@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { nextServer } from "../api";
+import { serverApi } from "./serverApi";
 
 export async function getCurrentUser() {
   const cookieStore = await cookies();
@@ -7,7 +7,7 @@ export async function getCurrentUser() {
   if (!token) return null;
 
   try {
-    const res = await nextServer.get("/users/profile", {
+    const res = await serverApi.get("/users/profile", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
