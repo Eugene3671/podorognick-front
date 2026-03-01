@@ -29,6 +29,22 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
@@ -72,6 +88,15 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <Link href="/travellers" onClick={onClose}>
                 Мандрівники
               </Link>
+            </li>
+            <li
+              className={clsx(
+                css.navItem,
+                css.noAuthNavItem,
+                isAuthenticated && css.authNavItem,
+              )}
+            >
+              <Link href="/profile">Мій Профіль</Link>
             </li>
           </ul>
         </nav>

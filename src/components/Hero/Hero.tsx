@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 
 export default function Hero() {
   return (
-    <section className={css.hero}>
+    <section className={css.hero} id="hero">
       <div className="container">
         <picture className={css.picture}>
           <source
@@ -40,7 +40,7 @@ export default function Hero() {
             своїми історіями та отримувати натхнення для нових пригод. Відкрийте
             для себе нові місця та знайдіть однодумців!
           </p>
-          <Button href="/auh/register">Доєднатись</Button>
+          <Button href="/auth/register">Доєднатись</Button>
         </div>
       </div>
     </section>

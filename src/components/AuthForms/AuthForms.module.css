@@ -24,7 +24,7 @@
 
     text-align: center;
     text-decoration: none;
-    color: #000;
+    color:var(--light-scheme-text);
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
@@ -42,10 +42,9 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    /* border: 1px solid rgba(0, 0, 0, 0.15); */
-    width: 100%;
+     width: 100%;
     height: 1.5px;
-    background: rgba(0, 0, 0, 0.15);
+    background: var(--opacity-neutral-darkest-15);
 }
 
 .authTitle {
@@ -55,7 +54,7 @@
     line-height: 120%;
     letter-spacing: -0.01em;
     text-align: center;
-    color: #000;
+    color: var(--light-scheme-text);
     margin-bottom: 24px;
 }
 
@@ -65,7 +64,7 @@
     font-size: 16px;
     line-height: 150%;
     text-align: center;
-    color: #000;
+    color: var(--light-scheme-text);
 }
 
 .authHeader {
@@ -77,22 +76,22 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
-    color: v#000;
+    color: var(--light-scheme-text);
 
 }
 
 .input {
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--opacity-neutral-darkest-15);
     border-radius: 8px;
 
     font-family: var(--font-nunito-sans);
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--opacity-neutral-darkest-60);
     padding: 8px;
     margin-top: 8px;
-    background: rgba(255, 255, 255, 0);
+    background: var(--opacity-transparent);
 }
 
 .input:focus {
@@ -120,17 +119,17 @@
     color: #fff;
 
     width: 100%;
-    border: 1px solid #4169e1;
+    border: 1px solid var(--color-royal-blue);
     border-radius: 8px;
     padding: 6px 12px;
-    background: #4169e1;
+    background: var(--color-royal-blue);
 
 }
 
 .authButton:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    color: #000;
+    background-color: var(--opacity-neutral-darkest-5);
+    border: 1px solid var(--opacity-neutral-darkest-15); 
+    color: var(--light-scheme-text);
 }
 
 @media screen and (min-width: 768px) {
@@ -199,12 +198,12 @@
 }
 
 .inputError {
-    border: 1px solid #e74a3b;
-    background-color: #fff5f5;
+    border: 1px solid var(--color-red);
+    background-color: var(--light-scheme-background);
 }
 
 .error {
-    color: #e74a3b;
+    color: var(--color-red);
     font-size: 14px;
     margin-top: 4px;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
@@ -21,7 +21,13 @@ export default function Header() {
 
   return (
     <>
-      <header className={clsx(css.header, isHome && css.homeHeader)}>
+      <header
+        className={clsx(
+          css.header,
+          isHome && css.homeHeader,
+          isFixed && css.fixed,
+        )}
+      >
         <div className={`container  ${css.headerContainer}`}>
           <Link href="/" className={css.logo}>
             <svg width="156" height="36">
@@ -60,17 +66,14 @@ export default function Header() {
                   Мандрівники
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/profile"
-                  className={clsx(
-                    css.navItem,
-                    css.noAuthNavItem,
-                    isAuthenticated && css.authNavItem,
-                  )}
-                >
-                  Мій Профіль
-                </Link>
+              <li
+                className={clsx(
+                  css.navItem,
+                  css.noAuthNavItem,
+                  isAuthenticated && css.authNavItem,
+                )}
+              >
+                <Link href="/profile">Мій Профіль</Link>
               </li>
             </ul>
           </nav>
@@ -78,11 +81,13 @@ export default function Header() {
           <div
             className={clsx(css.action, isAuthenticated && css.authActionBtn)}
           >
-            <Link href="/stories/create">Опублікувати історію</Link>
+            <Link href="/stories/create" className="buttonBlue">
+              Опублікувати історію
+            </Link>
           </div>
 
           <div className={css.auth}>
-            <AuthNavigation />
+            <AuthNavigation isFixed={isFixed} />
           </div>
 
           <button
@@ -90,7 +95,9 @@ export default function Header() {
             onClick={() => setIsOpen(true)}
             aria-label="Open menu"
           >
-            ☰
+            <svg width="24" height="24">
+              <use href="/sprite.svg#icon-menu" />
+            </svg>
           </button>
         </div>
       </header>

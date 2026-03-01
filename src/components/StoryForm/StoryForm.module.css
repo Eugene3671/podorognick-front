@@ -1,0 +1,122 @@
+.formWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 48px;
+
+  margin-left: 64px;
+  margin-right: 64px;
+  margin-bottom: 72px;
+}
+
+.formLayout {
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  width: 100%;
+  border-radius: 8px;
+
+  & button {
+    border-radius: 8px;
+    border: 2px solid #261a2b;
+    padding: 12px 0px;
+  }
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label span {
+  margin-top: 24px;
+}
+
+.error {
+  color: red;
+  margin: 0;
+  font-size: 14px;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.buttons {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.saveBtn {
+  width: 100%;
+}
+
+.cancelBtn {
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 8px;
+}
+
+.preview {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  padding-bottom: 24px;
+}
+
+.preview {
+  max-width: 250px;
+  height: auto;
+}
+
+/* -----------------------------  FOR TABLET ----------------------------- */
+@media screen and (min-width: 768px) {
+  .preview {
+    max-width: 350px;
+  }
+}
+
+/* -----------------------------  FOR COMPUTER ----------------------------- */
+@media screen and (min-width: 1440px) {
+  .formLayout {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .justForm {
+    display: flex;
+    flex-direction: row;
+    justify-items: start;
+    gap: 24px;
+  }
+
+  .form {
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  .preview {
+    max-width: 500px;
+  }
+
+  .buttons {
+    width: 30%;
+  }
+}

@@ -1,8 +1,10 @@
 import TravellersStories from "@/src/components/TravellersStories/TravellersStories";
+import TitleUpdater from "@/src/components/ui/TitleUpdater/TitleUpdater";
 
 const ProfileOwnTabPage = () => {
   return (
-    <div>
+    <>
+      <TitleUpdater title="Мої публікації" />
       <TravellersStories
         key="own"
         sort="new"
@@ -10,7 +12,7 @@ const ProfileOwnTabPage = () => {
         buttonType="loadMore"
         mode="myOwnStories"
       />
-    </div>
+    </>
   );
 };
 

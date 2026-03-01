@@ -12,92 +12,32 @@
     color: #000000;
 }
 
-.login {
-    background-color: #00000005;
-    border: 1px solid #00000015;
-    
-}
-
-.register {
-    background-color: #4169E1;
-    border: 1px solid #4169E1;
-
-}
-
-.register a {
-    color: #FFFFFF;
-}
-
 .mobile {
     margin-bottom: 16px;
+}
+
+.mobile .navigationItem {
+    height: 32px;
+    width: 335px;
+}
+
+.mobile .login {
+    margin-bottom: 16px;
+}
+
+.mobile.homeLogout {
+    color: #000;
+}
+
+.mobile.homeUserName {
+    color: #000;
 }
 
 .desktop {
     height: 35px;
     padding: 4px 10px;
 }
-.mobile .login {
-    margin-bottom: 16px;
-}
-.desktop .homeLoginBtn {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.1);
-    
-}
 
-.desktop .homeLoginBtn a {
-    color: #fff;
-}
-
-.desktop .homeRegisterBtn  {
-    background: #fff;
-    border: 1px solid #fff;
-}
-
-.desktop .homeRegisterBtn a {
-    color: #000;
-}
-.avatarWrapper {
-    width: 32;
-    height: 32;
-    margin-right: 8px;
-}
-.avatar {
-    border-radius: 50%;
-    object-fit: cover;
-}
-.userName {
-    margin: 0;
-    color: #000;
-    padding-right: 8px;
-    border-right: 1px solid rgba(0, 0, 0, 0.15);
-}
-.homeUserName.userName {
-    color: #f7f9ff;
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
-}
-.logoutButton {
-    width: 24px;
-    height: 24px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin: 0 8px;
-}
-.homeLogout.logoutButton {
-    color: #f7f9ff;
-}
-.mobile.homeLogout  {
-    color: #000;
-}
-.mobile.homeUserName {
-    color: #000;
-}
-.mobile .navigationItem{
-    height: 32px;
-    width: 335px;
-}
 .desktop.authWrapper {
     display: flex;
     flex-direction: row;
@@ -105,6 +45,144 @@
     align-items: center;
     gap: 16px;
 }
+
 .desktop.authWrapper .navigationItem {
     padding: 4px 10px;
+}
+
+.desktop .homeLoginBtn {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.desktop .homeLoginBtn:hover,
+.desktop .homeLoginBtn:focus {
+    background: #fff;
+    border: 1px solid #fff;
+    color: #000;
+}
+
+.desktop .homeLoginBtn.fixed {
+    border: 1px solid var(--opacity-neutral-darkest-15);
+    background-color: var(--opacity-neutral-darkest-5);
+    color: var(--light-scheme-text);
+}
+
+.desktop .homeLoginBtn.fixed:hover,
+.desktop .homeLoginBtn.fixed:focus {
+    background-color: var(--color-accent);
+    color: var(--light-scheme-background);
+    border: 1px solid var(--color-accent);
+}
+
+.desktop .homeLoginBtn.fixed:active {
+    background-color: var(--color-accent-darker);
+    color: var(--light-scheme-background);
+    border: 1px solid var(--opacity-transparent);
+}
+
+.desktop .homeRegisterBtn {
+    background: #fff;
+    border: 1px solid #fff;
+    color: #000;
+}
+
+.desktop .homeRegisterBtn:hover,
+.desktop .homeRegisterBtn:focus {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.desktop .homeRegisterBtn.fixed {
+    border: 1px solid #4169e1;
+    background: #4169e1;
+    color: #fff;
+}
+
+.desktop .homeRegisterBtn.fixed:hover,
+.desktop .homeRegisterBtn.fixed:focus {
+    background-color: var(--color-accent-lighter);
+    color: var(--light-scheme-text);
+    border: 1px solid var(--color-accent);
+}
+
+.desktop .homeRegisterBtn.fixed:active {
+    background-color: var(--color-accent-light);
+    color: var(--light-scheme-text);
+}
+
+.avatarWrapper {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+}
+
+.avatar {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar:hover,
+.avatar:focus {
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.userName {
+    font-size: 12px;
+    margin: 0;
+    color: #000;
+    padding: 7px 8px 7px 0px;
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+    height: auto;
+}
+
+.homeUserName {
+    color: #f7f9ff;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.homeUserName.fixed {
+    color: #000;
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.logoutButton {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    margin: 0 0 0 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoutButton:hover,
+.logoutButton:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.homeLogout {
+    color: #fff;
+}
+
+.homeLogout.fixed {
+    color: #000;
+}
+
+.homeLogout.logoutButton:hover,
+.homeLogout.logoutButton:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+
+@media (min-width: 1440px) {
+    .userName {
+        font-size: 16px;
+    }
 }
