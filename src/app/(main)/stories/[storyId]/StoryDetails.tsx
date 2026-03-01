@@ -1,6 +1,6 @@
 import { Story } from "@/src/types/story";
 import Image from "next/image";
-
+import css from "./StoryDetails.module.css";
 interface StoryDetailsProps {
   story: Story;
 }
@@ -9,8 +9,8 @@ export const StoryDetails = ({ story }: StoryDetailsProps) => {
     return <div>Помилка під час завантаженя</div>;
   return (
     <>
-      <div>
-        <div>
+      <div className={css.storyDetails}>
+        <div className={css.}>
           <p>
             <strong>Автор статті:{story.ownerId.name}</strong>
           </p>
