@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
@@ -16,10 +16,32 @@ export default function Header() {
   const isHome = pathname === "/";
   const { isAuthenticated } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
+  const [isFixed, setIsFixed] = useState(!isHome);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isHome) {
+        setIsFixed(window.scrollY > 550);
+      } else {
+        setIsFixed(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHome]);
 
   return (
     <>
-      <header className={clsx(css.header, isHome && css.homeHeader)}>
+      <header
+        className={clsx(
+          css.header,
+          isHome && css.homeHeader,
+          isFixed && css.fixed,
+        )}
+      >
         <div className={`container  ${css.headerContainer}`}>
           <Link href="/" className={css.logo}>
             <svg width="156" height="36">
@@ -70,7 +92,7 @@ export default function Header() {
           </div>
 
           <div className={css.auth}>
-            <AuthNavigation />
+            <AuthNavigation isFixed={isFixed} />
           </div>
 
           <button
@@ -78,7 +100,9 @@ export default function Header() {
             onClick={() => setIsOpen(true)}
             aria-label="Open menu"
           >
-            ☰
+            <svg width="24" height="24">
+              <use href="/sprite.svg#icon-menu" />
+            </svg>
           </button>
         </div>
       </header>
