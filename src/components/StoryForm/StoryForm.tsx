@@ -42,7 +42,7 @@ const StoryForm = ({
         validationSchema={StorySchemaValidation}
         enableReinitialize
       >
-        {({ setFieldValue, values }) => (
+        {({ setFieldValue, values, resetForm }) => (
           <Form className={styles.form}>
             <label className={styles.label}>
               <span>Обкладинка статті</span>
@@ -150,7 +150,11 @@ const StoryForm = ({
                 {buttonText}
               </button>
 
-              <button type="button" className={styles.cancelBtn}>
+              <button
+                type="button"
+                onClick={() => resetForm()}
+                className={styles.cancelBtn}
+              >
                 Відмінити
               </button>
             </div>
