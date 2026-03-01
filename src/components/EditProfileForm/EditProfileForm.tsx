@@ -34,11 +34,16 @@ export default function EditProfileForm() {
 
   const mutation = useMutation({
     mutationFn: async () => {
-      const formData = new FormData();
-      formData.append("about", about);
-      if (file) formData.append("avatar", file);
+      
+      await nextServer.patch("/users/me", { about });
 
-      await nextServer.patch("/users/edit", formData);
+      
+      if (file) {
+        const formData = new FormData();
+formData.append("avatarUrl", file);
+
+        await nextServer.patch("/users/me/avatar", formData);
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["currentUser"] });
@@ -67,37 +72,45 @@ export default function EditProfileForm() {
         <div className={styles["profedit__avatar-section"]}>
           <span>Аватар</span>
 
-          <div className={styles["profedit__avatar-wrapper"]}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "25px",
+            }}
+          >
+            <div className={styles["profedit__avatar-wrapper"]}>
+              {avatar ? (
+                <img
+                  src={avatar}
+                  alt="avatar"
+                  className={styles["profedit__avatar-image"]}
+                />
+              ) : (
+                <div className={styles["profedit__avatar-placeholder"]} />
+              )}
+            </div>
+
             {avatar ? (
-              <img
-                src={avatar}
-                alt="avatar"
-                className={styles["profedit__avatar-image"]}
-              />
+              <button
+                type="button"
+                onClick={handleRemoveAvatar}
+                className={styles["profedit__avatar-action"]}
+              >
+                Видалити фото
+              </button>
             ) : (
-              <div className={styles["profedit__avatar-placeholder"]} />
+              <label className={styles["profedit__avatar-action"]}>
+                Завантажити фото
+                <input
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  onChange={handleFileChange}
+                />
+              </label>
             )}
           </div>
-
-          {avatar ? (
-            <button
-              type="button"
-              onClick={handleRemoveAvatar}
-              className={styles["profedit__avatar-action"]}
-            >
-              Видалити фото
-            </button>
-          ) : (
-            <label className={styles["profedit__avatar-action"]}>
-              Завантажити фото
-              <input
-                type="file"
-                accept="image/*"
-                hidden
-                onChange={handleFileChange}
-              />
-            </label>
-          )}
         </div>
 
         <div className={styles["profedit__bio-section"]}>
