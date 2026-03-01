@@ -15,6 +15,7 @@ export default function CreateStoryPage() {
     article: "",
     category: "",
     img: null,
+    date: "",
   };
 
   const mutation = useMutation({
@@ -41,7 +42,6 @@ export default function CreateStoryPage() {
       initialValues={initialValues}
       onSubmit={mutation.mutate}
       buttonText="Create Story"
-      isSubmitting={mutation.isPending}
     />
   );
 }

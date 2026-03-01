@@ -10,7 +10,7 @@ export const StoryDetails = ({ story }: StoryDetailsProps) => {
   return (
     <>
       <div className={css.storyDetails}>
-        <div className={css.}>
+        <div>
           <p>
             <strong>Автор статті:{story.ownerId.name}</strong>
           </p>
