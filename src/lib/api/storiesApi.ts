@@ -28,6 +28,11 @@ export async function getAllStories(
   return response.data;
 }
 
+export async function getStoryById(storyId: string): Promise<Story> {
+  const response = await nextServer.get<Story>(`/stories/${storyId}`);
+  return response.data;
+}
+
 export async function addToSavedStories(storyId: string) {
   const response = await nextServer.post(`/stories/${storyId}/save`);
   return response.data;
@@ -46,10 +51,6 @@ export async function getSavedStories(
   });
   return response.data;
 }
-export async function getStoryById(storyId: string): Promise<Story> {
-  const res = await nextServer.get(`/stories/${storyId}`);
-  return res.data;
-}
 
 export async function getMyStories(
   params: PaginationParams,
@@ -58,10 +59,35 @@ export async function getMyStories(
   return res.data;
 }
 
-export async function creatStory(formData: FormData): Promise<Story> {
-  const res = await nextServer.post("/stories", formData);
-  return res.data;
+// export async function creatStory(formData: FormData): Promise<Story> {
+//   const res = await nextServer.post("/stories", formData);
+//   return res.data;
+// }
+
+// Data Transfer Object для створення історії
+
+export interface CreateStoryDto {
+  title: string;
+  article: string;
+  category: string; // <-- ID категорії
+  img?: File | null;
+  date: string;
 }
+
+export const createStory = async (story: CreateStoryDto) => {
+  const formData = new FormData();
+
+  formData.append("title", story.title);
+  formData.append("article", story.article);
+  formData.append("category", story.category); // ID
+  formData.append("date", story.date);
+
+  if (story.img) {
+    formData.append("img", story.img);
+  }
+
+  return nextServer.post("/stories", formData);
+};
 
 export async function updateStory(
   id: string,
