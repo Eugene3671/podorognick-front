@@ -10,8 +10,7 @@ import { RegisterFormValues } from "@/src/types/auth";
 import toast from "react-hot-toast";
 import { useAuthStore } from "@/src/lib/store/authStore";
 import { AxiosError } from "axios";
-import LoaderEl from '@/src/components/LoaderEl/LoaderEl';
-
+import LoaderEl from "@/src/components/LoaderEl/LoaderEl";
 
 export default function Register() {
   const initialValues: RegisterFormValues = {
@@ -30,7 +29,7 @@ export default function Register() {
     setIsSubmitting(true);
     try {
       const response = await register(values);
- 
+
       setUser(response.user);
 
       console.log("Користувач зареєстрований:", response);
@@ -52,9 +51,7 @@ export default function Register() {
     <div className={css.authContainer}>
       <div className={css.authTabs}>
         <div className={css.tabWrapper}>
-          <Link href="./auth/register" className={`${css.tab} ${css.active}`}>
-            Реєстрація
-          </Link>
+          <div className={`${css.tab} ${css.active}`}>Реєстрація</div>
         </div>
         <div className={css.tabWrapper}>
           <Link href="/auth/login" className={css.tab}>
@@ -154,15 +151,18 @@ export default function Register() {
               )}
             </div>
 
-            <button type="submit" className={css.authButton} disabled={isSubmitting}>
+            <button
+              type="submit"
+              className={css.authButton}
+              disabled={isSubmitting}
+            >
               Зареєструватись
             </button>
-             {isSubmitting && (
-        <div className={css.loaderWrapper}>
-          <LoaderEl />
-        </div>
-      )}
-
+            {isSubmitting && (
+              <div className={css.loaderWrapper}>
+                <LoaderEl />
+              </div>
+            )}
           </Form>
         )}
       </Formik>

@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { api } from "../../api";
+import { api } from "@/src/app/api/api";
 
 export async function GET() {
   const cookieStore = await cookies();
@@ -9,7 +9,7 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   try {
-    const res = await api.get("/auth/me", {
+    const res = await api.get("/users/profile", {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     return NextResponse.json(res.data);
