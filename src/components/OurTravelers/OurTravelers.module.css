@@ -90,7 +90,7 @@
 .avatar {
   width: 112px;
   height: 112px;
-  border-radius: 16px;
+  border-radius: 50%;
   object-fit: cover;
   margin-bottom: 24px;
   display: block;
@@ -131,14 +131,11 @@
   }
 }
 
-.button {
+.cardButton {
   width: 100%;
   height: 48px;
   padding: 6px 12px;
-  background-color: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 8px;
-  color: #1a1a1a;
   font-size: 16px;
   font-weight: 500;
   line-height: 1.5;
@@ -146,25 +143,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease;
-  margin: auto 0 24px;
 }
 @media (min-width: 1440px) {
-  .button {
+  .cardButton {
     font-size: 18px;
   }
 }
-.button:hover,
-.button:focus {
-  background-color: #4169e1;
-  border: 1px solid rgba(255, 255, 255, 0);
-  color: #fff;
-}
-.button:active {
-  background-color: #1a2a5a;
-  border: 1px solid rgba(255, 255, 255, 0);
-  color: #fff;
-}
+
 .viewAllButton {
   display: none;
 }
