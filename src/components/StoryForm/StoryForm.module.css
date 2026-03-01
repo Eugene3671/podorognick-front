@@ -1,0 +1,85 @@
+.formWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10 px;
+  margin-left: 64px;
+  margin-right: 64px;
+  margin-bottom: 62px;
+}
+
+.form {
+  border-radius: 8px;
+
+  & button {
+    border-radius: 8px;
+    border: 2px solid #261a2b;
+    padding: 12px 0px;
+  }
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label span {
+  margin-top: 24px;
+}
+
+.error {
+  color: red;
+  margin: 0;
+  font-size: 14px;
+}
+
+.input {
+  min-width: 300px;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.preview {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  padding-bottom: 24px;
+}
+
+.preview {
+  max-width: 250px;
+  height: auto;
+}
+
+/* -----------------------------  FOR TABLET ----------------------------- */
+@media screen and (min-width: 768px) {
+  .preview {
+    max-width: 350px;
+  }
+}
+
+/* -----------------------------  FOR COMPUTER ----------------------------- */
+@media screen and (min-width: 1440px) {
+  .preview {
+    max-width: 500px;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+  }
+}
