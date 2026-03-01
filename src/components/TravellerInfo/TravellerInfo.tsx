@@ -31,30 +31,18 @@ export default function TravellerInfo({ travellerId }: TravellerInfoProps) {
     retry: false,
   });
 
-  if (isLoading)
-    return (
-      <div>
-        <LoaderEl />
-      </div>
-    );
-  if (isError || !user)
-    return (
-      <div>
-        <LoaderEl />
-      </div>
-    );
   return (
     <div className={css.info}>
       <Image
-        src={user.avatarUrl || "/avatar-placeholder.svg"}
-        alt={user.name || "User avatar"}
+        src={user?.avatarUrl || "/avatar-placeholder.svg"}
+        alt={user?.name || "User avatar"}
         width={199}
         height={199}
         className={css.avatar}
       />
       <div className={css.info_content}>
-        <h2 className={css.info_name}>{user.name}</h2>
-        <p className={css.info_text}>{user.description}</p>
+        <h2 className={css.info_name}>{user?.name}</h2>
+        <p className={css.info_text}>{user?.description}</p>
       </div>
     </div>
   );
