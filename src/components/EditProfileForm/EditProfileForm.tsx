@@ -6,8 +6,8 @@ import { nextServer } from "@/src/lib/api/api";
 import styles from "./EditProfileForm.module.css";
 
 interface User {
-  avatar?: string;
-  about?: string;
+  avatarUrl?: string;
+  description?: string;
 }
 
 export default function EditProfileForm() {
@@ -27,15 +27,15 @@ export default function EditProfileForm() {
 
   useEffect(() => {
     if (user) {
-      setAbout(user.about || "");
-      setAvatar(user.avatar || null);
+      setAbout(user.description || "");
+      setAvatar(user.avatarUrl || null);
     }
   }, [user]);
 
   const mutation = useMutation({
     mutationFn: async () => {
       
-      await nextServer.patch("/users/me", { about });
+      await nextServer.patch("/users/me", { description: about });
 
       
       if (file) {
