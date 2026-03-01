@@ -1,3 +1,4 @@
+import { StoryFormValues } from "@/src/components/StoryForm/StoryForm";
 import { Story } from "../../types/story";
 import { nextServer } from "./api";
 
@@ -91,8 +92,15 @@ export const createStory = async (story: CreateStoryDto) => {
 
 export async function updateStory(
   id: string,
-  data: Partial<Story>,
+  data: StoryFormValues,
 ): Promise<Story> {
-  const res = await nextServer.patch(`/stories/${id}`, data);
+  const formData = new FormData();
+  formData.append("title", data.title);
+  formData.append("article", data.article);
+  formData.append("category", data.category);
+  formData.append("date", data.date);
+  if (data.img) formData.append("img", data.img);
+
+  const res = await nextServer.patch(`/stories/${id}`, formData);
   return res.data;
 }

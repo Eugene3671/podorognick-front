@@ -42,7 +42,7 @@ const StoryForm = ({
         validationSchema={StorySchemaValidation}
         enableReinitialize
       >
-        {({ setFieldValue, values }) => (
+        {({ setFieldValue, values, resetForm }) => (
           <div className={styles.justForm}>
             <div className={styles.formLayout}>
               <Form className={styles.form}>
@@ -152,6 +152,7 @@ const StoryForm = ({
                 </label>
               </Form>
             </div>
+
             <div className={styles.buttons}>
               <button type="submit" className={`buttonBlue ${styles.saveBtn}`}>
                 {buttonText}
@@ -159,6 +160,7 @@ const StoryForm = ({
 
               <button
                 type="button"
+                onClick={() => resetForm()}
                 className={`buttonGrey ${styles.cancelBtn}`}
               >
                 Відмінити

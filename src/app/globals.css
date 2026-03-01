@@ -63,7 +63,6 @@ main {
   display: flex;
   flex-direction: column;
 }
-
 .container {
   width: 100%;
   max-width: 375px;
@@ -192,4 +191,12 @@ button {
   color: var(--light-scheme-text);
   background-color: var(--opacity-neutral-darkest-5);
   opacity: 0.3;
+}
+
+.offset {
+  margin-top: 32px;
+}
+
+.homePage.offset {
+  margin-top: 0;
 }
