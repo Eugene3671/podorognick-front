@@ -1,6 +1,7 @@
 import { Story } from "@/src/types/story";
 import Image from "next/image";
 import css from "./StoryDetails.module.css";
+import { formatDate } from "@/src/utils/formatDate";
 interface StoryDetailsProps {
   story: Story;
 }
@@ -16,7 +17,7 @@ export const StoryDetails = ({ story }: StoryDetailsProps) => {
         </p>
         <p className={css.storyInfoTitle}>
           <strong>Опубліковано </strong>
-          {story.date}
+          {formatDate(story.date)}
         </p>
         <p className={css.storyInfoCategory}>
           {story.category.name ?? "Без категорії"}
