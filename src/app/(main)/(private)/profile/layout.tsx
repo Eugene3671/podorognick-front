@@ -1,15 +1,15 @@
 import { ReactNode } from "react";
+import "@/src/app/globals.css";
 import PageToggle from "@/src/components/PageToggle/PageToggle";
 import TravellerInfo from "@/src/components/TravellerInfo/TravellerInfo";
 
 type Props = {
   children: ReactNode;
-  tabs: React.ReactNode;
 };
 
-const ProfileLayout = ({ children, tabs }: Props) => {
+const ProfileLayout = ({ children }: Props) => {
   return (
-    <div className="container">
+    <div className={`container offset`}>
       <TravellerInfo />
       <PageToggle />
       {children}

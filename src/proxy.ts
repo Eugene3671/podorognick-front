@@ -4,7 +4,6 @@ import type { NextRequest } from "next/server";
 const privateRoutes = ["/profile", "/my", "/edit"];
 
 export function proxy(request: NextRequest) {
-  console.log("MIDDLEWARE:", request.nextUrl.pathname);
   const { pathname } = request.nextUrl;
 
   const accessToken = request.cookies.get("accessToken")?.value;
