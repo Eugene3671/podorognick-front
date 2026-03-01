@@ -1,5 +1,3 @@
-// lib/api/api.ts
-
 import axios from "axios";
 
 const BASE_URL = "/api";
