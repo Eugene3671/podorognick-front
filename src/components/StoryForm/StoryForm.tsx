@@ -43,118 +43,128 @@ const StoryForm = ({
         enableReinitialize
       >
         {({ setFieldValue, values }) => (
-          <Form className={styles.form}>
-            <label className={styles.label}>
-              <span>Обкладинка статті</span>
+          <div className={styles.justForm}>
+            <div className={styles.formLayout}>
+              <Form className={styles.form}>
+                <label className={styles.label}>
+                  <span>Обкладинка статті</span>
 
-              {previewImage && (
-                <img
-                  src={previewImage}
-                  alt="preview"
-                  className={styles.preview}
-                />
-              )}
+                  {previewImage && (
+                    <img
+                      src={previewImage}
+                      alt="preview"
+                      className={styles.preview}
+                    />
+                  )}
 
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (!file) return;
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
 
-                  setFieldValue("img", file);
-                  setPreview(URL.createObjectURL(file));
-                }}
-                className={styles.input}
-              />
+                      setFieldValue("img", file);
+                      setPreview(URL.createObjectURL(file));
+                    }}
+                    className={styles.input}
+                  />
 
-              <ErrorMessage name="img" component="p" className={styles.error} />
-            </label>
+                  <ErrorMessage
+                    name="img"
+                    component="p"
+                    className={styles.error}
+                  />
+                </label>
 
-            <label className={styles.label}>
-              <span>Заголовок</span>
+                <label className={styles.label}>
+                  <span>Заголовок</span>
 
-              <Field
-                type="text"
-                name="title"
-                placeholder="Введіть заголовок історії"
-                className={styles.input}
-              />
+                  <Field
+                    type="text"
+                    name="title"
+                    placeholder="Введіть заголовок історії"
+                    className={styles.input}
+                  />
 
-              <ErrorMessage
-                name="title"
-                component="p"
-                className={styles.error}
-              />
-            </label>
+                  <ErrorMessage
+                    name="title"
+                    component="p"
+                    className={styles.error}
+                  />
+                </label>
 
-            <label className={styles.label}>
-              <span>Категорія</span>
+                <label className={styles.label}>
+                  <span>Категорія</span>
 
-              <select
-                name="category"
-                className={styles.input}
-                value={values.category}
-                onChange={(e) => setFieldValue("category", e.target.value)}
-                disabled={isLoading}
-              >
-                <option value="">
-                  {isLoading ? "Завантаження..." : "Оберіть категорію"}
-                </option>
+                  <select
+                    name="category"
+                    className={styles.input}
+                    value={values.category}
+                    onChange={(e) => setFieldValue("category", e.target.value)}
+                    disabled={isLoading}
+                  >
+                    <option value="">
+                      {isLoading ? "Завантаження..." : "Оберіть категорію"}
+                    </option>
 
-                {categories.map((cat) => (
-                  <option key={cat._id} value={cat._id}>
-                    {cat.name}
-                  </option>
-                ))}
-              </select>
+                    {categories.map((cat) => (
+                      <option key={cat._id} value={cat._id}>
+                        {cat.name}
+                      </option>
+                    ))}
+                  </select>
 
-              <ErrorMessage
-                name="category"
-                component="p"
-                className={styles.error}
-              />
-            </label>
+                  <ErrorMessage
+                    name="category"
+                    component="p"
+                    className={styles.error}
+                  />
+                </label>
 
-            <label className={styles.label}>
-              <span>Текст історії</span>
+                <label className={styles.label}>
+                  <span>Текст історії</span>
 
-              <Field
-                as="textarea"
-                name="article"
-                placeholder="Ваша історія тут"
-                className={styles.textarea}
-              />
+                  <Field
+                    as="textarea"
+                    name="article"
+                    placeholder="Ваша історія тут"
+                    className={styles.textarea}
+                  />
 
-              <ErrorMessage
-                name="article"
-                component="p"
-                className={styles.error}
-              />
-            </label>
+                  <ErrorMessage
+                    name="article"
+                    component="p"
+                    className={styles.error}
+                  />
+                </label>
 
-            <label className={styles.label}>
-              <span>Дата</span>
+                <label className={styles.label}>
+                  <span>Дата</span>
 
-              <Field type="date" name="date" className={styles.input} />
+                  <Field type="date" name="date" className={styles.input} />
 
-              <ErrorMessage
-                name="date"
-                component="p"
-                className={styles.error}
-              />
-            </label>
-
+                  <ErrorMessage
+                    name="date"
+                    component="p"
+                    className={styles.error}
+                  />
+                </label>
+              </Form>
+            </div>
             <div className={styles.buttons}>
-              <button type="submit" className={styles.saveBtn}>
+              <button type="submit" className={`buttonBlue ${styles.saveBtn}`}>
                 {buttonText}
               </button>
 
-              <button type="button" className={styles.cancelBtn}>
+              <button
+                type="button"
+                className={`buttonGrey ${styles.cancelBtn}`}
+              >
                 Відмінити
               </button>
             </div>
-          </Form>
+          </div>
         )}
       </Formik>
     </div>

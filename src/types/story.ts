@@ -17,4 +17,5 @@ export interface CreateStoryFormValues {
   article: string;
   category: string;
   img: File | null;
+  date: string;
 }

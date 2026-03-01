@@ -1,13 +1,19 @@
 .formWrap {
   display: flex;
   flex-direction: column;
-  gap: 10 px;
+  gap: 10px;
   margin-left: 64px;
   margin-right: 64px;
   margin-bottom: 62px;
 }
 
+.formLayout {
+  display: flex;
+  flex-direction: column;
+}
+
 .form {
+  width: 100%;
   border-radius: 8px;
 
   & button {
@@ -34,7 +40,8 @@
 }
 
 .input {
-  min-width: 300px;
+  width: 100%;
+  /* min-width: 300px; */
   padding: 8px;
   border-radius: 8px;
 }
@@ -47,10 +54,21 @@
 }
 
 .buttons {
+  margin-top: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   width: 100%;
+}
+
+.saveBtn {
+  width: 100%;
+}
+
+.cancelBtn {
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 8px;
 }
 
 .preview {
@@ -74,12 +92,30 @@
 
 /* -----------------------------  FOR COMPUTER ----------------------------- */
 @media screen and (min-width: 1440px) {
+  .formLayout {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .justForm {
+    display: flex;
+    flex-direction: row;
+    justify-items: start;
+    gap: 24px;
+  }
+
+  .form {
+    flex-direction: row;
+    gap: 40px;
+  }
+
   .preview {
     max-width: 500px;
   }
+
   .buttons {
-    display: flex;
-    flex-direction: column;
-    min-width: 200px;
+    width: 30%;
   }
 }

@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import StoryForm, { StoryFormValues } from "@/components/StoryForm/StoryForm";
+import StoryForm, {
+  StoryFormValues,
+} from "@/src/components/StoryForm/StoryForm";
 import { getStoryById, updateStory } from "@/src/lib/api/storiesApi";
 import { Story } from "@/src/types/story";
 
