@@ -43,113 +43,117 @@ const StoryForm = ({
         enableReinitialize
       >
         {({ setFieldValue, values, resetForm }) => (
-          <div className={styles.justForm}>
-            <div className={styles.formLayout}>
+          <div className={styles.formLayout}>
+            <div className={styles.justForm}>
               <Form className={styles.form}>
-                <label className={styles.label}>
-                  <span>Обкладинка статті</span>
+                <div className={styles.fields}>
+                  <label className={styles.label}>
+                    <span>Обкладинка статті</span>
 
-                  {previewImage && (
-                    <img
-                      src={previewImage}
-                      alt="preview"
-                      className={styles.preview}
+                    {previewImage && (
+                      <img
+                        src={previewImage}
+                        alt="preview"
+                        className={styles.preview}
+                      />
+                    )}
+
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (!file) return;
+
+                        setFieldValue("img", file);
+                        setPreview(URL.createObjectURL(file));
+                      }}
+                      className={styles.input}
                     />
-                  )}
 
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (!file) return;
+                    <ErrorMessage
+                      name="img"
+                      component="p"
+                      className={styles.error}
+                    />
+                  </label>
 
-                      setFieldValue("img", file);
-                      setPreview(URL.createObjectURL(file));
-                    }}
-                    className={styles.input}
-                  />
+                  <label className={styles.label}>
+                    <span>Заголовок</span>
 
-                  <ErrorMessage
-                    name="img"
-                    component="p"
-                    className={styles.error}
-                  />
-                </label>
+                    <Field
+                      type="text"
+                      name="title"
+                      placeholder="Введіть заголовок історії"
+                      className={styles.input}
+                    />
 
-                <label className={styles.label}>
-                  <span>Заголовок</span>
+                    <ErrorMessage
+                      name="title"
+                      component="p"
+                      className={styles.error}
+                    />
+                  </label>
 
-                  <Field
-                    type="text"
-                    name="title"
-                    placeholder="Введіть заголовок історії"
-                    className={styles.input}
-                  />
+                  <label className={styles.label}>
+                    <span>Категорія</span>
 
-                  <ErrorMessage
-                    name="title"
-                    component="p"
-                    className={styles.error}
-                  />
-                </label>
-
-                <label className={styles.label}>
-                  <span>Категорія</span>
-
-                  <select
-                    name="category"
-                    className={styles.input}
-                    value={values.category}
-                    onChange={(e) => setFieldValue("category", e.target.value)}
-                    disabled={isLoading}
-                  >
-                    <option value="">
-                      {isLoading ? "Завантаження..." : "Оберіть категорію"}
-                    </option>
-
-                    {categories.map((cat) => (
-                      <option key={cat._id} value={cat._id}>
-                        {cat.name}
+                    <select
+                      name="category"
+                      className={styles.input}
+                      value={values.category}
+                      onChange={(e) =>
+                        setFieldValue("category", e.target.value)
+                      }
+                      disabled={isLoading}
+                    >
+                      <option value="">
+                        {isLoading ? "Завантаження..." : "Оберіть категорію"}
                       </option>
-                    ))}
-                  </select>
 
-                  <ErrorMessage
-                    name="category"
-                    component="p"
-                    className={styles.error}
-                  />
-                </label>
+                      {categories.map((cat) => (
+                        <option key={cat._id} value={cat._id}>
+                          {cat.name}
+                        </option>
+                      ))}
+                    </select>
 
-                <label className={styles.label}>
-                  <span>Текст історії</span>
+                    <ErrorMessage
+                      name="category"
+                      component="p"
+                      className={styles.error}
+                    />
+                  </label>
 
-                  <Field
-                    as="textarea"
-                    name="article"
-                    placeholder="Ваша історія тут"
-                    className={styles.textarea}
-                  />
+                  <label className={styles.label}>
+                    <span>Текст історії</span>
 
-                  <ErrorMessage
-                    name="article"
-                    component="p"
-                    className={styles.error}
-                  />
-                </label>
+                    <Field
+                      as="textarea"
+                      name="article"
+                      placeholder="Ваша історія тут"
+                      className={styles.textarea}
+                    />
 
-                <label className={styles.label}>
-                  <span>Дата</span>
+                    <ErrorMessage
+                      name="article"
+                      component="p"
+                      className={styles.error}
+                    />
+                  </label>
 
-                  <Field type="date" name="date" className={styles.input} />
+                  <label className={styles.label}>
+                    <span>Дата</span>
 
-                  <ErrorMessage
-                    name="date"
-                    component="p"
-                    className={styles.error}
-                  />
-                </label>
+                    <Field type="date" name="date" className={styles.input} />
+
+                    <ErrorMessage
+                      name="date"
+                      component="p"
+                      className={styles.error}
+                    />
+                  </label>
+                </div>
                 <div className={styles.buttons}>
                   <button
                     type="submit"
