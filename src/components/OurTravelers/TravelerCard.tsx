@@ -23,9 +23,12 @@ const TravelerCard: React.FC<TravelerProps> = ({ id, name, description, img }) =
       <h3 className={styles.name}>{name}</h3>
       <p className={styles.description}>{description}</p>
       
-      <Link href={`/travellers/${id}`} className={styles.button}>
-        Переглянути профіль
-      </Link>
+      <Link 
+  href={`/travellers/${id}`} 
+  className={`buttonGrey ${styles.cardButton}`}
+>
+  Переглянути профіль
+</Link>
     </div>
   );
 };
