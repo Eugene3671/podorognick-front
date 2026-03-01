@@ -12,13 +12,15 @@ export const StoryDetails = ({ story }: StoryDetailsProps) => {
       <div className={css.storyInfo}>
         <p className={css.storyInfoTitle}>
           <strong>Автор статті </strong>
-          {story.ownerId.name}
+          {story.ownerId.name ?? "Невідомий автор"}
         </p>
         <p className={css.storyInfoTitle}>
           <strong>Опубліковано </strong>
           {story.date}
         </p>
-        <p className={css.storyInfoCategory}>{story.category.name}</p>
+        <p className={css.storyInfoCategory}>
+          {story.category.name ?? "Без категорії"}
+        </p>
       </div>
       <div className={css.storyImageWrapper}>
         <Image src={story.img} alt="story" fill className={css.storyImage} />
