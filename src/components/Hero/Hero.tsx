@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 
 export default function Hero() {
   return (
-    <section className={css.hero}>
+    <section className={css.hero} id="hero">
       <div className="container">
         <picture className={css.picture}>
           <source

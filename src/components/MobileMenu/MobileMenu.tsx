@@ -89,6 +89,15 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 Мандрівники
               </Link>
             </li>
+            <li
+              className={clsx(
+                css.navItem,
+                css.noAuthNavItem,
+                isAuthenticated && css.authNavItem,
+              )}
+            >
+              <Link href="/profile">Мій Профіль</Link>
+            </li>
           </ul>
         </nav>
         <div className={clsx(css.action, isAuthenticated && css.authActionBtn)}>
