@@ -1,17 +1,47 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import StoryForm, {
-  StoryFormValues,
-} from "@/src/components/StoryForm/StoryForm";
+import { useRouter } from "next/navigation";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createStory, CreateStoryDto } from "@/src/lib/api/storiesApi";
+import { CreateStoryFormValues } from "@/src/types/story";
+import StoryForm from "@/src/components/StoryForm/StoryForm";
 
-type Category = {
-  _id: string;
-  name: string;
-};
+export default function CreateStoryPage() {
+  const router = useRouter();
+  const queryClient = useQueryClient();
 
-const CreateStoryPage = () => {
-  return <div>Create story page placeholder</div>;
-};
+  const initialValues: CreateStoryFormValues = {
+    title: "",
+    article: "",
+    category: "",
+    img: null,
+  };
 
-export default CreateStoryPage;
+  const mutation = useMutation({
+    mutationFn: (values: CreateStoryFormValues) => {
+      const dto: CreateStoryDto = {
+        title: values.title,
+        article: values.article,
+        category: values.category,
+        img: values.img,
+        date: new Date().toISOString(),
+      };
+
+      return createStory(dto);
+    },
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["stories"] });
+      router.push("/stories");
+    },
+  });
+
+  return (
+    <StoryForm
+      initialValues={initialValues}
+      onSubmit={mutation.mutate}
+      buttonText="Create Story"
+      isSubmitting={mutation.isPending}
+    />
+  );
+}
