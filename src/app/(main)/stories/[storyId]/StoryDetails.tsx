@@ -31,14 +31,11 @@ export const StoryDetails = ({ story }: StoryDetailsProps) => {
       setFavoriteCount((favCount) => favCount + 1);
     },
 
-    onError: (error) => {
+    onError: () => {
       setIsSaved(false);
       setFavoriteCount((favCount) => favCount - 1);
-      toast.error(`Сталася помилка: ${error.message}`);
     },
-    onSuccess: () => {
-      toast.success("Історію було збережено!");
-    },
+    onSuccess: () => {},
   });
 
   const unsaveMutation = useMutation({
