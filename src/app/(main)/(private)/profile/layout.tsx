@@ -1,20 +1,19 @@
-import React, { ReactNode } from "react";
-import TravellerInfo from "@/src/components/TravellerInfo/TravellerInfo";
+import { ReactNode } from "react";
+import "@/src/app/globals.css";
 import PageToggle from "@/src/components/PageToggle/PageToggle";
+import TravellerInfo from "@/src/components/TravellerInfo/TravellerInfo";
 
 type Props = {
   children: ReactNode;
-  tabs: ReactNode;
 };
 
-const ProfileLayout = ({ children, tabs }: Props) => {
+const ProfileLayout = ({ children }: Props) => {
   return (
-    <main className="container">
+    <div className={`container offset`}>
       <TravellerInfo />
       <PageToggle />
       {children}
-      <div style={{ minHeight: "600px" }}>{tabs}</div>
-    </main>
+    </div>
   );
 };
 

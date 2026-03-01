@@ -15,16 +15,31 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      setLoading(true);
-      const isAuthenticated = await checkSession();
-      if (isAuthenticated) {
+      try {
+        setLoading(true);
+
+        const isAuthenticated = await checkSession();
+
+        if (!isAuthenticated) {
+          clearAuth();
+          return;
+        }
+
         const user = await getMe();
-        if (user) setUser(user);
-      } else {
+
+        if (user) {
+          setUser(user);
+        } else {
+          clearAuth();
+        }
+      } catch (error) {
+        console.error("AuthProvider error:", error);
         clearAuth();
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
+
     fetchUser();
   }, [setUser, clearAuth]);
 
