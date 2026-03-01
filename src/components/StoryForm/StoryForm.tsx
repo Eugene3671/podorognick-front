@@ -150,21 +150,23 @@ const StoryForm = ({
                     className={styles.error}
                   />
                 </label>
+                <div className={styles.buttons}>
+                  <button
+                    type="submit"
+                    className={`buttonBlue ${styles.saveBtn}`}
+                  >
+                    {buttonText}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => resetForm()}
+                    className={`buttonGrey ${styles.cancelBtn}`}
+                  >
+                    Відмінити
+                  </button>
+                </div>
               </Form>
-            </div>
-
-            <div className={styles.buttons}>
-              <button type="submit" className={`buttonBlue ${styles.saveBtn}`}>
-                {buttonText}
-              </button>
-
-              <button
-                type="button"
-                onClick={() => resetForm()}
-                className={`buttonGrey ${styles.cancelBtn}`}
-              >
-                Відмінити
-              </button>
             </div>
           </div>
         )}
