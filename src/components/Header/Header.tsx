@@ -10,14 +10,31 @@ import css from "./Header.module.css";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import { useAuthStore } from "@/src/lib/store/authStore";
-import { useTheme } from "@/src/components/providers/ThemeProvider";
+import { useTheme } from "@/src/components/provider/ThemeProvider";
 
 export default function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const { isAuthenticated } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
+  const [isFixed, setIsFixed] = useState(!isHome);
   const { theme, toggleTheme } = useTheme();
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isHome) {
+        setIsFixed(window.scrollY > 550);
+      } else {
+        setIsFixed(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHome]);
 
   return (
     <>
@@ -35,6 +52,7 @@ export default function Header() {
             </svg>
           </Link>
 
+
           <label className="theme-switch">
             <input
               type="checkbox"
@@ -44,6 +62,7 @@ export default function Header() {
             />
             <span className="theme-switch__slider"></span>
           </label>
+
           <nav className={css.nav}>
             <ul
               className={clsx(

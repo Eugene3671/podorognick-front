@@ -3,6 +3,7 @@ import { Nunito_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import TanStackProvider from "@/src/components/TanStackProvider/TanStackProvider";
 import AuthProvider from "@/src/components/AuthProvider/AuthProvider";
+import { ThemeProvider } from "@/src/components/provider/ThemeProvider";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -52,11 +53,13 @@ export default async function RootLayout({
         <link rel="icon" href="/Favicon.svg" />
       </head>
       <body>
-        <AuthProvider>
-          <TanStackProvider>
-            <main>{children}</main>
-          </TanStackProvider>
-        </AuthProvider>
+               <ThemeProvider>
+          <AuthProvider>
+            <TanStackProvider>
+              <main>{children}</main>
+            </TanStackProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
