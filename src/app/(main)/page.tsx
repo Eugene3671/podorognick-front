@@ -8,12 +8,12 @@ import TravellersStories from "@/src/components/TravellersStories/TravellersStor
 
 export default function HomePage() {
   return (
-    <main className="main">
+    <>
       <Hero />
       <About />
       <PopularStories />
       <OurTravelers />
       <Join />
-    </main>
+    </>
   );
 }

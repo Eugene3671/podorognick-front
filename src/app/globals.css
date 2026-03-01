@@ -85,7 +85,6 @@ main {
   display: flex;
   flex-direction: column;
 }
-
 .container {
   width: 100%;
   max-width: 375px;
@@ -173,7 +172,7 @@ button {
 }
 
 .buttonBlue:hover,
-.buttonBlue:focus {
+.buttonBlue:focus-visible {
   background-color: var(--color-accent-lighter);
   color: var(--color-text);
   border: 1px solid var(--color-accent);
@@ -206,7 +205,7 @@ button {
 }
 
 .buttonGrey:hover,
-.buttonGrey:focus {
+.buttonGrey:focus-visible {
   background-color: var(--color-accent);
   color: var(--color-background);
   border: 1px solid var(--color-accent);
@@ -224,4 +223,12 @@ button {
   color: var(--color-text);
   background-color: var(--opacity-neutral-darkest-5);
   opacity: 0.3;
+}
+
+.offset {
+  margin-top: 32px;
+}
+
+.homePage.offset {
+  margin-top: 0;
 }

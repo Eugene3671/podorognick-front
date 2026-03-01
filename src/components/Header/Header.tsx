@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
@@ -10,22 +10,58 @@ import css from "./Header.module.css";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import { useAuthStore } from "@/src/lib/store/authStore";
+import { useTheme } from "@/src/components/provider/ThemeProvider";
 
 export default function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const { isAuthenticated } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
+  const [isFixed, setIsFixed] = useState(!isHome);
+  const { theme, toggleTheme } = useTheme();
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isHome) {
+        setIsFixed(window.scrollY > 550);
+      } else {
+        setIsFixed(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHome]);
 
   return (
     <>
-      <header className={clsx(css.header, isHome && css.homeHeader)}>
+      <header
+        className={clsx(
+          css.header,
+          isHome && css.homeHeader,
+          isFixed && css.fixed,
+        )}
+      >
         <div className={`container  ${css.headerContainer}`}>
           <Link href="/" className={css.logo}>
             <svg width="156" height="36">
               <use href="/sprite.svg#icon-Logo" />
             </svg>
           </Link>
+
+
+          <label className="theme-switch">
+            <input
+              type="checkbox"
+              className="theme-switch__checkbox"
+              onChange={toggleTheme}
+              checked={theme === "dark"}
+            />
+            <span className="theme-switch__slider"></span>
+          </label>
 
           <nav className={css.nav}>
             <ul
@@ -70,7 +106,7 @@ export default function Header() {
           </div>
 
           <div className={css.auth}>
-            <AuthNavigation />
+            <AuthNavigation isFixed={isFixed} />
           </div>
 
           <button
@@ -78,7 +114,9 @@ export default function Header() {
             onClick={() => setIsOpen(true)}
             aria-label="Open menu"
           >
-            ☰
+            <svg width="24" height="24">
+              <use href="/sprite.svg#icon-menu" />
+            </svg>
           </button>
         </div>
       </header>

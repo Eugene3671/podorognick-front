@@ -1,94 +1,115 @@
 .background {
     position: fixed;
     inset: 0;
-    background: #F7F9FF;
     z-index: 999;
+    background: #f7f9ff;
 }
 
 .wrapper {
     min-width: 320px;
     max-width: 375px;
     height: 100%;
-    background: transparent;
+    margin: auto;
     padding: 20px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: auto;
+
+    background: transparent;
 }
+
 @media (min-width: 768px) {
     .wrapper {
         min-width: 768px;
     }
-
 }
+
 .header {
     width: 100%;
     margin: 0 auto;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    justify-content: space-between;
-    
 }
+
 .logo {
     width: 156px;
     height: 36px;
     text-align: center;
 }
+
 .closeBtn {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
-    border: 1px solid var(--color-scheme-2-border);
-    border-radius: 8px;
-    padding: 4px;
+
     width: 32px;
     height: 32px;
+    padding: 4px;
+
     background-color: #00000005;
     border: 1px solid #00000015;
+    border-radius: 8px;
 }
+
 .navList {
-    text-align: center;
     display: flex;
     flex-direction: column;
     margin: 32px auto;
+    text-align: center;
 }
+
 .navList li {
     margin-top: 32px;
 }
+
 .navItem a {
-    color: #000000;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.5;
+    color: #000000;
 }
 
 .action {
     display: none;
 }
+
 .action a {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
+
+    width: 335px;
+    margin-bottom: 16px;
     padding: 4px 10px;
-    background-color: #4169E1;
-    border: 1px solid #4169E1;
-    color: #FFFFFF;
+
+    border-radius: 8px;
+    background-color: #4169e1;
+    border: 1px solid #4169e1;
+
+    color: #ffffff;
     font-weight: 500;
     font-size: 16px;
     line-height: 1.4;
-    width: 335px;
-    margin-bottom: 16px;
 }
+
 .authActionBtn {
     display: block;
 }
+
 .auth {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+}
+.noAuthNavItem {
+    margin: 0;
+    display: none;
+}
+
+.authNavItem {
+    display: flex;
+    align-items: center;
 }

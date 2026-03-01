@@ -10,10 +10,12 @@ import Image from "next/image";
 
 interface AuthNavigationProps {
   variant?: "mobile" | "desktop";
+  isFixed?: boolean;
 }
 
 export default function AuthNavigation({
   variant = "desktop",
+  isFixed,
 }: AuthNavigationProps) {
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -54,6 +56,7 @@ export default function AuthNavigation({
             css.userName,
             isHome && css.homeUserName,
             css[variant],
+            isFixed && css.fixed,
           )}
         >
           {user?.name}
@@ -65,6 +68,7 @@ export default function AuthNavigation({
           css.logoutButton,
           isHome && css.homeLogout,
           css[variant],
+          isFixed && css.fixed,
         )}
         onClick={handleLogout}
       >
@@ -85,6 +89,7 @@ export default function AuthNavigation({
             "buttonGrey",
             "buttonBlue",
             isHome && css.homeLoginBtn,
+            isFixed && css.fixed,
           )}
         >
           Вхід
@@ -100,6 +105,7 @@ export default function AuthNavigation({
             css.register,
             "buttonBlue",
             isHome && css.homeRegisterBtn,
+            isFixed && css.fixed,
           )}
         >
           Реєстрація
