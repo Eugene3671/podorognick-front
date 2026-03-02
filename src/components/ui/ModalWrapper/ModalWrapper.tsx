@@ -10,8 +10,15 @@ interface ModalWrapperProps {
   onClose: () => void;
   title: string;
   description: string;
+
+  // navigation url for left/right button, optional when using click callbacks
   hrefBtnLeft?: string;
-  hrefBtnRight: string;
+  hrefBtnRight?: string;
+
+  // click handlers, e.g. for cancelling/confirming an action
+  onLeftClick?: () => void;
+  onRightClick?: () => void | Promise<void>;
+
   textBtnLeft: string;
   textBtnRight: string;
 }
@@ -25,6 +32,8 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   textBtnLeft,
   title,
   description,
+  onLeftClick,
+  onRightClick,
 }) => {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -73,12 +82,14 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           <Button
             className={`buttonGrey ${css.modalButton}`}
             href={hrefBtnLeft}
+            onClick={onLeftClick}
           >
             {textBtnLeft}
           </Button>
           <Button
             className={`buttonBlue ${css.modalButton}`}
             href={hrefBtnRight}
+            onClick={onRightClick}
           >
             {textBtnRight}
           </Button>
