@@ -10,13 +10,12 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
 }
 
 /* & button {
   border-radius: 8px; */
-  /* border: 2px solid #261a2b; */
-  /* padding: 12px 10px;
+/* border: 2px solid #261a2b; */
+/* padding: 12px 10px;
 } */
 
 .label {
@@ -46,6 +45,7 @@
   border: 1px solid var(--input-border);
   transition: all 0.3s ease-in-out;
   background-color: var(--opacity-transparent);
+  margin-bottom: 24px;
 }
 
 .input:focus,
@@ -80,6 +80,7 @@
   color: transparent;
   width: 100%;
   cursor: pointer;
+  margin-bottom: 24px;
 }
 
 .label .fileInput::file-selector-button {
@@ -91,6 +92,14 @@
   padding-inline: 10px;
   padding: 0;
   cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
 }
 
 .saveBtn,
@@ -117,6 +126,11 @@
     position: sticky;
     top: 40px;
     margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
   }
   .saveBtn,
   .cancelBtn {
