@@ -127,7 +127,7 @@ export const StoryDetails = ({ story }: StoryDetailsProps) => {
                 setIsModalOpen(true);
               }
             }}
-            className={css.addToSaveBtn}
+            className={`buttonBlue ${css.addToSaveBtn}`}
           >
             {isSaved ? "Видалити зі збережених" : "Зберегти"}
           </Button>
