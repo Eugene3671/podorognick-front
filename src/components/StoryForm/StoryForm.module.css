@@ -13,11 +13,11 @@
   gap: 24px;
 }
 
-& button {
+/* & button {
   border-radius: 8px;
   /* border: 2px solid #261a2b; */
-  padding: 12px 10px;
-}
+  /* padding: 12px 10px; */
+/* } */ 
 
 .label {
   display: flex;
