@@ -46,11 +46,14 @@ export default function Hero() {
             для себе нові місця та знайдіть однодумців!
           </p>
           {isAuthenticated ? (
-            <Button href="/profile" className="buttonBlue">
+            <Button href="/profile" className={`buttonBlue ${css.button}`}>
               Мій Профіль
             </Button>
           ) : (
-            <Button href="/auth/register" className="buttonBlue">
+            <Button
+              href="/auth/register"
+              className={`buttonBlue ${css.button}`}
+            >
               Доєднатись
             </Button>
           )}

@@ -48,6 +48,10 @@
   margin-bottom: 32px;
 }
 
+.button {
+  width: 100%;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1439px) {
   .heroContainer {
     padding-top: 244px;
@@ -57,6 +61,13 @@
   .title {
     font-size: 48px;
     width: 612px;
+  }
+
+  .button {
+    width: auto;
+    font-size: 18px;
+
+    margin: 0;
   }
 }
 
@@ -72,5 +83,12 @@
   }
   .description {
     font-size: 20px;
+  }
+
+  .button {
+    width: auto;
+    font-size: 18px;
+
+    margin: 0;
   }
 }
