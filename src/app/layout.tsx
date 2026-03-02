@@ -40,8 +40,6 @@ export const metadata: Metadata = {
   },
 };
 
-
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -51,9 +49,22 @@ export default async function RootLayout({
     <html lang="uk" className={`${nunitoSans.variable} ${inter.variable}`}>
       <head>
         <link rel="icon" href="/Favicon.svg" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+        (function() {
+          const theme = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (theme === 'dark' || (!theme && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          }
+        })();
+      `,
+          }}
+        />
       </head>
       <body>
-               <ThemeProvider>
+        <ThemeProvider>
           <AuthProvider>
             <TanStackProvider>
               <main>{children}</main>

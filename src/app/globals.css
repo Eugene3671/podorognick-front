@@ -63,7 +63,7 @@
   --color-scheme-2-text: #000;
 }
 
-[data-theme="dark"] {
+.dark {
   --primary-button-background: var(--color-white);
   --primary-button-border: var(--color-white);
   --primary-button-hover-background: var(--color-neutral);
@@ -88,15 +88,6 @@
   --color-text: #fff;
   --color-page-background: #000;
   --color-button-text: #000;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #000;
-    --color-text: #fff;
-    --color-button-text: #000;
-    --color-page-background: #000;
-  }
 }
 
 /* transition: property 0.3s ease-in-out */
@@ -270,4 +261,66 @@ button {
 
 .homePage.offset {
   margin-top: 0;
+}
+
+/* Toggle Theme Sidebar Transitions */
+.ToggleThemeSidebar {
+  transition:
+    width 0.4s ease,
+    padding 0.4s ease;
+}
+
+.ToggleThemeSidebar-expanded {
+  width: 160px;
+}
+
+.ToggleThemeSidebar-collapsed {
+  width: 64px;
+}
+
+/* Toggle Switch Component */
+.toggle-switch {
+  position: relative;
+  width: 2.5rem;
+  /* w-10 */
+  height: 1.25rem;
+  /* h-5 */
+  border-radius: 9999px;
+  background-color: hsl(var(--secondary));
+  transition-property: background-color;
+  transition-duration: 200ms;
+}
+
+.toggle-switch.active {
+  background-color: hsl(var(--primary));
+}
+
+.toggle-switch .toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1rem;
+  /* w-4 */
+  height: 1rem;
+  /* h-4 */
+  border-radius: 9999px;
+  background-color: hsl(var(--foreground));
+  transition-property: transform;
+  transition-duration: 200ms;
+}
+
+.toggle-switch.active .toggle-knob {
+  transform: translateX(1.25rem);
+  /* translate-x-5 */
+  background-color: hsl(var(--background));
+}
+
+.toggle-icon {
+  color: var(--color-text);
+}
+
+.theme-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

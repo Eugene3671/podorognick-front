@@ -10,7 +10,6 @@ import css from "./Header.module.css";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import { useAuthStore } from "@/src/lib/store/authStore";
-import { useTheme } from "@/src/components/provider/ThemeProvider";
 
 export default function Header() {
   const pathname = usePathname();
@@ -18,7 +17,6 @@ export default function Header() {
   const { isAuthenticated } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
   const [isFixed, setIsFixed] = useState(!isHome);
-  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,16 +48,6 @@ export default function Header() {
               <use href="/sprite.svg#icon-Logo" />
             </svg>
           </Link>
-
-          <label className="theme-switch">
-            <input
-              type="checkbox"
-              className="theme-switch__checkbox"
-              onChange={toggleTheme}
-              checked={theme === "dark"}
-            />
-            <span className="theme-switch__slider"></span>
-          </label>
 
           <nav className={css.nav}>
             <ul
