@@ -32,15 +32,22 @@ export default function Register() {
 
       setUser(response.user);
 
-      console.log("Користувач зареєстрований:", response);
-
       toast.success(`Привіт, ${response.user.name}! Реєстрація успішна.`);
       router.push("/");
-    } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        toast.error(error.response?.data?.error || "Помилка реєстрації");
+    } catch  (error: unknown) {
+    if (error instanceof AxiosError) {
+      const message =
+        error.response?.data?.response?.message ||
+        error.response?.data?.message ||
+        "Помилка реєстрації";
+
+      if (message === "User already exists") {
+        toast.error("Користувач з таким email вже існує");
       } else {
-        toast.error("Невідома помилка");
+        toast.error(message);
+      }
+    } else {
+      toast.error("Невідома помилка");
       }
     } finally {
       setIsSubmitting(false);
@@ -71,7 +78,6 @@ export default function Register() {
         initialValues={initialValues}
         validationSchema={registerSchema}
         onSubmit={(values) => {
-          console.log("Formik onSubmit викликався", values);
           handleSubmit(values);
         }}
       >
