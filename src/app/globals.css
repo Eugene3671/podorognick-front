@@ -53,8 +53,7 @@
   --color-white: #fff;
   --color-scheme-2-text: #000;
 }
-
-/* [data-theme="dark"] {
+[data-theme="dark"] {
   --primary-button-background: var(--color-white);
   --color-background: #000;
   --color-text: #fff;
@@ -77,7 +76,7 @@
     --color-button-text: #000;
     --color-page-background: #000;
   }
-} */
+}
 /* transition: property 0.3s ease-in-out */
 
 html,
