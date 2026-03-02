@@ -1,0 +1,10 @@
+.toggleIcon {
+  color: var(--color-text);
+  stroke: var(--color-text);
+}
+
+.themeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
