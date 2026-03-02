@@ -1,0 +1,33 @@
+.container {
+  padding-top: 72px;
+  padding-bottom: 64px;
+  min-height: 80vh;
+  font-family: var(--font-nunito-sans), sans-serif;
+}
+
+.title {
+  font-family: "Inter", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 110%;
+  letter-spacing: -0.01em;
+  color: #000;
+  margin-bottom: 24px;
+  text-align: start;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 48px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    padding-bottom: 72px;
+  }
+
+  .title {
+    font-size: 56px;
+  }
+}
