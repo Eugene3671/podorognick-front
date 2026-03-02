@@ -22,10 +22,10 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   }, [pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
+    document.documentElement.style.overflow = isOpen ? "hidden" : "";
 
     return () => {
-      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
   }, [isOpen]);
 

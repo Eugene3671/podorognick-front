@@ -7,6 +7,7 @@ import { useCategories } from "@/src/hooks/useCategories";
 
 import { StorySchemaValidation } from "@/src/validation/storySchemaValid";
 import Image from "next/image";
+import clsx from "clsx";
 
 export type StoryFormValues = {
   img: File | null;
@@ -55,11 +56,14 @@ const StoryForm = ({
                   <div className={styles.fields}>
                     <label className={styles.label}>
                       <span>Обкладинка статті</span>
-                      <Image
-                        src={previewImage || "/path-to-your-placeholder.png"}
-                        alt="preview"
-                        className={styles.preview}
-                      />
+                      <div className={styles.imageWrapperPreview}>
+                        <Image
+                          src={previewImage || "/path-to-your-placeholder.png"}
+                          alt="preview"
+                          fill
+                          className={styles.preview}
+                        />
+                      </div>
                       <input
                         type="file"
                         accept="image/*"
@@ -151,7 +155,7 @@ const StoryForm = ({
                   <div className={styles.buttons}>
                     <button
                       type="submit"
-                      className={`buttonBlue ${styles.saveBtn}`}
+                      className={clsx("buttonBlue", styles.saveBtn)}
                       disabled={!canSubmit}
                     >
                       {buttonText}
