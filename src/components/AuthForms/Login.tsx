@@ -34,8 +34,7 @@ export default function Login() {
       router.push("/");
       toast.success(`Привіт, ${response.user.name}!`);
 
-      console.log("Користувач залогінився:", response);
-    } catch (error: any) {
+     } catch (error: any) {
       console.error("Login error:", error);
 
       let message = "Помилка входу, спробуйте ще раз";
