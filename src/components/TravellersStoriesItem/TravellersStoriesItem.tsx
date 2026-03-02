@@ -103,9 +103,7 @@ export default function TravellersStoriesItem({
   }
 
   const isPending = saveMutation.isPending || unsaveMutation.isPending;
-  console.log("isPending:", isPending);
-  console.log("saveMutation.isPending:", saveMutation.isPending);
-  console.log("unsaveMutation.isPending:", unsaveMutation.isPending);
+
   return (
     <>
       <ModalWrapper

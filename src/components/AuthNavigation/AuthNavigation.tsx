@@ -9,6 +9,7 @@ import { useAuthStore } from "@/src/lib/store/authStore";
 import { logout } from "@/src/lib/api/authApi";
 import ModalWrapper from "@/src/components/ui/ModalWrapper/ModalWrapper";
 import Image from "next/image";
+import { ToggleTheme } from "../lightswind/toggle-theme";
 
 interface AuthNavigationProps {
   variant?: "mobile" | "desktop";
@@ -38,7 +39,6 @@ export default function AuthNavigation({
     try {
       await logout();
     } finally {
-     
       clearIsAuthenticated();
       localStorage.removeItem("auth");
       setIsLogoutModalOpen(false);
@@ -89,6 +89,7 @@ export default function AuthNavigation({
           <use href="/sprite.svg#icon-logout" />
         </svg>
       </button>
+      <ToggleTheme />
       <ModalWrapper
         isOpen={isLogoutModalOpen}
         onClose={() => setIsLogoutModalOpen(false)}
@@ -133,6 +134,9 @@ export default function AuthNavigation({
         >
           Реєстрація
         </Link>
+      </li>
+      <li>
+        <ToggleTheme />
       </li>
     </ul>
   );

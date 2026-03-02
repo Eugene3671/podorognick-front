@@ -1,159 +1,171 @@
 .footer {
-    width: 100%;
-    background: #e8eeff;
-    padding: 48px 0;
+  width: 100%;
+  background: var(--footer-background);
+  padding: 48px 0;
 }
 
 .footerContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .logo {
-    width: 156px;
-    height: 36px;
-    margin-bottom: 40px;
+  width: 156px;
+  height: 36px;
+  margin-bottom: 40px;
+}
+
+.logo svg {
+  --color8: var(--color-text);
+}
+
+.logoAuth {
+  margin-right: 200px;
 }
 
 .socialMediaList {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 40px;
 }
 
 .socialMediaItem {
-    border: 1px solid transparent;
-    border-radius: 8px;
-    padding: 4px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 4px;
+  transition: all 0.3s ease-in-out;
 }
 
 .socialMediaItem a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .socialMediaItem a svg {
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
+  fill: var(--color-text);
 }
 
 .socialMediaItem:hover,
 .socialMediaItem:focus {
-    border: 1px solid #000;
+  border: 1px solid var(--color-text);
 }
 
 .socialMediaItem:active {
-    border: 1px solid #000;
-    background: #d8d8d8;
+  border: 1px solid #000;
+  background: #d8d8d8;
 }
 
 .navList {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    margin-bottom: 32px;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 32px;
+  text-align: center;
 }
 
 .navItem {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #000000;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    padding: 4px 8px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 4px 8px;
+  transition: all 0.3s ease-in-out;
 }
 
 .navItem:hover,
 .navItem:focus {
-    border: 1px solid #000;
+  border: 1px solid var(--color-text);
 }
 
 .navItem:active {
-    border: 1px solid #000;
-    background: #d8d8d8;
+  border: 1px solid #000;
+  background: #d8d8d8;
 }
 
 .text {
-    width: 88%;
-    margin: 0 auto;
-    padding-top: 32px;
-    border-top: 1px solid rgba(0, 0, 0, 0.15);
-    font-size: 12px;
-    line-height: 1.5;
-    text-align: center;
+  width: 88%;
+  margin: 0 auto;
+  padding-top: 32px;
+  border-top: 1px solid var(--secondary-button-border);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .textAuth {
-    font-size: 12px;
-    line-height: 1.5;
-    text-align: center;
-    margin: 27px 0;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  margin: 27px 0;
 }
 
 @media (min-width: 768px) {
-    .footer {
-        padding: 50px 0;
-    }
+  .footer {
+    padding: 50px 0;
+  }
 
-    .footerContainer {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+  .footerContainer {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-    .logo {
-        margin-right: 400px;
-        margin-bottom: 32px;
-    }
-    .socialMediaList {
-        margin-bottom: 32px;
-        gap: 4px;
-    }
+  .logo {
+    margin-right: 416px;
+    margin-bottom: 32px;
+  }
 
-    .socialMediaItem a svg {
-        width: 24px;
-        height: 24px;
-    }
+  .socialMediaList {
+    margin-bottom: 32px;
+    gap: 4px;
+  }
 
-    .navList {
-        flex-direction: row;
-        justify-content: center;
-    }
+  .socialMediaItem a svg {
+    width: 24px;
+    height: 24px;
+  }
 
-    .text {
-        width: 100%;
-    }
+  .navList {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .text {
+    width: 100%;
+  }
 }
 
 @media (min-width: 1440px) {
-    .footer {
-        padding: 80px 0;
-    }
+  .footer {
+    padding: 80px 0;
+  }
 
-    .footerContainer {
-        justify-content: space-between;
-    }
+  .footerContainer {
+    justify-content: space-between;
+  }
 
-    .logo {
-        margin-right: 92px;
-    }
+  .logo {
+    margin-right: 92px;
+  }
 
-    .logoAuth {
-        margin-right: 240px;
-    }
+  .logoAuth {
+    margin-right: 200px;
+  }
 
-    .text {
-        font-size: 16px;
-    }
+  .text {
+    font-size: 16px;
+  }
 
-    .textAuth {
-        font-size: 16px;
-        margin: 24px 0;
-    }
+  .textAuth {
+    font-size: 16px;
+    margin: 24px 0;
+  }
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import styles from "./CreateStoryPage.module.css";
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createStory, CreateStoryDto } from "@/src/lib/api/storiesApi";
@@ -42,11 +43,14 @@ export default function CreateStoryPage() {
   });
 
   return isAuthenticated ? (
-    <StoryForm
-      initialValues={initialValues}
-      onSubmit={mutation.mutate}
-      buttonText="Create Story"
-    />
+    <div className={`${styles.container} container`}>
+      <h1 className={styles.title}>Створити нову історію</h1>
+      <StoryForm
+        initialValues={initialValues}
+        onSubmit={mutation.mutate}
+        buttonText="Create Story"
+      />
+    </div>
   ) : (
     <div className="container">
       <EmptyState

@@ -11,19 +11,20 @@
   position: absolute;
   top: 12px;
   right: 12px;
-
+  color: var(--color-text);
   background: transparent;
   border: none;
   font-size: 24px;
   cursor: pointer;
 }
+
 .modalContent {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: white;
+  background: var(--color-page-background);
   padding: 20px;
   padding-top: 64px;
   border-radius: 12px;

@@ -1,117 +1,125 @@
 .formWrap {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 48px;
-
-  margin-left: 64px;
-  margin-right: 64px;
-  margin-bottom: 72px;
+  width: 100%;
+  padding-bottom: 60px;
 }
 
 .formLayout {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
 }
 
 .form {
-  width: 100%;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
 
-  & button {
-    border-radius: 8px;
-    border: 2px solid #261a2b;
-    padding: 12px 0px;
-  }
+& button {
+  border-radius: 8px;
+  /* border: 2px solid #261a2b; */
+  padding: 12px 0px;
 }
 
 .label {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
 }
 
 .label span {
-  margin-top: 24px;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--color-text);
 }
 
-.error {
-  color: red;
-  margin: 0;
-  font-size: 14px;
-}
-
-.input {
-  width: 100%;
-  padding: 8px;
-  border-radius: 8px;
-}
-
+.input,
 .textarea {
   width: 100%;
   padding: 12px;
   border-radius: 8px;
+  border: 1px solid var(--color-neutral-lighter);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-family);
   font-size: 16px;
+  border: 1px solid var(--input-border);
+  transition: all 0.3s ease-in-out;
+  background-color: var(--opacity-transparent);
 }
 
-.buttons {
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.textarea {
+  min-height: 200px;
+  resize: vertical;
+}
+
+.preview {
   width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  background-color: var(--color-neutral-lightest);
 }
 
-.saveBtn {
+.error {
+  color: var(--color-red);
+  font-size: 14px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.fileInput {
+  color: transparent;
   width: 100%;
+  cursor: pointer;
 }
 
+.label .fileInput::file-selector-button {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  width: 163px;
+  height: 32px;
+  border-radius: 8px;
+  padding-block: 4px;
+  padding-inline: 10px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.saveBtn,
 .cancelBtn {
   width: 100%;
-  padding: 12px 0;
-  border-radius: 8px;
+  margin: 0;
+  text-align: center;
 }
 
-.preview {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-  padding-bottom: 24px;
-}
-
-.preview {
-  max-width: 250px;
-  height: auto;
-}
-
-/* -----------------------------  FOR TABLET ----------------------------- */
-@media screen and (min-width: 768px) {
-  .preview {
-    max-width: 350px;
-  }
-}
-
-/* -----------------------------  FOR COMPUTER ----------------------------- */
 @media screen and (min-width: 1440px) {
-  .formLayout {
-    width: 100%;
-  }
   .form {
-    display: flex;
     flex-direction: row;
-    gap: 24px;
     align-items: flex-start;
-    width: 100%;
+    justify-content: space-between;
+    gap: 40px;
   }
+
   .fields {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
+    flex: 0 0 894px;
   }
+
   .buttons {
-    width: 30%;
+    flex: 0 0 394px;
+    position: sticky;
+    top: 40px;
+    margin-top: 28px;
   }
-  .preview {
-    max-width: 500px;
+  .saveBtn,
+  .cancelBtn {
+    padding: 14px 20px;
   }
 }
