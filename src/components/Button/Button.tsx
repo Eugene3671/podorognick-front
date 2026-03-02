@@ -20,7 +20,7 @@ export default function Button({
   disabled = false,
   className = "",
 }: ButtonProps) {
-  const classes = `${css.button} buttonBlue ${className}`.trim();
+  const classes = `${css.button} ${className}`.trim();
 
   if (href) {
     return (

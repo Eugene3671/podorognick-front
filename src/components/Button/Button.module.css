@@ -1,37 +1,12 @@
 /* src/components/Button/Button.module.css */
 
 .button {
-  width: 100%;
   margin: 0 auto;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  transition: all 0.3s ease-in-out;
-
-  border: 1px solid var(--color-royal-blue);
-  border-radius: 8px;
-  padding: 6px 12px;
-
-  background: var(--color-royal-blue);
-
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
   line-height: 150%;
-  color: var(--color-white);
-}
-
-/* З 768px кнопка стає по ширині контенту */
-@media screen and (min-width: 768px) {
-  .button {
-    width: auto;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .button {
-    font-size: 18px;
-  }
 }

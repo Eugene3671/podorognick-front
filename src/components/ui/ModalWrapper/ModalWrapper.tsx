@@ -1,11 +1,12 @@
-"use client"
+"use client";
 
-import React, { useEffect } from "react"
+import React, { useEffect } from "react";
+import "./ModalWrapper.css";
 
 interface ModalWrapperProps {
-  isOpen: boolean
-  onClose: () => void
-  children: React.ReactNode
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
 }
 
 const ModalWrapper: React.FC<ModalWrapperProps> = ({
@@ -13,48 +14,39 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   onClose,
   children,
 }) => {
- 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        onClose()
+        onClose();
       }
-    }
+    };
 
     if (isOpen) {
-      document.addEventListener("keydown", handleEsc)
+      document.addEventListener("keydown", handleEsc);
     }
 
     return () => {
-      document.removeEventListener("keydown", handleEsc)
-    }
-  }, [isOpen, onClose])
-
+      document.removeEventListener("keydown", handleEsc);
+    };
+  }, [isOpen, onClose]);
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden"
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = ""
+      document.body.style.overflow = "";
     }
 
     return () => {
-      document.body.style.overflow = ""
-    }
-  }, [isOpen])
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
-    <div
-      className="modal-overlay"
-      onClick={onClose} 
-    >
-      <div
-        className="modal-content"
-        onClick={(e) => e.stopPropagation()} 
-      >
-       
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button
           type="button"
           className="modal-close-btn"
@@ -67,7 +59,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
         {children}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ModalWrapper
+export default ModalWrapper;
