@@ -10,9 +10,7 @@ import { LoginFormValues } from "@/src/types/auth";
 import { login } from "@/src/lib/api/authApi";
 import toast from "react-hot-toast";
 import { useAuthStore } from "@/src/lib/store/authStore";
-import { AxiosError } from "axios";
 import LoaderEl from "@/src/components/LoaderEl/LoaderEl";
-
 export default function Login() {
   const router = useRouter();
   const setUser = useAuthStore((state) => state.setUser);
@@ -33,8 +31,7 @@ export default function Login() {
       setUser(response.user);
       router.push("/");
       toast.success(`Привіт, ${response.user.name}!`);
-
-     } catch (error: any) {
+    } catch (error: any) {
       console.error("Login error:", error);
 
       let message = "Помилка входу, спробуйте ще раз";

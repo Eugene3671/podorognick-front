@@ -13,6 +13,7 @@
   min-height: 199px;
   border-radius: 50%;
   object-fit: cover;
+  flex-shrink: 0;
 }
 .info_content {
   display: flex;
@@ -39,7 +40,6 @@
   width: 100%;
   padding: 0;
   text-align: center;
-  /* text-wrap: balance; */
   color: var(----color-scheme-2-text-family);
 }
 

@@ -11,16 +11,12 @@
   display: flex;
   flex-direction: column;
 }
-
-/* & button {
-  border-radius: 8px; */
-/* border: 2px solid #261a2b; */
-/* padding: 12px 10px;
-} */
-/* border-radius: 8px; */
-/* border: 2px solid #261a2b; */
-/* padding: 12px 10px; */
-/* } */
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 100%;
+}
 
 .label {
   display: flex;
@@ -63,16 +59,16 @@
   resize: vertical;
 }
 
-.preview {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
+.imageWrapperPreview {
+  position: relative;
+  height: 223px;
+  margin-bottom: 12px;
+}
+.imagePreview {
   object-fit: cover;
   border-radius: 12px;
-  margin-bottom: 12px;
   background-color: var(--color-neutral-lightest);
 }
-
 .error {
   color: var(--color-red);
   font-size: 14px;
@@ -97,47 +93,35 @@
   padding: 0;
   cursor: pointer;
 }
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-}
-
 .saveBtn,
 .cancelBtn {
   width: 100%;
-  margin: 0;
   text-align: center;
 }
+.saveBtn {
+  margin-bottom: 16px;
+}
 
+@media screen and (min-width: 768px) {
+  .imageWrapperPreview {
+    height: 469px;
+    margin-bottom: 24px;
+  }
+}
 @media screen and (min-width: 1440px) {
   .form {
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 40px;
+    gap: 24px;
   }
-
   .fields {
-    flex: 0 0 894px;
+    max-width: 865px;
+    flex-grow: 1;
   }
-
+  .imageWrapperPreview {
+    height: 576px;
+  }
   .buttons {
-    flex: 0 0 394px;
-    position: sticky;
-    top: 40px;
-    margin-top: 28px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-  }
-  .saveBtn,
-  .cancelBtn {
-    padding: 14px 20px;
+    max-width: 423px;
+    flex-grow: 1;
   }
 }

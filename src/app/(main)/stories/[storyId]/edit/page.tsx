@@ -60,7 +60,7 @@ export default function EditStoryPage() {
         exact: false,
       });
 
-      router.push("/stories");
+      router.push("/profile/own");
       // router.refresh();
     } catch (err) {
       console.error("Помилка при оновленні історії:", err);

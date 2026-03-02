@@ -191,7 +191,6 @@ button {
   border: 1px solid var(--primary-button-background);
   background-color: var(--primary-button-background);
   transition: all 0.3s ease-in-out;
-  margin: 0 auto;
   display: inline-block;
   font-family: var(--font-nunito-sans);
   font-weight: 500;
