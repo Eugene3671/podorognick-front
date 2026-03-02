@@ -19,13 +19,11 @@ import Button from "../Button/Button";
 import { formatDate } from "@/src/utils/formatDate";
 interface TravellersStoriesItemProps {
   story: Story;
-  savedStoryIds?: string[];
   mode?: string;
 }
 
 export default function TravellersStoriesItem({
   story,
-  savedStoryIds = [],
   mode,
 }: TravellersStoriesItemProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -34,9 +32,7 @@ export default function TravellersStoriesItem({
   const [favoriteCount, setFavoriteCount] = useState<number>(
     story.favoriteCount,
   );
-  const [isSaved, setIsSaved] = useState<boolean>(
-    savedStoryIds.includes(story._id),
-  );
+  const [isSaved, setIsSaved] = useState<boolean>(false);
 
   useEffect(() => {
     const checkSaved = async () => {
