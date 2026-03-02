@@ -121,7 +121,7 @@ export default function TravellersStoriesItem({
       <li className={css.travellerStoryItem}>
         <div className={css.storyThumbnailWrapper}>
           <Image
-            src={story.img}
+            src={story.img ?? "/public/path-to-your-placeholder.png"}
             alt="placeholder"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1440px) 340px, 421px"
@@ -142,7 +142,10 @@ export default function TravellersStoriesItem({
 
           <div className={css.storyAuthor}>
             <Image
-              src={story.ownerId?.avatarUrl ?? "/default-avatar.png"}
+              src={
+                story.ownerId?.avatarUrl ??
+                "/public/path-to-your-placeholder.png"
+              }
               alt="avatar"
               width={48}
               height={48}
