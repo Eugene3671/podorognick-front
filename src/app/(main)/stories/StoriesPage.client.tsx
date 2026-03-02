@@ -6,15 +6,11 @@ import css from "./StoriesPage.module.css";
 import TravellersStories from "@/src/components/TravellersStories/TravellersStories";
 import { Toaster } from "react-hot-toast";
 import { Category } from "@/src/types/category";
-import { useQuery } from "@tanstack/react-query";
-import { getCategories } from "@/src/lib/api/сategoriesApi";
+import { useCategories } from "@/src/hooks/useCategories";
 
 function StoriesPageClient() {
   const [category, setCategory] = useState<Category | null>();
-  const { data } = useQuery({
-    queryKey: ["categories"],
-    queryFn: () => getCategories(),
-  });
+  const categories = useCategories();
 
   return (
     <section className={css.storiesSection}>
@@ -28,8 +24,8 @@ function StoriesPageClient() {
             value={"Усі категорії"}
             onClick={() => setCategory(null)}
           />
-          {data ? (
-            data?.map((cat) => (
+          {categories.data ? (
+            categories.data?.map((cat) => (
               <input
                 key={cat._id}
                 className={css.categoryButton}

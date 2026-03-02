@@ -4,7 +4,7 @@
 }
 
 .join_background {
-  background-color: #e8eeff;
+  background-color: var(--color-page-background);
   border-radius: 24px;
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.2)), url(/img/join/join_mob_1x.webp);
@@ -22,14 +22,14 @@
 
 .join_title {
   margin-top: 0;
-  color: #fff;
+  color: var(--color-white) !important;
   margin-bottom: 16px;
   font-size: 26px;
   line-height: 120%;
 }
 
 .join_description {
-  color: #fff;
+  color: var(--color-white) !important;
   line-height: 150%;
   font-size: 16px;
   margin-bottom: 24px;

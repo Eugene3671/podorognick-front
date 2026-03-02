@@ -1,7 +1,7 @@
 "use client";
 
 import TravellersStoriesItem from "../TravellersStoriesItem/TravellersStoriesItem";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import css from "./TravellersStories.module.css";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -15,6 +15,8 @@ import LoaderEl from "../LoaderEl/LoaderEl";
 import { useBreakpoint } from "@/src/hooks/useBreakpoint";
 import { getUserById } from "@/src/lib/api/usersApi";
 import EmptyState from "../ui/EmptyState/EmptyState";
+import { useAuthStore } from "@/src/lib/store/authStore";
+import { Story } from "@/src/types/story";
 
 type StoryMode =
   | "default"
@@ -41,7 +43,6 @@ export default function TravellersStories({
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
   const hasBreakpoint = breakpoint !== null;
-
   const loadStep = breakpoint === "tablet" ? 4 : 3;
 
   const initialVisibleStories = useMemo(() => {
@@ -127,6 +128,17 @@ export default function TravellersStories({
     setVisibleStories(initialVisibleStories);
   }, [initialVisibleStories]);
 
+  // const { data: savedData } = useQuery({
+  //   queryKey: ["savedStories"],
+  //   queryFn: () => getSavedStories({ page: 1, perPage: 20 }),
+  //   enabled: isAuthenticated,
+  // });
+
+  // const savedStoryIds = useMemo(
+  //   () => savedData?.stories.map((s: Story) => s._id) ?? [],
+  //   [savedData],
+  // );
+
   const handleLoadMore = () => {
     const nextVisible = visibleStories + loadStep;
 
@@ -141,7 +153,7 @@ export default function TravellersStories({
     }
   };
 
-  const shoulShowLoadButton =
+  const shouldShowLoadButton =
     buttonType === "loadMore" &&
     (hasNextPage || visibleStories < allStories.length);
 
@@ -151,47 +163,72 @@ export default function TravellersStories({
         <LoaderEl />
       </div>
     );
-  }
+  } else if (isLoading) {
+    return (
+      <div className={css.loaderWrapper}>
+        <LoaderEl />
+      </div>
+    );
+  } else if (isError) {
+    return <EmptyState title={error.message} />;
+  } else if (!isLoading && !isFetchingNextPage && allStories.length === 0) {
+    switch (mode) {
+      case "myOwnStories":
+        return (
+          <EmptyState
+            title="Ви ще нічого не публікували, поділіться своєю першою історією!"
+            buttonText="Опублікувати історію"
+            // href="/stories"
+          />
+        );
+      case "mySavedStories":
+        return (
+          <EmptyState
+            title="У вас ще немає збережених історій, мершій збережіть вашу першу історію!"
+            buttonText="До історій"
+            // href="/stories"
+          />
+        );
+      case "travellerStories":
+        return (
+          <EmptyState
+            title="Цей користувач ще не публікував історій"
+            buttonText="Назад до історій"
+            // href="/stories"
+          />
+        );
+    }
+  } else {
+    return (
+      <>
+        <ul className={css.travellerStoriesList}>
+          {allStories.slice(0, visibleStories).map((story) => (
+            <TravellersStoriesItem key={story._id} story={story} mode={mode} />
+          ))}
+        </ul>
+        <div className={css.buttonWrapper}>
+          {isFetchingNextPage ? (
+            <LoaderEl />
+          ) : (
+            shouldShowLoadButton &&
+            !isFetchingNextPage && (
+              <button
+                className={`buttonBlue`}
+                onClick={handleLoadMore}
+                disabled={isFetchingNextPage}
+              >
+                Показати ще
+              </button>
+            )
+          )}
 
-  return (
-    <>
-      {isLoading ? (
-        <div className={css.loaderWrapper}>
-          <LoaderEl />
+          {buttonType === "link" && !isMobile && (
+            <Link href="/stories" className={`buttonBlue`}>
+              Переглянути всі
+            </Link>
+          )}
         </div>
-      ) : isError ? (
-        <EmptyState title={error.message} />
-      ) : (
-        <>
-          <ul className={css.travellerStoriesList}>
-            {allStories.slice(0, visibleStories).map((story) => (
-              <TravellersStoriesItem key={story._id} story={story} />
-            ))}
-          </ul>
-          <div className={css.buttonWrapper}>
-            {isFetchingNextPage ? (
-              <LoaderEl />
-            ) : (
-              shoulShowLoadButton &&
-              !isFetchingNextPage && (
-                <button
-                  className={`buttonBlue`}
-                  onClick={handleLoadMore}
-                  disabled={isFetchingNextPage}
-                >
-                  Показати ще
-                </button>
-              )
-            )}
-
-            {buttonType === "link" && !isMobile && (
-              <Link href="/stories" className={`buttonBlue`}>
-                Переглянути всі
-              </Link>
-            )}
-          </div>
-        </>
-      )}
-    </>
-  );
+      </>
+    );
+  }
 }
