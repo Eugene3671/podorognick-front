@@ -1,18 +1,30 @@
 "use client";
 
 import React, { useEffect } from "react";
-import "./ModalWrapper.css";
+import css from "./ModalWrapper.module.css";
+import Button from "../../Button/Button";
+import { createPortal } from "react-dom";
 
 interface ModalWrapperProps {
   isOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode;
+  title: string;
+  description: string;
+  hrefBtnLeft?: string;
+  hrefBtnRight: string;
+  textBtnLeft: string;
+  textBtnRight: string;
 }
 
 const ModalWrapper: React.FC<ModalWrapperProps> = ({
   isOpen,
   onClose,
-  children,
+  hrefBtnLeft,
+  hrefBtnRight,
+  textBtnRight,
+  textBtnLeft,
+  title,
+  description,
 }) => {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -44,21 +56,36 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className={css.modalContent} onClick={(e) => e.stopPropagation()}>
         <button
           type="button"
-          className="modal-close-btn"
+          className={css.modalCloseBtn}
           onClick={onClose}
           aria-label="Close modal"
         >
           ×
         </button>
-
-        {children}
+        <h3 className={css.modalTitle}>{title}</h3>
+        <p className={css.modalText}>{description}</p>
+        <div className={css.modalButtonsWrapper}>
+          <Button
+            className={`buttonGrey ${css.modalButton}`}
+            href={hrefBtnLeft}
+          >
+            {textBtnLeft}
+          </Button>
+          <Button
+            className={`buttonBlue ${css.modalButton}`}
+            href={hrefBtnRight}
+          >
+            {textBtnRight}
+          </Button>
+        </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };
 

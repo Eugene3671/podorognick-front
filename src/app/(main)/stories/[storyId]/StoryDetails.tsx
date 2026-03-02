@@ -20,11 +20,8 @@ interface StoryDetailsProps {
 export const StoryDetails = ({ story }: StoryDetailsProps) => {
   const router = useRouter();
   const { isAuthenticated } = useAuthStore();
-  const [favoriteCount, setFavoriteCount] = useState<number>(
-    story.favoriteCount,
-  );
   const [isSaved, setIsSaved] = useState<boolean>(false);
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   useEffect(() => {
     const checkSaved = async () => {
       try {
@@ -48,12 +45,10 @@ export const StoryDetails = ({ story }: StoryDetailsProps) => {
 
     onMutate: () => {
       setIsSaved(true);
-      setFavoriteCount((favCount) => favCount + 1);
     },
 
     onError: () => {
       setIsSaved(false);
-      setFavoriteCount((favCount) => favCount - 1);
     },
     onSuccess: () => {},
   });
@@ -62,11 +57,9 @@ export const StoryDetails = ({ story }: StoryDetailsProps) => {
     mutationFn: () => removeFromSavedStories(story._id),
     onMutate: () => {
       setIsSaved(false);
-      setFavoriteCount((favCount) => favCount - 1);
     },
     onError: () => {
       setIsSaved(true);
-      setFavoriteCount((favCount) => favCount + 1);
     },
     onSuccess: () => {},
   });
@@ -82,11 +75,22 @@ export const StoryDetails = ({ story }: StoryDetailsProps) => {
   const handleUnsave = () => {
     unsaveMutation.mutate();
   };
-  const openModal = () => {};
   if (typeof story.category === "string" || typeof story.ownerId === "string")
     return <div>Помилка під час завантаженя</div>;
   return (
     <>
+      <ModalWrapper
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Помилка під час збереження"
+        description="Щоб зберегти статтю вам треба увійти, якщо ще немає облікового
+            запису зареєструйтесь."
+        hrefBtnLeft="/auth/login"
+        hrefBtnRight="/auth/register"
+        textBtnLeft="Увійти"
+        textBtnRight="Зареєструватись"
+      />
+
       <div className={css.storyInfo}>
         <p className={css.storyInfoTitle}>
           <strong>Автор статті </strong>
@@ -114,12 +118,16 @@ export const StoryDetails = ({ story }: StoryDetailsProps) => {
             type="button"
             onClick={() => {
               if (isAuthenticated) {
-                isSaved ? handleUnsave() : handleSave();
+                if (isSaved) {
+                  handleUnsave();
+                } else {
+                  handleSave();
+                }
               } else {
-                setIsOpenModal(true);
+                setIsModalOpen(true);
               }
             }}
-            className={css.addToSaveBtn}
+            className={`buttonBlue ${css.addToSaveBtn}`}
           >
             {isSaved ? "Видалити зі збережених" : "Зберегти"}
           </Button>

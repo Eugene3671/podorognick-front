@@ -15,7 +15,6 @@ import {
 import { useAuthStore } from "@/src/lib/store/authStore";
 import toast from "react-hot-toast";
 import ModalWrapper from "../ui/ModalWrapper/ModalWrapper";
-import Button from "../Button/Button";
 import { formatDate } from "@/src/utils/formatDate";
 interface TravellersStoriesItemProps {
   story: Story;
@@ -109,29 +108,17 @@ export default function TravellersStoriesItem({
   console.log("unsaveMutation.isPending:", unsaveMutation.isPending);
   return (
     <>
-      <ModalWrapper isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <div className={css.modalContent}>
-          <h3 className={css.modalTitle}>Помилка під час збереження</h3>
-          <p className={css.modalText}>
-            Щоб зберегти статтю вам треба увійти, якщо ще немає облікового
-            запису зареєструйтесь.
-          </p>
-          <div className={css.modalButtonsWrapper}>
-            <Button
-              className={`buttonGrey ${css.modalButton}`}
-              href="/auth/login"
-            >
-              Увійти
-            </Button>
-            <Button
-              className={`buttonBlue ${css.modalButton}`}
-              href="/auth/register"
-            >
-              Зареєструватись
-            </Button>
-          </div>
-        </div>
-      </ModalWrapper>
+      <ModalWrapper
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Помилка під час збереження"
+        description="Щоб зберегти статтю вам треба увійти, якщо ще немає облікового
+            запису зареєструйтесь."
+        hrefBtnLeft="/auth/login"
+        hrefBtnRight="/auth/register"
+        textBtnLeft="Увійти"
+        textBtnRight="Зареєструватись"
+      />
 
       <li className={css.travellerStoryItem}>
         <div className={css.storyThumbnailWrapper}>

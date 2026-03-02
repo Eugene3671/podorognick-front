@@ -53,7 +53,6 @@
   --color-white: #fff;
   --color-scheme-2-text: #000;
 }
-
 [data-theme="dark"] {
   --primary-button-background: var(--color-white);
   --color-background: #000;
