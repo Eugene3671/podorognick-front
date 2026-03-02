@@ -7,8 +7,11 @@ import { Story } from "@/src/types/story";
 import StoryForm, {
   StoryFormValues,
 } from "@/src/components/StoryForm/StoryForm";
+import { useQueryClient } from "@tanstack/react-query";
+import css from "../StoryDetails.module.css";
 
 export default function EditStoryPage() {
+  const queryClient = useQueryClient();
   const { storyId } = useParams<{ storyId: string }>();
   const router = useRouter();
 
@@ -47,7 +50,18 @@ export default function EditStoryPage() {
 
     try {
       await updateStory(storyId, values);
+
+      await queryClient.invalidateQueries({
+        queryKey: ["stories"],
+        exact: false,
+      });
+      await queryClient.refetchQueries({
+        queryKey: ["stories"],
+        exact: false,
+      });
+
       router.push("/stories");
+      // router.refresh();
     } catch (err) {
       console.error("Помилка при оновленні історії:", err);
     }
@@ -56,11 +70,16 @@ export default function EditStoryPage() {
   if (!initialValues || !story) return <div>Loading...</div>;
 
   return (
-    <StoryForm
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      buttonText="Оновити історію"
-      currentImage={story.img}
-    />
+    <>
+      <section className={`${css.stroryDatailsContainer} container`}>
+        <h1 className={css.storyTitle}>Оновити історію</h1>
+        <StoryForm
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          buttonText="Оновити історію"
+          currentImage={story.img}
+        />
+      </section>
+    </>
   );
 }
