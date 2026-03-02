@@ -3,40 +3,63 @@
 import Image from "next/image";
 import Link from "next/link";
 import css from "./TravellersStoriesItem.module.css";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import "@/src/app/globals.css";
 import { useMutation } from "@tanstack/react-query";
 import { Story } from "@/src/types/story";
 import {
   addToSavedStories,
+  getSavedStories,
   removeFromSavedStories,
 } from "@/src/lib/api/storiesApi";
 import { useAuthStore } from "@/src/lib/store/authStore";
 import toast from "react-hot-toast";
+import ModalWrapper from "../ui/ModalWrapper/ModalWrapper";
+import { formatDate } from "@/src/utils/formatDate";
 interface TravellersStoriesItemProps {
   story: Story;
+  mode?: string;
 }
+
 export default function TravellersStoriesItem({
   story,
+  mode,
 }: TravellersStoriesItemProps) {
-  const router = useRouter();
-  const { isAuthenticated, user } = useAuthStore();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { isAuthenticated } = useAuthStore();
   const [favoriteCount, setFavoriteCount] = useState<number>(
     story.favoriteCount,
   );
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
+  useEffect(() => {
+    const checkSaved = async () => {
+      try {
+        const savedStories = await getSavedStories();
+        const isAlreadySaved = savedStories.stories.some(
+          (saved) => saved._id === story._id,
+        );
+        setIsSaved(isAlreadySaved);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (isAuthenticated) {
+      checkSaved();
+    }
+  }, [isAuthenticated, story._id]);
+
   const saveMutation = useMutation({
     mutationFn: () => addToSavedStories(story._id),
-
     onMutate: () => {
       setIsSaved(true);
-      setFavoriteCount((favCount) => favCount + 1);
+      setFavoriteCount((prev) => prev + 1);
     },
-
     onError: (error) => {
       setIsSaved(false);
-      setFavoriteCount((favCount) => favCount - 1);
+      setFavoriteCount((prev) => prev - 1);
       toast.error(`Сталася помилка: ${error.message}`);
     },
     onSuccess: () => {
@@ -48,11 +71,11 @@ export default function TravellersStoriesItem({
     mutationFn: () => removeFromSavedStories(story._id),
     onMutate: () => {
       setIsSaved(false);
-      setFavoriteCount((favCount) => favCount - 1);
+      setFavoriteCount((prev) => prev - 1);
     },
     onError: (error) => {
       setIsSaved(true);
-      setFavoriteCount((favCount) => favCount + 1);
+      setFavoriteCount((prev) => prev + 1);
       toast.error(`Сталася помилка: ${error.message}`);
     },
     onSuccess: () => {
@@ -61,86 +84,124 @@ export default function TravellersStoriesItem({
   });
 
   const handleSave = () => {
+    setIsLoading(true);
     if (!isAuthenticated) {
-      router.push("/auth/login");
+      setIsLoading(false);
+      setIsModalOpen(true);
       return;
     }
     saveMutation.mutate();
+    setIsLoading(false);
   };
 
   const handleUnsave = () => {
     unsaveMutation.mutate();
   };
+
   if (typeof story.ownerId === "string" || typeof story.category === "string") {
     return null;
   }
-  return (
-    <li className={css.travellerStoryItem}>
-      <div className={css.storyThumbnailWrapper}>
-        <Image
-          src={story.img}
-          alt="placeholder"
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1440px) 340px, 421px"
-          style={{ objectFit: "cover" }}
-          loading="eager"
-          className={css.storyThumbnail}
-        />
-      </div>
 
-      <div className={css.storyWrapper}>
-        <div className={css.storyContents}>
-          <p className={css.regionTag}>
-            {story.category?.name ?? "Без категорії"}
-          </p>
-          <h4 className={css.storyTitle}>{story.title}</h4>
-          <p className={css.storyText}>{story.article}</p>
-        </div>
-        <div className={css.storyAuthor}>
+  const isPending = saveMutation.isPending || unsaveMutation.isPending;
+  console.log("isPending:", isPending);
+  console.log("saveMutation.isPending:", saveMutation.isPending);
+  console.log("unsaveMutation.isPending:", unsaveMutation.isPending);
+  return (
+    <>
+      <ModalWrapper
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Помилка під час збереження"
+        description="Щоб зберегти статтю вам треба увійти, якщо ще немає облікового
+            запису зареєструйтесь."
+        hrefBtnLeft="/auth/login"
+        hrefBtnRight="/auth/register"
+        textBtnLeft="Увійти"
+        textBtnRight="Зареєструватись"
+      />
+
+      <li className={css.travellerStoryItem}>
+        <div className={css.storyThumbnailWrapper}>
           <Image
-            src={story.ownerId?.avatarUrl ?? "/default-avatar.png"}
-            alt="avatar"
-            width={48}
-            height={48}
-            className={css.authorAvatar}
+            src={story.img}
+            alt="placeholder"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1440px) 340px, 421px"
+            style={{ objectFit: "cover" }}
+            loading="eager"
+            className={css.storyThumbnail}
           />
-          <div className={css.authorInfo}>
-            <p className={css.authorName}>
-              {story.ownerId?.name ?? "Невідомий автор"}
+        </div>
+
+        <div className={css.storyWrapper}>
+          <div className={css.storyContents}>
+            <p className={css.regionTag}>
+              {story.category?.name ?? "Без категорії"}
             </p>
-            <div className={css.storyInfo}>
-              <p className={css.storyDate}>{story.date}</p>
-              <span className={css.separator}>•</span>
-              <p className={css.numberOfSaves}>
-                {favoriteCount}
-                <svg width="12" height="12" className={css.saveIcon}>
-                  <use href="/sprite.svg#icon-bookmark"></use>
-                </svg>
+            <h4 className={css.storyTitle}>{story.title}</h4>
+            <p className={css.storyText}>{story.article}</p>
+          </div>
+
+          <div className={css.storyAuthor}>
+            <Image
+              src={story.ownerId?.avatarUrl ?? "/default-avatar.png"}
+              alt="avatar"
+              width={48}
+              height={48}
+              className={css.authorAvatar}
+            />
+            <div className={css.authorInfo}>
+              <p className={css.authorName}>
+                {story.ownerId?.name ?? "Невідомий автор"}
               </p>
+              <div className={css.storyInfo}>
+                <p className={css.storyDate}>{formatDate(story.date)}</p>
+                <span className={css.separator}>•</span>
+                <p className={css.numberOfSaves}>
+                  {favoriteCount}
+                  <svg width="12" height="12" className={css.saveIcon}>
+                    <use href="/sprite.svg#icon-bookmark"></use>
+                  </svg>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className={css.buttonsWrapper}>
-          <Link
-            href={`/stories/${story._id}`}
-            className={`buttonGrey ${css.storyDetailsLink}`}
-          >
-            Переглянути статтю
-          </Link>
-          <button
-            className={`buttonGrey ${isSaved ? css.saveButtonActive : css.saveButton}`}
-            onClick={isSaved ? handleUnsave : handleSave}
-          >
-            {saveMutation.isPending || unsaveMutation.isPending ? (
-              <span className={css.loader}></span>
+
+          <div className={css.buttonsWrapper}>
+            <Link
+              href={`/stories/${story._id}`}
+              className={`buttonGrey ${css.storyDetailsLink}`}
+            >
+              Переглянути статтю
+            </Link>
+
+            {mode === "myOwnStories" ? (
+              <Link
+                href={`/stories/${story._id}/edit`}
+                className={`buttonGrey ${css.saveButton}`}
+              >
+                <svg width="24" height="24" className={css.saveIconButton}>
+                  <use href="/sprite.svg#icon-edit"></use>
+                </svg>
+              </Link>
             ) : (
-              <svg width="24" height="24" className={css.saveIconButton}>
-                <use href="/sprite.svg#icon-bookmark"></use>
-              </svg>
+              <button
+                className={`buttonGrey ${isSaved ? css.saveButtonActive : css.saveButton}`}
+                onClick={isSaved ? handleUnsave : handleSave}
+                disabled={isPending}
+              >
+                {isPending || isLoading ? (
+                  <span className={css.loader}></span>
+                ) : (
+                  <svg width="24" height="24" className={css.saveIconButton}>
+                    <use href="/sprite.svg#icon-bookmark"></use>
+                  </svg>
+                )}
+              </button>
             )}
-          </button>
+          </div>
         </div>
-      </div>
-    </li>
+      </li>
+    </>
   );
 }

@@ -1,20 +1,27 @@
 "use client";
 
 import React, { useEffect } from "react";
+import css from "./ModalWrapper.module.css";
 import Button from "../../Button/Button";
 
 interface ModalWrapperProps {
   isOpen: boolean;
   onClose: () => void;
-  typeCancle: "";
-  title: "href";
-  description: "";
+  title: string;
+  description: string;
+  hrefBtnLeft?: string;
+  hrefBtnRight: string;
+  textBtnLeft: string;
+  textBtnRight: string;
 }
 
 const ModalWrapper: React.FC<ModalWrapperProps> = ({
   isOpen,
   onClose,
-  typeCancle,
+  hrefBtnLeft,
+  hrefBtnRight,
+  textBtnRight,
+  textBtnLeft,
   title,
   description,
 }) => {
@@ -59,11 +66,23 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
         >
           ×
         </button>
-        <h2></h2>
-        <p></p>
-        <div>
-          <Button type={typeCancle}></Button>
-          <Button></Button>
+        <div className={css.modalContent}>
+          <h3 className={css.modalTitle}>{title}</h3>
+          <p className={css.modalText}>{description}</p>
+          <div className={css.modalButtonsWrapper}>
+            <Button
+              className={`buttonGrey ${css.modalButton}`}
+              href={hrefBtnLeft}
+            >
+              {textBtnLeft}
+            </Button>
+            <Button
+              className={`buttonBlue ${css.modalButton}`}
+              href={hrefBtnRight}
+            >
+              {textBtnRight}
+            </Button>
+          </div>
         </div>
       </div>
     </div>

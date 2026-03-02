@@ -15,12 +15,12 @@ const OurTravelers = () => {
   useEffect(() => {
     const fetchFirstTravelers = async () => {
       try {
-       const response = await getUsers({ 
-  page: 1, 
-  perPage: 4, 
-  sortBy: "articlesAmount", 
-  sortOrder: "desc" 
-});
+        const response = await getUsers({
+          page: 1,
+          perPage: 4,
+          sortBy: "articlesAmount",
+          sortOrder: "desc",
+        });
         const usersArray = response.users || [];
 
         setTravelers(usersArray);
@@ -38,10 +38,10 @@ const OurTravelers = () => {
       <h2 className={styles.title}>Наші Мандрівники</h2>
 
       {isLoading ? (
-  <div className={styles.loaderWrapper}>
-    <LoaderEl />
-  </div>
-) : (
+        <div className={styles.loaderWrapper}>
+          <LoaderEl />
+        </div>
+      ) : (
         <ul className={styles.list}>
           {travelers.map((user) => (
             <li key={user._id}>
@@ -57,10 +57,13 @@ const OurTravelers = () => {
       )}
 
       <div className={styles.buttonContainer}>
-  <Button href="/travellers" className={styles.viewAllButton}>
-    Переглянути всіх
-  </Button>
-</div>
+        <Button
+          href="/travellers"
+          className={`buttonBlue ${styles.viewAllButton}`}
+        >
+          Переглянути всіх
+        </Button>
+      </div>
     </section>
   );
 };
