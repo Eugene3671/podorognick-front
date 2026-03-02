@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { flushSync } from "react-dom";
 import "@/src/app/globals.css";
+import css from "./toggle-theme.module.css";
 
 import { cn } from "@/src/lib/utils";
 
@@ -155,16 +156,16 @@ export const ToggleTheme = ({
         ref={buttonRef}
         onClick={toggleTheme}
         className={cn(
-          "p-2 rounded-full transition-colors duration-300 theme-button",
+          `p-2 rounded-full transition-colors duration-300 ${css.themeButton}`,
           isDark ? "hover:text-amber-400" : "hover:text-blue-500",
           className,
         )}
         {...props}
       >
         {isDark ? (
-          <Sun className="h-6 w-6 text-amber-400 toggle-icon" />
+          <Sun className={`h-6 w-6 text-amber-400 ${css.toggleIcon}`} />
         ) : (
-          <Moon className="h-6 w-6 text-blue-500 toggle-icon" />
+          <Moon className={`h-6 w-6 text-blue-500 ${css.toggleIcon}`} />
         )}
       </button>
 

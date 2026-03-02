@@ -89,7 +89,6 @@ export default function AuthNavigation({
           <use href="/sprite.svg#icon-logout" />
         </svg>
       </button>
-      <ToggleTheme />
       <ModalWrapper
         isOpen={isLogoutModalOpen}
         onClose={() => setIsLogoutModalOpen(false)}
@@ -134,9 +133,6 @@ export default function AuthNavigation({
         >
           Реєстрація
         </Link>
-      </li>
-      <li>
-        <ToggleTheme />
       </li>
     </ul>
   );

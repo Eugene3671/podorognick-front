@@ -19,7 +19,7 @@ export default function About() {
         </div>
         <ul className={css.list}>
           <li className={css.item}>
-            <svg className={css.icon} width="37" height="37">
+            <svg className={css.icon} width="48" height="48">
               <use href="/sprite.svg#icon-stars" />
             </svg>
             <h3 className={css.subTitle}>Наша місія</h3>

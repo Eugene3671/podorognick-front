@@ -173,37 +173,46 @@
   display: none;
 }
 
-.burger {
+.burger,
+.toggleTheme {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background-color: #00000005;
+  background-color: var(--header-menu-button-background);
   border: 1px solid #00000015;
   border-radius: 8px;
   padding: 4px;
   width: 32px;
   height: 32px;
+  color: var(--color-text);
 }
 
-.homeHeader .burger {
+.toggleTheme {
+  margin-left: 8px;
+}
+
+.homeHeader .burger,
+.homeHeader .toggleTheme {
   background-color: #ffffff10;
   border: 1px solid transparent;
   color: #ffffff;
 }
 
-.homeHeader .burger svg {
+.homeHeader .burger svg,
+.homeHeader .toggleTheme svg {
   fill: #ffffff;
 }
 
-.homeHeader.fixed .burger {
+.homeHeader.fixed .burger,
+.homeHeader.fixed .toggleTheme {
   background-color: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.1);
-  color: #000;
+  color: var(--color-text);
 }
 
 .homeHeader.fixed .burger svg {
-  fill: #000;
+  fill: var(--color-text);
 }
 
 @media (min-width: 768px) {
