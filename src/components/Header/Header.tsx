@@ -20,7 +20,6 @@ export default function Header() {
   const [isFixed, setIsFixed] = useState(!isHome);
   const { theme, toggleTheme } = useTheme();
 
-
   useEffect(() => {
     const handleScroll = () => {
       if (isHome) {
@@ -51,7 +50,6 @@ export default function Header() {
               <use href="/sprite.svg#icon-Logo" />
             </svg>
           </Link>
-
 
           <label className="theme-switch">
             <input
@@ -100,7 +98,7 @@ export default function Header() {
           <div
             className={clsx(css.action, isAuthenticated && css.authActionBtn)}
           >
-            <Link href="/stories/create" className="buttonBlue">
+            <Link href="/stories/create" className={"buttonBlue"}>
               Опублікувати історію
             </Link>
           </div>

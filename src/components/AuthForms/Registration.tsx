@@ -151,17 +151,18 @@ export default function Register() {
               )}
             </div>
 
-            <button
-              type="submit"
-              className={css.authButton}
-              disabled={isSubmitting}
-            >
-              Зареєструватись
-            </button>
-            {isSubmitting && (
+            {isSubmitting ? (
               <div className={css.loaderWrapper}>
                 <LoaderEl />
               </div>
+            ) : (
+              <button
+                type="submit"
+                className={`${css.authButton} buttonBlue`}
+                disabled={isSubmitting}
+              >
+                Зареєструватись
+              </button>
             )}
           </Form>
         )}

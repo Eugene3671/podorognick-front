@@ -7,16 +7,25 @@
   --color-button-text: #fff;
 
   --primary-button-background: var(--color-accent);
+  --primary-button-border: var(--color-accent);
   --primary-button-hover-background: var(--color-accent-lighter);
   --primary-button-active-background: var(--color-accent-light);
   --primary-button-disabled-background: var(--color-accent-light);
   --primary-button-disabled-color: var(--color-background);
 
   --secondary-button-background: var(--opacity-neutral-darkest-5);
+  --secondary-button-border: var(--opacity-neutral-darkest-15);
   --secondary-button-hover-background: var(--color-accent);
   --secondary-button-active-background: var(--color-accent-darker);
   --secondary-button-disabled-background: var(--opacity-neutral-darkest-5);
   --secondary-button-disabled-color: var(--color-text);
+
+  --card-background: var(--color-accent-lighter);
+  --header-background: var(--color-page-background);
+  --header-fixed-background: var(--color-accent-lightest);
+  --footer-background: var(--color-accent-lighter);
+  --input-border: var(--opacity-neutral-darkest-15);
+  --input-placeholder: var(--opacity-neutral-darkest-60);
 
   --color-accent-lightest: #f7f9ff;
   --color-accent-lighter: #e8eeff;
@@ -54,15 +63,29 @@
   --color-scheme-2-text: #000;
 }
 
-/* 
 [data-theme="dark"] {
   --primary-button-background: var(--color-white);
-  --color-background: #000;
+  --primary-button-border: var(--color-white);
+  --primary-button-hover-background: var(--color-neutral);
+  --primary-button-active-background: var(--color-neutral-dark);
+  --primary-button-active-border: var(--color-neutral);
+  --primary-button-disabled-background: var(--color-background);
+  --primary-button-disabled-color: var(--color-background);
+
+  --secondary-button-border: var(--color-accent-lightest);
+  --secondary-button-background: var(--opacity-white-10);
+  --secondary-button-hover-background: var(--color-accent-lighter);
+  --secondary-button-active-background: var(--color-accent-light);
+  --secondary-button-disabled-background: var(--opacity-neutral-darkest-5);
+  --secondary-button-disabled-color: var(--color-background);
+
+  --card-background: var(--opacity-white-10);
+  --header-background: var(--color-page-background);
+  --header-fixed-background: var(--color-page-background);
+  --footer-background: var(--opacity-white-10);
+  --input-border: var(--color-accent-lightest);
+  --input-placeholder: var(--opacity-white-50);
   --color-text: #fff;
-  --color-accent-lightest: #f7f9ff;
-  --color-accent-lighter: rgba(255, 255, 255, 0.1);
-  --color-accent-light: #7a96ea;
-  --color-accent: #fff;
   --color-page-background: #000;
   --color-button-text: #000;
 }
@@ -71,14 +94,10 @@
   :root {
     --color-background: #000;
     --color-text: #fff;
-    --color-accent-lightest: #f7f9ff;
-    --color-accent-lighter: #e8eeff;
-    --color-accent-light: #7a96ea;
-    --color-accent: #fff;
     --color-button-text: #000;
     --color-page-background: #000;
   }
-} */
+}
 
 /* transition: property 0.3s ease-in-out */
 
@@ -168,7 +187,7 @@ button {
 }
 
 .buttonBlue {
-  color: var(--color-background);
+  color: var(--color-button-text);
   border: 1px solid var(--primary-button-background);
   background-color: var(--primary-button-background);
   transition: all 0.3s ease-in-out;
@@ -193,22 +212,24 @@ button {
 .buttonBlue:focus-visible {
   background-color: var(--primary-button-hover-background);
   color: var(--color-text);
-  border: 1px solid var(--color-accent);
+  border: 1px solid var(--primary-button-border);
 }
 
 .buttonBlue:active {
   background-color: var(--primary-button-active-background);
+  border-color: var(--primary-button-active-border);
   color: var(--color-text);
 }
 
 .buttonBlue:disabled {
   background-color: var(--primary-button-disabled-background);
+  border-color: var(--primary-button-disabled-background);
   opacity: 0.3;
   color: var(--primary-button-disabled-color);
 }
 
 .buttonGrey {
-  border: 1px solid var(--secondary-button-hover-background);
+  border: 1px solid var(--secondary-button-border);
   background-color: var(--secondary-button-background);
   transition: all 0.3s ease-in-out;
   color: var(--color-text);
@@ -225,8 +246,8 @@ button {
 .buttonGrey:hover,
 .buttonGrey:focus-visible {
   background-color: var(--secondary-button-hover-background);
-  color: var(--color-background);
-  border: 1px solid var(--color-accent);
+  color: var(--color-button-text);
+  border: 1px solid var(--secondary-button-hover-background);
   cursor: pointer;
 }
 
