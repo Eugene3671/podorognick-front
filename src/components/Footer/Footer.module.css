@@ -16,10 +16,6 @@
     margin-bottom: 40px;
 }
 
-.logoAuth {
-    margin-right: 200px;
-}
-
 .socialMediaList {
     display: flex;
     align-items: center;
@@ -112,10 +108,9 @@
     }
 
     .logo {
-        margin-right: 416px;
+        margin-right: 400px;
         margin-bottom: 32px;
     }
-
     .socialMediaList {
         margin-bottom: 32px;
         gap: 4px;
@@ -150,7 +145,7 @@
     }
 
     .logoAuth {
-        margin-right: 200px;
+        margin-right: 240px;
     }
 
     .text {

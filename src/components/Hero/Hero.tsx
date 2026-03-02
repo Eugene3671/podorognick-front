@@ -1,8 +1,13 @@
+"use client";
+
 import css from "./Hero.module.css";
 import "@/src/app/globals.css";
 import Button from "../Button/Button";
+import { useAuthStore } from "@/src/lib/store/authStore";
 
 export default function Hero() {
+  const { isAuthenticated } = useAuthStore();
+
   return (
     <section className={css.hero} id="hero">
       <div className="container">
@@ -40,9 +45,15 @@ export default function Hero() {
             своїми історіями та отримувати натхнення для нових пригод. Відкрийте
             для себе нові місця та знайдіть однодумців!
           </p>
-          <Button href="/auth/register" className={"buttonBlue"}>
-            Доєднатись
-          </Button>
+          {isAuthenticated ? (
+            <Button href="/profile" className="buttonBlue">
+              Мій Профіль
+            </Button>
+          ) : (
+            <Button href="/auth/register" className="buttonBlue">
+              Доєднатись
+            </Button>
+          )}
         </div>
       </div>
     </section>
