@@ -11,7 +11,7 @@
   font-weight: 700;
   line-height: 110%;
   letter-spacing: -0.01em;
-  color: #000;
+  color: var(--color-text);
   margin-bottom: 24px;
   text-align: start;
 }

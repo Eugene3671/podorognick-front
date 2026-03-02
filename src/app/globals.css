@@ -76,7 +76,7 @@
   --primary-button-active-background: var(--color-neutral-dark);
   --primary-button-active-border: var(--color-neutral);
   --primary-button-disabled-background: var(--color-background);
-  --primary-button-disabled-color: var(--color-background);
+  --primary-button-disabled-color: var(--color-scheme-2-text);
 
   --secondary-button-border: var(--color-accent-lightest);
   --secondary-button-background: var(--opacity-white-10);
