@@ -9,6 +9,8 @@
   padding-top: 32px;
 }
 .avatar {
+  min-width: 199px;
+  min-height: 199px;
   border-radius: 50%;
   object-fit: cover;
 }

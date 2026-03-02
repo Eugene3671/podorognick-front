@@ -26,11 +26,11 @@
 }
 
 .mobile.homeLogout {
-  color: #000;
+  color: var(--color-text);
 }
 
 .mobile.homeUserName {
-  color: #000;
+  color: var(--color-text);
 }
 
 .desktop {
@@ -132,14 +132,14 @@
 .userName {
   font-size: 12px;
   margin: 0;
-  color: #000;
+  color: var(--color-text);
   padding: 7px 8px 7px 0px;
   border-right: 1px solid rgba(0, 0, 0, 0.15);
   height: auto;
 }
 
 .homeUserName {
-  color: #f7f9ff ;
+  color: #f7f9ff;
   border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -159,6 +159,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--color-text);
 }
 
 .logoutButton:hover,

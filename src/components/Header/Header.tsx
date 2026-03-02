@@ -10,6 +10,7 @@ import css from "./Header.module.css";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import { useAuthStore } from "@/src/lib/store/authStore";
+import { ToggleTheme } from "../lightswind/toggle-theme";
 
 export default function Header() {
   const pathname = usePathname();
@@ -104,6 +105,9 @@ export default function Header() {
               <use href="/sprite.svg#icon-menu" />
             </svg>
           </button>
+          <span className={css.toggleTheme}>
+            <ToggleTheme />
+          </span>
         </div>
       </header>
 
