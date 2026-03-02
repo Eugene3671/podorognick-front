@@ -9,7 +9,7 @@ type Props = {
 
 const ProfileLayout = ({ children }: Props) => {
   return (
-    <div className={`container offset`}>
+    <div className={`container offset pb-16 md:pb-18 xl:pb-18`}>
       <TravellerInfo />
       <PageToggle />
       {children}
