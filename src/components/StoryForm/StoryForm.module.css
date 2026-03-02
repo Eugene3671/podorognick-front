@@ -13,17 +13,10 @@
   gap: 24px;
 }
 
-.fields {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 12px;
+& button {
+  border-radius: 8px;
+  /* border: 2px solid #261a2b; */
+  padding: 12px 0px;
 }
 
 .label {
@@ -50,7 +43,9 @@
   color: var(--color-text);
   font-family: var(--font-family);
   font-size: 16px;
-  transition: border-color 0.3s ease-in-out;
+  border: 1px solid var(--input-border);
+  transition: all 0.3s ease-in-out;
+  background-color: var(--opacity-transparent);
 }
 
 .input:focus,

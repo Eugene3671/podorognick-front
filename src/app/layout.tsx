@@ -3,8 +3,6 @@ import { Nunito_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import TanStackProvider from "@/src/components/TanStackProvider/TanStackProvider";
 import AuthProvider from "@/src/components/AuthProvider/AuthProvider";
-import { ThemeProvider } from "@/src/components/provider/ThemeProvider";
-
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
   subsets: ["cyrillic"],
@@ -40,8 +38,6 @@ export const metadata: Metadata = {
   },
 };
 
-
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -51,15 +47,26 @@ export default async function RootLayout({
     <html lang="uk" className={`${nunitoSans.variable} ${inter.variable}`}>
       <head>
         <link rel="icon" href="/Favicon.svg" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+        (function() {
+          const theme = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (theme === 'dark' || (!theme && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          }
+        })();
+      `,
+          }}
+        />
       </head>
       <body>
-               <ThemeProvider>
-          <AuthProvider>
-            <TanStackProvider>
-              <main>{children}</main>
-            </TanStackProvider>
-          </AuthProvider>
-        </ThemeProvider>
+        <AuthProvider>
+          <TanStackProvider>
+            <main>{children}</main>
+          </TanStackProvider>
+        </AuthProvider>
       </body>
     </html>
   );

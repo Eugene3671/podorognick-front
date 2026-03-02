@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import css from "./AuthForms.module.css";
+import "@/src/app/globals.css";
 import { Formik, Form, Field } from "formik";
 import { loginSchema } from "@/src/validation/registerValidation";
 import { LoginFormValues } from "@/src/types/auth";
@@ -130,17 +131,18 @@ export default function Login() {
               )}
             </div>
 
-            <button
-              type="submit"
-              className={css.authButton}
-              disabled={isSubmitting}
-            >
-              Увійти
-            </button>
-            {isSubmitting && (
+            {isSubmitting ? (
               <div className={css.loaderWrapper}>
                 <LoaderEl />
               </div>
+            ) : (
+              <button
+                type="submit"
+                className={`${css.authButton} buttonBlue`}
+                disabled={isSubmitting}
+              >
+                Увійти
+              </button>
             )}
           </Form>
         )}

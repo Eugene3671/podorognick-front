@@ -2,7 +2,7 @@
   max-width: 335px;
   width: 100%;
   display: flex;
-  background: #e8eeff;
+  background: var(--card-background);
   border-radius: 10px;
   padding: 4px;
   margin-bottom: 40px;
@@ -18,13 +18,14 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  color: var(--color-text);
 }
 
 .active {
   text-decoration: none;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 8px;
-  background: #f7f9ff;
+  background: var(--header-fixed-background);
 }
 
 @media screen and (min-width: 768px) {
