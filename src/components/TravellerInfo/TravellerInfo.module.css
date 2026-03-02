@@ -6,9 +6,11 @@
   max-width: 311px;
   width: 100%;
   margin: 32px 12px;
+  padding-top: 32px;
 }
 .avatar {
   border-radius: 50%;
+  object-fit: cover;
 }
 .info_content {
   display: flex;
@@ -61,5 +63,6 @@
 @media screen and (min-width: 1440) {
   .info {
     max-width: 590px;
+    padding-top: 48px;
   }
 }
