@@ -139,7 +139,7 @@
 }
 
 .homeUserName {
-  color: #f7f9ff !important;
+  color: #f7f9ff ;
   border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
