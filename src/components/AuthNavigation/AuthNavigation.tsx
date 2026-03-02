@@ -1,11 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import css from "./AuthNavigation.module.css";
 import Link from "next/link";
 import clsx from "clsx";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuthStore } from "@/src/lib/store/authStore";
 import { logout } from "@/src/lib/api/authApi";
+import ModalWrapper from "@/src/components/ui/ModalWrapper/ModalWrapper";
 import Image from "next/image";
 
 interface AuthNavigationProps {
@@ -26,11 +28,22 @@ export default function AuthNavigation({
   );
   const router = useRouter();
 
-  const handleLogout = async () => {
-    await logout();
-    clearIsAuthenticated();
-    localStorage.removeItem("auth");
-    router.refresh();
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
+  const handleLogout = () => {
+    setIsLogoutModalOpen(true);
+  };
+
+  const handleConfirmLogout = async () => {
+    try {
+      await logout();
+    } finally {
+     
+      clearIsAuthenticated();
+      localStorage.removeItem("auth");
+      setIsLogoutModalOpen(false);
+      router.refresh();
+    }
   };
 
   return isAuthenticated ? (
@@ -76,6 +89,16 @@ export default function AuthNavigation({
           <use href="/sprite.svg#icon-logout" />
         </svg>
       </button>
+      <ModalWrapper
+        isOpen={isLogoutModalOpen}
+        onClose={() => setIsLogoutModalOpen(false)}
+        title="Вийти з акаунта?"
+        description="Ви впевнені, що хочете вийти?"
+        textBtnLeft="Скасувати"
+        textBtnRight="Вийти"
+        onLeftClick={() => setIsLogoutModalOpen(false)}
+        onRightClick={handleConfirmLogout}
+      />
     </>
   ) : (
     <ul className={clsx(css[variant], css.authWrapper)}>
