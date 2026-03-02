@@ -29,7 +29,6 @@ const StoryForm = ({
   currentImage,
 }: StoryFormProps) => {
   const { data: categories = [], isLoading } = useCategories();
-
   const [preview, setPreview] = useState<string | null>(null);
 
   const previewImage = preview ?? currentImage ?? null;
@@ -42,21 +41,18 @@ const StoryForm = ({
         validationSchema={StorySchemaValidation}
         enableReinitialize
       >
-        {({ setFieldValue, values, resetForm }) => (
+        {({ setFieldValue, values, resetForm, dirty, isValid }) => (
           <div className={styles.formLayout}>
             <div className={styles.justForm}>
               <Form className={styles.form}>
                 <div className={styles.fields}>
                   <label className={styles.label}>
                     <span>Обкладинка статті</span>
-
-                    {previewImage && (
-                      <img
-                        src={previewImage}
-                        alt="preview"
-                        className={styles.preview}
-                      />
-                    )}
+                    <img
+                      src={previewImage || "/path-to-your-placeholder.png"}
+                      alt="preview"
+                      className={styles.preview}
+                    />
 
                     <input
                       type="file"
@@ -68,7 +64,7 @@ const StoryForm = ({
                         setFieldValue("img", file);
                         setPreview(URL.createObjectURL(file));
                       }}
-                      className={styles.input}
+                      className={styles.fileInput}
                     />
 
                     <ErrorMessage
@@ -80,14 +76,12 @@ const StoryForm = ({
 
                   <label className={styles.label}>
                     <span>Заголовок</span>
-
                     <Field
                       type="text"
                       name="title"
                       placeholder="Введіть заголовок історії"
                       className={styles.input}
                     />
-
                     <ErrorMessage
                       name="title"
                       component="p"
@@ -97,7 +91,6 @@ const StoryForm = ({
 
                   <label className={styles.label}>
                     <span>Категорія</span>
-
                     <select
                       name="category"
                       className={styles.input}
@@ -110,14 +103,12 @@ const StoryForm = ({
                       <option value="">
                         {isLoading ? "Завантаження..." : "Оберіть категорію"}
                       </option>
-
                       {categories.map((cat) => (
                         <option key={cat._id} value={cat._id}>
                           {cat.name}
                         </option>
                       ))}
                     </select>
-
                     <ErrorMessage
                       name="category"
                       component="p"
@@ -127,14 +118,12 @@ const StoryForm = ({
 
                   <label className={styles.label}>
                     <span>Текст історії</span>
-
                     <Field
                       as="textarea"
                       name="article"
                       placeholder="Ваша історія тут"
                       className={styles.textarea}
                     />
-
                     <ErrorMessage
                       name="article"
                       component="p"
@@ -144,9 +133,7 @@ const StoryForm = ({
 
                   <label className={styles.label}>
                     <span>Дата</span>
-
                     <Field type="date" name="date" className={styles.input} />
-
                     <ErrorMessage
                       name="date"
                       component="p"
@@ -154,17 +141,22 @@ const StoryForm = ({
                     />
                   </label>
                 </div>
+
                 <div className={styles.buttons}>
                   <button
                     type="submit"
                     className={`buttonBlue ${styles.saveBtn}`}
+                    disabled={!(dirty && isValid)}
                   >
                     {buttonText}
                   </button>
 
                   <button
                     type="button"
-                    onClick={() => resetForm()}
+                    onClick={() => {
+                      resetForm();
+                      setPreview(null);
+                    }}
                     className={`buttonGrey ${styles.cancelBtn}`}
                   >
                     Відмінити
