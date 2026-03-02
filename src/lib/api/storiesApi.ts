@@ -45,7 +45,7 @@ export async function removeFromSavedStories(storyId: string) {
 }
 
 export async function getSavedStories(
-  params: PaginationParams,
+  params?: PaginationParams,
 ): Promise<StoriesResponse> {
   const response = await nextServer.get<StoriesResponse>("/stories/saved", {
     params,

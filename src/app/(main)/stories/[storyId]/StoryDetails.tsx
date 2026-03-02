@@ -5,10 +5,11 @@ import css from "./StoryDetails.module.css";
 import { formatDate } from "@/src/utils/formatDate";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/src/lib/store/authStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import {
   addToSavedStories,
+  getSavedStories,
   removeFromSavedStories,
 } from "@/src/lib/api/storiesApi";
 import ModalWrapper from "@/src/components/ui/ModalWrapper/ModalWrapper";
@@ -24,6 +25,24 @@ export const StoryDetails = ({ story }: StoryDetailsProps) => {
   );
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  useEffect(() => {
+    const checkSaved = async () => {
+      try {
+        const savedStories = await getSavedStories();
+        const isAlreadySaved = savedStories.stories.some(
+          (saved) => saved._id === story._id,
+        );
+        setIsSaved(isAlreadySaved);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (isAuthenticated) {
+      checkSaved();
+    }
+  }, [isAuthenticated, story._id]);
+
   const saveMutation = useMutation({
     mutationFn: () => addToSavedStories(story._id),
 
