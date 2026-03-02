@@ -94,29 +94,24 @@
 /* -----------------------------  FOR COMPUTER ----------------------------- */
 @media screen and (min-width: 1440px) {
   .formLayout {
+    width: 100%;
+  }
+  .form {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    align-items: flex-start;
+    width: 100%;
+  }
+  .fields {
     width: 70%;
     display: flex;
-    flex-direction: row;
-    gap: 10px;
+    flex-direction: column;
   }
-
-  .justForm {
-    display: flex;
-    flex-direction: row;
-    justify-items: start;
-    gap: 24px;
-  }
-
-  .form {
-    flex-direction: row;
-    gap: 40px;
-  }
-
-  .preview {
-    max-width: 500px;
-  }
-
   .buttons {
     width: 30%;
+  }
+  .preview {
+    max-width: 500px;
   }
 }
