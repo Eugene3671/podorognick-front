@@ -19,7 +19,7 @@ export default function EmptyState({
       <h3 className={css.emptyStateTitle}>{title}</h3>
 
       {buttonText && onButtonClick && (
-        <button className={css.emptyStateButton} onClick={onButtonClick}>
+        <button className={`buttonBlue ${css.button}`} onClick={onButtonClick}>
           {buttonText}
         </button>
       )}

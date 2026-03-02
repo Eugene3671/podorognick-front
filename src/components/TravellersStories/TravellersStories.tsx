@@ -17,6 +17,7 @@ import { getUserById } from "@/src/lib/api/usersApi";
 import EmptyState from "../ui/EmptyState/EmptyState";
 import { useAuthStore } from "@/src/lib/store/authStore";
 import { Story } from "@/src/types/story";
+import { useRouter } from "next/navigation";
 
 type StoryMode =
   | "default"
@@ -44,6 +45,7 @@ export default function TravellersStories({
   const isMobile = breakpoint === "mobile";
   const hasBreakpoint = breakpoint !== null;
   const loadStep = breakpoint === "tablet" ? 4 : 3;
+  const router = useRouter();
 
   const initialVisibleStories = useMemo(() => {
     if (pageType === "stories") {
@@ -178,7 +180,9 @@ export default function TravellersStories({
           <EmptyState
             title="Ви ще нічого не публікували, поділіться своєю першою історією!"
             buttonText="Опублікувати історію"
-            // href="/stories"
+            onButtonClick={() => {
+              router.push("/stories/create");
+            }}
           />
         );
       case "mySavedStories":
@@ -186,7 +190,9 @@ export default function TravellersStories({
           <EmptyState
             title="У вас ще немає збережених історій, мершій збережіть вашу першу історію!"
             buttonText="До історій"
-            // href="/stories"
+            onButtonClick={() => {
+              router.push("/stories");
+            }}
           />
         );
       case "travellerStories":
@@ -194,7 +200,9 @@ export default function TravellersStories({
           <EmptyState
             title="Цей користувач ще не публікував історій"
             buttonText="Назад до історій"
-            // href="/stories"
+            onButtonClick={() => {
+              router.push("/stories");
+            }}
           />
         );
     }
