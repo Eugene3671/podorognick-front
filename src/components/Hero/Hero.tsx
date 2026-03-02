@@ -1,12 +1,25 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import css from "./Hero.module.css";
 import "@/src/app/globals.css";
 import Button from "../Button/Button";
+import LoaderEl from "../LoaderEl/LoaderEl";
 import { useAuthStore } from "@/src/lib/store/authStore";
 
 export default function Hero() {
   const { isAuthenticated } = useAuthStore();
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  const handleClick = () => {
+    setIsLoading(true);
+
+    setTimeout(() => {
+      router.push("/auth/register");
+    }, 300);
+  };
 
   return (
     <section className={css.hero} id="hero">
@@ -36,23 +49,31 @@ export default function Hero() {
             className={css.image}
           />
         </picture>
-        <div className={`${css.heroContainer}`}>
+
+        <div className={css.heroContainer}>
           <h1 className={css.title}>
             Відкрийте світ <br /> подорожей з нами!
           </h1>
           <p className={css.description}>
             Приєднуйтесь до нашої спільноти мандрівників, де ви зможете ділитися
-            своїми історіями та отримувати натхнення для нових пригод. Відкрийте
-            для себе нові місця та знайдіть однодумців!
+            своїми <br />
+            історіями та отримувати натхнення для нових пригод. Відкрийте для
+            себе нові <br />
+            місця та знайдіть однодумців!
           </p>
-          {isAuthenticated ? (
+
+          {isLoading ? (
+            <div className={css.loaderWrapper}>
+              <LoaderEl />
+            </div>
+          ) : isAuthenticated ? (
             <Button href="/profile" className={`buttonBlue ${css.button}`}>
               Мій Профіль
             </Button>
           ) : (
             <Button
-              href="/auth/register"
               className={`buttonBlue ${css.button}`}
+              onClick={handleClick}
             >
               Доєднатись
             </Button>

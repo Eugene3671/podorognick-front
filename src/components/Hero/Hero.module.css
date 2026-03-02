@@ -48,6 +48,13 @@
   margin-bottom: 32px;
 }
 
+.loaderWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .button {
   width: 100%;
 }
@@ -73,13 +80,13 @@
 
 @media screen and (min-width: 1440px) {
   .heroContainer {
-    max-width: 759px;
+    /* max-width: 759px; */
     padding-bottom: 347px;
   }
 
   .title {
     font-size: 56px;
-    width: 759px;
+    /* width: 759px; */
   }
   .description {
     font-size: 20px;
