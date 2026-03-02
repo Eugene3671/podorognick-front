@@ -6,6 +6,7 @@ import styles from "./StoryForm.module.css";
 import { useCategories } from "@/src/hooks/useCategories";
 
 import { StorySchemaValidation } from "@/src/validation/storySchemaValid";
+import Image from "next/image";
 
 export type StoryFormValues = {
   img: File | null;
@@ -54,12 +55,11 @@ const StoryForm = ({
                   <div className={styles.fields}>
                     <label className={styles.label}>
                       <span>Обкладинка статті</span>
-                      <img
+                      <Image
                         src={previewImage || "/path-to-your-placeholder.png"}
                         alt="preview"
                         className={styles.preview}
                       />
-
                       <input
                         type="file"
                         accept="image/*"
