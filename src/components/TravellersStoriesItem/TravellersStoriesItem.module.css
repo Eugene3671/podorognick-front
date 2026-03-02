@@ -58,7 +58,7 @@
   font-weight: 600;
   font-size: 12px;
   line-height: 150%;
-  color: var(--light-scheme-text);
+  color: var(--color-text);
   margin: 0;
   margin-bottom: 8px;
 }
@@ -81,7 +81,7 @@
   font-weight: 700;
   font-size: 18px !important;
   line-height: 150%;
-  color: var(--light-scheme-text);
+  color: var(--color-text);
   margin: 0;
   margin-bottom: 8px;
 }
@@ -104,7 +104,7 @@
   font-size: 16px !important;
   height: 72px;
   line-height: 150%;
-  color: var(--light-scheme-text);
+  color: var(--color-text);
   margin: 0;
 }
 @media only screen and (min-width: 1440px) {
@@ -139,7 +139,7 @@
   font-weight: 600;
   font-size: 12px;
   line-height: 150%;
-  color: var(--light-scheme-text);
+  color: var(--color-text);
   margin: 0;
 }
 
@@ -155,7 +155,7 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 150%;
-  color: var(--light-scheme-text);
+  color: var(--color-text);
   margin: 0;
 }
 
@@ -164,7 +164,7 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 150%;
-  color: var(--light-scheme-text);
+  color: var(--color-text);
   margin: 0;
   display: flex;
   align-items: center;
@@ -232,12 +232,17 @@
     fill 0.3s ease-in-out;
 }
 
+.saveButton .saveIconButton,
+.saveIcon {
+  fill: var(--color-text);
+}
+
 .loader {
   width: 24px;
   height: 24px;
   border-radius: 50%;
   display: inline-block;
-  border-top: 3px solid var(--light-scheme-background);
+  border-top: 3px solid var(--color-background);
   border-right: 3px solid transparent;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
@@ -257,7 +262,7 @@
 .saveButton:hover .saveIconButton,
 .saveButton:focus .saveIconButton,
 .saveButton:active .saveIconButton {
-  fill: var(--color-background);
+  fill: var(--color-button-text);
 }
 
 .saveButtonActive {
@@ -294,7 +299,7 @@
   font-size: 48px;
   line-height: 120%;
   letter-spacing: -0.01em;
-  color: var(--light-scheme-text);
+  color: var(--color-text);
   text-align: center;
   margin: 0;
   margin-bottom: 16px;
@@ -306,7 +311,7 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 150%;
-  color: var(--light-scheme-text);
+  color: var(--color-text);
   text-align: center;
   margin-bottom: 16px;
   max-width: 640px;

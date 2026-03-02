@@ -3,23 +3,30 @@
 import Image from "next/image";
 import Link from "next/link";
 import css from "./TravellersStoriesItem.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "@/src/app/globals.css";
 import { useMutation } from "@tanstack/react-query";
 import { Story } from "@/src/types/story";
 import {
   addToSavedStories,
+  getSavedStories,
   removeFromSavedStories,
 } from "@/src/lib/api/storiesApi";
 import { useAuthStore } from "@/src/lib/store/authStore";
 import toast from "react-hot-toast";
 import ModalWrapper from "../ui/ModalWrapper/ModalWrapper";
 import Button from "../Button/Button";
+import { formatDate } from "@/src/utils/formatDate";
 interface TravellersStoriesItemProps {
   story: Story;
+  savedStoryIds?: string[];
+  mode?: string;
 }
+
 export default function TravellersStoriesItem({
   story,
+  savedStoryIds = [],
+  mode,
 }: TravellersStoriesItemProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -27,19 +34,37 @@ export default function TravellersStoriesItem({
   const [favoriteCount, setFavoriteCount] = useState<number>(
     story.favoriteCount,
   );
-  const [isSaved, setIsSaved] = useState<boolean>(false);
+  const [isSaved, setIsSaved] = useState<boolean>(
+    savedStoryIds.includes(story._id),
+  );
+
+  useEffect(() => {
+    const checkSaved = async () => {
+      try {
+        const savedStories = await getSavedStories();
+        const isAlreadySaved = savedStories.stories.some(
+          (saved) => saved._id === story._id,
+        );
+        setIsSaved(isAlreadySaved);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (isAuthenticated) {
+      checkSaved();
+    }
+  }, [isAuthenticated, story._id]);
 
   const saveMutation = useMutation({
     mutationFn: () => addToSavedStories(story._id),
-
     onMutate: () => {
       setIsSaved(true);
-      setFavoriteCount((favCount) => favCount + 1);
+      setFavoriteCount((prev) => prev + 1);
     },
-
     onError: (error) => {
       setIsSaved(false);
-      setFavoriteCount((favCount) => favCount - 1);
+      setFavoriteCount((prev) => prev - 1);
       toast.error(`Сталася помилка: ${error.message}`);
     },
     onSuccess: () => {
@@ -51,11 +76,11 @@ export default function TravellersStoriesItem({
     mutationFn: () => removeFromSavedStories(story._id),
     onMutate: () => {
       setIsSaved(false);
-      setFavoriteCount((favCount) => favCount - 1);
+      setFavoriteCount((prev) => prev - 1);
     },
     onError: (error) => {
       setIsSaved(true);
-      setFavoriteCount((favCount) => favCount + 1);
+      setFavoriteCount((prev) => prev + 1);
       toast.error(`Сталася помилка: ${error.message}`);
     },
     onSuccess: () => {
@@ -64,9 +89,7 @@ export default function TravellersStoriesItem({
   });
 
   const handleSave = () => {
-    console.log("Is clicked");
     setIsLoading(true);
-
     if (!isAuthenticated) {
       setIsLoading(false);
       setIsModalOpen(true);
@@ -79,36 +102,41 @@ export default function TravellersStoriesItem({
   const handleUnsave = () => {
     unsaveMutation.mutate();
   };
+
   if (typeof story.ownerId === "string" || typeof story.category === "string") {
     return null;
   }
+
+  const isPending = saveMutation.isPending || unsaveMutation.isPending;
+  console.log("isPending:", isPending);
+  console.log("saveMutation.isPending:", saveMutation.isPending);
+  console.log("unsaveMutation.isPending:", unsaveMutation.isPending);
   return (
     <>
-      {isModalOpen && (
-        <ModalWrapper isOpen={true} onClose={() => setIsModalOpen(false)}>
-          <div className={css.modalContent}>
-            <h3 className={css.modalTitle}>Помилка під час збереження</h3>
-            <p className={css.modalText}>
-              Щоб зберегти статтю вам треба увійти, якщо ще немає облікового
-              запису зареєструйтесь.
-            </p>
-            <div className={css.modalButtonsWrapper}>
-              <Button
-                className={`buttonGrey ${css.modalButton}`}
-                href="/auth/login"
-              >
-                Увійти
-              </Button>
-              <Button
-                className={`buttonBlue ${css.modalButton}`}
-                href="/auth/register"
-              >
-                Зареєструватись
-              </Button>
-            </div>
+      <ModalWrapper isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <div className={css.modalContent}>
+          <h3 className={css.modalTitle}>Помилка під час збереження</h3>
+          <p className={css.modalText}>
+            Щоб зберегти статтю вам треба увійти, якщо ще немає облікового
+            запису зареєструйтесь.
+          </p>
+          <div className={css.modalButtonsWrapper}>
+            <Button
+              className={`buttonGrey ${css.modalButton}`}
+              href="/auth/login"
+            >
+              Увійти
+            </Button>
+            <Button
+              className={`buttonBlue ${css.modalButton}`}
+              href="/auth/register"
+            >
+              Зареєструватись
+            </Button>
           </div>
-        </ModalWrapper>
-      )}
+        </div>
+      </ModalWrapper>
+
       <li className={css.travellerStoryItem}>
         <div className={css.storyThumbnailWrapper}>
           <Image
@@ -130,6 +158,7 @@ export default function TravellersStoriesItem({
             <h4 className={css.storyTitle}>{story.title}</h4>
             <p className={css.storyText}>{story.article}</p>
           </div>
+
           <div className={css.storyAuthor}>
             <Image
               src={story.ownerId?.avatarUrl ?? "/default-avatar.png"}
@@ -143,7 +172,7 @@ export default function TravellersStoriesItem({
                 {story.ownerId?.name ?? "Невідомий автор"}
               </p>
               <div className={css.storyInfo}>
-                <p className={css.storyDate}>{story.date}</p>
+                <p className={css.storyDate}>{formatDate(story.date)}</p>
                 <span className={css.separator}>•</span>
                 <p className={css.numberOfSaves}>
                   {favoriteCount}
@@ -154,6 +183,7 @@ export default function TravellersStoriesItem({
               </div>
             </div>
           </div>
+
           <div className={css.buttonsWrapper}>
             <Link
               href={`/stories/${story._id}`}
@@ -161,20 +191,31 @@ export default function TravellersStoriesItem({
             >
               Переглянути статтю
             </Link>
-            <button
-              className={`buttonGrey ${isSaved ? css.saveButtonActive : css.saveButton}`}
-              onClick={isSaved ? handleUnsave : handleSave}
-            >
-              {isLoading ||
-              saveMutation.isPending ||
-              unsaveMutation.isPending ? (
-                <span className={css.loader}></span>
-              ) : (
+
+            {mode === "myOwnStories" ? (
+              <Link
+                href={`/stories/${story._id}/edit`}
+                className={`buttonGrey ${css.saveButton}`}
+              >
                 <svg width="24" height="24" className={css.saveIconButton}>
-                  <use href="/sprite.svg#icon-bookmark"></use>
+                  <use href="/sprite.svg#icon-edit"></use>
                 </svg>
-              )}
-            </button>
+              </Link>
+            ) : (
+              <button
+                className={`buttonGrey ${isSaved ? css.saveButtonActive : css.saveButton}`}
+                onClick={isSaved ? handleUnsave : handleSave}
+                disabled={isPending}
+              >
+                {isPending || isLoading ? (
+                  <span className={css.loader}></span>
+                ) : (
+                  <svg width="24" height="24" className={css.saveIconButton}>
+                    <use href="/sprite.svg#icon-bookmark"></use>
+                  </svg>
+                )}
+              </button>
+            )}
           </div>
         </div>
       </li>

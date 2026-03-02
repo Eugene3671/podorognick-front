@@ -1,7 +1,7 @@
 "use client";
 
 import TravellersStoriesItem from "../TravellersStoriesItem/TravellersStoriesItem";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import css from "./TravellersStories.module.css";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -15,6 +15,8 @@ import LoaderEl from "../LoaderEl/LoaderEl";
 import { useBreakpoint } from "@/src/hooks/useBreakpoint";
 import { getUserById } from "@/src/lib/api/usersApi";
 import EmptyState from "../ui/EmptyState/EmptyState";
+import { useAuthStore } from "@/src/lib/store/authStore";
+import { Story } from "@/src/types/story";
 
 type StoryMode =
   | "default"
@@ -41,7 +43,6 @@ export default function TravellersStories({
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
   const hasBreakpoint = breakpoint !== null;
-
   const loadStep = breakpoint === "tablet" ? 4 : 3;
 
   const initialVisibleStories = useMemo(() => {
@@ -127,6 +128,17 @@ export default function TravellersStories({
     setVisibleStories(initialVisibleStories);
   }, [initialVisibleStories]);
 
+  // const { data: savedData } = useQuery({
+  //   queryKey: ["savedStories"],
+  //   queryFn: () => getSavedStories({ page: 1, perPage: 20 }),
+  //   enabled: isAuthenticated,
+  // });
+
+  // const savedStoryIds = useMemo(
+  //   () => savedData?.stories.map((s: Story) => s._id) ?? [],
+  //   [savedData],
+  // );
+
   const handleLoadMore = () => {
     const nextVisible = visibleStories + loadStep;
 
@@ -191,7 +203,7 @@ export default function TravellersStories({
       <>
         <ul className={css.travellerStoriesList}>
           {allStories.slice(0, visibleStories).map((story) => (
-            <TravellersStoriesItem key={story._id} story={story} />
+            <TravellersStoriesItem key={story._id} story={story} mode={mode} />
           ))}
         </ul>
         <div className={css.buttonWrapper}>

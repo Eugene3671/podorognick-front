@@ -1,5 +1,6 @@
 "use client";
 import css from "./Join.module.css";
+import "@/src/app/globals.css";
 import Button from "@/src/components/Button/Button";
 import { useAuthStore } from "@/src/lib/store/authStore";
 const Join = () => {
@@ -15,14 +16,14 @@ const Join = () => {
               надихають на нові пригоди.
             </p>
             {authenticated ? (
-              <Button href="/profile" type="button" className={css.join_button}>
+              <Button href="/profile" type="button" className={"buttonBlue"}>
                 Збережені
               </Button>
             ) : (
               <Button
                 href="/auth/register"
                 type="button"
-                className={css.join_button}
+                className={"buttonBlue"}
               >
                 Зареєструватися
               </Button>
