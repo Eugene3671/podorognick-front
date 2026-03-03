@@ -21,12 +21,13 @@ const TravellersList = () => {
     isFetching,
   } = useInfiniteQuery<UserPaginationResponse>({
     queryKey: ["travelers-infinite"],
-    queryFn: ({ pageParam = 1 }) => getUsers({ 
-  page: Number(pageParam), 
-  perPage: 20,
-  sortBy: "articlesAmount",
-  sortOrder: "desc"
-}),
+    queryFn: ({ pageParam = 1 }) =>
+      getUsers({
+        page: Number(pageParam),
+        perPage: 20,
+        sortBy: "articlesAmount",
+        sortOrder: "desc",
+      }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       if (lastPage.page < lastPage.totalPages) return lastPage.page + 1;
@@ -36,9 +37,9 @@ const TravellersList = () => {
 
   const allUsers = useMemo(() => {
     if (!data) return [];
-    const flatUsers = data.pages.flatMap(page => page.users);
+    const flatUsers = data.pages.flatMap((page) => page.users);
     const uniqueMap = new Map();
-    flatUsers.forEach(user => uniqueMap.set(user._id, user));
+    flatUsers.forEach((user) => uniqueMap.set(user._id, user));
     return Array.from(uniqueMap.values()) as User[];
   }, [data]);
 
@@ -48,10 +49,10 @@ const TravellersList = () => {
 
   const handleLoadMore = () => {
     if (visibleCount + 4 <= allUsers.length) {
-      setVisibleCount(prev => prev + 4);
+      setVisibleCount((prev) => prev + 4);
     } else if (hasNextPage) {
       fetchNextPage().then(() => {
-        setVisibleCount(prev => prev + 4);
+        setVisibleCount((prev) => prev + 4);
       });
     }
   };
@@ -68,8 +69,8 @@ const TravellersList = () => {
     <>
       <div className={styles.grid}>
         {visibleUsers.map((user: User, index: number) => (
-          <div 
-            key={user._id} 
+          <div
+            key={user._id}
             className={index >= 8 && index < 12 ? styles.desktopOnlyCard : ""}
           >
             <TravelerCard
@@ -84,20 +85,20 @@ const TravellersList = () => {
 
       {(visibleCount < allUsers.length || hasNextPage) && (
         <div className={styles.buttonContainer}>
-  {isFetchingNextPage ? (
-    <LoaderEl />
-  ) : (
-    (visibleCount < allUsers.length || hasNextPage) && (
-      <Button
-        type="button"
-        onClick={handleLoadMore}
-        className={styles.loadMoreButton}
-      >
-        Показати ще
-      </Button>
-    )
-  )}
-</div>
+          {isFetchingNextPage ? (
+            <LoaderEl />
+          ) : (
+            (visibleCount < allUsers.length || hasNextPage) && (
+              <Button
+                type="button"
+                onClick={handleLoadMore}
+                className={`buttonBlue ${styles.loadMoreButton}`}
+              >
+                Показати ще
+              </Button>
+            )
+          )}
+        </div>
       )}
     </>
   );
