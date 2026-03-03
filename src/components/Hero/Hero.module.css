@@ -80,16 +80,16 @@
 
 @media screen and (min-width: 1440px) {
   .heroContainer {
-    /* max-width: 759px; */
     padding-bottom: 347px;
   }
 
   .title {
     font-size: 56px;
-    /* width: 759px; */
+    width: 759px;
   }
   .description {
     font-size: 20px;
+    width: 759px;
   }
 
   .button {
