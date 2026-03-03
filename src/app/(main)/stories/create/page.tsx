@@ -48,7 +48,7 @@ export default function CreateStoryPage() {
       <StoryForm
         initialValues={initialValues}
         onSubmit={mutation.mutate}
-        buttonText="Create Story"
+        buttonText="Зберегти"
       />
     </div>
   ) : (
