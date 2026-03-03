@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 const TravellerPage = async ({ params }: Props) => {
   const { travellerId } = await params;
   return (
-    <div className="container">
+    <div className={`container offset`}>
       <TravellerInfo travellerId={travellerId} />
       <h1 className={css.title}>Історії Мандрівника</h1>
       <TravellersStories

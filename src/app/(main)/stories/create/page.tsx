@@ -52,7 +52,7 @@ export default function CreateStoryPage() {
       />
     </div>
   ) : (
-    <div className="container">
+    <div className={`container offset`}>
       <EmptyState
         title="Поділіться своїм досвідом подорожей з іншими мандрівниками.
   Увійдіть або створіть акаунт, щоб почати."

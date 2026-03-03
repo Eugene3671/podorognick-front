@@ -12,7 +12,7 @@ const StoryPage = async ({
   const story = await getServerStoryById(storyId);
   return (
     <>
-      <section className={`${css.stroryDatailsContainer} container`}>
+      <section className={`${css.stroryDatailsContainer} container offset`}>
         <h1 className={css.storyTitle}>{story.title}</h1>
         <StoryDetails story={story} />
       </section>
