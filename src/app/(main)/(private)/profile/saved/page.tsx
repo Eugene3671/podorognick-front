@@ -8,7 +8,7 @@ const ProfileSavedTabPage = () => {
       <TravellersStories
         key="saved"
         sort="new"
-        pageType="stories"
+        pageType="profile"
         buttonType="loadMore"
         mode="mySavedStories"
       />

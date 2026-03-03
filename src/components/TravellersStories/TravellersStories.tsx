@@ -18,6 +18,7 @@ import EmptyState from "../ui/EmptyState/EmptyState";
 import { useAuthStore } from "@/src/lib/store/authStore";
 import { Story } from "@/src/types/story";
 import { useRouter } from "next/navigation";
+import { useSavedStoriesStore } from "@/src/lib/store/savedStore";
 
 type StoryMode =
   | "default"
@@ -46,6 +47,18 @@ export default function TravellersStories({
   const hasBreakpoint = breakpoint !== null;
   const loadStep = breakpoint === "tablet" ? 4 : 3;
   const router = useRouter();
+  const { setSavedStoryIds } = useSavedStoriesStore();
+  const { isAuthenticated } = useAuthStore();
+
+  useQuery({
+    queryKey: ["savedStories"],
+    queryFn: async () => {
+      const data = await getSavedStories({ page: 1, perPage: 9 });
+      setSavedStoryIds(data.stories.map((s: Story) => s._id));
+      return data;
+    },
+    enabled: isAuthenticated,
+  });
 
   const initialVisibleStories = useMemo(() => {
     if (pageType === "stories") {
@@ -129,17 +142,6 @@ export default function TravellersStories({
   useEffect(() => {
     setVisibleStories(initialVisibleStories);
   }, [initialVisibleStories]);
-
-  // const { data: savedData } = useQuery({
-  //   queryKey: ["savedStories"],
-  //   queryFn: () => getSavedStories({ page: 1, perPage: 20 }),
-  //   enabled: isAuthenticated,
-  // });
-
-  // const savedStoryIds = useMemo(
-  //   () => savedData?.stories.map((s: Story) => s._id) ?? [],
-  //   [savedData],
-  // );
 
   const handleLoadMore = () => {
     const nextVisible = visibleStories + loadStep;

@@ -8,7 +8,7 @@ const ProfileOwnTabPage = () => {
       <TravellersStories
         key="own"
         sort="new"
-        pageType="stories"
+        pageType="profile"
         buttonType="loadMore"
         mode="myOwnStories"
       />
