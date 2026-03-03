@@ -17,3 +17,12 @@ export async function getCurrentUser() {
     return null;
   }
 }
+
+export async function refreshUserSession() {
+  try {
+    const res = await serverApi.post("/auth/refresh");
+    return res.data;
+  } catch {
+    return null;
+  }
+}
