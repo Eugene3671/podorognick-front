@@ -1,5 +1,5 @@
 import { User } from "@/src/types/user";
-import { nextServer } from './api'
+import { nextServer } from "./api";
 
 export type RegisterRequest = {
   name: string;
@@ -23,28 +23,20 @@ export interface AuthResponse {
   data: LoginAndRegisterResponse;
 }
 
-
 interface CheckSessionRequest {
   success: boolean;
-};
-
+}
 
 export async function register(
   data: RegisterRequest,
 ): Promise<LoginAndRegisterResponse> {
-  const res = await nextServer.post<AuthResponse>(
-    "/auth/register",
-    data,
-  );
+  const res = await nextServer.post<AuthResponse>("/auth/register", data);
   return res.data.data;
 }
 export async function login(
   data: LoginRequest,
 ): Promise<LoginAndRegisterResponse> {
-  const res = await nextServer.post<AuthResponse>(
-    "/auth/login",
-    data,
-  );
+  const res = await nextServer.post<AuthResponse>("/auth/login", data);
   return res.data.data;
 }
 
@@ -54,6 +46,6 @@ export async function logout(): Promise<void> {
 }
 
 export async function checkSession() {
-  const response = await nextServer.get<CheckSessionRequest>('/auth/session');
+  const response = await nextServer.post<CheckSessionRequest>("/auth/session");
   return response.data.success;
-};
+}
