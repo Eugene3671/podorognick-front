@@ -5,17 +5,17 @@ import Link from "next/link";
 import css from "./TravellersStoriesItem.module.css";
 import { useEffect, useState } from "react";
 import "@/src/app/globals.css";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Story } from "@/src/types/story";
 import {
   addToSavedStories,
-  getSavedStories,
   removeFromSavedStories,
 } from "@/src/lib/api/storiesApi";
 import { useAuthStore } from "@/src/lib/store/authStore";
 import toast from "react-hot-toast";
 import ModalWrapper from "../ui/ModalWrapper/ModalWrapper";
 import { formatDate } from "@/src/utils/formatDate";
+import { useSavedStoriesStore } from "@/src/lib/store/savedStore";
 interface TravellersStoriesItemProps {
   story: Story;
   mode?: string;
@@ -31,34 +31,31 @@ export default function TravellersStoriesItem({
   const [favoriteCount, setFavoriteCount] = useState<number>(
     story.favoriteCount,
   );
-  const [isSaved, setIsSaved] = useState<boolean>(false);
+
+  const { savedStoryIds, addSavedStoryId, removeSavedStoryId } =
+    useSavedStoriesStore();
+
+  const [isSaved, setIsSaved] = useState(() =>
+    savedStoryIds.includes(story._id),
+  );
 
   useEffect(() => {
-    const checkSaved = async () => {
-      try {
-        const savedStories = await getSavedStories();
-        const isAlreadySaved = savedStories.stories.some(
-          (saved) => saved._id === story._id,
-        );
-        setIsSaved(isAlreadySaved);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsSaved(savedStoryIds.includes(story._id));
+  }, [savedStoryIds, story._id]);
 
-    if (isAuthenticated) {
-      checkSaved();
-    }
-  }, [isAuthenticated, story._id]);
+  const queryClient = useQueryClient();
 
   const saveMutation = useMutation({
     mutationFn: () => addToSavedStories(story._id),
     onMutate: () => {
       setIsSaved(true);
+      addSavedStoryId(story._id);
       setFavoriteCount((prev) => prev + 1);
     },
     onError: (error) => {
       setIsSaved(false);
+      removeSavedStoryId(story._id);
       setFavoriteCount((prev) => prev - 1);
       toast.error(`Сталася помилка: ${error.message}`);
     },
@@ -71,15 +68,19 @@ export default function TravellersStoriesItem({
     mutationFn: () => removeFromSavedStories(story._id),
     onMutate: () => {
       setIsSaved(false);
+      removeSavedStoryId(story._id);
       setFavoriteCount((prev) => prev - 1);
     },
     onError: (error) => {
       setIsSaved(true);
+      addSavedStoryId(story._id);
       setFavoriteCount((prev) => prev + 1);
       toast.error(`Сталася помилка: ${error.message}`);
     },
     onSuccess: () => {
       toast.success("Історію було видалено зі збережених.");
+      queryClient.invalidateQueries({ queryKey: ["stories"] });
+      queryClient.invalidateQueries({ queryKey: ["savedStories"] });
     },
   });
 
