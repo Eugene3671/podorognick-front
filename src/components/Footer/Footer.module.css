@@ -20,9 +20,6 @@
   --color8: var(--color-text);
 }
 
-.logoAuth {
-  margin-right: 200px;
-}
 
 .socialMediaList {
   display: flex;
@@ -119,7 +116,7 @@
   }
 
   .logo {
-    margin-right: 416px;
+    margin-right: 400px;
     margin-bottom: 32px;
   }
 
@@ -153,11 +150,11 @@
   }
 
   .logo {
-    margin-right: 92px;
+    margin-right: 112px;
   }
 
   .logoAuth {
-    margin-right: 200px;
+    margin-right: 220px;
   }
 
   .text {

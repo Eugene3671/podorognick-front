@@ -71,7 +71,7 @@ export default function EditStoryPage() {
 
   return (
     <>
-      <section className={`${css.stroryDatailsContainer} container`}>
+      <section className={`${css.stroryDatailsContainer} container offset`}>
         <h1 className={css.storyTitle}>Оновити історію</h1>
         <StoryForm
           initialValues={initialValues}
