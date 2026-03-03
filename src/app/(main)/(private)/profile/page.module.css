@@ -1,0 +1,10 @@
+.profileSection {
+  padding-top: 37px;
+  padding-bottom: 64px;
+}
+@media screen and (min-width: 1440px) {
+  .profileSection {
+    padding-top: 48px;
+    padding-bottom: 72px;
+  }
+}

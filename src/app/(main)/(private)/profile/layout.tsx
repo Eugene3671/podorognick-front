@@ -2,18 +2,18 @@ import { ReactNode } from "react";
 import "@/src/app/globals.css";
 import PageToggle from "@/src/components/PageToggle/PageToggle";
 import TravellerInfo from "@/src/components/TravellerInfo/TravellerInfo";
-
+import css from "@/src/app/(main)/(private)/profile/page.module.css";
 type Props = {
   children: ReactNode;
 };
 
 const ProfileLayout = ({ children }: Props) => {
   return (
-    <div className={`container offset pb-16 md:pb-18 xl:pb-18`}>
+    <section className={`container ${css.profileSection}`}>
       <TravellerInfo />
       <PageToggle />
       {children}
-    </div>
+    </section>
   );
 };
 

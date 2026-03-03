@@ -5,8 +5,8 @@
   gap: 24px;
   max-width: 311px;
   width: 100%;
-  margin: 32px 12px;
-  padding-top: 32px;
+  margin-inline: auto;
+  margin-bottom: 32px;
 }
 .avatar {
   border-radius: 50%;
@@ -45,8 +45,7 @@
   .info {
     align-items: center;
     flex-direction: row;
-    margin: 32px 0;
-    max-width: 704px;
+    margin-inline: 0;
   }
 
   .info_content {
@@ -62,7 +61,7 @@
 
 @media screen and (min-width: 1440) {
   .info {
+    margin-bottom: 48px;
     max-width: 590px;
-    padding-top: 48px;
   }
 }
