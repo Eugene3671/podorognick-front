@@ -1,3 +1,9 @@
+.container {
+  padding-top: 40px;
+  padding-bottom: 64px;
+  min-height: 80vh;
+}
+
 .title {
   font-family: var(----second-family-family);
   font-size: 28px;
@@ -14,6 +20,10 @@
 }
 
 @media screen and (min-width: 1440px) {
+  .container {
+    padding-bottom: 72px;
+  }
+
   .title {
     font-size: 52px;
   }
