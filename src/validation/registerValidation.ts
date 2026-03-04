@@ -4,6 +4,7 @@
 export const loginSchema = Yup.object({
   
   email: Yup.string()
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Некоректна пошта")
     .email('Некоректна пошта')
     .max(64, 'Максимум 64 символи')
     .required("Пошта є обов'язковою"),
@@ -18,7 +19,8 @@ export const loginSchema = Yup.object({
     .max(32, 'Максимум 32 символи')
     .required("Імʼя та прізвище обовʼязкові"),
 
-  email: Yup.string()
+   email: Yup.string()
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Некоректна пошта")
     .email('Некоректна пошта')
     .max(64, 'Максимум 64 символи')
     .required("Пошта обовʼязкова"),

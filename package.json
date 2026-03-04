@@ -41,7 +41,7 @@
     "react-resizable-panels": "^4.7.0",
     "recharts": "^3.7.0",
     "swiper": "^12.1.2",
-    "yup": "^1.7.1",
+    "yup": "^1.2.0",
     "zustand": "^5.0.11"
   },
   "devDependencies": {

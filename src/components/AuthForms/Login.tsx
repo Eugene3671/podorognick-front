@@ -3,14 +3,14 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import css from "./AuthForms.module.css";
-import "@/src/app/globals.css";
 import { Formik, Form, Field } from "formik";
 import { loginSchema } from "@/src/validation/registerValidation";
 import { LoginFormValues } from "@/src/types/auth";
 import { login } from "@/src/lib/api/authApi";
 import toast from "react-hot-toast";
 import { useAuthStore } from "@/src/lib/store/authStore";
-import LoaderEl from "@/src/components/LoaderEl/LoaderEl";
+ import LoaderEl from "@/src/components/LoaderEl/LoaderEl";
+
 export default function Login() {
   const router = useRouter();
   const setUser = useAuthStore((state) => state.setUser);
@@ -31,7 +31,8 @@ export default function Login() {
       setUser(response.user);
       router.push("/");
       toast.success(`Привіт, ${response.user.name}!`);
-    } catch (error: any) {
+
+     } catch (error: any) {
       console.error("Login error:", error);
 
       let message = "Помилка входу, спробуйте ще раз";
@@ -128,18 +129,17 @@ export default function Login() {
               )}
             </div>
 
-            {isSubmitting ? (
+            <button
+              type="submit"
+              className={`${css.authButton} buttonBlue`}
+              disabled={isSubmitting}
+            >
+              Увійти
+            </button>
+            {isSubmitting && (
               <div className={css.loaderWrapper}>
                 <LoaderEl />
               </div>
-            ) : (
-              <button
-                type="submit"
-                className={`${css.authButton} buttonBlue`}
-                disabled={isSubmitting}
-              >
-                Увійти
-              </button>
             )}
           </Form>
         )}

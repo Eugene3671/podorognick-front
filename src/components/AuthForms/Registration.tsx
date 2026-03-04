@@ -34,20 +34,22 @@ export default function Register() {
 
       toast.success(`Привіт, ${response.user.name}! Реєстрація успішна.`);
       router.push("/");
-    } catch  (error: unknown) {
-    if (error instanceof AxiosError) {
-      const message =
-        error.response?.data?.response?.message ||
-        error.response?.data?.message ||
-        "Помилка реєстрації";
+    } catch (error: unknown) {
+  if (error instanceof AxiosError) {
+    const status = error.response?.status;
+    const message =
+      error.response?.data?.message ||
+      "Помилка реєстрації";
 
-      if (message === "User already exists") {
-        toast.error("Користувач з таким email вже існує");
-      } else {
-        toast.error(message);
-      }
+    if (status === 409) {
+      toast.error("Користувач з таким email вже існує");
+    } else if (status === 400) {
+      toast.error(message || "Некоректні дані");
     } else {
-      toast.error("Невідома помилка");
+      toast.error("Помилка сервера. Спробуйте пізніше.");
+    }
+  } else {
+    toast.error("Невідома помилка");
       }
     } finally {
       setIsSubmitting(false);
