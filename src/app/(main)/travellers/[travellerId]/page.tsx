@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import TravellerInfo from "@/src/components/TravellerInfo/TravellerInfo";
 import TravellersStories from "@/src/components/TravellersStories/TravellersStories";
-import css from "./TravellerPage.module.css";
+import styles from "./TravellerPage.module.css";
 
 type Props = {
   params: Promise<{ travellerId: string }>;
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
 const TravellerPage = async ({ params }: Props) => {
   const { travellerId } = await params;
   return (
-    <div className="container">
+    <div className={`${styles.container} container`}>
       <TravellerInfo travellerId={travellerId} />
-      <h1 className={css.title}>Історії Мандрівника</h1>
+      <h1 className={styles.title}>Історії Мандрівника</h1>
       <TravellersStories
         sort="new"
         pageType="stories"

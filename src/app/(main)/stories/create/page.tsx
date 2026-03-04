@@ -48,11 +48,11 @@ export default function CreateStoryPage() {
       <StoryForm
         initialValues={initialValues}
         onSubmit={mutation.mutate}
-        buttonText="Create Story"
+        buttonText="Зберегти"
       />
     </div>
   ) : (
-    <div className="container">
+    <div className={`container offset`}>
       <EmptyState
         title="Поділіться своїм досвідом подорожей з іншими мандрівниками.
   Увійдіть або створіть акаунт, щоб почати."

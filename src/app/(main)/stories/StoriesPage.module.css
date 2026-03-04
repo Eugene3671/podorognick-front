@@ -70,11 +70,26 @@
 }
 
 .categoryButtonActive {
-  background-color: var(--color-neutral-lightest);
+  background-color: var(--category-button-hover-background);
+  border: 1px solid var(--color-neutral-lightest);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-text);
+  transition: all 0.3s ease-in-out;
 }
 
 @media only screen and (min-width: 1440px) {
   .categoryButton {
+    padding: 6px 12px;
+    font-size: 18px;
+    color: var(--light-theme-text);
+  }
+
+  .categoryButtonActive {
     padding: 6px 12px;
     font-size: 18px;
     color: var(--light-theme-text);

@@ -9,7 +9,7 @@ import { Category } from "@/src/types/category";
 import { useCategories } from "@/src/hooks/useCategories";
 
 function StoriesPageClient() {
-  const [category, setCategory] = useState<Category | null>();
+  const [category, setCategory] = useState<Category | null>(null);
   const categories = useCategories();
 
   return (
@@ -19,19 +19,29 @@ function StoriesPageClient() {
         <h1 className={css.pageTitle}>Історії Мандрівників</h1>
         <fieldset className={css.categoryList}>
           <input
-            className={css.categoryButton}
+            className={
+              category === null ? css.categoryButtonActive : css.categoryButton
+            }
             type="button"
             value={"Усі категорії"}
-            onClick={() => setCategory(null)}
+            onClick={() => {
+              setCategory(null);
+            }}
           />
           {categories.data ? (
             categories.data?.map((cat) => (
               <input
                 key={cat._id}
-                className={css.categoryButton}
+                className={
+                  category?._id === cat._id
+                    ? css.categoryButtonActive
+                    : css.categoryButton
+                }
                 type="button"
                 value={cat.name}
-                onClick={() => setCategory(cat)}
+                onClick={() => {
+                  setCategory(cat);
+                }}
               />
             ))
           ) : (
