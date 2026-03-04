@@ -131,7 +131,7 @@ export default function Login() {
 
             <button
               type="submit"
-              className={css.authButton}
+              className={`${css.authButton} buttonBlue`}
               disabled={isSubmitting}
             >
               Увійти
