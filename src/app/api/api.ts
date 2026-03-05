@@ -1,9 +1,10 @@
+import { checkSession } from "@/src/lib/api/authApi";
 import axios, { AxiosError } from "axios";
 
 export type ApiError = AxiosError<{ error: string }>;
 
 export const api = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`,
+  baseURL: `${process.env.NEXT_PRIVATE_API_URL}/api`,
   withCredentials: true,
 });
 
@@ -18,6 +19,6 @@ if (process.env.NODE_ENV === "development") {
       });
 
       return Promise.reject(error);
-    }
+    },
   );
 }
