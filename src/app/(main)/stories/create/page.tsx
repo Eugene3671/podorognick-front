@@ -20,7 +20,7 @@ export default function CreateStoryPage() {
     article: "",
     category: "",
     img: null,
-    date: "",
+    date: new Date().toISOString().split("T")[0],
   };
 
   const mutation = useMutation({

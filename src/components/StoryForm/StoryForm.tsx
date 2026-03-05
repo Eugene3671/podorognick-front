@@ -171,20 +171,6 @@ const StoryForm = ({
                           className={styles.error}
                         />
                       </label>
-
-                      <label className={styles.label}>
-                        <span>Дата</span>
-                        <Field
-                          type="date"
-                          name="date"
-                          className={styles.input}
-                        />
-                        <ErrorMessage
-                          name="date"
-                          component="p"
-                          className={styles.error}
-                        />
-                      </label>
                     </div>
 
                     <div className={styles.buttons}>

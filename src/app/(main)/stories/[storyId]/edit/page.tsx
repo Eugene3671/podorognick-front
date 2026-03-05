@@ -29,7 +29,7 @@ export default function EditStoryPage() {
         setStory(story);
 
         setInitialValues({
-          img: null, // файл не можемо заповнити автоматично
+          img: null,
           title: story.title || "",
           category:
             typeof story.category === "string"
@@ -61,7 +61,6 @@ export default function EditStoryPage() {
       });
 
       router.push("/profile/own");
-      // router.refresh();
     } catch (err) {
       console.error("Помилка при оновленні історії:", err);
     }
