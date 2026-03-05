@@ -25,6 +25,7 @@ export interface AuthResponse {
 
 interface CheckSessionRequest {
   success: boolean;
+  accessToken: string;
 }
 
 export async function register(
@@ -46,6 +47,20 @@ export async function logout(): Promise<void> {
 }
 
 export async function checkSession() {
-  const response = await nextServer.post<CheckSessionRequest>("/auth/session");
-  return response.data.success;
+  try {
+    const response =
+      await nextServer.post<CheckSessionRequest>("/auth/session");
+
+    // Перевірка відповіді від сервера
+    console.log("checkSession response:", response.data);
+
+    if (response.data.success && response.data.accessToken) {
+      return response.data; // Повертаємо всі дані, включаючи новий accessToken
+    } else {
+      return { success: false }; // Якщо не вдалося отримати токен
+    }
+  } catch (error) {
+    console.error("checkSession error:", error);
+    throw error; // Якщо сталася помилка
+  }
 }

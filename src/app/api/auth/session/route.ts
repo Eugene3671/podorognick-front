@@ -11,10 +11,14 @@ export async function POST() {
     const accessToken = cookieStore.get("accessToken")?.value;
     const refreshToken = cookieStore.get("refreshToken")?.value;
 
-    if (accessToken) {
-      return NextResponse.json({ success: true });
+    if (!accessToken && !refreshToken) {
+      return NextResponse.redirect(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/login/`,
+      );
     }
-
+    if (accessToken) {
+      return NextResponse.json({ accessToken, success: true });
+    }
     if (refreshToken) {
       const apiRes = await api.post("/auth/refresh", {
         headers: {
@@ -40,8 +44,10 @@ export async function POST() {
           if (parsed.refreshToken)
             cookieStore.set("refreshToken", parsed.refreshToken, options);
         }
-
-        return NextResponse.json({ success: true }, { status: 200 });
+        return NextResponse.json(
+          { accessToken: apiRes.data.accessToken, success: true },
+          { status: 200 },
+        );
       }
     }
 
