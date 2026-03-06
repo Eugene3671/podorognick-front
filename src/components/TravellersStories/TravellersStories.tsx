@@ -146,19 +146,23 @@ export default function TravellersStories({
   const handleLoadMore = () => {
     const nextVisible = visibleStories + loadStep;
 
-    if (nextVisible <= allStories.length) {
+    if (nextVisible < allStories.length) {
       setVisibleStories(nextVisible);
       return;
     }
 
+    setVisibleStories(allStories.length);
+
     if (hasNextPage) {
-      fetchNextPage();
-      setVisibleStories(nextVisible);
+      fetchNextPage().then(() => {
+        setVisibleStories(nextVisible);
+      });
     }
   };
 
   const shouldShowLoadButton =
     buttonType === "loadMore" &&
+    !isFetchingNextPage &&
     (hasNextPage || visibleStories < allStories.length);
 
   if (!hasBreakpoint) {

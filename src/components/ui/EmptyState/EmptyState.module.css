@@ -4,7 +4,7 @@
   padding: 20px;
 
   width: 335px;
-  background: var(--color-accent-lighter);
+  background: var(--card-background);
 
   overflow: hidden;
   display: flex;
@@ -39,4 +39,3 @@
     width: auto;
   }
 }
-
