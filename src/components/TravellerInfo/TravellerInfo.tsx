@@ -4,7 +4,6 @@ import css from "./TravellerInfo.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { getMe, getUserById } from "@/src/lib/api/usersApi";
 import Image from "next/image";
-import LoaderEl from "../LoaderEl/LoaderEl";
 import { User } from "@/src/types/user";
 
 interface TravellerInfoProps {
@@ -12,11 +11,7 @@ interface TravellerInfoProps {
 }
 
 export default function TravellerInfo({ travellerId }: TravellerInfoProps) {
-  const {
-    data: user,
-    isLoading,
-    isError,
-  } = useQuery<User>({
+  const { data: user } = useQuery<User>({
     queryKey: ["user", travellerId || "me"],
     queryFn: async () => {
       if (travellerId) {

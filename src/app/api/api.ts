@@ -1,4 +1,3 @@
-import { checkSession } from "@/src/lib/api/authApi";
 import axios, { AxiosError } from "axios";
 
 export type ApiError = AxiosError<{ error: string }>;

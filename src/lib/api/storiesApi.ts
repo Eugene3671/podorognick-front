@@ -60,17 +60,10 @@ export async function getMyStories(
   return res.data;
 }
 
-// export async function creatStory(formData: FormData): Promise<Story> {
-//   const res = await nextServer.post("/stories", formData);
-//   return res.data;
-// }
-
-// Data Transfer Object для створення історії
-
 export interface CreateStoryDto {
   title: string;
   article: string;
-  category: string; // <-- ID категорії
+  category: string;
   img?: File | null;
   date: string;
 }
@@ -80,7 +73,7 @@ export const createStory = async (story: CreateStoryDto) => {
 
   formData.append("title", story.title);
   formData.append("article", story.article);
-  formData.append("category", story.category); // ID
+  formData.append("category", story.category);
   formData.append("date", story.date);
 
   if (story.img) {

@@ -50,17 +50,15 @@ export async function checkSession() {
   try {
     const response =
       await nextServer.post<CheckSessionRequest>("/auth/session");
-
-    // Перевірка відповіді від сервера
     console.log("checkSession response:", response.data);
 
     if (response.data.success && response.data.accessToken) {
-      return response.data; // Повертаємо всі дані, включаючи новий accessToken
+      return response.data;
     } else {
-      return { success: false }; // Якщо не вдалося отримати токен
+      return { success: false };
     }
   } catch (error) {
     console.error("checkSession error:", error);
-    throw error; // Якщо сталася помилка
+    throw error;
   }
 }
