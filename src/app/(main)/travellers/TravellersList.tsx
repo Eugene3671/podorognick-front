@@ -77,7 +77,7 @@ const TravellersList = () => {
               id={user._id}
               name={user.name || "Мандрівник"}
               description={user.description || "Досвідчений мандрівник"}
-              img={user.avatarUrl || "/default-avatar.png"}
+              img={user.avatarUrl || "/avatar-placeholder.jpg"}
             />
           </div>
         ))}

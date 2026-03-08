@@ -51,10 +51,7 @@ export default function AuthNavigation({
       <li className={css.navigationItem}>
         <Link href="/edit" prefetch={false} className={css.avatarWrapper}>
           <Image
-            src={
-              user?.avatarUrl ||
-              "https://ac.goit.global/fullstack/react/default-avatar.jpg"
-            }
+            src={user?.avatarUrl || "/avatar-placeholder.jpg"}
             alt="User avatar"
             width={32}
             height={32}

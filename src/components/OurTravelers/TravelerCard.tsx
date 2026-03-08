@@ -10,25 +10,30 @@ interface TravelerProps {
   img: string;
 }
 
-const TravelerCard: React.FC<TravelerProps> = ({ id, name, description, img }) => {
+const TravelerCard: React.FC<TravelerProps> = ({
+  id,
+  name,
+  description,
+  img,
+}) => {
   return (
-    <div className={styles.card}> 
-      <Image 
-        src={img || "/default-avatar.png"} 
+    <div className={styles.card}>
+      <Image
+        src={img || "/avatar-placeholder.jpg"}
         alt={`Аватар мандрівника ${name}`}
-        width={112} 
-        height={112} 
-        className={styles.avatar} 
+        width={112}
+        height={112}
+        className={styles.avatar}
       />
       <h3 className={styles.name}>{name}</h3>
       <p className={styles.description}>{description}</p>
-      
-      <Link 
-  href={`/travellers/${id}`} 
-  className={`buttonGrey ${styles.cardButton}`}
->
-  Переглянути профіль
-</Link>
+
+      <Link
+        href={`/travellers/${id}`}
+        className={`buttonGrey ${styles.cardButton}`}
+      >
+        Переглянути профіль
+      </Link>
     </div>
   );
 };

@@ -34,7 +34,7 @@ export default function TravellerInfo({ travellerId }: TravellerInfoProps) {
   return (
     <div className={css.info}>
       <Image
-        src={user?.avatarUrl || "/avatar-placeholder.svg"}
+        src={user?.avatarUrl || "/avatar-placeholder.jpg"}
         alt={user?.name || "User avatar"}
         width={199}
         height={199}

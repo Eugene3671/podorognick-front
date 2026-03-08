@@ -10,9 +10,11 @@ export async function GET(req: Request, { params }: Props) {
   try {
     const cookieStore = await cookies();
     const { id } = await params;
+    const { searchParams } = new URL(req.url);
 
     const res = await api.get(`/users/${id}`, {
       headers: { Cookie: cookieStore.toString() },
+      params: Object.fromEntries(searchParams),
     });
 
     return NextResponse.json(res.data, { status: res.status });

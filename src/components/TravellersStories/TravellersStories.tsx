@@ -79,7 +79,16 @@ export default function TravellersStories({
     isError,
     error,
   } = useInfiniteQuery({
-    queryKey: ["stories", pageType, sort, breakpoint, category, mode, ownerId],
+    queryKey: [
+      "stories",
+      pageType,
+      sort,
+      breakpoint,
+      category,
+      mode,
+      ownerId,
+      initialVisibleStories,
+    ],
     queryFn: async ({ pageParam = 1 }) => {
       switch (mode) {
         case "myOwnStories":

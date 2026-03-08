@@ -26,7 +26,7 @@ const TravellerPage = async ({ params }: Props) => {
       <h1 className={styles.title}>Історії Мандрівника</h1>
       <TravellersStories
         sort="new"
-        pageType="stories"
+        pageType="profile"
         buttonType="loadMore"
         mode="travellerStories"
         ownerId={travellerId}
