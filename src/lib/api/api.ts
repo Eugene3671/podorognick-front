@@ -1,7 +1,6 @@
 "use client";
 import axios from "axios";
 import { logout } from "./authApi";
-import toast from "react-hot-toast";
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}/api`;
 
@@ -25,15 +24,11 @@ nextServer.interceptors.response.use(
           return nextServer(originalRequest);
         } else {
           logout();
-
-          toast.error("Сесія закінчилась, увійдіть знову");
           window.location.href = "/auth/login";
           return Promise.reject(error);
         }
       } catch {
         logout();
-
-        toast.error("Сесія закінчилась, увійдіть знову");
         window.location.href = "/auth/login";
         return Promise.reject(error);
       }
