@@ -7,12 +7,12 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const accessToken = request.cookies.get("accessToken")?.value;
-
-  const isPrivate = privateRoutes.some(route =>
-    pathname === route || pathname.startsWith(route + "/")
+  const refreshToken = request.cookies.get("refreshToken")?.value;
+  const isPrivate = privateRoutes.some(
+    (route) => pathname === route || pathname.startsWith(route + "/"),
   );
 
-  if (!accessToken && isPrivate) {
+  if (!accessToken && !refreshToken && isPrivate) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 

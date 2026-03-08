@@ -10,21 +10,28 @@ export async function POST() {
     const cookieStore = await cookies();
     const accessToken = cookieStore.get("accessToken")?.value;
     const refreshToken = cookieStore.get("refreshToken")?.value;
-
-    if (!accessToken && !refreshToken) {
-      return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/login/`,
-      );
-    }
+    const sessionId = cookieStore.get("sessionId")?.value;
     if (accessToken) {
       return NextResponse.json({ accessToken, success: true });
     }
+    if (!refreshToken && !sessionId) {
+      return NextResponse.json({ success: false }, { status: 401 });
+    }
     if (refreshToken) {
-      const apiRes = await api.post("/auth/refresh", {
-        headers: {
-          Cookie: cookieStore.toString(),
+      const cookieHeader = cookieStore
+        .getAll()
+        .map((c) => `${c.name}=${c.value}`)
+        .join("; ");
+
+      const apiRes = await api.post(
+        "/auth/refresh",
+        {},
+        {
+          headers: {
+            Cookie: cookieHeader,
+          },
         },
-      });
+      );
 
       const setCookie = apiRes.headers["set-cookie"];
 
@@ -33,6 +40,7 @@ export async function POST() {
 
         for (const cookieStr of cookieArray) {
           const parsed = parse(cookieStr);
+          console.log(parsed);
           const options = {
             expires: parsed.Expires ? new Date(parsed.Expires) : undefined,
             path: parsed.Path,
@@ -43,6 +51,8 @@ export async function POST() {
             cookieStore.set("accessToken", parsed.accessToken, options);
           if (parsed.refreshToken)
             cookieStore.set("refreshToken", parsed.refreshToken, options);
+          if (parsed.sessionId)
+            cookieStore.set("sessionId", parsed.sessionId, options);
         }
         return NextResponse.json(
           { accessToken: apiRes.data.accessToken, success: true },
